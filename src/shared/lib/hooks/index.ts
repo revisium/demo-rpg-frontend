@@ -1,0 +1,1 @@
+export { useViewModel } from './useViewModel';

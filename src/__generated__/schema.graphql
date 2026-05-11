@@ -1,0 +1,3126 @@
+schema {
+  query: Query
+  mutation: Mutation
+}
+
+directive @defer(if: Boolean! = true, label: String) on FRAGMENT_SPREAD | INLINE_FRAGMENT
+
+"""
+A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+"""
+scalar DateTime
+
+type Demo_rpg_cmsBlog_authors {
+  avatar: Demo_rpg_cmsBlog_authorsAvatar!
+  bio: Demo_rpg_cmsBlog_authorsBio!
+  name: Demo_rpg_cmsBlog_authorsName!
+  slug: String!
+}
+
+type Demo_rpg_cmsBlog_authorsAvatar {
+  extension: String!
+  fileId: String!
+  fileName: String!
+  hash: String!
+  height: Float!
+  mimeType: String!
+  size: Float!
+  status: String!
+  url: String!
+  width: Float!
+}
+
+type Demo_rpg_cmsBlog_authorsBio {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_cmsBlog_authorsConnection {
+  edges: [Demo_rpg_cmsBlog_authorsEdge!]!
+  pageInfo: Demo_rpg_cmsPageInfo!
+  totalCount: Int!
+}
+
+type Demo_rpg_cmsBlog_authorsEdge {
+  cursor: String!
+  node: Demo_rpg_cmsBlog_authorsNode!
+}
+
+type Demo_rpg_cmsBlog_authorsFlat {
+  avatar: Demo_rpg_cmsBlog_authorsFlatAvatar!
+  bio: Demo_rpg_cmsBlog_authorsFlatBio!
+  name: Demo_rpg_cmsBlog_authorsFlatName!
+  slug: String!
+}
+
+type Demo_rpg_cmsBlog_authorsFlatAvatar {
+  extension: String!
+  fileId: String!
+  fileName: String!
+  hash: String!
+  height: Float!
+  mimeType: String!
+  size: Float!
+  status: String!
+  url: String!
+  width: Float!
+}
+
+type Demo_rpg_cmsBlog_authorsFlatBio {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_cmsBlog_authorsFlatConnection {
+  edges: [Demo_rpg_cmsBlog_authorsFlatEdge!]!
+  pageInfo: Demo_rpg_cmsPageInfo!
+  totalCount: Int!
+}
+
+type Demo_rpg_cmsBlog_authorsFlatEdge {
+  cursor: String!
+  node: Demo_rpg_cmsBlog_authorsFlat!
+}
+
+type Demo_rpg_cmsBlog_authorsFlatName {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_cmsBlog_authorsName {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_cmsBlog_authorsNode {
+  createdAt: DateTime!
+  createdId: String!
+  data: Demo_rpg_cmsBlog_authors!
+  id: String!
+  json: JSON!
+  publishedAt: DateTime!
+  updatedAt: DateTime!
+  versionId: String!
+}
+
+input Demo_rpg_cmsBlog_authorsesWhereInput {
+  AND: [Demo_rpg_cmsBlog_authorsesWhereInput!]
+  NOT: [Demo_rpg_cmsBlog_authorsesWhereInput!]
+  OR: [Demo_rpg_cmsBlog_authorsesWhereInput!]
+  createdAt: Demo_rpg_cmsDateTimeFilter
+  createdId: Demo_rpg_cmsStringFilter
+  data: Demo_rpg_cmsJsonFilter
+  id: Demo_rpg_cmsStringFilter
+  publishedAt: Demo_rpg_cmsDateTimeFilter
+  readonly: Demo_rpg_cmsBoolFilter
+  updatedAt: Demo_rpg_cmsDateTimeFilter
+  versionId: Demo_rpg_cmsStringFilter
+}
+
+type Demo_rpg_cmsBlog_posts {
+  author_id: Demo_rpg_cmsBlog_authorsNode!
+  body: Demo_rpg_cmsBlog_postsBody!
+  excerpt: Demo_rpg_cmsBlog_postsExcerpt!
+  hero_image: Demo_rpg_cmsBlog_postsHero_image!
+  published_at: String!
+  slug: String!
+  title: Demo_rpg_cmsBlog_postsTitle!
+}
+
+type Demo_rpg_cmsBlog_postsBody {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_cmsBlog_postsConnection {
+  edges: [Demo_rpg_cmsBlog_postsEdge!]!
+  pageInfo: Demo_rpg_cmsPageInfo!
+  totalCount: Int!
+}
+
+type Demo_rpg_cmsBlog_postsEdge {
+  cursor: String!
+  node: Demo_rpg_cmsBlog_postsNode!
+}
+
+type Demo_rpg_cmsBlog_postsExcerpt {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_cmsBlog_postsFlat {
+  author_id: Demo_rpg_cmsBlog_authorsFlat!
+  body: Demo_rpg_cmsBlog_postsFlatBody!
+  excerpt: Demo_rpg_cmsBlog_postsFlatExcerpt!
+  hero_image: Demo_rpg_cmsBlog_postsFlatHero_image!
+  published_at: String!
+  slug: String!
+  title: Demo_rpg_cmsBlog_postsFlatTitle!
+}
+
+type Demo_rpg_cmsBlog_postsFlatBody {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_cmsBlog_postsFlatConnection {
+  edges: [Demo_rpg_cmsBlog_postsFlatEdge!]!
+  pageInfo: Demo_rpg_cmsPageInfo!
+  totalCount: Int!
+}
+
+type Demo_rpg_cmsBlog_postsFlatEdge {
+  cursor: String!
+  node: Demo_rpg_cmsBlog_postsFlat!
+}
+
+type Demo_rpg_cmsBlog_postsFlatExcerpt {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_cmsBlog_postsFlatHero_image {
+  extension: String!
+  fileId: String!
+  fileName: String!
+  hash: String!
+  height: Float!
+  mimeType: String!
+  size: Float!
+  status: String!
+  url: String!
+  width: Float!
+}
+
+type Demo_rpg_cmsBlog_postsFlatTitle {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_cmsBlog_postsHero_image {
+  extension: String!
+  fileId: String!
+  fileName: String!
+  hash: String!
+  height: Float!
+  mimeType: String!
+  size: Float!
+  status: String!
+  url: String!
+  width: Float!
+}
+
+type Demo_rpg_cmsBlog_postsNode {
+  createdAt: DateTime!
+  createdId: String!
+  data: Demo_rpg_cmsBlog_posts!
+  id: String!
+  json: JSON!
+  publishedAt: DateTime!
+  updatedAt: DateTime!
+  versionId: String!
+}
+
+type Demo_rpg_cmsBlog_postsTitle {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+input Demo_rpg_cmsBlog_postsesWhereInput {
+  AND: [Demo_rpg_cmsBlog_postsesWhereInput!]
+  NOT: [Demo_rpg_cmsBlog_postsesWhereInput!]
+  OR: [Demo_rpg_cmsBlog_postsesWhereInput!]
+  createdAt: Demo_rpg_cmsDateTimeFilter
+  createdId: Demo_rpg_cmsStringFilter
+  data: Demo_rpg_cmsJsonFilter
+  id: Demo_rpg_cmsStringFilter
+  publishedAt: Demo_rpg_cmsDateTimeFilter
+  readonly: Demo_rpg_cmsBoolFilter
+  updatedAt: Demo_rpg_cmsDateTimeFilter
+  versionId: Demo_rpg_cmsStringFilter
+}
+
+input Demo_rpg_cmsBoolFilter {
+  equals: Boolean
+  not: Boolean
+}
+
+input Demo_rpg_cmsDateTimeFilter {
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  notIn: [String!]
+}
+
+enum Demo_rpg_cmsFilterJsonMode {
+  default
+  insensitive
+}
+
+enum Demo_rpg_cmsFilterStringMode {
+  default
+  insensitive
+}
+
+input Demo_rpg_cmsGetBlog_authorsesInput {
+  after: String
+  first: Int
+  orderBy: [Demo_rpg_cmsGetBlog_authorsesOrderByInput!]
+  where: Demo_rpg_cmsBlog_authorsesWhereInput
+}
+
+enum Demo_rpg_cmsGetBlog_authorsesOrderByField {
+  createdAt
+  data
+  id
+  publishedAt
+  updatedAt
+}
+
+input Demo_rpg_cmsGetBlog_authorsesOrderByInput {
+  aggregation: Demo_rpg_cmsOrderFieldAggregation
+  direction: Demo_rpg_cmsSortOrder!
+  field: Demo_rpg_cmsGetBlog_authorsesOrderByField!
+  path: String
+  type: Demo_rpg_cmsOrderFieldType
+}
+
+input Demo_rpg_cmsGetBlog_postsesInput {
+  after: String
+  first: Int
+  orderBy: [Demo_rpg_cmsGetBlog_postsesOrderByInput!]
+  where: Demo_rpg_cmsBlog_postsesWhereInput
+}
+
+enum Demo_rpg_cmsGetBlog_postsesOrderByField {
+  createdAt
+  data
+  id
+  publishedAt
+  updatedAt
+}
+
+input Demo_rpg_cmsGetBlog_postsesOrderByInput {
+  aggregation: Demo_rpg_cmsOrderFieldAggregation
+  direction: Demo_rpg_cmsSortOrder!
+  field: Demo_rpg_cmsGetBlog_postsesOrderByField!
+  path: String
+  type: Demo_rpg_cmsOrderFieldType
+}
+
+input Demo_rpg_cmsGetLanding_featuresesInput {
+  after: String
+  first: Int
+  orderBy: [Demo_rpg_cmsGetLanding_featuresesOrderByInput!]
+  where: Demo_rpg_cmsLanding_featuresesWhereInput
+}
+
+enum Demo_rpg_cmsGetLanding_featuresesOrderByField {
+  createdAt
+  data
+  id
+  publishedAt
+  updatedAt
+}
+
+input Demo_rpg_cmsGetLanding_featuresesOrderByInput {
+  aggregation: Demo_rpg_cmsOrderFieldAggregation
+  direction: Demo_rpg_cmsSortOrder!
+  field: Demo_rpg_cmsGetLanding_featuresesOrderByField!
+  path: String
+  type: Demo_rpg_cmsOrderFieldType
+}
+
+input Demo_rpg_cmsGetLanding_herosInput {
+  after: String
+  first: Int
+  orderBy: [Demo_rpg_cmsGetLanding_herosOrderByInput!]
+  where: Demo_rpg_cmsLanding_herosWhereInput
+}
+
+enum Demo_rpg_cmsGetLanding_herosOrderByField {
+  createdAt
+  data
+  id
+  publishedAt
+  updatedAt
+}
+
+input Demo_rpg_cmsGetLanding_herosOrderByInput {
+  aggregation: Demo_rpg_cmsOrderFieldAggregation
+  direction: Demo_rpg_cmsSortOrder!
+  field: Demo_rpg_cmsGetLanding_herosOrderByField!
+  path: String
+  type: Demo_rpg_cmsOrderFieldType
+}
+
+input Demo_rpg_cmsGetLanding_testimonialsesInput {
+  after: String
+  first: Int
+  orderBy: [Demo_rpg_cmsGetLanding_testimonialsesOrderByInput!]
+  where: Demo_rpg_cmsLanding_testimonialsesWhereInput
+}
+
+enum Demo_rpg_cmsGetLanding_testimonialsesOrderByField {
+  createdAt
+  data
+  id
+  publishedAt
+  updatedAt
+}
+
+input Demo_rpg_cmsGetLanding_testimonialsesOrderByInput {
+  aggregation: Demo_rpg_cmsOrderFieldAggregation
+  direction: Demo_rpg_cmsSortOrder!
+  field: Demo_rpg_cmsGetLanding_testimonialsesOrderByField!
+  path: String
+  type: Demo_rpg_cmsOrderFieldType
+}
+
+input Demo_rpg_cmsJsonFilter {
+  array_contains: [JSON!]
+  array_ends_with: JSON
+  array_starts_with: JSON
+  equals: JSON
+  gt: Float
+  gte: Float
+  lt: Float
+  lte: Float
+  mode: Demo_rpg_cmsFilterJsonMode
+  path: JSON
+  search: String
+  searchLanguage: Demo_rpg_cmsSearchLanguage
+  searchType: Demo_rpg_cmsSearchType
+  string_contains: String
+  string_ends_with: String
+  string_starts_with: String
+}
+
+type Demo_rpg_cmsLanding_features {
+  body: Demo_rpg_cmsLanding_featuresBody!
+  icon: Demo_rpg_cmsLanding_featuresIcon!
+  order: Float!
+  title: Demo_rpg_cmsLanding_featuresTitle!
+}
+
+type Demo_rpg_cmsLanding_featuresBody {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_cmsLanding_featuresConnection {
+  edges: [Demo_rpg_cmsLanding_featuresEdge!]!
+  pageInfo: Demo_rpg_cmsPageInfo!
+  totalCount: Int!
+}
+
+type Demo_rpg_cmsLanding_featuresEdge {
+  cursor: String!
+  node: Demo_rpg_cmsLanding_featuresNode!
+}
+
+type Demo_rpg_cmsLanding_featuresFlat {
+  body: Demo_rpg_cmsLanding_featuresFlatBody!
+  icon: Demo_rpg_cmsLanding_featuresFlatIcon!
+  order: Float!
+  title: Demo_rpg_cmsLanding_featuresFlatTitle!
+}
+
+type Demo_rpg_cmsLanding_featuresFlatBody {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_cmsLanding_featuresFlatConnection {
+  edges: [Demo_rpg_cmsLanding_featuresFlatEdge!]!
+  pageInfo: Demo_rpg_cmsPageInfo!
+  totalCount: Int!
+}
+
+type Demo_rpg_cmsLanding_featuresFlatEdge {
+  cursor: String!
+  node: Demo_rpg_cmsLanding_featuresFlat!
+}
+
+type Demo_rpg_cmsLanding_featuresFlatIcon {
+  extension: String!
+  fileId: String!
+  fileName: String!
+  hash: String!
+  height: Float!
+  mimeType: String!
+  size: Float!
+  status: String!
+  url: String!
+  width: Float!
+}
+
+type Demo_rpg_cmsLanding_featuresFlatTitle {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_cmsLanding_featuresIcon {
+  extension: String!
+  fileId: String!
+  fileName: String!
+  hash: String!
+  height: Float!
+  mimeType: String!
+  size: Float!
+  status: String!
+  url: String!
+  width: Float!
+}
+
+type Demo_rpg_cmsLanding_featuresNode {
+  createdAt: DateTime!
+  createdId: String!
+  data: Demo_rpg_cmsLanding_features!
+  id: String!
+  json: JSON!
+  publishedAt: DateTime!
+  updatedAt: DateTime!
+  versionId: String!
+}
+
+type Demo_rpg_cmsLanding_featuresTitle {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+input Demo_rpg_cmsLanding_featuresesWhereInput {
+  AND: [Demo_rpg_cmsLanding_featuresesWhereInput!]
+  NOT: [Demo_rpg_cmsLanding_featuresesWhereInput!]
+  OR: [Demo_rpg_cmsLanding_featuresesWhereInput!]
+  createdAt: Demo_rpg_cmsDateTimeFilter
+  createdId: Demo_rpg_cmsStringFilter
+  data: Demo_rpg_cmsJsonFilter
+  id: Demo_rpg_cmsStringFilter
+  publishedAt: Demo_rpg_cmsDateTimeFilter
+  readonly: Demo_rpg_cmsBoolFilter
+  updatedAt: Demo_rpg_cmsDateTimeFilter
+  versionId: Demo_rpg_cmsStringFilter
+}
+
+type Demo_rpg_cmsLanding_hero {
+  bg_image: Demo_rpg_cmsLanding_heroBg_image!
+  cta_label: Demo_rpg_cmsLanding_heroCta_label!
+  cta_url: String!
+  headline: Demo_rpg_cmsLanding_heroHeadline!
+  subheadline: Demo_rpg_cmsLanding_heroSubheadline!
+}
+
+type Demo_rpg_cmsLanding_heroBg_image {
+  extension: String!
+  fileId: String!
+  fileName: String!
+  hash: String!
+  height: Float!
+  mimeType: String!
+  size: Float!
+  status: String!
+  url: String!
+  width: Float!
+}
+
+type Demo_rpg_cmsLanding_heroConnection {
+  edges: [Demo_rpg_cmsLanding_heroEdge!]!
+  pageInfo: Demo_rpg_cmsPageInfo!
+  totalCount: Int!
+}
+
+type Demo_rpg_cmsLanding_heroCta_label {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_cmsLanding_heroEdge {
+  cursor: String!
+  node: Demo_rpg_cmsLanding_heroNode!
+}
+
+type Demo_rpg_cmsLanding_heroFlat {
+  bg_image: Demo_rpg_cmsLanding_heroFlatBg_image!
+  cta_label: Demo_rpg_cmsLanding_heroFlatCta_label!
+  cta_url: String!
+  headline: Demo_rpg_cmsLanding_heroFlatHeadline!
+  subheadline: Demo_rpg_cmsLanding_heroFlatSubheadline!
+}
+
+type Demo_rpg_cmsLanding_heroFlatBg_image {
+  extension: String!
+  fileId: String!
+  fileName: String!
+  hash: String!
+  height: Float!
+  mimeType: String!
+  size: Float!
+  status: String!
+  url: String!
+  width: Float!
+}
+
+type Demo_rpg_cmsLanding_heroFlatConnection {
+  edges: [Demo_rpg_cmsLanding_heroFlatEdge!]!
+  pageInfo: Demo_rpg_cmsPageInfo!
+  totalCount: Int!
+}
+
+type Demo_rpg_cmsLanding_heroFlatCta_label {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_cmsLanding_heroFlatEdge {
+  cursor: String!
+  node: Demo_rpg_cmsLanding_heroFlat!
+}
+
+type Demo_rpg_cmsLanding_heroFlatHeadline {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_cmsLanding_heroFlatSubheadline {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_cmsLanding_heroHeadline {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_cmsLanding_heroNode {
+  createdAt: DateTime!
+  createdId: String!
+  data: Demo_rpg_cmsLanding_hero!
+  id: String!
+  json: JSON!
+  publishedAt: DateTime!
+  updatedAt: DateTime!
+  versionId: String!
+}
+
+type Demo_rpg_cmsLanding_heroSubheadline {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+input Demo_rpg_cmsLanding_herosWhereInput {
+  AND: [Demo_rpg_cmsLanding_herosWhereInput!]
+  NOT: [Demo_rpg_cmsLanding_herosWhereInput!]
+  OR: [Demo_rpg_cmsLanding_herosWhereInput!]
+  createdAt: Demo_rpg_cmsDateTimeFilter
+  createdId: Demo_rpg_cmsStringFilter
+  data: Demo_rpg_cmsJsonFilter
+  id: Demo_rpg_cmsStringFilter
+  publishedAt: Demo_rpg_cmsDateTimeFilter
+  readonly: Demo_rpg_cmsBoolFilter
+  updatedAt: Demo_rpg_cmsDateTimeFilter
+  versionId: Demo_rpg_cmsStringFilter
+}
+
+type Demo_rpg_cmsLanding_testimonials {
+  author_name: String!
+  author_role: Demo_rpg_cmsLanding_testimonialsAuthor_role!
+  avatar: Demo_rpg_cmsLanding_testimonialsAvatar!
+  quote: Demo_rpg_cmsLanding_testimonialsQuote!
+}
+
+type Demo_rpg_cmsLanding_testimonialsAuthor_role {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_cmsLanding_testimonialsAvatar {
+  extension: String!
+  fileId: String!
+  fileName: String!
+  hash: String!
+  height: Float!
+  mimeType: String!
+  size: Float!
+  status: String!
+  url: String!
+  width: Float!
+}
+
+type Demo_rpg_cmsLanding_testimonialsConnection {
+  edges: [Demo_rpg_cmsLanding_testimonialsEdge!]!
+  pageInfo: Demo_rpg_cmsPageInfo!
+  totalCount: Int!
+}
+
+type Demo_rpg_cmsLanding_testimonialsEdge {
+  cursor: String!
+  node: Demo_rpg_cmsLanding_testimonialsNode!
+}
+
+type Demo_rpg_cmsLanding_testimonialsFlat {
+  author_name: String!
+  author_role: Demo_rpg_cmsLanding_testimonialsFlatAuthor_role!
+  avatar: Demo_rpg_cmsLanding_testimonialsFlatAvatar!
+  quote: Demo_rpg_cmsLanding_testimonialsFlatQuote!
+}
+
+type Demo_rpg_cmsLanding_testimonialsFlatAuthor_role {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_cmsLanding_testimonialsFlatAvatar {
+  extension: String!
+  fileId: String!
+  fileName: String!
+  hash: String!
+  height: Float!
+  mimeType: String!
+  size: Float!
+  status: String!
+  url: String!
+  width: Float!
+}
+
+type Demo_rpg_cmsLanding_testimonialsFlatConnection {
+  edges: [Demo_rpg_cmsLanding_testimonialsFlatEdge!]!
+  pageInfo: Demo_rpg_cmsPageInfo!
+  totalCount: Int!
+}
+
+type Demo_rpg_cmsLanding_testimonialsFlatEdge {
+  cursor: String!
+  node: Demo_rpg_cmsLanding_testimonialsFlat!
+}
+
+type Demo_rpg_cmsLanding_testimonialsFlatQuote {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_cmsLanding_testimonialsNode {
+  createdAt: DateTime!
+  createdId: String!
+  data: Demo_rpg_cmsLanding_testimonials!
+  id: String!
+  json: JSON!
+  publishedAt: DateTime!
+  updatedAt: DateTime!
+  versionId: String!
+}
+
+type Demo_rpg_cmsLanding_testimonialsQuote {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+input Demo_rpg_cmsLanding_testimonialsesWhereInput {
+  AND: [Demo_rpg_cmsLanding_testimonialsesWhereInput!]
+  NOT: [Demo_rpg_cmsLanding_testimonialsesWhereInput!]
+  OR: [Demo_rpg_cmsLanding_testimonialsesWhereInput!]
+  createdAt: Demo_rpg_cmsDateTimeFilter
+  createdId: Demo_rpg_cmsStringFilter
+  data: Demo_rpg_cmsJsonFilter
+  id: Demo_rpg_cmsStringFilter
+  publishedAt: Demo_rpg_cmsDateTimeFilter
+  readonly: Demo_rpg_cmsBoolFilter
+  updatedAt: Demo_rpg_cmsDateTimeFilter
+  versionId: Demo_rpg_cmsStringFilter
+}
+
+enum Demo_rpg_cmsOrderFieldAggregation {
+  avg
+  first
+  last
+  max
+  min
+}
+
+enum Demo_rpg_cmsOrderFieldType {
+  boolean
+  float
+  int
+  text
+  timestamp
+}
+
+type Demo_rpg_cmsPageInfo {
+  endCursor: String
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+}
+
+enum Demo_rpg_cmsSearchLanguage {
+  arabic
+  armenian
+  basque
+  catalan
+  danish
+  dutch
+  english
+  finnish
+  french
+  german
+  greek
+  hindi
+  hungarian
+  indonesian
+  irish
+  italian
+  lithuanian
+  nepali
+  norwegian
+  portuguese
+  romanian
+  russian
+  serbian
+  simple
+  spanish
+  swedish
+  tamil
+  turkish
+  yiddish
+}
+
+enum Demo_rpg_cmsSearchType {
+  phrase
+  plain
+  prefix
+  tsquery
+}
+
+enum Demo_rpg_cmsSortOrder {
+  asc
+  desc
+}
+
+input Demo_rpg_cmsStringFilter {
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  mode: Demo_rpg_cmsFilterStringMode
+  not: String
+  notIn: [String!]
+  startsWith: String
+}
+
+type Demo_rpg_dataAbilities {
+  base_damage: Float!
+  cooldown: Float!
+  damage_scaling: Float!
+  description: Demo_rpg_dataAbilitiesDescription!
+  effects: [Demo_rpg_dataAbilitiesEffectsItems!]!
+  icon: Demo_rpg_dataAbilitiesIcon!
+  kind: String!
+  level_required: Float!
+  name: Demo_rpg_dataAbilitiesName!
+  school: String!
+}
+
+type Demo_rpg_dataAbilitiesConnection {
+  edges: [Demo_rpg_dataAbilitiesEdge!]!
+  pageInfo: Demo_rpg_dataPageInfo!
+  totalCount: Int!
+}
+
+type Demo_rpg_dataAbilitiesDescription {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_dataAbilitiesEdge {
+  cursor: String!
+  node: Demo_rpg_dataAbilitiesNode!
+}
+
+type Demo_rpg_dataAbilitiesEffectsItems {
+  chance: Float!
+  duration: Float!
+  effect_id: Demo_rpg_dataEffectsNode!
+}
+
+type Demo_rpg_dataAbilitiesFlat {
+  base_damage: Float!
+  cooldown: Float!
+  damage_scaling: Float!
+  description: Demo_rpg_dataAbilitiesFlatDescription!
+  effects: [Demo_rpg_dataAbilitiesFlatEffectsItems!]!
+  icon: Demo_rpg_dataAbilitiesFlatIcon!
+  kind: String!
+  level_required: Float!
+  name: Demo_rpg_dataAbilitiesFlatName!
+  school: String!
+}
+
+type Demo_rpg_dataAbilitiesFlatConnection {
+  edges: [Demo_rpg_dataAbilitiesFlatEdge!]!
+  pageInfo: Demo_rpg_dataPageInfo!
+  totalCount: Int!
+}
+
+type Demo_rpg_dataAbilitiesFlatDescription {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_dataAbilitiesFlatEdge {
+  cursor: String!
+  node: Demo_rpg_dataAbilitiesFlat!
+}
+
+type Demo_rpg_dataAbilitiesFlatEffectsItems {
+  chance: Float!
+  duration: Float!
+  effect_id: Demo_rpg_dataEffectsFlat!
+}
+
+type Demo_rpg_dataAbilitiesFlatIcon {
+  extension: String!
+  fileId: String!
+  fileName: String!
+  hash: String!
+  height: Float!
+  mimeType: String!
+  size: Float!
+  status: String!
+  url: String!
+  width: Float!
+}
+
+type Demo_rpg_dataAbilitiesFlatName {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_dataAbilitiesIcon {
+  extension: String!
+  fileId: String!
+  fileName: String!
+  hash: String!
+  height: Float!
+  mimeType: String!
+  size: Float!
+  status: String!
+  url: String!
+  width: Float!
+}
+
+type Demo_rpg_dataAbilitiesName {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_dataAbilitiesNode {
+  createdAt: DateTime!
+  createdId: String!
+  data: Demo_rpg_dataAbilities!
+  id: String!
+  json: JSON!
+  publishedAt: DateTime!
+  updatedAt: DateTime!
+  versionId: String!
+}
+
+input Demo_rpg_dataAbilitiesesWhereInput {
+  AND: [Demo_rpg_dataAbilitiesesWhereInput!]
+  NOT: [Demo_rpg_dataAbilitiesesWhereInput!]
+  OR: [Demo_rpg_dataAbilitiesesWhereInput!]
+  createdAt: Demo_rpg_dataDateTimeFilter
+  createdId: Demo_rpg_dataStringFilter
+  data: Demo_rpg_dataJsonFilter
+  id: Demo_rpg_dataStringFilter
+  publishedAt: Demo_rpg_dataDateTimeFilter
+  readonly: Demo_rpg_dataBoolFilter
+  updatedAt: Demo_rpg_dataDateTimeFilter
+  versionId: Demo_rpg_dataStringFilter
+}
+
+input Demo_rpg_dataBoolFilter {
+  equals: Boolean
+  not: Boolean
+}
+
+type Demo_rpg_dataClasses {
+  base_hp: Float!
+  description: Demo_rpg_dataClassesDescription!
+  hp_per_level: Float!
+  mp_per_level: Float!
+  name: Demo_rpg_dataClassesName!
+  primary_stat: String!
+  starting_ability_ids: [Demo_rpg_dataAbilitiesNode!]!
+}
+
+type Demo_rpg_dataClassesConnection {
+  edges: [Demo_rpg_dataClassesEdge!]!
+  pageInfo: Demo_rpg_dataPageInfo!
+  totalCount: Int!
+}
+
+type Demo_rpg_dataClassesDescription {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_dataClassesEdge {
+  cursor: String!
+  node: Demo_rpg_dataClassesNode!
+}
+
+type Demo_rpg_dataClassesFlat {
+  base_hp: Float!
+  description: Demo_rpg_dataClassesFlatDescription!
+  hp_per_level: Float!
+  mp_per_level: Float!
+  name: Demo_rpg_dataClassesFlatName!
+  primary_stat: String!
+  starting_ability_ids: [Demo_rpg_dataAbilitiesFlat!]!
+}
+
+type Demo_rpg_dataClassesFlatConnection {
+  edges: [Demo_rpg_dataClassesFlatEdge!]!
+  pageInfo: Demo_rpg_dataPageInfo!
+  totalCount: Int!
+}
+
+type Demo_rpg_dataClassesFlatDescription {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_dataClassesFlatEdge {
+  cursor: String!
+  node: Demo_rpg_dataClassesFlat!
+}
+
+type Demo_rpg_dataClassesFlatName {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_dataClassesName {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_dataClassesNode {
+  createdAt: DateTime!
+  createdId: String!
+  data: Demo_rpg_dataClasses!
+  id: String!
+  json: JSON!
+  publishedAt: DateTime!
+  updatedAt: DateTime!
+  versionId: String!
+}
+
+input Demo_rpg_dataClassesesWhereInput {
+  AND: [Demo_rpg_dataClassesesWhereInput!]
+  NOT: [Demo_rpg_dataClassesesWhereInput!]
+  OR: [Demo_rpg_dataClassesesWhereInput!]
+  createdAt: Demo_rpg_dataDateTimeFilter
+  createdId: Demo_rpg_dataStringFilter
+  data: Demo_rpg_dataJsonFilter
+  id: Demo_rpg_dataStringFilter
+  publishedAt: Demo_rpg_dataDateTimeFilter
+  readonly: Demo_rpg_dataBoolFilter
+  updatedAt: Demo_rpg_dataDateTimeFilter
+  versionId: Demo_rpg_dataStringFilter
+}
+
+input Demo_rpg_dataDateTimeFilter {
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  notIn: [String!]
+}
+
+type Demo_rpg_dataDialogs {
+  line_count: Float!
+  lines: [Demo_rpg_dataDialogsLinesItems!]!
+  npc_id: Demo_rpg_dataNpcsNode!
+  slug: String!
+}
+
+type Demo_rpg_dataDialogsConnection {
+  edges: [Demo_rpg_dataDialogsEdge!]!
+  pageInfo: Demo_rpg_dataPageInfo!
+  totalCount: Int!
+}
+
+type Demo_rpg_dataDialogsEdge {
+  cursor: String!
+  node: Demo_rpg_dataDialogsNode!
+}
+
+type Demo_rpg_dataDialogsFlat {
+  line_count: Float!
+  lines: [Demo_rpg_dataDialogsFlatLinesItems!]!
+  npc_id: Demo_rpg_dataNpcsFlat!
+  slug: String!
+}
+
+type Demo_rpg_dataDialogsFlatConnection {
+  edges: [Demo_rpg_dataDialogsFlatEdge!]!
+  pageInfo: Demo_rpg_dataPageInfo!
+  totalCount: Int!
+}
+
+type Demo_rpg_dataDialogsFlatEdge {
+  cursor: String!
+  node: Demo_rpg_dataDialogsFlat!
+}
+
+type Demo_rpg_dataDialogsFlatLinesItems {
+  emotion: String!
+  speaker: String!
+  text: Demo_rpg_dataDialogsFlatLinesItemsText!
+}
+
+type Demo_rpg_dataDialogsFlatLinesItemsText {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_dataDialogsLinesItems {
+  emotion: String!
+  speaker: String!
+  text: Demo_rpg_dataDialogsLinesItemsText!
+}
+
+type Demo_rpg_dataDialogsLinesItemsText {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_dataDialogsNode {
+  createdAt: DateTime!
+  createdId: String!
+  data: Demo_rpg_dataDialogs!
+  id: String!
+  json: JSON!
+  publishedAt: DateTime!
+  updatedAt: DateTime!
+  versionId: String!
+}
+
+input Demo_rpg_dataDialogsesWhereInput {
+  AND: [Demo_rpg_dataDialogsesWhereInput!]
+  NOT: [Demo_rpg_dataDialogsesWhereInput!]
+  OR: [Demo_rpg_dataDialogsesWhereInput!]
+  createdAt: Demo_rpg_dataDateTimeFilter
+  createdId: Demo_rpg_dataStringFilter
+  data: Demo_rpg_dataJsonFilter
+  id: Demo_rpg_dataStringFilter
+  publishedAt: Demo_rpg_dataDateTimeFilter
+  readonly: Demo_rpg_dataBoolFilter
+  updatedAt: Demo_rpg_dataDateTimeFilter
+  versionId: Demo_rpg_dataStringFilter
+}
+
+type Demo_rpg_dataEffects {
+  code: String!
+  default_duration: Float!
+  description: Demo_rpg_dataEffectsDescription!
+  kind: String!
+  name: Demo_rpg_dataEffectsName!
+}
+
+type Demo_rpg_dataEffectsConnection {
+  edges: [Demo_rpg_dataEffectsEdge!]!
+  pageInfo: Demo_rpg_dataPageInfo!
+  totalCount: Int!
+}
+
+type Demo_rpg_dataEffectsDescription {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_dataEffectsEdge {
+  cursor: String!
+  node: Demo_rpg_dataEffectsNode!
+}
+
+type Demo_rpg_dataEffectsFlat {
+  code: String!
+  default_duration: Float!
+  description: Demo_rpg_dataEffectsFlatDescription!
+  kind: String!
+  name: Demo_rpg_dataEffectsFlatName!
+}
+
+type Demo_rpg_dataEffectsFlatConnection {
+  edges: [Demo_rpg_dataEffectsFlatEdge!]!
+  pageInfo: Demo_rpg_dataPageInfo!
+  totalCount: Int!
+}
+
+type Demo_rpg_dataEffectsFlatDescription {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_dataEffectsFlatEdge {
+  cursor: String!
+  node: Demo_rpg_dataEffectsFlat!
+}
+
+type Demo_rpg_dataEffectsFlatName {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_dataEffectsName {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_dataEffectsNode {
+  createdAt: DateTime!
+  createdId: String!
+  data: Demo_rpg_dataEffects!
+  id: String!
+  json: JSON!
+  publishedAt: DateTime!
+  updatedAt: DateTime!
+  versionId: String!
+}
+
+input Demo_rpg_dataEffectsesWhereInput {
+  AND: [Demo_rpg_dataEffectsesWhereInput!]
+  NOT: [Demo_rpg_dataEffectsesWhereInput!]
+  OR: [Demo_rpg_dataEffectsesWhereInput!]
+  createdAt: Demo_rpg_dataDateTimeFilter
+  createdId: Demo_rpg_dataStringFilter
+  data: Demo_rpg_dataJsonFilter
+  id: Demo_rpg_dataStringFilter
+  publishedAt: Demo_rpg_dataDateTimeFilter
+  readonly: Demo_rpg_dataBoolFilter
+  updatedAt: Demo_rpg_dataDateTimeFilter
+  versionId: Demo_rpg_dataStringFilter
+}
+
+type Demo_rpg_dataFactions {
+  alignment: String!
+  crest: Demo_rpg_dataFactionsCrest!
+  description: Demo_rpg_dataFactionsDescription!
+  name: Demo_rpg_dataFactionsName!
+}
+
+type Demo_rpg_dataFactionsConnection {
+  edges: [Demo_rpg_dataFactionsEdge!]!
+  pageInfo: Demo_rpg_dataPageInfo!
+  totalCount: Int!
+}
+
+type Demo_rpg_dataFactionsCrest {
+  extension: String!
+  fileId: String!
+  fileName: String!
+  hash: String!
+  height: Float!
+  mimeType: String!
+  size: Float!
+  status: String!
+  url: String!
+  width: Float!
+}
+
+type Demo_rpg_dataFactionsDescription {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_dataFactionsEdge {
+  cursor: String!
+  node: Demo_rpg_dataFactionsNode!
+}
+
+type Demo_rpg_dataFactionsFlat {
+  alignment: String!
+  crest: Demo_rpg_dataFactionsFlatCrest!
+  description: Demo_rpg_dataFactionsFlatDescription!
+  name: Demo_rpg_dataFactionsFlatName!
+}
+
+type Demo_rpg_dataFactionsFlatConnection {
+  edges: [Demo_rpg_dataFactionsFlatEdge!]!
+  pageInfo: Demo_rpg_dataPageInfo!
+  totalCount: Int!
+}
+
+type Demo_rpg_dataFactionsFlatCrest {
+  extension: String!
+  fileId: String!
+  fileName: String!
+  hash: String!
+  height: Float!
+  mimeType: String!
+  size: Float!
+  status: String!
+  url: String!
+  width: Float!
+}
+
+type Demo_rpg_dataFactionsFlatDescription {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_dataFactionsFlatEdge {
+  cursor: String!
+  node: Demo_rpg_dataFactionsFlat!
+}
+
+type Demo_rpg_dataFactionsFlatName {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_dataFactionsName {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_dataFactionsNode {
+  createdAt: DateTime!
+  createdId: String!
+  data: Demo_rpg_dataFactions!
+  id: String!
+  json: JSON!
+  publishedAt: DateTime!
+  updatedAt: DateTime!
+  versionId: String!
+}
+
+input Demo_rpg_dataFactionsesWhereInput {
+  AND: [Demo_rpg_dataFactionsesWhereInput!]
+  NOT: [Demo_rpg_dataFactionsesWhereInput!]
+  OR: [Demo_rpg_dataFactionsesWhereInput!]
+  createdAt: Demo_rpg_dataDateTimeFilter
+  createdId: Demo_rpg_dataStringFilter
+  data: Demo_rpg_dataJsonFilter
+  id: Demo_rpg_dataStringFilter
+  publishedAt: Demo_rpg_dataDateTimeFilter
+  readonly: Demo_rpg_dataBoolFilter
+  updatedAt: Demo_rpg_dataDateTimeFilter
+  versionId: Demo_rpg_dataStringFilter
+}
+
+enum Demo_rpg_dataFilterJsonMode {
+  default
+  insensitive
+}
+
+enum Demo_rpg_dataFilterStringMode {
+  default
+  insensitive
+}
+
+input Demo_rpg_dataGetAbilitiesesInput {
+  after: String
+  first: Int
+  orderBy: [Demo_rpg_dataGetAbilitiesesOrderByInput!]
+  where: Demo_rpg_dataAbilitiesesWhereInput
+}
+
+enum Demo_rpg_dataGetAbilitiesesOrderByField {
+  createdAt
+  data
+  id
+  publishedAt
+  updatedAt
+}
+
+input Demo_rpg_dataGetAbilitiesesOrderByInput {
+  aggregation: Demo_rpg_dataOrderFieldAggregation
+  direction: Demo_rpg_dataSortOrder!
+  field: Demo_rpg_dataGetAbilitiesesOrderByField!
+  path: String
+  type: Demo_rpg_dataOrderFieldType
+}
+
+input Demo_rpg_dataGetClassesesInput {
+  after: String
+  first: Int
+  orderBy: [Demo_rpg_dataGetClassesesOrderByInput!]
+  where: Demo_rpg_dataClassesesWhereInput
+}
+
+enum Demo_rpg_dataGetClassesesOrderByField {
+  createdAt
+  data
+  id
+  publishedAt
+  updatedAt
+}
+
+input Demo_rpg_dataGetClassesesOrderByInput {
+  aggregation: Demo_rpg_dataOrderFieldAggregation
+  direction: Demo_rpg_dataSortOrder!
+  field: Demo_rpg_dataGetClassesesOrderByField!
+  path: String
+  type: Demo_rpg_dataOrderFieldType
+}
+
+input Demo_rpg_dataGetDialogsesInput {
+  after: String
+  first: Int
+  orderBy: [Demo_rpg_dataGetDialogsesOrderByInput!]
+  where: Demo_rpg_dataDialogsesWhereInput
+}
+
+enum Demo_rpg_dataGetDialogsesOrderByField {
+  createdAt
+  data
+  id
+  publishedAt
+  updatedAt
+}
+
+input Demo_rpg_dataGetDialogsesOrderByInput {
+  aggregation: Demo_rpg_dataOrderFieldAggregation
+  direction: Demo_rpg_dataSortOrder!
+  field: Demo_rpg_dataGetDialogsesOrderByField!
+  path: String
+  type: Demo_rpg_dataOrderFieldType
+}
+
+input Demo_rpg_dataGetEffectsesInput {
+  after: String
+  first: Int
+  orderBy: [Demo_rpg_dataGetEffectsesOrderByInput!]
+  where: Demo_rpg_dataEffectsesWhereInput
+}
+
+enum Demo_rpg_dataGetEffectsesOrderByField {
+  createdAt
+  data
+  id
+  publishedAt
+  updatedAt
+}
+
+input Demo_rpg_dataGetEffectsesOrderByInput {
+  aggregation: Demo_rpg_dataOrderFieldAggregation
+  direction: Demo_rpg_dataSortOrder!
+  field: Demo_rpg_dataGetEffectsesOrderByField!
+  path: String
+  type: Demo_rpg_dataOrderFieldType
+}
+
+input Demo_rpg_dataGetFactionsesInput {
+  after: String
+  first: Int
+  orderBy: [Demo_rpg_dataGetFactionsesOrderByInput!]
+  where: Demo_rpg_dataFactionsesWhereInput
+}
+
+enum Demo_rpg_dataGetFactionsesOrderByField {
+  createdAt
+  data
+  id
+  publishedAt
+  updatedAt
+}
+
+input Demo_rpg_dataGetFactionsesOrderByInput {
+  aggregation: Demo_rpg_dataOrderFieldAggregation
+  direction: Demo_rpg_dataSortOrder!
+  field: Demo_rpg_dataGetFactionsesOrderByField!
+  path: String
+  type: Demo_rpg_dataOrderFieldType
+}
+
+input Demo_rpg_dataGetHeroesesInput {
+  after: String
+  first: Int
+  orderBy: [Demo_rpg_dataGetHeroesesOrderByInput!]
+  where: Demo_rpg_dataHeroesesWhereInput
+}
+
+enum Demo_rpg_dataGetHeroesesOrderByField {
+  createdAt
+  data
+  id
+  publishedAt
+  updatedAt
+}
+
+input Demo_rpg_dataGetHeroesesOrderByInput {
+  aggregation: Demo_rpg_dataOrderFieldAggregation
+  direction: Demo_rpg_dataSortOrder!
+  field: Demo_rpg_dataGetHeroesesOrderByField!
+  path: String
+  type: Demo_rpg_dataOrderFieldType
+}
+
+input Demo_rpg_dataGetItem_typesesInput {
+  after: String
+  first: Int
+  orderBy: [Demo_rpg_dataGetItem_typesesOrderByInput!]
+  where: Demo_rpg_dataItem_typesesWhereInput
+}
+
+enum Demo_rpg_dataGetItem_typesesOrderByField {
+  createdAt
+  data
+  id
+  publishedAt
+  updatedAt
+}
+
+input Demo_rpg_dataGetItem_typesesOrderByInput {
+  aggregation: Demo_rpg_dataOrderFieldAggregation
+  direction: Demo_rpg_dataSortOrder!
+  field: Demo_rpg_dataGetItem_typesesOrderByField!
+  path: String
+  type: Demo_rpg_dataOrderFieldType
+}
+
+input Demo_rpg_dataGetItemsesInput {
+  after: String
+  first: Int
+  orderBy: [Demo_rpg_dataGetItemsesOrderByInput!]
+  where: Demo_rpg_dataItemsesWhereInput
+}
+
+enum Demo_rpg_dataGetItemsesOrderByField {
+  createdAt
+  data
+  id
+  publishedAt
+  updatedAt
+}
+
+input Demo_rpg_dataGetItemsesOrderByInput {
+  aggregation: Demo_rpg_dataOrderFieldAggregation
+  direction: Demo_rpg_dataSortOrder!
+  field: Demo_rpg_dataGetItemsesOrderByField!
+  path: String
+  type: Demo_rpg_dataOrderFieldType
+}
+
+input Demo_rpg_dataGetLocationsesInput {
+  after: String
+  first: Int
+  orderBy: [Demo_rpg_dataGetLocationsesOrderByInput!]
+  where: Demo_rpg_dataLocationsesWhereInput
+}
+
+enum Demo_rpg_dataGetLocationsesOrderByField {
+  createdAt
+  data
+  id
+  publishedAt
+  updatedAt
+}
+
+input Demo_rpg_dataGetLocationsesOrderByInput {
+  aggregation: Demo_rpg_dataOrderFieldAggregation
+  direction: Demo_rpg_dataSortOrder!
+  field: Demo_rpg_dataGetLocationsesOrderByField!
+  path: String
+  type: Demo_rpg_dataOrderFieldType
+}
+
+input Demo_rpg_dataGetMonstersesInput {
+  after: String
+  first: Int
+  orderBy: [Demo_rpg_dataGetMonstersesOrderByInput!]
+  where: Demo_rpg_dataMonstersesWhereInput
+}
+
+enum Demo_rpg_dataGetMonstersesOrderByField {
+  createdAt
+  data
+  id
+  publishedAt
+  updatedAt
+}
+
+input Demo_rpg_dataGetMonstersesOrderByInput {
+  aggregation: Demo_rpg_dataOrderFieldAggregation
+  direction: Demo_rpg_dataSortOrder!
+  field: Demo_rpg_dataGetMonstersesOrderByField!
+  path: String
+  type: Demo_rpg_dataOrderFieldType
+}
+
+input Demo_rpg_dataGetNpcsesInput {
+  after: String
+  first: Int
+  orderBy: [Demo_rpg_dataGetNpcsesOrderByInput!]
+  where: Demo_rpg_dataNpcsesWhereInput
+}
+
+enum Demo_rpg_dataGetNpcsesOrderByField {
+  createdAt
+  data
+  id
+  publishedAt
+  updatedAt
+}
+
+input Demo_rpg_dataGetNpcsesOrderByInput {
+  aggregation: Demo_rpg_dataOrderFieldAggregation
+  direction: Demo_rpg_dataSortOrder!
+  field: Demo_rpg_dataGetNpcsesOrderByField!
+  path: String
+  type: Demo_rpg_dataOrderFieldType
+}
+
+input Demo_rpg_dataGetPartiesesInput {
+  after: String
+  first: Int
+  orderBy: [Demo_rpg_dataGetPartiesesOrderByInput!]
+  where: Demo_rpg_dataPartiesesWhereInput
+}
+
+enum Demo_rpg_dataGetPartiesesOrderByField {
+  createdAt
+  data
+  id
+  publishedAt
+  updatedAt
+}
+
+input Demo_rpg_dataGetPartiesesOrderByInput {
+  aggregation: Demo_rpg_dataOrderFieldAggregation
+  direction: Demo_rpg_dataSortOrder!
+  field: Demo_rpg_dataGetPartiesesOrderByField!
+  path: String
+  type: Demo_rpg_dataOrderFieldType
+}
+
+input Demo_rpg_dataGetQuestsesInput {
+  after: String
+  first: Int
+  orderBy: [Demo_rpg_dataGetQuestsesOrderByInput!]
+  where: Demo_rpg_dataQuestsesWhereInput
+}
+
+enum Demo_rpg_dataGetQuestsesOrderByField {
+  createdAt
+  data
+  id
+  publishedAt
+  updatedAt
+}
+
+input Demo_rpg_dataGetQuestsesOrderByInput {
+  aggregation: Demo_rpg_dataOrderFieldAggregation
+  direction: Demo_rpg_dataSortOrder!
+  field: Demo_rpg_dataGetQuestsesOrderByField!
+  path: String
+  type: Demo_rpg_dataOrderFieldType
+}
+
+input Demo_rpg_dataGetRegionsesInput {
+  after: String
+  first: Int
+  orderBy: [Demo_rpg_dataGetRegionsesOrderByInput!]
+  where: Demo_rpg_dataRegionsesWhereInput
+}
+
+enum Demo_rpg_dataGetRegionsesOrderByField {
+  createdAt
+  data
+  id
+  publishedAt
+  updatedAt
+}
+
+input Demo_rpg_dataGetRegionsesOrderByInput {
+  aggregation: Demo_rpg_dataOrderFieldAggregation
+  direction: Demo_rpg_dataSortOrder!
+  field: Demo_rpg_dataGetRegionsesOrderByField!
+  path: String
+  type: Demo_rpg_dataOrderFieldType
+}
+
+input Demo_rpg_dataGetStatsesInput {
+  after: String
+  first: Int
+  orderBy: [Demo_rpg_dataGetStatsesOrderByInput!]
+  where: Demo_rpg_dataStatsesWhereInput
+}
+
+enum Demo_rpg_dataGetStatsesOrderByField {
+  createdAt
+  data
+  id
+  publishedAt
+  updatedAt
+}
+
+input Demo_rpg_dataGetStatsesOrderByInput {
+  aggregation: Demo_rpg_dataOrderFieldAggregation
+  direction: Demo_rpg_dataSortOrder!
+  field: Demo_rpg_dataGetStatsesOrderByField!
+  path: String
+  type: Demo_rpg_dataOrderFieldType
+}
+
+type Demo_rpg_dataHeroes {
+  ability_ids: [Demo_rpg_dataAbilitiesNode!]!
+  class_id: Demo_rpg_dataClassesNode!
+  constitution: Float!
+  display_name_en: String!
+  epithet: Demo_rpg_dataHeroesEpithet!
+  equipment: [Demo_rpg_dataHeroesEquipmentItems!]!
+  equipped_count: Float!
+  gold: Float!
+  inventory_item_ids: [Demo_rpg_dataItemsNode!]!
+  is_veteran: Boolean!
+  level: Float!
+  name: Demo_rpg_dataHeroesName!
+  portrait: Demo_rpg_dataHeroesPortrait!
+  total_equipment_modifier: Float!
+}
+
+type Demo_rpg_dataHeroesConnection {
+  edges: [Demo_rpg_dataHeroesEdge!]!
+  pageInfo: Demo_rpg_dataPageInfo!
+  totalCount: Int!
+}
+
+type Demo_rpg_dataHeroesEdge {
+  cursor: String!
+  node: Demo_rpg_dataHeroesNode!
+}
+
+type Demo_rpg_dataHeroesEpithet {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_dataHeroesEquipmentItems {
+  item_id: Demo_rpg_dataItemsNode!
+  modifier: Float!
+  slot: String!
+}
+
+type Demo_rpg_dataHeroesFlat {
+  ability_ids: [Demo_rpg_dataAbilitiesFlat!]!
+  class_id: Demo_rpg_dataClassesFlat!
+  constitution: Float!
+  display_name_en: String!
+  epithet: Demo_rpg_dataHeroesFlatEpithet!
+  equipment: [Demo_rpg_dataHeroesFlatEquipmentItems!]!
+  equipped_count: Float!
+  gold: Float!
+  inventory_item_ids: [Demo_rpg_dataItemsFlat!]!
+  is_veteran: Boolean!
+  level: Float!
+  name: Demo_rpg_dataHeroesFlatName!
+  portrait: Demo_rpg_dataHeroesFlatPortrait!
+  total_equipment_modifier: Float!
+}
+
+type Demo_rpg_dataHeroesFlatConnection {
+  edges: [Demo_rpg_dataHeroesFlatEdge!]!
+  pageInfo: Demo_rpg_dataPageInfo!
+  totalCount: Int!
+}
+
+type Demo_rpg_dataHeroesFlatEdge {
+  cursor: String!
+  node: Demo_rpg_dataHeroesFlat!
+}
+
+type Demo_rpg_dataHeroesFlatEpithet {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_dataHeroesFlatEquipmentItems {
+  item_id: Demo_rpg_dataItemsFlat!
+  modifier: Float!
+  slot: String!
+}
+
+type Demo_rpg_dataHeroesFlatName {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_dataHeroesFlatPortrait {
+  extension: String!
+  fileId: String!
+  fileName: String!
+  hash: String!
+  height: Float!
+  mimeType: String!
+  size: Float!
+  status: String!
+  url: String!
+  width: Float!
+}
+
+type Demo_rpg_dataHeroesName {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_dataHeroesNode {
+  createdAt: DateTime!
+  createdId: String!
+  data: Demo_rpg_dataHeroes!
+  id: String!
+  json: JSON!
+  publishedAt: DateTime!
+  updatedAt: DateTime!
+  versionId: String!
+}
+
+type Demo_rpg_dataHeroesPortrait {
+  extension: String!
+  fileId: String!
+  fileName: String!
+  hash: String!
+  height: Float!
+  mimeType: String!
+  size: Float!
+  status: String!
+  url: String!
+  width: Float!
+}
+
+input Demo_rpg_dataHeroesesWhereInput {
+  AND: [Demo_rpg_dataHeroesesWhereInput!]
+  NOT: [Demo_rpg_dataHeroesesWhereInput!]
+  OR: [Demo_rpg_dataHeroesesWhereInput!]
+  createdAt: Demo_rpg_dataDateTimeFilter
+  createdId: Demo_rpg_dataStringFilter
+  data: Demo_rpg_dataJsonFilter
+  id: Demo_rpg_dataStringFilter
+  publishedAt: Demo_rpg_dataDateTimeFilter
+  readonly: Demo_rpg_dataBoolFilter
+  updatedAt: Demo_rpg_dataDateTimeFilter
+  versionId: Demo_rpg_dataStringFilter
+}
+
+type Demo_rpg_dataItem_types {
+  code: String!
+  description: Demo_rpg_dataItem_typesDescription!
+  name: Demo_rpg_dataItem_typesName!
+}
+
+type Demo_rpg_dataItem_typesConnection {
+  edges: [Demo_rpg_dataItem_typesEdge!]!
+  pageInfo: Demo_rpg_dataPageInfo!
+  totalCount: Int!
+}
+
+type Demo_rpg_dataItem_typesDescription {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_dataItem_typesEdge {
+  cursor: String!
+  node: Demo_rpg_dataItem_typesNode!
+}
+
+type Demo_rpg_dataItem_typesFlat {
+  code: String!
+  description: Demo_rpg_dataItem_typesFlatDescription!
+  name: Demo_rpg_dataItem_typesFlatName!
+}
+
+type Demo_rpg_dataItem_typesFlatConnection {
+  edges: [Demo_rpg_dataItem_typesFlatEdge!]!
+  pageInfo: Demo_rpg_dataPageInfo!
+  totalCount: Int!
+}
+
+type Demo_rpg_dataItem_typesFlatDescription {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_dataItem_typesFlatEdge {
+  cursor: String!
+  node: Demo_rpg_dataItem_typesFlat!
+}
+
+type Demo_rpg_dataItem_typesFlatName {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_dataItem_typesName {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_dataItem_typesNode {
+  createdAt: DateTime!
+  createdId: String!
+  data: Demo_rpg_dataItem_types!
+  id: String!
+  json: JSON!
+  publishedAt: DateTime!
+  updatedAt: DateTime!
+  versionId: String!
+}
+
+input Demo_rpg_dataItem_typesesWhereInput {
+  AND: [Demo_rpg_dataItem_typesesWhereInput!]
+  NOT: [Demo_rpg_dataItem_typesesWhereInput!]
+  OR: [Demo_rpg_dataItem_typesesWhereInput!]
+  createdAt: Demo_rpg_dataDateTimeFilter
+  createdId: Demo_rpg_dataStringFilter
+  data: Demo_rpg_dataJsonFilter
+  id: Demo_rpg_dataStringFilter
+  publishedAt: Demo_rpg_dataDateTimeFilter
+  readonly: Demo_rpg_dataBoolFilter
+  updatedAt: Demo_rpg_dataDateTimeFilter
+  versionId: Demo_rpg_dataStringFilter
+}
+
+type Demo_rpg_dataItems {
+  base_value: Float!
+  description: Demo_rpg_dataItemsDescription!
+  icon: Demo_rpg_dataItemsIcon!
+  market_value: Float!
+  modifiers: [Demo_rpg_dataItemsModifiersItems!]!
+  name: Demo_rpg_dataItemsName!
+  rarity: String!
+  rarity_multiplier: Float!
+  rarity_tag: String!
+  type_id: Demo_rpg_dataItem_typesNode!
+  weight: Float!
+}
+
+type Demo_rpg_dataItemsConnection {
+  edges: [Demo_rpg_dataItemsEdge!]!
+  pageInfo: Demo_rpg_dataPageInfo!
+  totalCount: Int!
+}
+
+type Demo_rpg_dataItemsDescription {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_dataItemsEdge {
+  cursor: String!
+  node: Demo_rpg_dataItemsNode!
+}
+
+type Demo_rpg_dataItemsFlat {
+  base_value: Float!
+  description: Demo_rpg_dataItemsFlatDescription!
+  icon: Demo_rpg_dataItemsFlatIcon!
+  market_value: Float!
+  modifiers: [Demo_rpg_dataItemsFlatModifiersItems!]!
+  name: Demo_rpg_dataItemsFlatName!
+  rarity: String!
+  rarity_multiplier: Float!
+  rarity_tag: String!
+  type_id: Demo_rpg_dataItem_typesFlat!
+  weight: Float!
+}
+
+type Demo_rpg_dataItemsFlatConnection {
+  edges: [Demo_rpg_dataItemsFlatEdge!]!
+  pageInfo: Demo_rpg_dataPageInfo!
+  totalCount: Int!
+}
+
+type Demo_rpg_dataItemsFlatDescription {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_dataItemsFlatEdge {
+  cursor: String!
+  node: Demo_rpg_dataItemsFlat!
+}
+
+type Demo_rpg_dataItemsFlatIcon {
+  extension: String!
+  fileId: String!
+  fileName: String!
+  hash: String!
+  height: Float!
+  mimeType: String!
+  size: Float!
+  status: String!
+  url: String!
+  width: Float!
+}
+
+type Demo_rpg_dataItemsFlatModifiersItems {
+  stat_id: Demo_rpg_dataStatsFlat!
+  value: Float!
+}
+
+type Demo_rpg_dataItemsFlatName {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_dataItemsIcon {
+  extension: String!
+  fileId: String!
+  fileName: String!
+  hash: String!
+  height: Float!
+  mimeType: String!
+  size: Float!
+  status: String!
+  url: String!
+  width: Float!
+}
+
+type Demo_rpg_dataItemsModifiersItems {
+  stat_id: Demo_rpg_dataStatsNode!
+  value: Float!
+}
+
+type Demo_rpg_dataItemsName {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_dataItemsNode {
+  createdAt: DateTime!
+  createdId: String!
+  data: Demo_rpg_dataItems!
+  id: String!
+  json: JSON!
+  publishedAt: DateTime!
+  updatedAt: DateTime!
+  versionId: String!
+}
+
+input Demo_rpg_dataItemsesWhereInput {
+  AND: [Demo_rpg_dataItemsesWhereInput!]
+  NOT: [Demo_rpg_dataItemsesWhereInput!]
+  OR: [Demo_rpg_dataItemsesWhereInput!]
+  createdAt: Demo_rpg_dataDateTimeFilter
+  createdId: Demo_rpg_dataStringFilter
+  data: Demo_rpg_dataJsonFilter
+  id: Demo_rpg_dataStringFilter
+  publishedAt: Demo_rpg_dataDateTimeFilter
+  readonly: Demo_rpg_dataBoolFilter
+  updatedAt: Demo_rpg_dataDateTimeFilter
+  versionId: Demo_rpg_dataStringFilter
+}
+
+input Demo_rpg_dataJsonFilter {
+  array_contains: [JSON!]
+  array_ends_with: JSON
+  array_starts_with: JSON
+  equals: JSON
+  gt: Float
+  gte: Float
+  lt: Float
+  lte: Float
+  mode: Demo_rpg_dataFilterJsonMode
+  path: JSON
+  search: String
+  searchLanguage: Demo_rpg_dataSearchLanguage
+  searchType: Demo_rpg_dataSearchType
+  string_contains: String
+  string_ends_with: String
+  string_starts_with: String
+}
+
+type Demo_rpg_dataLocations {
+  coordinates: Demo_rpg_dataLocationsCoordinates!
+  description: Demo_rpg_dataLocationsDescription!
+  kind: String!
+  map: Demo_rpg_dataLocationsMap!
+  name: Demo_rpg_dataLocationsName!
+  region_id: Demo_rpg_dataRegionsNode!
+}
+
+type Demo_rpg_dataLocationsConnection {
+  edges: [Demo_rpg_dataLocationsEdge!]!
+  pageInfo: Demo_rpg_dataPageInfo!
+  totalCount: Int!
+}
+
+type Demo_rpg_dataLocationsCoordinates {
+  x: Float!
+  y: Float!
+}
+
+type Demo_rpg_dataLocationsDescription {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_dataLocationsEdge {
+  cursor: String!
+  node: Demo_rpg_dataLocationsNode!
+}
+
+type Demo_rpg_dataLocationsFlat {
+  coordinates: Demo_rpg_dataLocationsFlatCoordinates!
+  description: Demo_rpg_dataLocationsFlatDescription!
+  kind: String!
+  map: Demo_rpg_dataLocationsFlatMap!
+  name: Demo_rpg_dataLocationsFlatName!
+  region_id: Demo_rpg_dataRegionsFlat!
+}
+
+type Demo_rpg_dataLocationsFlatConnection {
+  edges: [Demo_rpg_dataLocationsFlatEdge!]!
+  pageInfo: Demo_rpg_dataPageInfo!
+  totalCount: Int!
+}
+
+type Demo_rpg_dataLocationsFlatCoordinates {
+  x: Float!
+  y: Float!
+}
+
+type Demo_rpg_dataLocationsFlatDescription {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_dataLocationsFlatEdge {
+  cursor: String!
+  node: Demo_rpg_dataLocationsFlat!
+}
+
+type Demo_rpg_dataLocationsFlatMap {
+  extension: String!
+  fileId: String!
+  fileName: String!
+  hash: String!
+  height: Float!
+  mimeType: String!
+  size: Float!
+  status: String!
+  url: String!
+  width: Float!
+}
+
+type Demo_rpg_dataLocationsFlatName {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_dataLocationsMap {
+  extension: String!
+  fileId: String!
+  fileName: String!
+  hash: String!
+  height: Float!
+  mimeType: String!
+  size: Float!
+  status: String!
+  url: String!
+  width: Float!
+}
+
+type Demo_rpg_dataLocationsName {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_dataLocationsNode {
+  createdAt: DateTime!
+  createdId: String!
+  data: Demo_rpg_dataLocations!
+  id: String!
+  json: JSON!
+  publishedAt: DateTime!
+  updatedAt: DateTime!
+  versionId: String!
+}
+
+input Demo_rpg_dataLocationsesWhereInput {
+  AND: [Demo_rpg_dataLocationsesWhereInput!]
+  NOT: [Demo_rpg_dataLocationsesWhereInput!]
+  OR: [Demo_rpg_dataLocationsesWhereInput!]
+  createdAt: Demo_rpg_dataDateTimeFilter
+  createdId: Demo_rpg_dataStringFilter
+  data: Demo_rpg_dataJsonFilter
+  id: Demo_rpg_dataStringFilter
+  publishedAt: Demo_rpg_dataDateTimeFilter
+  readonly: Demo_rpg_dataBoolFilter
+  updatedAt: Demo_rpg_dataDateTimeFilter
+  versionId: Demo_rpg_dataStringFilter
+}
+
+type Demo_rpg_dataMonsters {
+  ability_ids: [Demo_rpg_dataAbilitiesNode!]!
+  avg_drop_chance: Float!
+  base_damage: Float!
+  description: Demo_rpg_dataMonstersDescription!
+  drop_count: Float!
+  drops: [Demo_rpg_dataMonstersDropsItems!]!
+  faction_id: Demo_rpg_dataFactionsNode!
+  hp: Float!
+  image: Demo_rpg_dataMonstersImage!
+  kind: String!
+  level: Float!
+  name: Demo_rpg_dataMonstersName!
+}
+
+type Demo_rpg_dataMonstersConnection {
+  edges: [Demo_rpg_dataMonstersEdge!]!
+  pageInfo: Demo_rpg_dataPageInfo!
+  totalCount: Int!
+}
+
+type Demo_rpg_dataMonstersDescription {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_dataMonstersDropsItems {
+  chance: Float!
+  item_id: Demo_rpg_dataItemsNode!
+  quantity_max: Float!
+  quantity_min: Float!
+}
+
+type Demo_rpg_dataMonstersEdge {
+  cursor: String!
+  node: Demo_rpg_dataMonstersNode!
+}
+
+type Demo_rpg_dataMonstersFlat {
+  ability_ids: [Demo_rpg_dataAbilitiesFlat!]!
+  avg_drop_chance: Float!
+  base_damage: Float!
+  description: Demo_rpg_dataMonstersFlatDescription!
+  drop_count: Float!
+  drops: [Demo_rpg_dataMonstersFlatDropsItems!]!
+  faction_id: Demo_rpg_dataFactionsFlat!
+  hp: Float!
+  image: Demo_rpg_dataMonstersFlatImage!
+  kind: String!
+  level: Float!
+  name: Demo_rpg_dataMonstersFlatName!
+}
+
+type Demo_rpg_dataMonstersFlatConnection {
+  edges: [Demo_rpg_dataMonstersFlatEdge!]!
+  pageInfo: Demo_rpg_dataPageInfo!
+  totalCount: Int!
+}
+
+type Demo_rpg_dataMonstersFlatDescription {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_dataMonstersFlatDropsItems {
+  chance: Float!
+  item_id: Demo_rpg_dataItemsFlat!
+  quantity_max: Float!
+  quantity_min: Float!
+}
+
+type Demo_rpg_dataMonstersFlatEdge {
+  cursor: String!
+  node: Demo_rpg_dataMonstersFlat!
+}
+
+type Demo_rpg_dataMonstersFlatImage {
+  extension: String!
+  fileId: String!
+  fileName: String!
+  hash: String!
+  height: Float!
+  mimeType: String!
+  size: Float!
+  status: String!
+  url: String!
+  width: Float!
+}
+
+type Demo_rpg_dataMonstersFlatName {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_dataMonstersImage {
+  extension: String!
+  fileId: String!
+  fileName: String!
+  hash: String!
+  height: Float!
+  mimeType: String!
+  size: Float!
+  status: String!
+  url: String!
+  width: Float!
+}
+
+type Demo_rpg_dataMonstersName {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_dataMonstersNode {
+  createdAt: DateTime!
+  createdId: String!
+  data: Demo_rpg_dataMonsters!
+  id: String!
+  json: JSON!
+  publishedAt: DateTime!
+  updatedAt: DateTime!
+  versionId: String!
+}
+
+input Demo_rpg_dataMonstersesWhereInput {
+  AND: [Demo_rpg_dataMonstersesWhereInput!]
+  NOT: [Demo_rpg_dataMonstersesWhereInput!]
+  OR: [Demo_rpg_dataMonstersesWhereInput!]
+  createdAt: Demo_rpg_dataDateTimeFilter
+  createdId: Demo_rpg_dataStringFilter
+  data: Demo_rpg_dataJsonFilter
+  id: Demo_rpg_dataStringFilter
+  publishedAt: Demo_rpg_dataDateTimeFilter
+  readonly: Demo_rpg_dataBoolFilter
+  updatedAt: Demo_rpg_dataDateTimeFilter
+  versionId: Demo_rpg_dataStringFilter
+}
+
+type Demo_rpg_dataNpcs {
+  description: Demo_rpg_dataNpcsDescription!
+  display_label_en: String!
+  faction_id: Demo_rpg_dataFactionsNode!
+  inventory_item_ids: [Demo_rpg_dataItemsNode!]!
+  location_id: Demo_rpg_dataLocationsNode!
+  name: Demo_rpg_dataNpcsName!
+  portrait: Demo_rpg_dataNpcsPortrait!
+  role: String!
+  title: Demo_rpg_dataNpcsTitle!
+}
+
+type Demo_rpg_dataNpcsConnection {
+  edges: [Demo_rpg_dataNpcsEdge!]!
+  pageInfo: Demo_rpg_dataPageInfo!
+  totalCount: Int!
+}
+
+type Demo_rpg_dataNpcsDescription {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_dataNpcsEdge {
+  cursor: String!
+  node: Demo_rpg_dataNpcsNode!
+}
+
+type Demo_rpg_dataNpcsFlat {
+  description: Demo_rpg_dataNpcsFlatDescription!
+  display_label_en: String!
+  faction_id: Demo_rpg_dataFactionsFlat!
+  inventory_item_ids: [Demo_rpg_dataItemsFlat!]!
+  location_id: Demo_rpg_dataLocationsFlat!
+  name: Demo_rpg_dataNpcsFlatName!
+  portrait: Demo_rpg_dataNpcsFlatPortrait!
+  role: String!
+  title: Demo_rpg_dataNpcsFlatTitle!
+}
+
+type Demo_rpg_dataNpcsFlatConnection {
+  edges: [Demo_rpg_dataNpcsFlatEdge!]!
+  pageInfo: Demo_rpg_dataPageInfo!
+  totalCount: Int!
+}
+
+type Demo_rpg_dataNpcsFlatDescription {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_dataNpcsFlatEdge {
+  cursor: String!
+  node: Demo_rpg_dataNpcsFlat!
+}
+
+type Demo_rpg_dataNpcsFlatName {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_dataNpcsFlatPortrait {
+  extension: String!
+  fileId: String!
+  fileName: String!
+  hash: String!
+  height: Float!
+  mimeType: String!
+  size: Float!
+  status: String!
+  url: String!
+  width: Float!
+}
+
+type Demo_rpg_dataNpcsFlatTitle {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_dataNpcsName {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_dataNpcsNode {
+  createdAt: DateTime!
+  createdId: String!
+  data: Demo_rpg_dataNpcs!
+  id: String!
+  json: JSON!
+  publishedAt: DateTime!
+  updatedAt: DateTime!
+  versionId: String!
+}
+
+type Demo_rpg_dataNpcsPortrait {
+  extension: String!
+  fileId: String!
+  fileName: String!
+  hash: String!
+  height: Float!
+  mimeType: String!
+  size: Float!
+  status: String!
+  url: String!
+  width: Float!
+}
+
+type Demo_rpg_dataNpcsTitle {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+input Demo_rpg_dataNpcsesWhereInput {
+  AND: [Demo_rpg_dataNpcsesWhereInput!]
+  NOT: [Demo_rpg_dataNpcsesWhereInput!]
+  OR: [Demo_rpg_dataNpcsesWhereInput!]
+  createdAt: Demo_rpg_dataDateTimeFilter
+  createdId: Demo_rpg_dataStringFilter
+  data: Demo_rpg_dataJsonFilter
+  id: Demo_rpg_dataStringFilter
+  publishedAt: Demo_rpg_dataDateTimeFilter
+  readonly: Demo_rpg_dataBoolFilter
+  updatedAt: Demo_rpg_dataDateTimeFilter
+  versionId: Demo_rpg_dataStringFilter
+}
+
+enum Demo_rpg_dataOrderFieldAggregation {
+  avg
+  first
+  last
+  max
+  min
+}
+
+enum Demo_rpg_dataOrderFieldType {
+  boolean
+  float
+  int
+  text
+  timestamp
+}
+
+type Demo_rpg_dataPageInfo {
+  endCursor: String
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+}
+
+type Demo_rpg_dataParties {
+  formation: String!
+  hero_ids: [Demo_rpg_dataHeroesNode!]!
+  is_full: Boolean!
+  member_count: Float!
+  motto: Demo_rpg_dataPartiesMotto!
+  name: Demo_rpg_dataPartiesName!
+}
+
+type Demo_rpg_dataPartiesConnection {
+  edges: [Demo_rpg_dataPartiesEdge!]!
+  pageInfo: Demo_rpg_dataPageInfo!
+  totalCount: Int!
+}
+
+type Demo_rpg_dataPartiesEdge {
+  cursor: String!
+  node: Demo_rpg_dataPartiesNode!
+}
+
+type Demo_rpg_dataPartiesFlat {
+  formation: String!
+  hero_ids: [Demo_rpg_dataHeroesFlat!]!
+  is_full: Boolean!
+  member_count: Float!
+  motto: Demo_rpg_dataPartiesFlatMotto!
+  name: Demo_rpg_dataPartiesFlatName!
+}
+
+type Demo_rpg_dataPartiesFlatConnection {
+  edges: [Demo_rpg_dataPartiesFlatEdge!]!
+  pageInfo: Demo_rpg_dataPageInfo!
+  totalCount: Int!
+}
+
+type Demo_rpg_dataPartiesFlatEdge {
+  cursor: String!
+  node: Demo_rpg_dataPartiesFlat!
+}
+
+type Demo_rpg_dataPartiesFlatMotto {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_dataPartiesFlatName {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_dataPartiesMotto {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_dataPartiesName {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_dataPartiesNode {
+  createdAt: DateTime!
+  createdId: String!
+  data: Demo_rpg_dataParties!
+  id: String!
+  json: JSON!
+  publishedAt: DateTime!
+  updatedAt: DateTime!
+  versionId: String!
+}
+
+input Demo_rpg_dataPartiesesWhereInput {
+  AND: [Demo_rpg_dataPartiesesWhereInput!]
+  NOT: [Demo_rpg_dataPartiesesWhereInput!]
+  OR: [Demo_rpg_dataPartiesesWhereInput!]
+  createdAt: Demo_rpg_dataDateTimeFilter
+  createdId: Demo_rpg_dataStringFilter
+  data: Demo_rpg_dataJsonFilter
+  id: Demo_rpg_dataStringFilter
+  publishedAt: Demo_rpg_dataDateTimeFilter
+  readonly: Demo_rpg_dataBoolFilter
+  updatedAt: Demo_rpg_dataDateTimeFilter
+  versionId: Demo_rpg_dataStringFilter
+}
+
+type Demo_rpg_dataQuests {
+  description: Demo_rpg_dataQuestsDescription!
+  giver_npc_id: Demo_rpg_dataNpcsNode!
+  is_repeatable: Boolean!
+  kind: String!
+  level_required: Float!
+  map: Demo_rpg_dataQuestsMap!
+  name: Demo_rpg_dataQuestsName!
+  step_count: Float!
+  steps: [Demo_rpg_dataQuestsStepsItems!]!
+  total_loot_xp: Float!
+  total_xp: Float!
+}
+
+type Demo_rpg_dataQuestsConnection {
+  edges: [Demo_rpg_dataQuestsEdge!]!
+  pageInfo: Demo_rpg_dataPageInfo!
+  totalCount: Int!
+}
+
+type Demo_rpg_dataQuestsDescription {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_dataQuestsEdge {
+  cursor: String!
+  node: Demo_rpg_dataQuestsNode!
+}
+
+type Demo_rpg_dataQuestsFlat {
+  description: Demo_rpg_dataQuestsFlatDescription!
+  giver_npc_id: Demo_rpg_dataNpcsFlat!
+  is_repeatable: Boolean!
+  kind: String!
+  level_required: Float!
+  map: Demo_rpg_dataQuestsFlatMap!
+  name: Demo_rpg_dataQuestsFlatName!
+  step_count: Float!
+  steps: [Demo_rpg_dataQuestsFlatStepsItems!]!
+  total_loot_xp: Float!
+  total_xp: Float!
+}
+
+type Demo_rpg_dataQuestsFlatConnection {
+  edges: [Demo_rpg_dataQuestsFlatEdge!]!
+  pageInfo: Demo_rpg_dataPageInfo!
+  totalCount: Int!
+}
+
+type Demo_rpg_dataQuestsFlatDescription {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_dataQuestsFlatEdge {
+  cursor: String!
+  node: Demo_rpg_dataQuestsFlat!
+}
+
+type Demo_rpg_dataQuestsFlatMap {
+  extension: String!
+  fileId: String!
+  fileName: String!
+  hash: String!
+  height: Float!
+  mimeType: String!
+  size: Float!
+  status: String!
+  url: String!
+  width: Float!
+}
+
+type Demo_rpg_dataQuestsFlatName {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_dataQuestsFlatStepsItems {
+  description: Demo_rpg_dataQuestsFlatStepsItemsDescription!
+  location_id: Demo_rpg_dataLocationsFlat!
+  npc_id: Demo_rpg_dataNpcsFlat!
+  rewards: [Demo_rpg_dataQuestsFlatStepsItemsRewardsItems!]!
+  step_number: Float!
+  xp: Float!
+}
+
+type Demo_rpg_dataQuestsFlatStepsItemsDescription {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_dataQuestsFlatStepsItemsRewardsItems {
+  bonus_xp: Float!
+  item_id: Demo_rpg_dataItemsFlat!
+  quantity: Float!
+}
+
+type Demo_rpg_dataQuestsMap {
+  extension: String!
+  fileId: String!
+  fileName: String!
+  hash: String!
+  height: Float!
+  mimeType: String!
+  size: Float!
+  status: String!
+  url: String!
+  width: Float!
+}
+
+type Demo_rpg_dataQuestsName {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_dataQuestsNode {
+  createdAt: DateTime!
+  createdId: String!
+  data: Demo_rpg_dataQuests!
+  id: String!
+  json: JSON!
+  publishedAt: DateTime!
+  updatedAt: DateTime!
+  versionId: String!
+}
+
+type Demo_rpg_dataQuestsStepsItems {
+  description: Demo_rpg_dataQuestsStepsItemsDescription!
+  location_id: Demo_rpg_dataLocationsNode!
+  npc_id: Demo_rpg_dataNpcsNode!
+  rewards: [Demo_rpg_dataQuestsStepsItemsRewardsItems!]!
+  step_number: Float!
+  xp: Float!
+}
+
+type Demo_rpg_dataQuestsStepsItemsDescription {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_dataQuestsStepsItemsRewardsItems {
+  bonus_xp: Float!
+  item_id: Demo_rpg_dataItemsNode!
+  quantity: Float!
+}
+
+input Demo_rpg_dataQuestsesWhereInput {
+  AND: [Demo_rpg_dataQuestsesWhereInput!]
+  NOT: [Demo_rpg_dataQuestsesWhereInput!]
+  OR: [Demo_rpg_dataQuestsesWhereInput!]
+  createdAt: Demo_rpg_dataDateTimeFilter
+  createdId: Demo_rpg_dataStringFilter
+  data: Demo_rpg_dataJsonFilter
+  id: Demo_rpg_dataStringFilter
+  publishedAt: Demo_rpg_dataDateTimeFilter
+  readonly: Demo_rpg_dataBoolFilter
+  updatedAt: Demo_rpg_dataDateTimeFilter
+  versionId: Demo_rpg_dataStringFilter
+}
+
+type Demo_rpg_dataRegions {
+  climate: String!
+  description: Demo_rpg_dataRegionsDescription!
+  name: Demo_rpg_dataRegionsName!
+}
+
+type Demo_rpg_dataRegionsConnection {
+  edges: [Demo_rpg_dataRegionsEdge!]!
+  pageInfo: Demo_rpg_dataPageInfo!
+  totalCount: Int!
+}
+
+type Demo_rpg_dataRegionsDescription {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_dataRegionsEdge {
+  cursor: String!
+  node: Demo_rpg_dataRegionsNode!
+}
+
+type Demo_rpg_dataRegionsFlat {
+  climate: String!
+  description: Demo_rpg_dataRegionsFlatDescription!
+  name: Demo_rpg_dataRegionsFlatName!
+}
+
+type Demo_rpg_dataRegionsFlatConnection {
+  edges: [Demo_rpg_dataRegionsFlatEdge!]!
+  pageInfo: Demo_rpg_dataPageInfo!
+  totalCount: Int!
+}
+
+type Demo_rpg_dataRegionsFlatDescription {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_dataRegionsFlatEdge {
+  cursor: String!
+  node: Demo_rpg_dataRegionsFlat!
+}
+
+type Demo_rpg_dataRegionsFlatName {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_dataRegionsName {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_dataRegionsNode {
+  createdAt: DateTime!
+  createdId: String!
+  data: Demo_rpg_dataRegions!
+  id: String!
+  json: JSON!
+  publishedAt: DateTime!
+  updatedAt: DateTime!
+  versionId: String!
+}
+
+input Demo_rpg_dataRegionsesWhereInput {
+  AND: [Demo_rpg_dataRegionsesWhereInput!]
+  NOT: [Demo_rpg_dataRegionsesWhereInput!]
+  OR: [Demo_rpg_dataRegionsesWhereInput!]
+  createdAt: Demo_rpg_dataDateTimeFilter
+  createdId: Demo_rpg_dataStringFilter
+  data: Demo_rpg_dataJsonFilter
+  id: Demo_rpg_dataStringFilter
+  publishedAt: Demo_rpg_dataDateTimeFilter
+  readonly: Demo_rpg_dataBoolFilter
+  updatedAt: Demo_rpg_dataDateTimeFilter
+  versionId: Demo_rpg_dataStringFilter
+}
+
+enum Demo_rpg_dataSearchLanguage {
+  arabic
+  armenian
+  basque
+  catalan
+  danish
+  dutch
+  english
+  finnish
+  french
+  german
+  greek
+  hindi
+  hungarian
+  indonesian
+  irish
+  italian
+  lithuanian
+  nepali
+  norwegian
+  portuguese
+  romanian
+  russian
+  serbian
+  simple
+  spanish
+  swedish
+  tamil
+  turkish
+  yiddish
+}
+
+enum Demo_rpg_dataSearchType {
+  phrase
+  plain
+  prefix
+  tsquery
+}
+
+enum Demo_rpg_dataSortOrder {
+  asc
+  desc
+}
+
+type Demo_rpg_dataStats {
+  abbreviation: String!
+  code: String!
+  description: Demo_rpg_dataStatsDescription!
+  name: Demo_rpg_dataStatsName!
+}
+
+type Demo_rpg_dataStatsConnection {
+  edges: [Demo_rpg_dataStatsEdge!]!
+  pageInfo: Demo_rpg_dataPageInfo!
+  totalCount: Int!
+}
+
+type Demo_rpg_dataStatsDescription {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_dataStatsEdge {
+  cursor: String!
+  node: Demo_rpg_dataStatsNode!
+}
+
+type Demo_rpg_dataStatsFlat {
+  abbreviation: String!
+  code: String!
+  description: Demo_rpg_dataStatsFlatDescription!
+  name: Demo_rpg_dataStatsFlatName!
+}
+
+type Demo_rpg_dataStatsFlatConnection {
+  edges: [Demo_rpg_dataStatsFlatEdge!]!
+  pageInfo: Demo_rpg_dataPageInfo!
+  totalCount: Int!
+}
+
+type Demo_rpg_dataStatsFlatDescription {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_dataStatsFlatEdge {
+  cursor: String!
+  node: Demo_rpg_dataStatsFlat!
+}
+
+type Demo_rpg_dataStatsFlatName {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_dataStatsName {
+  en: String!
+  ru: String!
+  zh: String!
+}
+
+type Demo_rpg_dataStatsNode {
+  createdAt: DateTime!
+  createdId: String!
+  data: Demo_rpg_dataStats!
+  id: String!
+  json: JSON!
+  publishedAt: DateTime!
+  updatedAt: DateTime!
+  versionId: String!
+}
+
+input Demo_rpg_dataStatsesWhereInput {
+  AND: [Demo_rpg_dataStatsesWhereInput!]
+  NOT: [Demo_rpg_dataStatsesWhereInput!]
+  OR: [Demo_rpg_dataStatsesWhereInput!]
+  createdAt: Demo_rpg_dataDateTimeFilter
+  createdId: Demo_rpg_dataStringFilter
+  data: Demo_rpg_dataJsonFilter
+  id: Demo_rpg_dataStringFilter
+  publishedAt: Demo_rpg_dataDateTimeFilter
+  readonly: Demo_rpg_dataBoolFilter
+  updatedAt: Demo_rpg_dataDateTimeFilter
+  versionId: Demo_rpg_dataStringFilter
+}
+
+input Demo_rpg_dataStringFilter {
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  mode: Demo_rpg_dataFilterStringMode
+  not: String
+  notIn: [String!]
+  startsWith: String
+}
+
+type IdModel {
+  id: String!
+}
+
+"""
+The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSON
+
+input LoginInput {
+  email: String!
+  password: String!
+}
+
+type LoginResponseModel {
+  expiresIn: Int!
+  tokenType: String!
+}
+
+type Mutation {
+  login(data: LoginInput!): LoginResponseModel!
+  logout: Boolean!
+  refreshToken: LoginResponseModel!
+  signUp(data: SignUpInput!): IdModel!
+}
+
+type Query {
+  abilities(id: String!): Demo_rpg_dataAbilitiesNode!
+  abilitiesFlat(id: String!): Demo_rpg_dataAbilitiesFlat!
+  abilitieses(data: Demo_rpg_dataGetAbilitiesesInput): Demo_rpg_dataAbilitiesConnection!
+  abilitiesesFlat(data: Demo_rpg_dataGetAbilitiesesInput): Demo_rpg_dataAbilitiesFlatConnection!
+  blog_authors(id: String!): Demo_rpg_cmsBlog_authorsNode!
+  blog_authorsFlat(id: String!): Demo_rpg_cmsBlog_authorsFlat!
+  blog_authorses(data: Demo_rpg_cmsGetBlog_authorsesInput): Demo_rpg_cmsBlog_authorsConnection!
+  blog_authorsesFlat(data: Demo_rpg_cmsGetBlog_authorsesInput): Demo_rpg_cmsBlog_authorsFlatConnection!
+  blog_posts(id: String!): Demo_rpg_cmsBlog_postsNode!
+  blog_postsFlat(id: String!): Demo_rpg_cmsBlog_postsFlat!
+  blog_postses(data: Demo_rpg_cmsGetBlog_postsesInput): Demo_rpg_cmsBlog_postsConnection!
+  blog_postsesFlat(data: Demo_rpg_cmsGetBlog_postsesInput): Demo_rpg_cmsBlog_postsFlatConnection!
+  classes(id: String!): Demo_rpg_dataClassesNode!
+  classesFlat(id: String!): Demo_rpg_dataClassesFlat!
+  classeses(data: Demo_rpg_dataGetClassesesInput): Demo_rpg_dataClassesConnection!
+  classesesFlat(data: Demo_rpg_dataGetClassesesInput): Demo_rpg_dataClassesFlatConnection!
+  dialogs(id: String!): Demo_rpg_dataDialogsNode!
+  dialogsFlat(id: String!): Demo_rpg_dataDialogsFlat!
+  dialogses(data: Demo_rpg_dataGetDialogsesInput): Demo_rpg_dataDialogsConnection!
+  dialogsesFlat(data: Demo_rpg_dataGetDialogsesInput): Demo_rpg_dataDialogsFlatConnection!
+  effects(id: String!): Demo_rpg_dataEffectsNode!
+  effectsFlat(id: String!): Demo_rpg_dataEffectsFlat!
+  effectses(data: Demo_rpg_dataGetEffectsesInput): Demo_rpg_dataEffectsConnection!
+  effectsesFlat(data: Demo_rpg_dataGetEffectsesInput): Demo_rpg_dataEffectsFlatConnection!
+  factions(id: String!): Demo_rpg_dataFactionsNode!
+  factionsFlat(id: String!): Demo_rpg_dataFactionsFlat!
+  factionses(data: Demo_rpg_dataGetFactionsesInput): Demo_rpg_dataFactionsConnection!
+  factionsesFlat(data: Demo_rpg_dataGetFactionsesInput): Demo_rpg_dataFactionsFlatConnection!
+  heroes(id: String!): Demo_rpg_dataHeroesNode!
+  heroesFlat(id: String!): Demo_rpg_dataHeroesFlat!
+  heroeses(data: Demo_rpg_dataGetHeroesesInput): Demo_rpg_dataHeroesConnection!
+  heroesesFlat(data: Demo_rpg_dataGetHeroesesInput): Demo_rpg_dataHeroesFlatConnection!
+  item_types(id: String!): Demo_rpg_dataItem_typesNode!
+  item_typesFlat(id: String!): Demo_rpg_dataItem_typesFlat!
+  item_typeses(data: Demo_rpg_dataGetItem_typesesInput): Demo_rpg_dataItem_typesConnection!
+  item_typesesFlat(data: Demo_rpg_dataGetItem_typesesInput): Demo_rpg_dataItem_typesFlatConnection!
+  items(id: String!): Demo_rpg_dataItemsNode!
+  itemsFlat(id: String!): Demo_rpg_dataItemsFlat!
+  itemses(data: Demo_rpg_dataGetItemsesInput): Demo_rpg_dataItemsConnection!
+  itemsesFlat(data: Demo_rpg_dataGetItemsesInput): Demo_rpg_dataItemsFlatConnection!
+  landing_features(id: String!): Demo_rpg_cmsLanding_featuresNode!
+  landing_featuresFlat(id: String!): Demo_rpg_cmsLanding_featuresFlat!
+  landing_featureses(data: Demo_rpg_cmsGetLanding_featuresesInput): Demo_rpg_cmsLanding_featuresConnection!
+  landing_featuresesFlat(data: Demo_rpg_cmsGetLanding_featuresesInput): Demo_rpg_cmsLanding_featuresFlatConnection!
+  landing_hero(id: String!): Demo_rpg_cmsLanding_heroNode!
+  landing_heroFlat(id: String!): Demo_rpg_cmsLanding_heroFlat!
+  landing_heros(data: Demo_rpg_cmsGetLanding_herosInput): Demo_rpg_cmsLanding_heroConnection!
+  landing_herosFlat(data: Demo_rpg_cmsGetLanding_herosInput): Demo_rpg_cmsLanding_heroFlatConnection!
+  landing_testimonials(id: String!): Demo_rpg_cmsLanding_testimonialsNode!
+  landing_testimonialsFlat(id: String!): Demo_rpg_cmsLanding_testimonialsFlat!
+  landing_testimonialses(data: Demo_rpg_cmsGetLanding_testimonialsesInput): Demo_rpg_cmsLanding_testimonialsConnection!
+  landing_testimonialsesFlat(data: Demo_rpg_cmsGetLanding_testimonialsesInput): Demo_rpg_cmsLanding_testimonialsFlatConnection!
+  locations(id: String!): Demo_rpg_dataLocationsNode!
+  locationsFlat(id: String!): Demo_rpg_dataLocationsFlat!
+  locationses(data: Demo_rpg_dataGetLocationsesInput): Demo_rpg_dataLocationsConnection!
+  locationsesFlat(data: Demo_rpg_dataGetLocationsesInput): Demo_rpg_dataLocationsFlatConnection!
+  me: UserModel!
+  monsters(id: String!): Demo_rpg_dataMonstersNode!
+  monstersFlat(id: String!): Demo_rpg_dataMonstersFlat!
+  monsterses(data: Demo_rpg_dataGetMonstersesInput): Demo_rpg_dataMonstersConnection!
+  monstersesFlat(data: Demo_rpg_dataGetMonstersesInput): Demo_rpg_dataMonstersFlatConnection!
+  npcs(id: String!): Demo_rpg_dataNpcsNode!
+  npcsFlat(id: String!): Demo_rpg_dataNpcsFlat!
+  npcses(data: Demo_rpg_dataGetNpcsesInput): Demo_rpg_dataNpcsConnection!
+  npcsesFlat(data: Demo_rpg_dataGetNpcsesInput): Demo_rpg_dataNpcsFlatConnection!
+  parties(id: String!): Demo_rpg_dataPartiesNode!
+  partiesFlat(id: String!): Demo_rpg_dataPartiesFlat!
+  partieses(data: Demo_rpg_dataGetPartiesesInput): Demo_rpg_dataPartiesConnection!
+  partiesesFlat(data: Demo_rpg_dataGetPartiesesInput): Demo_rpg_dataPartiesFlatConnection!
+  quests(id: String!): Demo_rpg_dataQuestsNode!
+  questsFlat(id: String!): Demo_rpg_dataQuestsFlat!
+  questses(data: Demo_rpg_dataGetQuestsesInput): Demo_rpg_dataQuestsConnection!
+  questsesFlat(data: Demo_rpg_dataGetQuestsesInput): Demo_rpg_dataQuestsFlatConnection!
+  regions(id: String!): Demo_rpg_dataRegionsNode!
+  regionsFlat(id: String!): Demo_rpg_dataRegionsFlat!
+  regionses(data: Demo_rpg_dataGetRegionsesInput): Demo_rpg_dataRegionsConnection!
+  regionsesFlat(data: Demo_rpg_dataGetRegionsesInput): Demo_rpg_dataRegionsFlatConnection!
+  stats(id: String!): Demo_rpg_dataStatsNode!
+  statsFlat(id: String!): Demo_rpg_dataStatsFlat!
+  statses(data: Demo_rpg_dataGetStatsesInput): Demo_rpg_dataStatsConnection!
+  statsesFlat(data: Demo_rpg_dataGetStatsesInput): Demo_rpg_dataStatsFlatConnection!
+}
+
+input SignUpInput {
+  email: String!
+  password: String!
+  username: String!
+}
+
+type UserModel {
+  email: String!
+  id: String!
+  roleId: String!
+  username: String!
+}
