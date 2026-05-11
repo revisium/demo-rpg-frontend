@@ -4,12 +4,13 @@ import * as path from 'node:path';
 
 const ENV_DIR = '.env';
 const mode = process.env.NODE_ENV ?? 'development';
-// Vite-style precedence (highest wins). dotenv does not overwrite keys that
-// are already set, so loading from highest priority to lowest yields the
-// correct effective value for each key.
+// Vite-style precedence (highest wins, see https://vite.dev/guide/env-and-mode):
+//   .env.<mode>.local  >  .env.<mode>  >  .env.local  >  .env
+// dotenv leaves already-set keys untouched, so loading highest priority
+// first yields the correct effective value for each key.
 dotenvConfig({ path: path.join(ENV_DIR, `.env.${mode}.local`) });
-dotenvConfig({ path: path.join(ENV_DIR, '.env.local') });
 dotenvConfig({ path: path.join(ENV_DIR, `.env.${mode}`) });
+dotenvConfig({ path: path.join(ENV_DIR, '.env.local') });
 dotenvConfig({ path: path.join(ENV_DIR, '.env') });
 
 const env = process.env;
