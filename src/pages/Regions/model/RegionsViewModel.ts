@@ -9,7 +9,7 @@ export class RegionsViewModel implements IViewModel {
   public readonly request: ObservableRequest<RegionsQuery, []>;
 
   constructor(private readonly api: ApiService) {
-    this.request = ObservableRequest.of(() => this.api.sdk.Regions());
+    this.request = ObservableRequest.of((signal) => this.api.sdk.Regions(undefined, undefined, signal));
     makeAutoObservable(this, {}, { autoBind: true });
   }
 

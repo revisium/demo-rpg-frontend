@@ -20,6 +20,11 @@ const child = spawn('npx', ['graphql-codegen', '--config', 'codegen.ts', ...args
   stdio: 'inherit',
 });
 
+child.on('error', (error) => {
+  console.error(`[gql-codegen] failed to spawn: ${error.message}`);
+  process.exit(1);
+});
+
 child.on('exit', (code, signal) => {
   if (signal !== null) {
     process.kill(process.pid, signal);

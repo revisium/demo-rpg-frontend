@@ -24,7 +24,11 @@ import type { IViewModel } from '../../config';
 // `setup` / `mount` may return promises; rejections are reported to the
 // console rather than discarded so they cannot become silent unhandled
 // rejections that crash the Node SSR process.
-function reportLifecycleError(phase: 'setup' | 'mount', token: { name: string }, error: unknown): void {
+function reportLifecycleError(
+  phase: 'setup' | 'mount' | 'unmount',
+  token: { name: string },
+  error: unknown,
+): void {
   console.error(`[useViewModel] ${token.name}.${phase} rejected`, error);
 }
 
@@ -59,7 +63,11 @@ export function useViewModel<VM extends IViewModel, Args extends unknown[]>(
       reportLifecycleError('mount', token, error);
     }
     return () => {
-      viewModel.unmount();
+      try {
+        viewModel.unmount();
+      } catch (error) {
+        reportLifecycleError('unmount', token, error);
+      }
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [viewModel]);

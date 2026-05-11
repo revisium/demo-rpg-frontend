@@ -71,9 +71,10 @@ functions that read MobX-observable fields off the ViewModel.
 
 ## Env
 
-Variables are loaded from `.env/.env`, `.env/.env.<mode>`,
-`.env/.env.<mode>.local` (in that order). Only keys prefixed with
-`REACT_APP_` reach the client bundle. See `.env/.env.example`.
+Effective precedence (highest wins) is
+`.env/.env.<mode>.local` > `.env/.env.<mode>` > `.env/.env.local` > `.env/.env`,
+matching Vite's env-mode rules. Only keys prefixed with `REACT_APP_` reach
+the client bundle. See `.env/.env.example`.
 
 ## Docker
 

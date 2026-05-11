@@ -26,7 +26,7 @@ export default tseslint.config(
         projectService: true,
         tsconfigRootDir: import.meta.dirname,
       },
-      globals: { ...globals.browser, ...globals.node },
+      globals: { ...globals.browser },
     },
     plugins: {
       react: reactPlugin,
