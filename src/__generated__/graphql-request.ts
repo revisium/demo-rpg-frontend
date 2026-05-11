@@ -1,4 +1,3 @@
-// @ts-ignore
 import { GraphQLClient, RequestOptions } from 'graphql-request';
 import gql from 'graphql-tag';
 export type Maybe<T> = T | null;

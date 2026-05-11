@@ -20,4 +20,10 @@ const child = spawn('npx', ['graphql-codegen', '--config', 'codegen.ts', ...args
   stdio: 'inherit',
 });
 
-child.on('exit', (code) => process.exit(code ?? 0));
+child.on('exit', (code, signal) => {
+  if (signal !== null) {
+    process.kill(process.pid, signal);
+    return;
+  }
+  process.exit(code ?? 1);
+});

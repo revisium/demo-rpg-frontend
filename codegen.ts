@@ -12,10 +12,6 @@ const env = process.env;
 const args = process.argv.slice(2);
 const isDownload = args.includes('--download');
 
-const disablePlugin = {
-  add: { content: ['// @ts-ignore'] },
-};
-
 const scalars = {
   DateTime: 'number | string',
   JSON: 'unknown',
@@ -44,7 +40,7 @@ const config: CodegenConfig = {
       ? {}
       : {
           './src/__generated__/graphql-request.ts': {
-            plugins: [disablePlugin, 'typescript', 'typescript-operations', 'typescript-graphql-request'],
+            plugins: ['typescript', 'typescript-operations', 'typescript-graphql-request'],
             config: {
               rawRequest: false,
               skipTypename: true,

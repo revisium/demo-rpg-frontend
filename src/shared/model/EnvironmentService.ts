@@ -1,11 +1,14 @@
 import { container } from '../lib/DIContainer';
+import { isClient } from '../lib/helpers/isClient';
 
-// Reads REACT_APP_* env at module init.
+// Reads REACT_APP_* env once at construction.
 //
-// On the server we read from process.env (Node).
-// On the client Vite inlines `import.meta.env.REACT_APP_*` at build time.
-// This service hides that branch so the rest of the app sees a single
-// strongly-typed surface.
+// Lookup order matters because `import.meta.env.*` is inlined into BOTH
+// bundles at build time, while `process.env.*` is only meaningful on the
+// server at runtime. To allow operators to reconfigure the deployed image
+// without a rebuild we:
+//   - on the server: read `process.env` first, fall back to `import.meta.env`
+//   - on the client: read `import.meta.env` (no `process` is defined)
 export class EnvironmentService {
   public readonly graphqlServerUrl: string;
   public readonly packageVersion: string;
@@ -13,13 +16,16 @@ export class EnvironmentService {
   public readonly gitBranchName: string;
 
   constructor() {
-    const fromServer = (key: string): string | undefined =>
-      typeof process !== 'undefined' ? process.env[key] : undefined;
-    const fromClient = (key: string): string | undefined => {
+    const fromBuildTime = (key: string): string | undefined => {
       const env = import.meta.env as unknown as Record<string, string | undefined>;
       return env[key];
     };
-    const read = (key: string): string => fromClient(key) ?? fromServer(key) ?? '';
+    const fromRuntime = (key: string): string | undefined =>
+      typeof process !== 'undefined' ? process.env[key] : undefined;
+
+    const read = isClient()
+      ? (key: string): string => fromBuildTime(key) ?? ''
+      : (key: string): string => fromRuntime(key) ?? fromBuildTime(key) ?? '';
 
     this.graphqlServerUrl = read('REACT_APP_GRAPHQL_SERVER_URL');
     this.packageVersion = read('PACKAGE_VERSION');

@@ -10,7 +10,7 @@ const ENV_PREFIX = 'REACT_APP_';
 
 export default ({ mode }: { mode: string }) => {
   const env = loadEnv(mode, ENV_DIR, ENV_PREFIX);
-  process.env = { ...process.env, ...env };
+  Object.assign(process.env, env);
 
   return defineConfig({
     plugins: [

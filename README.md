@@ -35,7 +35,7 @@ npm run fsd:check
 
 ## Layout (FSD)
 
-```
+```text
 src/
   app/routes/         # react-router v7 route modules (thin shells)
   pages/<Page>/       # page-level MVVM bundle
@@ -89,9 +89,11 @@ with `react-router-serve` on port `8080`.
 
 ## CI / CD
 
-Workflows under `.github/workflows/` delegate to `revisium/revisium-actions`:
+Workflows live under `.github/workflows/`. `build.yml`, `deploy.yml`, and
+`release-train.yml` delegate to reusable workflows in
+`revisium/revisium-actions`; `ci.yml` runs locally on every PR.
 
-- `ci.yml` — runs `lint:ci`, `ts:check`, `fsd:check`, `build` on every PR
+- `ci.yml` — `lint:ci`, `ts:check`, `fsd:check`, `build` on every PR
 - `build.yml` — Docker image build + push to Docker Hub on `master` / tags
 - `deploy.yml` — Kubernetes deploy on successful Build (or manual dispatch)
 - `release-train.yml` — version bumps and tags

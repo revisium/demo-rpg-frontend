@@ -1,12 +1,17 @@
-// Minimal dependency-injection container with three scopes:
+// Minimal dependency-injection container with two scopes:
 //   - singleton: one instance per container lifetime
-//   - session:   one instance per `startSession() … stopSession()` window
 //   - transient: a fresh instance on every `get()`
 //
 // ViewModels register as `transient` so each page mount gets a clean store.
 // Long-lived services (ApiService, EnvironmentService) register as `singleton`.
+//
+// We intentionally do NOT support a `session` scope: in SSR the container is
+// shared across concurrent requests, and per-request state stored on a module
+// singleton would leak between requests. If per-request state becomes needed,
+// pass an explicit context through the call site (or AsyncLocalStorage in the
+// loader/action) — do not add it back to this container.
 
-type Scope = 'singleton' | 'session' | 'transient';
+type Scope = 'singleton' | 'transient';
 
 type Factory<T> = () => T;
 
@@ -14,14 +19,12 @@ interface Registration<T> {
   factory: Factory<T>;
   scope: Scope;
   singletonInstance?: T;
-  sessionInstance?: T;
 }
 
 export type Token<T> = new (...args: never[]) => T;
 
 class DIContainer {
   private readonly registrations = new Map<Token<unknown>, Registration<unknown>>();
-  private sessionActive = false;
 
   public register<T>(token: Token<T>, factory: Factory<T>, options: { scope: Scope }): void {
     this.registrations.set(token, {
@@ -41,30 +44,7 @@ class DIContainer {
       return registration.singletonInstance;
     }
 
-    if (registration.scope === 'session') {
-      if (!this.sessionActive) {
-        throw new Error(
-          `DIContainer: token "${token.name}" is session-scoped but no session is active`,
-        );
-      }
-      registration.sessionInstance ??= registration.factory();
-      return registration.sessionInstance;
-    }
-
     return registration.factory();
-  }
-
-  public startSession(): void {
-    this.sessionActive = true;
-  }
-
-  public stopSession(): void {
-    this.sessionActive = false;
-    for (const registration of this.registrations.values()) {
-      if (registration.scope === 'session') {
-        registration.sessionInstance = undefined;
-      }
-    }
   }
 }
 

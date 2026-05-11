@@ -18,7 +18,7 @@ export class RegionsViewModel implements IViewModel {
   }
 
   public async mount(): Promise<void> {
-    if (this.request.isLoaded) return;
+    if (this.request.isLoaded || this.request.isLoading) return;
     await this.request.fetch();
   }
 
