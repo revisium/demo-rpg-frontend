@@ -74,3 +74,28 @@ functions that read MobX-observable fields off the ViewModel.
 Variables are loaded from `.env/.env`, `.env/.env.<mode>`,
 `.env/.env.<mode>.local` (in that order). Only keys prefixed with
 `REACT_APP_` reach the client bundle. See `.env/.env.example`.
+
+## Docker
+
+```bash
+docker build -f docker/Dockerfile -t demo-rpg-frontend .
+docker run --rm -p 8080:8080 demo-rpg-frontend
+```
+
+The multi-stage build (`docker/Dockerfile`) compiles the React Router
+SSR bundle in a Node 22 Alpine builder, then ships a minimal runtime
+stage that installs only production deps and serves `build/server/index.js`
+with `react-router-serve` on port `8080`.
+
+## CI / CD
+
+Workflows under `.github/workflows/` delegate to `revisium/revisium-actions`:
+
+- `ci.yml` — runs `lint:ci`, `ts:check`, `fsd:check`, `build` on every PR
+- `build.yml` — Docker image build + push to Docker Hub on `master` / tags
+- `deploy.yml` — Kubernetes deploy on successful Build (or manual dispatch)
+- `release-train.yml` — version bumps and tags
+
+The Vite production build inlines `REACT_APP_*` from
+`.env/.env.production`. Per-env images are built by overriding the
+relevant env files before `npm run build` runs.
