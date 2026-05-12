@@ -27,7 +27,18 @@ export class EnvironmentService {
       ? (key: string): string => fromBuildTime(key) ?? ''
       : (key: string): string => fromRuntime(key) ?? fromBuildTime(key) ?? '';
 
-    this.graphqlServerUrl = read('REACT_APP_GRAPHQL_SERVER_URL');
+    // graphql-request constructs `new URL(endpoint)` internally, which
+    // throws on relative paths like "/graphql" because URL requires a
+    // base. Native fetch handles relative paths via the document base,
+    // but URL() does not — so on the client we resolve the configured
+    // URL against window.location.origin. On the server the value is
+    // always absolute (cluster DNS in production, dev-stand URL in
+    // dev), so we pass it through as-is.
+    const rawGraphqlUrl = read('REACT_APP_GRAPHQL_SERVER_URL');
+    this.graphqlServerUrl =
+      isClient() && rawGraphqlUrl
+        ? new URL(rawGraphqlUrl, window.location.origin).toString()
+        : rawGraphqlUrl;
     this.packageVersion = read('PACKAGE_VERSION');
     this.gitCommitHash = read('GIT_COMMIT_HASH');
     this.gitBranchName = read('GIT_BRANCH_NAME');
