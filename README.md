@@ -2,8 +2,11 @@
 
 **Branching Tales** — the public web front-end for the Revisium demo RPG.
 
-SSR React app talking to the federated GraphQL router
-(`https://demo-rpg-router.dev.revisium.io/graphql`).
+SSR React app talking to the federated GraphQL router. In production
+the router is co-located at `/graphql` under the app's own hostname
+(so the browser only ever makes same-origin calls); locally and for
+`npm run gql:codegen` the absolute router URL
+`https://demo-rpg-router.dev.revisium.io/graphql` is used.
 
 ## Stack
 
