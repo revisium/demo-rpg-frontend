@@ -1,0 +1,23 @@
+query Regions {
+  regionses {
+    edges {
+      node {
+        id
+        versionId
+        createdId
+        createdAt
+        publishedAt
+        data {
+          climate
+          name {
+            en
+          }
+          description {
+            en
+          }
+        }
+      }
+    }
+    totalCount
+  }
+}

@@ -1,0 +1,34 @@
+import { makeAutoObservable } from 'mobx';
+
+import { container, ObservableRequest } from 'src/shared/lib';
+import { ApiService } from 'src/shared/model';
+import type { IViewModel } from 'src/shared/config';
+import type { RegionsQuery } from '../../../__generated__/graphql-request';
+
+export class RegionsViewModel implements IViewModel {
+  public readonly request: ObservableRequest<RegionsQuery, []>;
+
+  constructor(private readonly api: ApiService) {
+    this.request = ObservableRequest.of((signal) => this.api.sdk.Regions(undefined, undefined, signal));
+    makeAutoObservable(this, {}, { autoBind: true });
+  }
+
+  public setup(): void {
+    // intentionally empty — RegionsPage has no per-route setup state
+  }
+
+  public async mount(): Promise<void> {
+    if (this.request.isLoaded || this.request.isLoading) return;
+    await this.request.fetch();
+  }
+
+  public unmount(): void {
+    this.request.reset();
+  }
+}
+
+container.register(
+  RegionsViewModel,
+  () => new RegionsViewModel(container.get(ApiService)),
+  { scope: 'transient' },
+);
