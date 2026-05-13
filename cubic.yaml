@@ -37,6 +37,8 @@ reviews:
       response mapping, link building, and display formatting.
     - Use MobX computed getters for derived read models instead of duplicated mutable state.
     - Enforce one non-trivial React component per file.
+    - Enforce same-named folders for component files under src/**/ui/, and reject
+      component-folder index.ts barrels.
     - Never hand-edit src/__generated__.
     - Do not treat review-thread cleanup as complete while required GitHub Actions,
       Sonar, or quality-gate checks are failed or pending.
@@ -76,6 +78,13 @@ reviews:
       include:
         - src/pages/**
         - src/widgets/**
+    - name: UI component folder structure
+      description: |
+        Flag non-test component files under src/**/ui/ that are not placed inside
+        a same-named folder. ui/RegionCard/RegionCard.tsx is valid; ui/RegionCard.tsx
+        and ui/RegionCard/index.ts are invalid.
+      include:
+        - src/**/ui/**
     - name: Docs-first contract
       description: |
         Flag route, UX, architecture, design-system, or review-rule behavior changes

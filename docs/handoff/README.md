@@ -35,6 +35,9 @@ Read in this order:
    npm run verify
    ```
 
+   `npm run verify` includes `ui:lint`, which enforces same-named folders for
+   component files under `src/**/ui/`.
+
 2. Open [`docs/roadmap/frontend-pages.md`](../roadmap/frontend-pages.md).
 3. Start with Milestone 1 unless the product owner assigns a different route.
 4. For the selected page, open its spec under [`docs/product/pages/`](../product/pages/README.md).

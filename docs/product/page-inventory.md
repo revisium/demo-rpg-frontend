@@ -22,7 +22,7 @@ routes the frontend team is expected to build unless this document changes first
 |---|---|---|---|---|
 | `/` | [home](./pages/home/README.md) | `cms.landing_hero`, `cms.landing_features`, `cms.landing_testimonials`, optional `data.news` | CMS-driven landing, 80/20 message, capability navigation | Draft |
 | `/about` | [about](./pages/about/README.md) | messaging docs + static architecture content | Long-form architecture and "what Revisium did vs what we wrote" | Draft |
-| `/regions` | [regions](./pages/regions/README.md) | `data.regions` | Reference catalog, localized strings, enum, totalCount, pagination | Ready |
+| `/regions` | [regions](./pages/regions/README.md) | `data.regions` | Reference catalog, localized strings, enum, totalCount, pagination | In delivery |
 | `/regions/[id]` | [regions-id](./pages/regions-id/README.md) | `data.regions` + backend `RegionsNode` fields | Federation reference detail | Blocked |
 | `/heroes` | [heroes](./pages/heroes/README.md) | `data.heroes`, `data.classes`, `data.regions`, `data.factions` | FK filters, formula string, portrait file field | Draft |
 | `/heroes/[id]` | [heroes-id](./pages/heroes-id/README.md) | `data.heroes` + class/ability/item FKs | Single FK, array FK, embedded equipment, formulas, portrait | Draft |
@@ -40,7 +40,7 @@ routes the frontend team is expected to build unless this document changes first
 | `/npcs/[id]` | [npcs-id](./pages/npcs-id/README.md) | `data.npcs`, `data.locations` | Portrait file detail and location FK | Draft |
 | `/locations` | [locations](./pages/locations/README.md) | `data.locations`, `data.regions` | Region FK and map preview | Draft |
 | `/locations/[id]` | [locations-id](./pages/locations-id/README.md) | `data.locations`, `data.regions` | Large map file and dimensions metadata | Draft |
-| `/classes` | [classes](./pages/classes/README.md) | `data.classes` | Small enum-like reference table | Draft |
+| `/classes` | [classes](./pages/classes/README.md) | `data.classes` | Small enum-like reference table | In delivery |
 | `/abilities` | [abilities](./pages/abilities/README.md) | `data.abilities` | SVG icon catalog | Draft |
 | `/search` | [search](./pages/search/README.md) | Revisium search across `demo-rpg-data` and `demo-rpg-cms` | Full-text search | Blocked |
 | `/balance-patch` | [balance-patch](./pages/balance-patch/README.md) | `data.items` `master:head` vs `master:draft`, revision changes | Branching and revision diff | Blocked |

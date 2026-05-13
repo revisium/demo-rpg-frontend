@@ -29,6 +29,8 @@ Use this checklist for every PR that touches frontend code or page docs.
 - [ ] Generated files changed only through codegen.
 - [ ] Methods stay at one abstraction level; orchestration, variable building, response mapping, and display formatting are split.
 - [ ] One non-trivial React component per file.
+- [ ] Every non-test component file under `src/**/ui/` lives in a same-named
+      folder, with no component-folder `index.ts` barrels.
 - [ ] Page-specific behavior has not been moved to `shared` before there are real cross-page consumers.
 
 ## UX
@@ -72,7 +74,7 @@ npm run verify
 ```
 
 `npm run verify` includes repo-local skill format validation through
-`npm run skills:lint`.
+`npm run skills:lint` and UI folder validation through `npm run ui:lint`.
 
 For PR updates and review iterations, inspect current PR checks as well:
 

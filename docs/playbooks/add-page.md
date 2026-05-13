@@ -53,7 +53,7 @@ For catalog pages or repeated cards/rows:
 
 ## 4. Build The View
 
-1. Create `src/pages/<Page>/ui/<Page>Page.tsx`.
+1. Create `src/pages/<Page>/ui/<Page>Page/<Page>Page.tsx`.
 2. Wrap the component with `observer`.
 3. Use `useViewModel(<Page>ViewModel, params...)`.
 4. Render semantic landmarks and headings.
@@ -62,8 +62,11 @@ For catalog pages or repeated cards/rows:
 7. Keep event handlers as thin calls into the ViewModel.
 8. Keep business logic, query variables, sorting, filtering, link building,
    labels, and formatting out of JSX.
-9. Use one non-trivial React component per file. Split list, item, empty,
-   error, header, filter, and widget-adapter components when they grow.
+9. Use one non-trivial React component per file. Every non-test component file
+   under `ui/` must live in a same-named folder, for example
+   `ui/RegionCard/RegionCard.tsx`; do not add `index.ts` barrels in component
+   folders. Split list, item, empty, error, header, filter, and widget-adapter
+   components when they grow.
 
 ## 5. Wire The Route
 

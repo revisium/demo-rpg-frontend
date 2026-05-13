@@ -1,22 +1,30 @@
-query Regions {
-  regionses {
+query Regions($data: Demo_rpg_dataGetRegionsesInput) {
+  regionses(data: $data) {
     edges {
+      cursor
       node {
         id
         versionId
-        createdId
         createdAt
         publishedAt
         data {
           climate
           name {
             en
+            ru
+            zh
           }
           description {
             en
+            ru
+            zh
           }
         }
       }
+    }
+    pageInfo {
+      endCursor
+      hasNextPage
     }
     totalCount
   }

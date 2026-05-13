@@ -17,3 +17,7 @@ access.
 Use List ViewModel and Item ViewModel boundaries for non-trivial repeated
 rows/cards. Prefer MobX computed getters for values read by views. Keep methods
 at one abstraction level.
+
+Every non-test component file under `src/**/ui/` must live in a same-named
+folder, for example `ui/RegionCard/RegionCard.tsx`. Do not add component-folder
+barrels such as `ui/RegionCard/index.ts`.

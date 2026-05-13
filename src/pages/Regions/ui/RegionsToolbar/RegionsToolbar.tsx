@@ -1,0 +1,76 @@
+import { Badge, Box, Button, ButtonGroup, Flex, Text } from '@chakra-ui/react';
+import { observer } from 'mobx-react-lite';
+
+import type { RegionLocale } from '../../model/RegionItemViewModel';
+import type { RegionsViewModel } from '../../model/RegionsViewModel';
+
+const localeOptions: readonly { value: RegionLocale; label: string }[] = [
+  { value: 'en', label: 'EN' },
+  { value: 'ru', label: 'RU' },
+  { value: 'zh', label: 'ZH' },
+];
+
+interface RegionsToolbarProps {
+  readonly vm: RegionsViewModel;
+}
+
+export const RegionsToolbar = observer(({ vm }: RegionsToolbarProps) => {
+  return (
+    <Flex align="flex-start" gap="4" justify="space-between" mb="5" wrap={{ base: 'wrap', sm: 'nowrap' }}>
+      <Box>
+        <Text color="gray.600">
+          Showing <Text as="strong">{vm.visibleCount}</Text> of{' '}
+          <Text as="strong">{vm.totalCount}</Text> regions
+        </Text>
+        <Text color="gray.600" fontSize="sm" mt="1">
+          Filter: <Text as="strong">{vm.activeFilterLabel}</Text>
+        </Text>
+        {vm.climates.length > 0 ? (
+          <Flex aria-label="Visible climates" gap="2" mt="2" wrap="wrap">
+            <Badge
+              as="button"
+              colorPalette={vm.activeClimate === null ? 'green' : 'gray'}
+              cursor="pointer"
+              onClick={() => vm.setClimate(null)}
+              variant={vm.activeClimate === null ? 'solid' : 'outline'}
+            >
+              All
+            </Badge>
+            {vm.climates.map((climate) => (
+              <Badge
+                as="button"
+                colorPalette={vm.activeClimate === climate ? 'green' : 'gray'}
+                cursor="pointer"
+                key={climate}
+                onClick={() => vm.setClimate(climate)}
+                variant={vm.activeClimate === climate ? 'solid' : 'outline'}
+              >
+                {climate}
+              </Badge>
+            ))}
+          </Flex>
+        ) : null}
+      </Box>
+
+      <ButtonGroup
+        aria-label="Content locale"
+        attached
+        flex="0 0 auto"
+        size="sm"
+        variant="outline"
+      >
+        {localeOptions.map((option) => (
+          <Button
+            colorPalette={vm.locale === option.value ? 'green' : 'gray'}
+            key={option.value}
+            minW="44px"
+            onClick={() => vm.setLocale(option.value)}
+            variant={vm.locale === option.value ? 'solid' : 'outline'}
+          >
+            {option.label}
+          </Button>
+        ))}
+      </ButtonGroup>
+    </Flex>
+  );
+});

@@ -14,12 +14,15 @@
     "lint:fix": "eslint \"src/**/*.{ts,tsx}\" --max-warnings 0 --fix",
     "markdown:lint": "markdownlint-cli2",
     "skills:lint": "node scripts/lint-skills.mjs",
+    "ui:lint": "node scripts/lint-ui-structure.mjs",
     "fsd:check": "CHOKIDAR_USEPOLLING=1 steiger src",
-    "verify": "npm run markdown:lint && npm run skills:lint && npm run ts:check && npm run lint:ci && npm run fsd:check && npm run build",
+    "verify": "npm run markdown:lint && npm run skills:lint && npm run ui:lint && npm run ts:check && npm run lint:ci && npm run fsd:check && npm run build",
     "gql:codegen": "node scripts/gql-codegen.mjs",
     "gql:codegen:download": "node scripts/gql-codegen.mjs --download"
   },
   "dependencies": {
+    "@chakra-ui/react": "^3.35.0",
+    "@emotion/react": "^11.14.0",
     "@react-router/express": "^7.13.2",
     "@react-router/node": "^7.13.2",
     "@react-router/serve": "^7.13.2",

@@ -1,5 +1,7 @@
 import { Links, Meta, Outlet, Scripts, ScrollRestoration } from 'react-router';
 
+import { AppLayout } from './app/layouts/AppLayout/AppLayout';
+import { ChakraAppProvider } from './app/providers/ChakraAppProvider';
 import 'src/shared/model/EnvironmentService';
 import 'src/shared/model/ApiService';
 
@@ -27,5 +29,11 @@ export function Layout({ children }: LayoutProps) {
 }
 
 export default function Root() {
-  return <Outlet />;
+  return (
+    <ChakraAppProvider>
+      <AppLayout>
+        <Outlet />
+      </AppLayout>
+    </ChakraAppProvider>
+  );
 }

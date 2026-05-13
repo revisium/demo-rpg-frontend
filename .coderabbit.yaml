@@ -47,7 +47,9 @@ reviews:
         model state and forward events to ViewModel actions only. Flag JSX that contains
         request orchestration, filter/sort/query payload construction, link-building
         decisions, business rules, direct storage/browser access, or raw GraphQL response
-        transformations. Enforce one non-trivial React component per file.
+        transformations. Enforce one non-trivial React component per file. Enforce
+        same-named folders for component files under src/**/ui/ and reject component-folder
+        index.ts barrels.
     - path: 'docs/**/*.md'
       instructions: |
         Review docs as the implementation source of truth. Page specs must be concrete
@@ -81,7 +83,8 @@ reviews:
           docs-first workflow, thin React views, ViewModel-owned state/actions/derived
           values, DataSource-owned API access for non-bootstrap pages and pages marked
           Done, Item ViewModels for non-trivial repeated rows/cards, DI for
-          services/shared state, one non-trivial React component per file, no
+          services/shared state, one non-trivial React component per file, same-named
+          folders for files under src/**/ui/ with no component-folder index.ts barrels, no
           hand-edited generated files, and docs updated whenever behavior or architecture
           changes.
 
