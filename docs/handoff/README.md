@@ -99,6 +99,9 @@ Agents should use the repo-local skills in this order:
    before handoff and PR updates.
 3. [`frontend-pr-review-iteration`](../../.agents/skills/frontend-pr-review-iteration/SKILL.md)
    when the work is driven by GitHub review threads.
+4. [`frontend-pr-publish`](../../.agents/skills/frontend-pr-publish/SKILL.md)
+   when the user asks to publish verified work as a branch, commit, push, and
+   PR.
 
 The skills output evidence in the response or PR notes. They do not create a
 separate committed source of truth.

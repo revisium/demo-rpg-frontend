@@ -106,4 +106,5 @@ knowledge_base:
       - '.agents/skills/frontend-general-checks/SKILL.md'
       - '.agents/skills/frontend-self-review/SKILL.md'
       - '.agents/skills/frontend-pr-review-iteration/SKILL.md'
+      - '.agents/skills/frontend-pr-publish/SKILL.md'
       - '.agents/rules/*.mdc'

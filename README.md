@@ -53,7 +53,7 @@ then start the dev server:
 ```bash
 nvm use                       # node 24
 npm install
-npm run verify                # markdown:lint, ts:check, lint:ci, fsd:check, build
+npm run verify                # markdown:lint, skills:lint, ts:check, lint:ci, fsd:check, build
 npm run dev                   # react-router dev
 ```
 
@@ -70,6 +70,7 @@ npm run build && npm start    # production SSR
 
 npm run verify                # full local PR gate
 npm run markdown:lint
+npm run skills:lint
 npm run ts:check
 npm run lint:ci
 npm run fsd:check
@@ -89,6 +90,8 @@ Repo-local agent workflows live in [`.agents`](./.agents/README.md):
   verification before handoff or PR update.
 - `frontend-pr-review-iteration` — fetch review threads, triage, fix, reply,
   and resolve only after verification.
+- `frontend-pr-publish` — create or reuse a conventional branch from fresh
+  `master`, verify, commit, push, and create a PR with an empty description.
 
 These workflows are helpers only. The canonical sources remain
 [`docs/`](./docs/README.md) and [`REVIEW.md`](./REVIEW.md).
@@ -154,7 +157,7 @@ Workflows live under `.github/workflows/`. `build.yml`, `deploy.yml`, and
 `release-train.yml` delegate to reusable workflows in
 `revisium/revisium-actions`; `ci.yml` runs locally on every PR.
 
-- `ci.yml` — `lint:ci`, `ts:check`, `fsd:check`, `build` on every PR
+- `ci.yml` — `npm run verify` on every PR
 - `build.yml` — Docker image build + push to Docker Hub on `master` / tags
 - `deploy.yml` — Kubernetes deploy on successful Build (or manual dispatch)
 - `release-train.yml` — version bumps and tags

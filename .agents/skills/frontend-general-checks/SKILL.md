@@ -1,3 +1,13 @@
+---
+name: frontend-general-checks
+description: >-
+  Run demo-rpg-frontend baseline verification before handoff, PR creation,
+  readiness replies, or after addressing review feedback, and report concise
+  evidence for branch, docs, commands, generated files, and remaining risks.
+metadata:
+  short-description: Run frontend verification checks
+---
+
 # Frontend General Checks Skill
 
 Use this skill before handoff, before opening a PR, before replying that a PR is
@@ -42,6 +52,7 @@ npm run verify
 
 ```bash
 npm run markdown:lint
+npm run skills:lint
 npm run ts:check
 npm run lint:ci
 npm run fsd:check

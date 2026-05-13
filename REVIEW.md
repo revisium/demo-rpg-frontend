@@ -75,7 +75,7 @@ Block a PR when any of these are true:
   file, with small private render helpers only when they have no hooks, no
   state, and no reuse value.
 - Generated files under `src/__generated__/` are hand-edited.
-- Steiger, TypeScript, lint, or build failures are ignored.
+- Steiger, TypeScript, lint, skill-lint, or build failures are ignored.
 
 ## Architecture Rules To Enforce
 

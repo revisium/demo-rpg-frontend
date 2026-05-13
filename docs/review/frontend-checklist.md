@@ -71,6 +71,9 @@ Run and paste/summarize results in PR notes:
 npm run verify
 ```
 
+`npm run verify` includes repo-local skill format validation through
+`npm run skills:lint`.
+
 If a command cannot run, document why and what risk remains.
 
 ## Author Self-Review Notes

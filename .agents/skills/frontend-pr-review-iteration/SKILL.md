@@ -1,3 +1,13 @@
+---
+name: frontend-pr-review-iteration
+description: >-
+  Address demo-rpg-frontend GitHub PR review threads by triaging unresolved
+  feedback, making the smallest docs/code/config fix, verifying it, replying in
+  the same thread, and resolving only after verification.
+metadata:
+  short-description: Address frontend PR review threads
+---
+
 # Frontend PR Review Iteration Skill
 
 Use this skill when addressing GitHub PR review threads for
