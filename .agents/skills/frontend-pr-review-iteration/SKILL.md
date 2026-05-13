@@ -26,9 +26,9 @@ review artifacts.
 4. Run the relevant verification commands. For frontend implementation changes,
    run the full gate:
 
-```bash
-npm run verify
-```
+   ```bash
+   npm run verify
+   ```
 
 5. Reply in the same GitHub review thread with:
    - what changed;

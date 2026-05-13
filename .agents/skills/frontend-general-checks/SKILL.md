@@ -12,10 +12,10 @@ developer, reviewer, or agent to continue without guessing.
 
 1. Confirm the branch and worktree:
 
-```bash
-git status --short --branch
-git diff --check
-```
+   ```bash
+   git status --short --branch
+   git diff --check
+   ```
 
 2. Identify the change type:
    - docs/config only;
@@ -41,6 +41,7 @@ npm run verify
 `npm run verify` runs:
 
 ```bash
+npm run markdown:lint
 npm run ts:check
 npm run lint:ci
 npm run fsd:check

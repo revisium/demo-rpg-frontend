@@ -53,7 +53,7 @@ then start the dev server:
 ```bash
 nvm use                       # node 24
 npm install
-npm run verify                # ts:check, lint:ci, fsd:check, build
+npm run verify                # markdown:lint, ts:check, lint:ci, fsd:check, build
 npm run dev                   # react-router dev
 ```
 
@@ -69,6 +69,7 @@ npm run gql:codegen           # writes src/__generated__/graphql-request.ts
 npm run build && npm start    # production SSR
 
 npm run verify                # full local PR gate
+npm run markdown:lint
 npm run ts:check
 npm run lint:ci
 npm run fsd:check

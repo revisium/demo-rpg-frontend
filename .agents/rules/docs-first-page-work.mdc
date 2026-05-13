@@ -3,6 +3,8 @@ description: Keep frontend implementation docs-first.
 alwaysApply: true
 ---
 
+# Docs-First Page Work
+
 `docs/` is the implementation source of truth for frontend work. Before changing
 a route, page behavior, navigation, shared UX pattern, layout, design language,
 data contract, architecture rule, or review rule, update the matching canonical

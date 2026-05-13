@@ -29,11 +29,11 @@ Read in this order:
 
 1. Confirm local setup:
 
-```bash
-nvm use
-npm install
-npm run verify
-```
+   ```bash
+   nvm use
+   npm install
+   npm run verify
+   ```
 
 2. Open [`docs/roadmap/frontend-pages.md`](../roadmap/frontend-pages.md).
 3. Start with Milestone 1 unless the product owner assigns a different route.
@@ -50,13 +50,13 @@ no exact branch instructions.
 
 1. Clone and verify the baseline:
 
-```bash
-git clone git@github.com:revisium/demo-rpg-frontend.git
-cd demo-rpg-frontend
-nvm use
-npm install
-npm run verify
-```
+   ```bash
+   git clone git@github.com:revisium/demo-rpg-frontend.git
+   cd demo-rpg-frontend
+   nvm use
+   npm install
+   npm run verify
+   ```
 
 2. Read [`AGENTS.md`](../../AGENTS.md), this handoff doc, and
    [`REVIEW.md`](../../REVIEW.md).
@@ -66,11 +66,11 @@ npm run verify
    for unresolved review threads.
 4. If no PR/branch is assigned, start from fresh `master`:
 
-```bash
-git switch master
-git pull
-git switch -c feat/<route-or-capability>
-```
+   ```bash
+   git switch master
+   git pull
+   git switch -c feat/<route-or-capability>
+   ```
 
 5. Choose the next task from
    [`docs/roadmap/frontend-pages.md`](../roadmap/frontend-pages.md) unless the
