@@ -1,6 +1,6 @@
 import { Box, Button, Heading, Text } from '@chakra-ui/react';
 
-interface ClassesStatePanelProps {
+interface StatePanelProps {
   readonly actionLabel?: string;
   readonly onAction?: () => void;
   readonly tone?: 'error' | 'neutral';
@@ -8,13 +8,13 @@ interface ClassesStatePanelProps {
   readonly description: string;
 }
 
-export function ClassesStatePanel({
+export function StatePanel({
   actionLabel,
   description,
   onAction,
   title,
   tone = 'neutral',
-}: ClassesStatePanelProps) {
+}: StatePanelProps) {
   const isError = tone === 'error';
 
   return (

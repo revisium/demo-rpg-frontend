@@ -193,6 +193,10 @@ replace them.
 - Split `Header`, `Filters`, `List`, `Item`, `Empty`, `Error`, and modal/sheet
   components once they carry meaningful markup or logic.
 - Component files should not register DI services or instantiate DataSources.
+- Reusable low-level UI components may live in `src/shared/ui/<Component>/<Component>.tsx`
+  only after at least two real page/widget consumers use the same behavior.
+  Export them from `src/shared/ui/index.ts`; do not add `index.ts` inside the
+  component folder itself.
 
 ## Data Fetching
 

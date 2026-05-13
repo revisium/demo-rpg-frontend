@@ -2,12 +2,12 @@ import { Box, Button, Grid } from '@chakra-ui/react';
 import { observer } from 'mobx-react-lite';
 
 import { useViewModel } from 'src/shared/lib';
+import { StatePanel } from 'src/shared/ui';
 import { ExplainerWidget } from 'src/widgets/explainer-widget';
 import { RegionsViewModel } from '../../model/RegionsViewModel';
 import { RegionList } from '../RegionList/RegionList';
 import { RegionsHeader } from '../RegionsHeader/RegionsHeader';
 import { RegionsSkeleton } from '../RegionsSkeleton/RegionsSkeleton';
-import { RegionsStatePanel } from '../RegionsStatePanel/RegionsStatePanel';
 import { RegionsToolbar } from '../RegionsToolbar/RegionsToolbar';
 
 export const RegionsPage = observer(() => {
@@ -33,7 +33,7 @@ export const RegionsPage = observer(() => {
             {vm.showLoading ? <RegionsSkeleton /> : null}
 
             {vm.showError ? (
-              <RegionsStatePanel
+              <StatePanel
                 actionLabel="Retry"
                 description="The GraphQL router did not return the regions catalog."
                 onAction={() => void vm.retry()}
@@ -43,7 +43,7 @@ export const RegionsPage = observer(() => {
             ) : null}
 
             {vm.showEmpty ? (
-              <RegionsStatePanel
+              <StatePanel
                 actionLabel={vm.hasActiveFilter ? 'Reset filter' : undefined}
                 description="The query completed, but no loaded regions match the current filter."
                 onAction={vm.hasActiveFilter ? () => vm.resetFilters() : undefined}

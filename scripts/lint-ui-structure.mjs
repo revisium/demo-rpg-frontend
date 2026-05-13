@@ -43,6 +43,10 @@ function lintUiFile(filePath) {
   const filename = path.basename(filePath);
 
   if (BARREL_FILES.has(filename)) {
+    if (relativePath === path.join('src', 'shared', 'ui', filename)) {
+      return;
+    }
+
     errors.push(`${relativePath}: barrel files are not allowed inside ui component folders`);
     return;
   }

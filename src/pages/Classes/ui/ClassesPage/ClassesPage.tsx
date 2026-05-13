@@ -2,12 +2,12 @@ import { Box, Grid } from '@chakra-ui/react';
 import { observer } from 'mobx-react-lite';
 
 import { useViewModel } from 'src/shared/lib';
+import { StatePanel } from 'src/shared/ui';
 import { ExplainerWidget } from 'src/widgets/explainer-widget';
 import { ClassesViewModel } from '../../model/ClassesViewModel';
 import { ClassList } from '../ClassList/ClassList';
 import { ClassesHeader } from '../ClassesHeader/ClassesHeader';
 import { ClassesSkeleton } from '../ClassesSkeleton/ClassesSkeleton';
-import { ClassesStatePanel } from '../ClassesStatePanel/ClassesStatePanel';
 import { ClassesToolbar } from '../ClassesToolbar/ClassesToolbar';
 
 export const ClassesPage = observer(() => {
@@ -33,7 +33,7 @@ export const ClassesPage = observer(() => {
             {vm.showLoading ? <ClassesSkeleton /> : null}
 
             {vm.showError ? (
-              <ClassesStatePanel
+              <StatePanel
                 actionLabel="Retry"
                 description="The GraphQL router did not return the classes catalog."
                 onAction={() => void vm.retry()}
@@ -43,7 +43,7 @@ export const ClassesPage = observer(() => {
             ) : null}
 
             {vm.showEmpty ? (
-              <ClassesStatePanel
+              <StatePanel
                 description="The query completed, but the classes table returned no rows."
                 title="No classes found"
               />
