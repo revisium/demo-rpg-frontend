@@ -7,11 +7,15 @@ codegen, and Feature-Sliced Design.
 
 - Do not add Apollo Client.
 - Do not call `graphql-request` directly from React components.
+- Do not build GraphQL variables, sort payloads, or filter payloads in JSX.
 - Do not create service singletons outside DI.
 - Do not edit generated files under `src/__generated__/`.
 - Do not silence Steiger boundary errors.
 - Do not move page-specific behaviour into `shared`.
 - Do not ship a page without a matching page spec.
+- Do not put non-trivial business logic in React components.
+- Do not mix unrelated abstraction levels in one method.
+- Do not put more than one non-trivial React component in a file.
 
 ## FSD Layers
 
@@ -36,7 +40,9 @@ Each page slice follows this shape:
 ```text
 src/pages/<Page>/
   api/<Page>.graphql
+  api/<Page>DataSource.ts
   model/<Page>ViewModel.ts
+  model/<Entity>ItemViewModel.ts
   ui/<Page>Page.tsx
   index.ts
 ```
@@ -68,11 +74,129 @@ Views own:
 React components do not own business state with `useState` or fetch data with
 `useEffect` directly. The `useViewModel` hook drives setup/mount/unmount.
 
+Derived read models should be MobX computed getters. If JSX reads a value more
+than once, if a value combines request data with filters/route params, or if a
+value names a business concept, put it behind a computed getter on a ViewModel
+or Item ViewModel.
+
+## DataSource Pattern
+
+Non-trivial pages use a DataSource class, following the `revisium-admin`
+pattern.
+
+DataSources own:
+
+- generated SDK method calls;
+- `ObservableRequest` instances;
+- request cancellation and `reset`;
+- GraphQL connection extraction into items, `pageInfo`, and `totalCount`;
+- transport-level error and abort handling;
+- mapping raw operation responses into page-facing data structures.
+
+DataSources do not own:
+
+- JSX labels;
+- route navigation decisions;
+- UI state such as selected tab or active drawer;
+- page-specific display formatting;
+- ExplainerDescriptor construction.
+
+Register page DataSources through DI. Use request/transient scope for
+page-owned request state. Use singleton scope only for long-lived cross-page
+services.
+
+Small bootstrap pages may call `ApiService` directly while scaffolding, but a
+page must move API access into a DataSource before its spec status becomes
+`Done`.
+
+## List And Item ViewModel Pattern
+
+Catalogs and repeated row/card surfaces should follow this shape:
+
+```text
+api/<Page>DataSource.ts          API calls and response extraction
+model/<Page>ViewModel.ts         page/list state, filters, actions, item cache
+model/<Entity>ItemViewModel.ts   row display getters, links, badges, item actions
+ui/<Page>Page.tsx                page composition
+ui/<Entity>List.tsx              list rendering
+ui/<Entity>Item.tsx              one row/card
+```
+
+Use an Item ViewModel when an item has any of:
+
+- a route or external link;
+- formatted labels, badges, chips, or fallback text;
+- permission or availability logic;
+- copy/open/toggle actions;
+- file preview metadata;
+- computed/formula labels;
+- subgraph or field attribution.
+
+The page/list ViewModel may cache Item ViewModels by stable row id so refreshes
+preserve item-level state. Avoid creating ad hoc item objects in JSX.
+
+## Method Shape And SOLID Rules
+
+Keep methods at one abstraction level.
+
+Good method shape:
+
+- public action validates state and orchestrates one workflow;
+- private method builds GraphQL variables;
+- private method maps response to item models;
+- private method builds links;
+- computed getter exposes display state.
+
+Avoid methods that fetch data, parse response trees, build route URLs, mutate
+selection state, and format labels in the same block.
+
+Apply these SOLID rules pragmatically:
+
+- Single responsibility: ViewModel, DataSource, Item ViewModel, Service, and
+  React component each have one reason to change.
+- Open/closed: extend page-specific behavior in the page slice before changing
+  shared primitives.
+- Liskov/interface segregation: keep shared interfaces small; do not add
+  optional feature methods that every page must carry. The shared lifecycle
+  `IViewModel` intentionally requires `setup`, `mount`, and `unmount` so
+  `useViewModel` can drive all pages uniformly; a lifecycle method may be a
+  no-op when a page has no work for that phase.
+- Dependency inversion: ViewModels depend on DataSources/services injected by
+  DI, not directly on module-level singletons or browser globals.
+
+## Services And Persisted State
+
+Use services for cross-page concerns:
+
+- environment and API clients;
+- router/navigation helpers;
+- auth/permissions if added;
+- file helpers;
+- storage-backed preferences;
+- long-lived UI state shared across routes.
+
+Persisted state must go through a service or dedicated state ViewModel. Do not
+read/write `localStorage`, `sessionStorage`, cookies, or browser globals inside
+React components. Inject browser-backed dependencies so SSR and tests can
+replace them.
+
+## React Component Rules
+
+- Components are `observer` when reading observable state.
+- Components receive a model and render it; they do not transform raw GraphQL
+  responses.
+- Event handlers call model actions with already-available UI values.
+- One non-trivial React component per file.
+- Split `Header`, `Filters`, `List`, `Item`, `Empty`, `Error`, and modal/sheet
+  components once they carry meaningful markup or logic.
+- Component files should not register DI services or instantiate DataSources.
+
 ## Data Fetching
 
 - GraphQL documents live in `src/pages/<Page>/api/*.graphql`.
 - Run `npm run gql:codegen` after adding or changing operations.
-- Use the generated SDK from `ApiService`.
+- Use the generated SDK from DataSources or from `ApiService` only in very small
+  bootstrap ViewModels.
 - Wrap page requests with `ObservableRequest` or an equivalent MobX-owned request model.
 - Abort in-flight requests on unmount or route changes when supported.
 - Keep previous successful data visible during refresh when possible.
@@ -128,8 +252,5 @@ Minimum per implemented page:
 Run before PR handoff:
 
 ```bash
-npm run ts:check
-npm run lint:ci
-npm run fsd:check
-npm run build
+npm run verify
 ```

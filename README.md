@@ -39,26 +39,58 @@ Start here:
 - [`docs/architecture/frontend.md`](./docs/architecture/frontend.md) — MVVM, FSD, DI, SSR, codegen.
 - [`docs/playbooks/add-page.md`](./docs/playbooks/add-page.md) — page implementation workflow.
 - [`docs/handoff/README.md`](./docs/handoff/README.md) — developer handoff reading order.
+- [`docs/handoff/bootstrap-new-frontend-project.md`](./docs/handoff/bootstrap-new-frontend-project.md) — prompt for reusing this setup in another frontend.
+- [`REVIEW.md`](./REVIEW.md) — review-bot and human reviewer entry point.
 - [`docs/review/frontend-checklist.md`](./docs/review/frontend-checklist.md) — PR review gate.
+- [`.coderabbit.yaml`](./.coderabbit.yaml) and [`cubic.yaml`](./cubic.yaml) — AI review bot configuration.
+- [`.agents`](./.agents/README.md) — repo-local agent review workflows and rules.
 
-## Commands
+## Local Development
+
+Use Node from [`.nvmrc`](./.nvmrc), install dependencies, verify the baseline,
+then start the dev server:
 
 ```bash
 nvm use                       # node 24
 npm install
+npm run verify                # ts:check, lint:ci, fsd:check, build
+npm run dev                   # react-router dev
+```
+
+The dev server uses the env files under [`.env/`](./.env). For local overrides,
+create `.env/.env.local` or `.env/.env.<mode>.local`; these files are ignored by
+git.
+
+## Common Commands
+
+```bash
 npm run gql:codegen:download  # writes src/__generated__/schema.graphql
 npm run gql:codegen           # writes src/__generated__/graphql-request.ts
-npm run dev                   # react-router dev
 npm run build && npm start    # production SSR
 
+npm run verify                # full local PR gate
 npm run ts:check
 npm run lint:ci
 npm run fsd:check
+npm run build
 ```
 
 `fsd:check` enables Chokidar polling inside the npm script because Steiger can
 hit `EMFILE` watcher limits under Node 24 in local and containerized runs. The
 check is short-lived, so the polling overhead is bounded to this command.
+
+## Agent Automation
+
+Repo-local agent workflows live in [`.agents`](./.agents/README.md):
+
+- `frontend-general-checks` — run baseline verification and report evidence.
+- `frontend-self-review` — review docs/source-of-truth, architecture, UX, and
+  verification before handoff or PR update.
+- `frontend-pr-review-iteration` — fetch review threads, triage, fix, reply,
+  and resolve only after verification.
+
+These workflows are helpers only. The canonical sources remain
+[`docs/`](./docs/README.md) and [`REVIEW.md`](./REVIEW.md).
 
 ## Layout (FSD)
 
@@ -86,9 +118,9 @@ Every page ships a `ViewModel` implementing `IViewModel`:
 
 ```ts
 interface IViewModel {
-  setup(...args): void | Promise<void>;  // sync, runs on SSR and client
-  mount(...args): void | Promise<void>;  // client only (useEffect)
-  unmount(): void;                       // client cleanup
+  setup(...args): void | Promise<void>; // sync, runs on SSR and client
+  mount(...args): void | Promise<void>; // client only (useEffect)
+  unmount(): void; // client cleanup
 }
 ```
 

@@ -1,0 +1,7 @@
+---
+description: Keep generated files generated.
+alwaysApply: true
+---
+
+Do not hand-edit files under `src/__generated__/`. Update GraphQL documents under
+the owning page slice and rerun codegen instead.

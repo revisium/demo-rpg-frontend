@@ -13,6 +13,7 @@
     "lint:ci": "eslint \"src/**/*.{ts,tsx}\" --max-warnings 0",
     "lint:fix": "eslint \"src/**/*.{ts,tsx}\" --max-warnings 0 --fix",
     "fsd:check": "CHOKIDAR_USEPOLLING=1 steiger src",
+    "verify": "npm run ts:check && npm run lint:ci && npm run fsd:check && npm run build",
     "gql:codegen": "node scripts/gql-codegen.mjs",
     "gql:codegen:download": "node scripts/gql-codegen.mjs --download"
   },
