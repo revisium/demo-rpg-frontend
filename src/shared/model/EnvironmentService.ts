@@ -9,7 +9,7 @@ const assertAbsoluteServerGraphqlUrl = (value: string): void => {
     }
   } catch {
     throw new Error(
-      'EnvironmentService: REACT_APP_GRAPHQL_SERVER_URL must be absolute on the server',
+      'EnvironmentService: GraphQL server URL must be absolute on the server',
     );
   }
 };
@@ -40,15 +40,23 @@ export class EnvironmentService {
     const read = client
       ? (key: string): string => fromBuildTime(key) ?? ''
       : (key: string): string => fromRuntime(key) ?? fromBuildTime(key) ?? '';
+    const readServerGraphqlUrl = (): string =>
+      fromRuntime('GRAPHQL_SERVER_URL') ??
+      fromRuntime('GRAPHQL_PROXY_TARGET') ??
+      fromRuntime('REACT_APP_GRAPHQL_SERVER_URL') ??
+      fromBuildTime('REACT_APP_GRAPHQL_SERVER_URL') ??
+      '';
 
     // graphql-request constructs `new URL(endpoint)` internally, which
     // throws on relative paths like "/graphql" because URL requires a
     // base. Native fetch handles relative paths via the document base,
     // but URL() does not — so on the client we resolve the configured
-    // URL against window.location.origin. Server-side requests do not
-    // have a document base, so a relative value there is a deployment
-    // misconfiguration and should fail before the first request.
-    const rawGraphqlUrl = read('REACT_APP_GRAPHQL_SERVER_URL');
+    // URL against window.location.origin. Server-side requests use
+    // GRAPHQL_SERVER_URL or the local dev proxy target, because a
+    // relative value there has no document base to resolve against.
+    const rawGraphqlUrl = client
+      ? read('REACT_APP_GRAPHQL_SERVER_URL')
+      : readServerGraphqlUrl();
     if (!client && rawGraphqlUrl) {
       assertAbsoluteServerGraphqlUrl(rawGraphqlUrl);
     }
@@ -62,7 +70,7 @@ export class EnvironmentService {
     this.gitBranchName = read('GIT_BRANCH_NAME');
 
     if (!this.graphqlServerUrl) {
-      throw new Error('EnvironmentService: REACT_APP_GRAPHQL_SERVER_URL is required');
+      throw new Error('EnvironmentService: GraphQL server URL is required');
     }
   }
 }
