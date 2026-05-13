@@ -37,8 +37,8 @@ reviews:
       response mapping, link building, and display formatting.
     - Use MobX computed getters for derived read models instead of duplicated mutable state.
     - Enforce one non-trivial React component per file.
-    - Enforce same-named folders for component files under src/**/ui/, and reject
-      component-folder index.ts barrels.
+    - Enforce same-named folders for non-test component files under src/**/ui/,
+      and reject component-folder index.ts barrels.
     - Never hand-edit src/__generated__.
     - Do not treat review-thread cleanup as complete while required GitHub Actions,
       Sonar, or quality-gate checks are failed or pending.

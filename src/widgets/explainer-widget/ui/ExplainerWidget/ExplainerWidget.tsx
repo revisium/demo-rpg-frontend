@@ -1,4 +1,5 @@
-import { Box, Heading, Text } from '@chakra-ui/react';
+import { Box, Button, Heading, Text } from '@chakra-ui/react';
+import { useState } from 'react';
 
 import type { ExplainerDescriptor } from '../../model/types';
 import { ExplainerContent } from '../ExplainerContent/ExplainerContent';
@@ -11,11 +12,14 @@ interface ExplainerWidgetProps {
 
 export function ExplainerWidget({ descriptor, headingId, isLoading = false }: ExplainerWidgetProps) {
   const mobileHeadingId = `${headingId}-mobile`;
+  const mobilePanelId = `${headingId}-mobile-panel`;
+  const [isMobileOpen, setMobileOpen] = useState(false);
 
   return (
     <>
       <Box
-        as="details"
+        as="section"
+        aria-labelledby={mobileHeadingId}
         bg="white"
         borderColor="gray.200"
         borderRadius="md"
@@ -25,15 +29,36 @@ export function ExplainerWidget({ descriptor, headingId, isLoading = false }: Ex
         minW="0"
         p="5"
       >
-        <Box as="summary" cursor="pointer" listStyleType="none">
-          <Text color="blue.700" fontSize="sm" fontWeight="bold" mb="2">
-            How this uses Revisium
-          </Text>
-          <Heading as="h2" fontSize="xl" id={mobileHeadingId}>
-            Explainer Widget
-          </Heading>
+        <Box>
+          <Button
+            aria-controls={mobilePanelId}
+            aria-expanded={isMobileOpen}
+            display="block"
+            h="auto"
+            minH="44px"
+            onClick={() => setMobileOpen((current) => !current)}
+            p="0"
+            textAlign="left"
+            variant="plain"
+            w="full"
+          >
+            <Text color="blue.700" fontSize="sm" fontWeight="bold" mb="2">
+              How this uses Revisium
+            </Text>
+            <Heading as="h2" fontSize="xl" id={mobileHeadingId}>
+              Explainer Widget
+            </Heading>
+          </Button>
         </Box>
-        <ExplainerContent descriptor={descriptor} isLoading={isLoading} />
+        <Box
+          aria-labelledby={mobileHeadingId}
+          display={isMobileOpen ? 'grid' : 'none'}
+          gap="4"
+          id={mobilePanelId}
+          role="region"
+        >
+          <ExplainerContent descriptor={descriptor} isLoading={isLoading} />
+        </Box>
       </Box>
 
       <Box

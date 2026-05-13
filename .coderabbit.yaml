@@ -84,9 +84,9 @@ reviews:
           values, DataSource-owned API access for non-bootstrap pages and pages marked
           Done, Item ViewModels for non-trivial repeated rows/cards, DI for
           services/shared state, one non-trivial React component per file, same-named
-          folders for files under src/**/ui/ with no component-folder index.ts barrels, no
-          hand-edited generated files, and docs updated whenever behavior or architecture
-          changes.
+          folders for non-test component files under src/**/ui/ with no component-folder
+          index.ts barrels, no hand-edited generated files, and docs updated whenever
+          behavior or architecture changes.
 
 chat:
   auto_reply: true

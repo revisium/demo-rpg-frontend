@@ -1,4 +1,4 @@
-import { Badge, Box, Button, ButtonGroup, Flex, Text } from '@chakra-ui/react';
+import { Box, Button, ButtonGroup, Flex, Text } from '@chakra-ui/react';
 import { observer } from 'mobx-react-lite';
 
 import type { RegionLocale } from '../../model/RegionItemViewModel';
@@ -27,26 +27,32 @@ export const RegionsToolbar = observer(({ vm }: RegionsToolbarProps) => {
         </Text>
         {vm.climates.length > 0 ? (
           <Flex aria-label="Visible climates" gap="2" mt="2" wrap="wrap">
-            <Badge
-              as="button"
+            <Button
+              aria-pressed={vm.activeClimate === null}
               colorPalette={vm.activeClimate === null ? 'green' : 'gray'}
-              cursor="pointer"
+              minH="44px"
+              minW="44px"
               onClick={() => vm.setClimate(null)}
+              size="sm"
+              type="button"
               variant={vm.activeClimate === null ? 'solid' : 'outline'}
             >
               All
-            </Badge>
+            </Button>
             {vm.climates.map((climate) => (
-              <Badge
-                as="button"
+              <Button
+                aria-pressed={vm.activeClimate === climate}
                 colorPalette={vm.activeClimate === climate ? 'green' : 'gray'}
-                cursor="pointer"
                 key={climate}
+                minH="44px"
+                minW="44px"
                 onClick={() => vm.setClimate(climate)}
+                size="sm"
+                type="button"
                 variant={vm.activeClimate === climate ? 'solid' : 'outline'}
               >
                 {climate}
-              </Badge>
+              </Button>
             ))}
           </Flex>
         ) : null}
