@@ -1,0 +1,19 @@
+---
+description: Enforce MVVM, DataSource, and List/Item ViewModel boundaries.
+alwaysApply: true
+---
+
+# Frontend MVVM Boundaries
+
+React components render observable model state and forward events only.
+ViewModels own page state, actions, derived values, transitions, and descriptors.
+DataSources own GraphQL SDK calls, request lifecycle, response extraction,
+pagination, cancellation, and transport-level error mapping.
+
+Small bootstrap pages may call `ApiService` directly until the page spec is
+marked `Done`. Pages marked `Done` must use a DataSource for non-trivial API
+access.
+
+Use List ViewModel and Item ViewModel boundaries for non-trivial repeated
+rows/cards. Prefer MobX computed getters for values read by views. Keep methods
+at one abstraction level.

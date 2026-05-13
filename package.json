@@ -12,7 +12,9 @@
     "ts:check": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.node.json",
     "lint:ci": "eslint \"src/**/*.{ts,tsx}\" --max-warnings 0",
     "lint:fix": "eslint \"src/**/*.{ts,tsx}\" --max-warnings 0 --fix",
+    "markdown:lint": "markdownlint-cli2",
     "fsd:check": "CHOKIDAR_USEPOLLING=1 steiger src",
+    "verify": "npm run markdown:lint && npm run ts:check && npm run lint:ci && npm run fsd:check && npm run build",
     "gql:codegen": "node scripts/gql-codegen.mjs",
     "gql:codegen:download": "node scripts/gql-codegen.mjs --download"
   },
@@ -54,6 +56,7 @@
     "glob": "^11.0.1",
     "globals": "^16.5.0",
     "jiti": "^2.4.2",
+    "markdownlint-cli2": "^0.22.1",
     "prettier": "^3.8.1",
     "steiger": "^0.5.11",
     "typescript": "^5.7.3",

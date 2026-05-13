@@ -6,6 +6,8 @@ Use this checklist for every PR that touches frontend code or page docs.
 
 - [ ] Matching page spec exists under `docs/product/pages/`.
 - [ ] Page implementation matches `Route`, `Purpose`, blocks, states, and acceptance criteria.
+- [ ] Any code change that affects behavior, UX, navigation, data contracts,
+      architecture, design, or review rules updates the matching source-of-truth docs.
 - [ ] `docs/product/page-inventory.md` status and route data are current.
 - [ ] Shared UX changes are reflected in `docs/product/page-patterns.md`.
 - [ ] Design changes are reflected in `docs/design-system/README.md`.
@@ -14,11 +16,20 @@ Use this checklist for every PR that touches frontend code or page docs.
 
 - [ ] No Apollo Client or alternate GraphQL runtime.
 - [ ] React components do not fetch directly.
+- [ ] React components do not build query variables, filters, sort payloads, links, labels, or business decisions.
 - [ ] ViewModels own state, requests, actions, derived data, and ExplainerDescriptor.
+- [ ] Derived values read by views are exposed as computed getters on ViewModels or Item ViewModels.
+- [ ] Non-trivial API access is isolated in DataSources.
+- [ ] DataSources own SDK calls, `ObservableRequest`, response extraction, pagination shape, abort/reset, and transport errors.
+- [ ] Catalogs/repeated cards use List ViewModel and Item ViewModel boundaries when rows have formatting, links, actions, permissions, files, or computed labels.
 - [ ] Route modules are thin.
 - [ ] DI is used for services and page ViewModels.
+- [ ] Shared/persisted state uses services or dedicated state ViewModels, not direct component storage calls.
 - [ ] FSD dependencies respect `app -> pages -> widgets/features/entities -> shared`.
 - [ ] Generated files changed only through codegen.
+- [ ] Methods stay at one abstraction level; orchestration, variable building, response mapping, and display formatting are split.
+- [ ] One non-trivial React component per file.
+- [ ] Page-specific behavior has not been moved to `shared` before there are real cross-page consumers.
 
 ## UX
 
@@ -57,10 +68,26 @@ Use this checklist for every PR that touches frontend code or page docs.
 Run and paste/summarize results in PR notes:
 
 ```bash
-npm run ts:check
-npm run lint:ci
-npm run fsd:check
-npm run build
+npm run verify
 ```
 
 If a command cannot run, document why and what risk remains.
+
+## Author Self-Review Notes
+
+Every implementation PR should include a short note answering:
+
+- Which docs/specs changed?
+- Did any code behavior change without docs changing? If yes, why is the
+  existing source-of-truth doc still correct?
+- Where does data fetching live?
+- Which ViewModel owns page state and actions?
+- Which Item ViewModels wrap repeated rows/cards?
+- Which values are computed rather than duplicated as mutable state?
+- Which responsive states were checked?
+- Which commands passed?
+
+## Reviewer Rubric
+
+Reviewers should cite [`REVIEW.md`](../../REVIEW.md) or this checklist when
+requesting changes. Prefer specific, local fixes over broad rewrites.
