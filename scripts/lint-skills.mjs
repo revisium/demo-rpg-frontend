@@ -23,7 +23,7 @@ async function findSkillFiles(directory) {
     }
   }
 
-  return files.sort();
+  return files.sort((left, right) => left.localeCompare(right));
 }
 
 function parseFrontmatter(filePath, rawText) {

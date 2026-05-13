@@ -142,7 +142,7 @@ Use this path when no PR exists for the publish branch:
 5. Create the PR with an empty description:
 
    ```bash
-   gh pr create --base master --head <prefix>/<slug> --title "<type>: <summary>" --body ""
+   gh pr create --base <target-base> --head <prefix>/<slug> --title "<type>: <summary>" --body ""
    ```
 
 6. Return the new PR URL.
