@@ -71,6 +71,18 @@ Run and paste/summarize results in PR notes:
 npm run verify
 ```
 
+`npm run verify` includes repo-local skill format validation through
+`npm run skills:lint`.
+
+For PR updates and review iterations, inspect current PR checks as well:
+
+```bash
+gh pr checks
+```
+
+Failed GitHub Actions and Sonar checks must be investigated from the actual
+check details before declaring the PR ready.
+
 If a command cannot run, document why and what risk remains.
 
 ## Author Self-Review Notes

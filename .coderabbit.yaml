@@ -68,7 +68,9 @@ reviews:
       instructions: |
         Repo-local agent skills and rules must enforce the same source-of-truth contract
         as REVIEW.md, .coderabbit.yaml, cubic.yaml, and docs/. They must not introduce
-        separate committed review artifacts or competing canonical guidance.
+        separate committed review artifacts or competing canonical guidance. PR-review
+        iteration skills should cover both unresolved review threads and failed required
+        checks, including Sonar quality-gate failures.
 
   pre_merge_checks:
     custom_checks:
@@ -106,4 +108,5 @@ knowledge_base:
       - '.agents/skills/frontend-general-checks/SKILL.md'
       - '.agents/skills/frontend-self-review/SKILL.md'
       - '.agents/skills/frontend-pr-review-iteration/SKILL.md'
+      - '.agents/skills/frontend-pr-publish/SKILL.md'
       - '.agents/rules/*.mdc'

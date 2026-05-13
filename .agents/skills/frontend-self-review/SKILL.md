@@ -1,3 +1,13 @@
+---
+name: frontend-self-review
+description: >-
+  Run the demo-rpg-frontend pre-handoff frontend self-review against docs,
+  architecture, UX, accessibility, and verification contracts before handing off
+  work or opening/updating a PR.
+metadata:
+  short-description: Self-review demo RPG frontend work
+---
+
 # Frontend Self-Review Skill
 
 Use this skill before handing off frontend work or opening/updating a PR in

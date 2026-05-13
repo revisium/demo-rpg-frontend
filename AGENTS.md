@@ -22,9 +22,10 @@ for the human-facing overview.
   [`frontend-self-review`](./.agents/skills/frontend-self-review/SKILL.md)
   is the pre-handoff self-review workflow. [`frontend-general-checks`](./.agents/skills/frontend-general-checks/SKILL.md)
   is the baseline verification workflow. [`frontend-pr-review-iteration`](./.agents/skills/frontend-pr-review-iteration/SKILL.md)
-  is the workflow for GitHub review threads. These skills do not create a new
-  source of truth; they enforce `docs/`, `REVIEW.md`, `.coderabbit.yaml`, and
-  `cubic.yaml`.
+  is the workflow for GitHub review threads. [`frontend-pr-publish`](./.agents/skills/frontend-pr-publish/SKILL.md)
+  is the verified branch, commit, push, and PR creation workflow. These skills
+  do not create a new source of truth; they enforce `docs/`, `REVIEW.md`,
+  `.coderabbit.yaml`, and `cubic.yaml`.
 - **Architecture rules live in canonical docs.** Use [`REVIEW.md`](./REVIEW.md)
   and [`docs/architecture/frontend.md`](./docs/architecture/frontend.md) for
   Apollo, FSD, MVVM, DataSource/List/Item ViewModel, DI, generated-file, and
@@ -48,9 +49,9 @@ Run before opening a PR:
 npm run verify
 ```
 
-`npm run verify` runs `markdown:lint`, `ts:check`, `lint:ci`, `fsd:check`, and
-`build`. CI mirrors these. The `vite-plugin-checker` plugin also surfaces tsc
-errors during `npm run dev`.
+`npm run verify` runs `markdown:lint`, `skills:lint`, `ts:check`, `lint:ci`,
+`fsd:check`, and `build`. CI mirrors these. The `vite-plugin-checker` plugin
+also surfaces tsc errors during `npm run dev`.
 
 Before handoff or PR update, run the repo-local
 [`frontend-general-checks`](./.agents/skills/frontend-general-checks/SKILL.md)
