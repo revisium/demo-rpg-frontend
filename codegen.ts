@@ -24,12 +24,26 @@ const scalars = {
   JSONObject: 'Record<string, unknown>',
 };
 
-const schemaUrl = env.REACT_APP_GRAPHQL_SCHEMA_URL || env.REACT_APP_GRAPHQL_SERVER_URL;
+const schemaUrl =
+  env.GRAPHQL_SCHEMA_URL ||
+  env.REACT_APP_GRAPHQL_SCHEMA_URL ||
+  env.GRAPHQL_PROXY_TARGET ||
+  env.GRAPHQL_SERVER_URL ||
+  env.REACT_APP_GRAPHQL_SERVER_URL;
 
 if (!schemaUrl) {
   throw new Error(
-    `codegen.ts: set REACT_APP_GRAPHQL_SCHEMA_URL (or REACT_APP_GRAPHQL_SERVER_URL) in .env/.env or .env/.env.${mode}`,
+    `codegen.ts: set GRAPHQL_SCHEMA_URL, GRAPHQL_PROXY_TARGET, or REACT_APP_GRAPHQL_SERVER_URL in .env/.env or .env/.env.${mode}`,
   );
+}
+
+try {
+  const parsedSchemaUrl = new URL(schemaUrl);
+  if (!['http:', 'https:'].includes(parsedSchemaUrl.protocol)) {
+    throw new Error('unsupported protocol');
+  }
+} catch {
+  throw new Error(`codegen.ts: GraphQL schema URL must be absolute, got ${schemaUrl}`);
 }
 
 const config: CodegenConfig = {

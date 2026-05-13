@@ -4,9 +4,10 @@
 
 SSR React app talking to the federated GraphQL router. In production
 the router is co-located at `/graphql` under the app's own hostname
-(so the browser only ever makes same-origin calls); locally and for
-`npm run gql:codegen` the absolute router URL
-`https://demo-rpg-router.dev.revisium.io/graphql` is used.
+(so the browser only ever makes same-origin calls). Locally the browser also
+uses `/graphql`; Vite proxies that path to
+`https://demo-rpg.dev.revisium.io/graphql`, which is also the default schema
+source for `npm run gql:codegen`.
 
 ## Stack
 
@@ -60,6 +61,11 @@ npm run dev                   # react-router dev
 The dev server uses the env files under [`.env/`](./.env). For local overrides,
 create `.env/.env.local` or `.env/.env.<mode>.local`; these files are ignored by
 git.
+
+Fresh clones should work without a local env file: `REACT_APP_GRAPHQL_SERVER_URL`
+is `/graphql` in development, and `GRAPHQL_PROXY_TARGET` points the Vite dev
+proxy at `https://demo-rpg.dev.revisium.io/graphql`. If the dev stand moves,
+update `GRAPHQL_PROXY_TARGET`; keep the browser URL same-origin.
 
 ## Common Commands
 
