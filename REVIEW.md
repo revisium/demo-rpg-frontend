@@ -76,6 +76,8 @@ Block a PR when any of these are true:
   state, and no reuse value.
 - Generated files under `src/__generated__/` are hand-edited.
 - Steiger, TypeScript, lint, skill-lint, or build failures are ignored.
+- Failed or pending required GitHub Actions, Sonar, or quality-gate checks are
+  ignored during PR update or review-thread cleanup.
 
 ## Architecture Rules To Enforce
 

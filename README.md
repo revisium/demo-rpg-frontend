@@ -88,8 +88,8 @@ Repo-local agent workflows live in [`.agents`](./.agents/README.md):
 - `frontend-general-checks` — run baseline verification and report evidence.
 - `frontend-self-review` — review docs/source-of-truth, architecture, UX, and
   verification before handoff or PR update.
-- `frontend-pr-review-iteration` — fetch review threads, triage, fix, reply,
-  and resolve only after verification.
+- `frontend-pr-review-iteration` — fetch review threads and PR checks, triage,
+  fix, reply, and resolve only after verification.
 - `frontend-pr-publish` — create or reuse a conventional branch from fresh
   `master`, verify, commit, push, and create a PR with an empty description.
 

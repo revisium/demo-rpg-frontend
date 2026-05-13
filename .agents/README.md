@@ -16,8 +16,8 @@ canonical docs first.
 - [`frontend-general-checks`](./skills/frontend-general-checks/SKILL.md) —
   baseline verification before handoff, PR creation, and review-thread replies.
 - [`frontend-pr-review-iteration`](./skills/frontend-pr-review-iteration/SKILL.md)
-  — GitHub review-thread workflow: fetch, triage, fix, reply, resolve after
-  verification.
+  — GitHub review-thread and failed-check workflow: fetch, triage, fix, reply,
+  resolve after verification.
 - [`frontend-pr-publish`](./skills/frontend-pr-publish/SKILL.md) — verified
   branch, commit, push, and PR creation workflow from fresh `master`.
 

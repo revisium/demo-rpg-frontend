@@ -38,6 +38,8 @@ reviews:
     - Use MobX computed getters for derived read models instead of duplicated mutable state.
     - Enforce one non-trivial React component per file.
     - Never hand-edit src/__generated__.
+    - Do not treat review-thread cleanup as complete while required GitHub Actions,
+      Sonar, or quality-gate checks are failed or pending.
     - Flag any PR that weakens page specs, review rules, architecture rules, or
       design-system contracts without updating the canonical docs.
     - Repo-local .agents skills/rules must enforce the same contract and must not
