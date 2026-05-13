@@ -5,6 +5,16 @@ for the human-facing overview.
 
 ## Ground rules
 
+- **Docs first for page work.** `docs/` is the frontend implementation
+  source of truth. Before changing a route, page, shared UI pattern,
+  layout, or review rule, update the matching document first:
+  `docs/product/pages/...`, `docs/product/page-patterns.md`,
+  `docs/design-system/README.md`, or `docs/architecture/frontend.md`.
+  Code that contradicts the docs is treated as a bug unless the same PR
+  updates the docs and explains the change.
+- **For handoff work, start at `docs/handoff/README.md`.** It links the
+  product route specs, feature map, design system, art direction, architecture,
+  playbooks, roadmap, and review checklist in the intended implementation order.
 - **Do not introduce Apollo Client.** This repo uses `graphql-request` 7 +
   the codegen'd typed SDK. If you need a hook-style API, write a MobX
   ViewModel around `ObservableRequest`, not a new client.
@@ -24,6 +34,9 @@ for the human-facing overview.
 
 ## Adding a page
 
+0. Read `docs/README.md`, the matching `docs/product/pages/<page>/README.md`,
+   and `docs/playbooks/add-page.md`. If the page spec is missing or stale,
+   update the spec before writing code.
 1. `src/pages/<Page>/api/<Page>.graphql` — query/mutation
 2. `npm run gql:codegen` — regenerates `Sdk` with the new operation
 3. `src/pages/<Page>/model/<Page>ViewModel.ts` — MobX class implementing

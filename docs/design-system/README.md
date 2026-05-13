@@ -1,0 +1,99 @@
+# Design System And Layout
+
+Branching Tales uses fantasy content, but the UI is a precise DevRel product
+surface. The visual language should feel like a serious developer tool showing
+a rich dataset, not a game landing page or decorative RPG interface.
+
+## Design Principles
+
+- Dense but readable: prioritize scanning, comparison, and evidence.
+- Restrained fantasy: names, portraits, icons, and maps carry the theme; chrome stays quiet.
+- Every surface has a job: avoid decorative sections that do not help evaluation.
+- Code and data examples are first-class UI, not afterthoughts.
+- Accessibility and responsive behaviour are required, not polish.
+
+## Layout System
+
+| Area | Requirement |
+|---|---|
+| App shell | Top nav, brand link, route groups, locale switcher, footer chip. |
+| Page header | Title, one-sentence purpose, capability chips, optional primary CTA. |
+| Main content | Catalog grid/table or detail content. |
+| Explainer column | Required on data pages; side-docked on tablet/desktop, accordion on phone. |
+| Footer | Architecture chip and source links. |
+
+## Breakpoints
+
+| Breakpoint | Rule |
+|---|---|
+| `<= 480px` | Single column, widget accordion, filter bottom sheet, 16px page gutters. |
+| `481px-1023px` | Two columns, widget visible, 24px gutters. |
+| `>= 1024px` | Content plus sticky widget, max content width `1440px`, 32px gutters. |
+
+No page-level horizontal scroll. Fixed-format widgets use stable dimensions via
+grid tracks, min/max widths, or aspect ratios.
+
+## Tokens
+
+Use CSS custom properties. Exact values may evolve, but the semantic names stay
+stable once implemented.
+
+| Token | Default | Usage |
+|---|---|---|
+| `--color-bg` | `#f7f7f4` | Page background. |
+| `--color-surface` | `#ffffff` | Cards, panels, popovers. |
+| `--color-surface-muted` | `#eef1ed` | Secondary panels and inactive tabs. |
+| `--color-text` | `#17201b` | Primary text. |
+| `--color-text-muted` | `#5f6b63` | Secondary text. |
+| `--color-border` | `#d8ddd7` | Borders and dividers. |
+| `--color-accent` | `#246b54` | Primary actions, active state. |
+| `--color-accent-strong` | `#154b3a` | Hover/pressed accent. |
+| `--color-data` | `#2f6fbb` | `data` subgraph chip. |
+| `--color-cms` | `#8a5a16` | `cms` subgraph chip. |
+| `--color-backend` | `#7a4fb0` | `backend` subgraph chip. |
+| `--color-danger` | `#b42318` | Error states. |
+| `--radius-sm` | `4px` | Inputs, chips. |
+| `--radius-md` | `8px` | Cards, panels. |
+| `--space-1..8` | `4px` steps | Spacing scale. |
+
+Do not let the UI collapse into one dominant hue. The palette combines neutral
+surfaces, green actions, blue/copper/purple subgraph chips, and red errors.
+
+## Typography
+
+- Use system UI fonts for app chrome and content.
+- Use a monospace font for GraphQL, JSON, REST, MCP, and code panels.
+- Do not scale font size with viewport width.
+- Letter spacing stays `0`.
+- Compact surfaces use compact headings; reserve large type for page-level heroes only.
+
+## Components
+
+| Component | Requirement |
+|---|---|
+| Buttons | Text for clear commands; icon buttons only with accessible labels/tooltips. |
+| Links | Underline or clear affordance in prose; route cards may use block links. |
+| Cards | Max radius `8px`; no card-inside-card layouts. |
+| Tables | Sticky header only when useful; preserve keyboard readability. |
+| Chips | Short labels for capabilities, subgraphs, statuses, and enums. |
+| Tabs | Used for GraphQL/REST/MCP surfaces and dense view switches. |
+| Code panels | Scroll internally, copy action, language label, accessible focus. |
+| Bottom sheets | Mobile filters only; must be dismissible by button and Escape. |
+
+## Data Visual Treatment
+
+- Catalogs use cards when imagery or summaries matter; tables when comparison matters.
+- Detail pages group fields by meaning: identity, schema fields, computed fields, related rows, files.
+- File previews reserve stable aspect ratios before images load.
+- Formula fields are visually labelled as computed.
+- Federated fields show visible subgraph attribution on reference pages.
+
+## Accessibility Baseline
+
+- WCAG 2.2 AA target.
+- All interactive controls have visible focus states.
+- Touch targets are at least `44px` on mobile.
+- Color is never the only state indicator.
+- Respect `prefers-reduced-motion`.
+- Modals, sheets, accordions, and tabs use correct ARIA patterns.
+- Error messages identify the problem and recovery action.

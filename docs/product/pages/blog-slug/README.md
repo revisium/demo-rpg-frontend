@@ -1,0 +1,87 @@
+# Blog Post Detail
+
+| Field | Value |
+|---|---|
+| Route | `/blog/[slug]` |
+| Status | Draft |
+| Pattern | CMS detail |
+| Primary capability | Markdown body, hero image, author avatar |
+
+## Purpose
+
+Render one CMS blog post as a public long-form article with file fields and
+author reference.
+
+## Context And Entry
+
+- Entry from `/blog`, `/about`, `/news/[slug]`, home, and external links.
+- Links to proof pages, source docs, author/source rows, and `/blog`.
+
+## Functional Blocks
+
+| Block | Requirement |
+|---|---|
+| Header | Title, excerpt, date, author. |
+| Hero image | CMS file field when present. |
+| Author panel | Author avatar/name/role. |
+| Article body | Markdown content. |
+| Related links | About page, source docs, relevant proof pages. |
+| Explainer Widget | Required. |
+
+## Primary Actions
+
+| Action | Result |
+|---|---|
+| Back to blog | Navigate to `/blog`. |
+| Open proof link | Navigate to route from article link. |
+| Open cloud row | Open blog post row. |
+
+## States
+
+| State | Requirement |
+|---|---|
+| Loading | Article skeleton. |
+| Loaded | Article body and author render. |
+| Not found | Missing post state with back link. |
+| Error | Retry. |
+
+## Transitions
+
+| From | Trigger | To |
+|---|---|---|
+| Blog catalog | Open post | Detail loading |
+| Detail loaded | Back action | `/blog` |
+| Detail loaded | Capability link | Target proof page |
+
+## Data Contract
+
+| Source | Fields |
+|---|---|
+| `cms.blog_posts` | slug, title, excerpt, body markdown, hero_image, author_id, published_at, og metadata. |
+| `cms.blog_authors` | name, avatar, role, bio. |
+
+## Explainer Widget
+
+- Summary: "Blog detail shows CMS markdown content, file fields, and author references from Revisium."
+- Variables: slug and locale.
+- Deep links: post row/schema and author row.
+- Subgraphs: `cms`.
+
+## Responsive Rules
+
+- Phone: article single-column; widget accordion after intro.
+- Desktop: readable article width plus widget side panel.
+
+## Architecture Notes
+
+- Generate document metadata from CMS fields when SSR metadata hooks are implemented.
+
+## Acceptance Criteria
+
+- [ ] Article body renders from CMS markdown.
+- [ ] Hero image and author avatar use Revisium file fields.
+- [ ] Not-found handles unknown slug.
+
+## Open Questions
+
+- Confirm slug uniqueness and query shape.

@@ -1,6 +1,19 @@
 import { container } from '../lib/DIContainer';
 import { isClient } from '../lib/helpers/isClient';
 
+const assertAbsoluteServerGraphqlUrl = (value: string): void => {
+  try {
+    const parsedGraphqlUrl = new URL(value);
+    if (!['http:', 'https:'].includes(parsedGraphqlUrl.protocol)) {
+      throw new Error('unsupported protocol');
+    }
+  } catch {
+    throw new Error(
+      'EnvironmentService: REACT_APP_GRAPHQL_SERVER_URL must be absolute on the server',
+    );
+  }
+};
+
 // Reads REACT_APP_* env once at construction.
 //
 // Lookup order matters because `import.meta.env.*` is inlined into BOTH
@@ -23,7 +36,8 @@ export class EnvironmentService {
     const fromRuntime = (key: string): string | undefined =>
       typeof process !== 'undefined' ? process.env[key] : undefined;
 
-    const read = isClient()
+    const client = isClient();
+    const read = client
       ? (key: string): string => fromBuildTime(key) ?? ''
       : (key: string): string => fromRuntime(key) ?? fromBuildTime(key) ?? '';
 
@@ -31,12 +45,16 @@ export class EnvironmentService {
     // throws on relative paths like "/graphql" because URL requires a
     // base. Native fetch handles relative paths via the document base,
     // but URL() does not — so on the client we resolve the configured
-    // URL against window.location.origin. On the server the value is
-    // always absolute (cluster DNS in production, dev-stand URL in
-    // dev), so we pass it through as-is.
+    // URL against window.location.origin. Server-side requests do not
+    // have a document base, so a relative value there is a deployment
+    // misconfiguration and should fail before the first request.
     const rawGraphqlUrl = read('REACT_APP_GRAPHQL_SERVER_URL');
+    if (!client && rawGraphqlUrl) {
+      assertAbsoluteServerGraphqlUrl(rawGraphqlUrl);
+    }
+
     this.graphqlServerUrl =
-      isClient() && rawGraphqlUrl
+      client && rawGraphqlUrl
         ? new URL(rawGraphqlUrl, window.location.origin).toString()
         : rawGraphqlUrl;
     this.packageVersion = read('PACKAGE_VERSION');
