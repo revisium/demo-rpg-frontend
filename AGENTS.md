@@ -25,50 +25,20 @@ for the human-facing overview.
   is the workflow for GitHub review threads. These skills do not create a new
   source of truth; they enforce `docs/`, `REVIEW.md`, `.coderabbit.yaml`, and
   `cubic.yaml`.
-- **Do not introduce Apollo Client.** This repo uses `graphql-request` 7 +
-  the codegen'd typed SDK. If you need a hook-style API, write a MobX
-  ViewModel around `ObservableRequest`, not a new client.
-- **FSD boundaries are enforced.** `npm run fsd:check` must pass. Slices
-  may only depend on lower layers: `app -> pages -> widgets/features/entities -> shared`.
-  If Steiger flags a cross-import, refactor — do not silence.
-- **MVVM for stateful pages.** New pages get `model/<Page>ViewModel.ts`
-  (DI-registered `transient`) + `ui/<Page>Page.tsx` (`observer`). Views
-  do not call `graphql-request` directly.
-- **Keep React thin.** Components render observable model state and forward
-  events to ViewModel actions. Business logic, query variables, sorting,
-  filtering, links, labels, and ExplainerDescriptor construction belong in
-  ViewModels or Item ViewModels.
-- **Use DataSource/List/Item boundaries for real pages.** Non-trivial pages
-  should isolate API access in `api/*DataSource.ts`, page/list state in
-  `model/*ViewModel.ts`, and row/card display state in `model/*ItemViewModel.ts`.
-  The current `/regions` bootstrap is intentionally minimal and should be
-  refactored into this shape before it is marked `Done`.
-- **No service singletons outside DI.** Long-lived services
-  (`ApiService`, `EnvironmentService`) register themselves in the
-  container at module load. Page ViewModels resolve them via
-  `container.get(...)`.
-- **Generated code is not edited.** Anything under `src/__generated__/`
-  is rewritten by `npm run gql:codegen`. Add new `*.graphql` documents
-  under `src/pages/<Page>/api/` and rerun codegen.
-- **One non-trivial React component per file.** Split reusable or stateful
-  subcomponents into their own files. Tiny private render helpers are allowed
-  only when they have no hooks, no model ownership, and no reuse value.
+- **Architecture rules live in canonical docs.** Use [`REVIEW.md`](./REVIEW.md)
+  and [`docs/architecture/frontend.md`](./docs/architecture/frontend.md) for
+  Apollo, FSD, MVVM, DataSource/List/Item ViewModel, DI, generated-file, and
+  React component boundaries. Keep this file as the boot pointer, not the full
+  policy source.
+- **Current bootstrap note:** `/regions` is intentionally minimal while its
+  spec is not `Done`; refactor it according to the DataSource/List/Item
+  ViewModel shape in the architecture doc before marking it `Done`.
 
 ## Adding a page
 
-0. Read `docs/README.md`, the matching `docs/product/pages/<page>/README.md`,
-   and `docs/playbooks/add-page.md`. If the page spec is missing or stale,
-   update the spec before writing code.
-1. `src/pages/<Page>/api/<Page>.graphql` — query/mutation
-2. `npm run gql:codegen` — regenerates `Sdk` with the new operation
-3. `src/pages/<Page>/model/<Page>ViewModel.ts` — MobX class implementing
-   `IViewModel`; register `transient`
-4. `src/pages/<Page>/ui/<Page>Page.tsx` — `observer` view, uses
-   `useViewModel(<Page>ViewModel)`
-5. `src/pages/<Page>/index.ts` — barrel re-exports the page component
-6. `src/app/routes/<page>.tsx` — thin RR v7 route module rendering the
-   page
-7. `src/routes.ts` — register the route
+Start from [`docs/playbooks/add-page.md`](./docs/playbooks/add-page.md) and the
+matching page spec. The playbook owns the implementation order; if the spec is
+missing or stale, update it before writing code.
 
 ## Quality gates
 
