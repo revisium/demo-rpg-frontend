@@ -30,8 +30,9 @@ export function PlaceholderPage({
               {title}
             </Heading>
             <Text color="gray.600" fontSize="lg" lineHeight="1.6" maxW="720px" mt="3">
-              This route is wired into the app shell and ready for implementation from its
-              page spec.
+              {status === 'Blocked'
+                ? 'This route is wired into the app shell, but its implementation is waiting on a documented dependency.'
+                : 'This route is wired into the app shell and ready for implementation from its page spec.'}
             </Text>
           </Box>
 

@@ -21,9 +21,13 @@ export const RegionsPage = observer(() => {
         <Grid
           alignItems="start"
           gap="8"
-          templateColumns={{ base: 'minmax(0, 1fr)', lg: 'minmax(0, 1fr) minmax(320px, 420px)' }}
+          templateColumns={{
+            base: 'minmax(0, 1fr)',
+            md: 'minmax(0, 1fr) minmax(280px, 360px)',
+            lg: 'minmax(0, 1fr) minmax(320px, 420px)',
+          }}
         >
-          <Box minW="0">
+          <Box minW="0" order={{ base: 1, md: 0 }}>
             <RegionsToolbar vm={vm} />
 
             {vm.showLoading ? <RegionsSkeleton /> : null}
@@ -62,7 +66,13 @@ export const RegionsPage = observer(() => {
             ) : null}
           </Box>
 
-          <ExplainerWidget descriptor={vm.explainer} headingId="regions-explainer-title" />
+          <Box minW="0" order={{ base: 0, md: 1 }}>
+            <ExplainerWidget
+              descriptor={vm.explainer}
+              headingId="regions-explainer-title"
+              isLoading={vm.showLoading}
+            />
+          </Box>
         </Grid>
       </Box>
     </Box>

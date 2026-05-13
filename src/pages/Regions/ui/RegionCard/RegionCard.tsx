@@ -37,7 +37,14 @@ export const RegionCard = observer(({ item }: RegionCardProps) => {
         </Text>
       </Box>
 
-      <SimpleGrid borderTopColor="gray.200" borderTopWidth="1px" columns={{ base: 1, sm: 2 }} gap="3" pt="4">
+      <SimpleGrid
+        as="dl"
+        borderTopColor="gray.200"
+        borderTopWidth="1px"
+        columns={{ base: 1, sm: 2 }}
+        gap="3"
+        pt="4"
+      >
         <Box>
           <Text as="dt" color="gray.600" fontSize="xs">
             Published

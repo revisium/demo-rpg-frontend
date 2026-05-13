@@ -18,6 +18,12 @@ Routes listed in [Page Inventory](./page-inventory.md) may be wired before their
 full page implementation so navigation and deep links do not 404 during
 delivery.
 
+This is the only explicit exception to the Explainer Widget requirement for
+catalog, detail, search, branching, blog, and news pages. A route may use the
+stub pattern only while its inventory status is `Draft` or `Blocked`; once the
+route status moves to `In delivery`, the matching page spec owns the real page
+blocks and widget requirement again.
+
 Rules:
 
 - Stub routes render inside the normal App Shell.

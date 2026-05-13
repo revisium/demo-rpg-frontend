@@ -6,6 +6,7 @@ import type { ExplainerDescriptor } from 'src/widgets/explainer-widget';
 import { ClassesDataSource, type ClassNode } from '../api/ClassesDataSource';
 import { ClassItemViewModel, type ClassLocale } from './ClassItemViewModel';
 
+// Keep this display string in sync with api/Classes.graphql until the widget can import raw GraphQL.
 const CLASSES_QUERY = `query Classes($data: Demo_rpg_dataGetClassesesInput) {
   classeses(data: $data) {
     edges {
@@ -36,9 +37,8 @@ export class ClassesViewModel implements IViewModel {
   private readonly loadedItems: ClassNode[] = [];
 
   constructor(public readonly dataSource: ClassesDataSource) {
-    makeAutoObservable<this, 'itemCache' | 'loadedItems'>(this, {
+    makeAutoObservable<this, 'itemCache'>(this, {
       itemCache: false,
-      loadedItems: false,
     }, { autoBind: true });
   }
 
@@ -107,8 +107,8 @@ export class ClassesViewModel implements IViewModel {
       responseSample: this.responseSample,
       subgraphsInUse: ['data'],
       deepLinks: {
-        cloudTable: 'https://cloud.revisium.io',
-        cloudSchema: 'https://cloud.revisium.io',
+        cloudTable: 'https://cloud.revisium.io/demo-rpg-data/classes',
+        cloudSchema: 'https://cloud.revisium.io/demo-rpg-data/schema/classes',
       },
       localeFallbacks: this.localeFallbacks,
       footerNote:
@@ -125,10 +125,10 @@ export class ClassesViewModel implements IViewModel {
   }
 
   private async loadInitial(): Promise<void> {
-    this.loadedItems.length = 0;
-    this.itemCache.clear();
     const result = await this.dataSource.request.fetch();
     if (result.ok) {
+      this.loadedItems.length = 0;
+      this.itemCache.clear();
       this.loadedItems.push(...result.value.items);
     }
   }

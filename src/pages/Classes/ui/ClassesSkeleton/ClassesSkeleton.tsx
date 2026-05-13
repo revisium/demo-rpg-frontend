@@ -11,6 +11,7 @@ export function ClassesSkeleton() {
           borderWidth="1px"
           gap="5"
           key={index}
+          minH="260px"
           p="5"
         >
           <Skeleton h="7" w="92px" />

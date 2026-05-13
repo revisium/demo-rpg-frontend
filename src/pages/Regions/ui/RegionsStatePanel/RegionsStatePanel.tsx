@@ -19,12 +19,12 @@ export function RegionsStatePanel({
 
   return (
     <Box
+      aria-live={isError ? 'polite' : undefined}
       bg="white"
       borderColor={isError ? 'red.300' : 'gray.200'}
       borderRadius="md"
       borderWidth="1px"
       p="6"
-      role={isError ? 'alert' : undefined}
     >
       <Heading as="h2" fontSize="xl">
         {title}
@@ -33,7 +33,7 @@ export function RegionsStatePanel({
         {description}
       </Text>
       {actionLabel && onAction ? (
-        <Button colorPalette="green" mt="4" onClick={onAction}>
+        <Button colorPalette="green" minH="44px" mt="4" onClick={onAction}>
           {actionLabel}
         </Button>
       ) : null}

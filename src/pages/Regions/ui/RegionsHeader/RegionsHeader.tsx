@@ -6,7 +6,7 @@ export function RegionsHeader() {
       <Text color="blue.700" fontSize="sm" fontWeight="bold" mb="2">
         data.regions
       </Text>
-      <Heading as="h1" fontSize={{ base: '4xl', md: '5xl' }} id="regions-title" lineHeight="1.05">
+      <Heading as="h1" fontSize="4xl" id="regions-title" lineHeight="1.05">
         Regions
       </Heading>
       <Text color="gray.600" fontSize="lg" lineHeight="1.6" maxW="720px" mt="3">
@@ -14,13 +14,13 @@ export function RegionsHeader() {
       </Text>
       <Flex aria-label="Capabilities" gap="2" mt="5" wrap="wrap">
         <Badge colorPalette="blue" size="lg" variant="subtle">
-          data subgraph
+          data.regions
         </Badge>
         <Badge size="lg" variant="outline">
-          localized JSON
+          enum
         </Badge>
         <Badge size="lg" variant="outline">
-          totalCount
+          localized strings
         </Badge>
         <Badge size="lg" variant="outline">
           pagination

@@ -41,7 +41,7 @@ export const ClassCard = observer(({ item }: ClassCardProps) => {
         <Stat label="MP growth" value={item.mpPerLevelLabel} />
       </SimpleGrid>
 
-      <Button asChild colorPalette="green" size="sm" variant="outline">
+      <Button asChild colorPalette="green" minH="44px" variant="outline">
         <RouterLink to={item.heroesHref}>Filter heroes</RouterLink>
       </Button>
     </Box>

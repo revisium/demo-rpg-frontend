@@ -1,3 +1,5 @@
+import { makeAutoObservable } from 'mobx';
+
 import type { ClassNode } from '../api/ClassesDataSource';
 
 export type ClassLocale = 'en' | 'ru' | 'zh';
@@ -12,7 +14,12 @@ export class ClassItemViewModel {
   constructor(
     private readonly node: ClassNode,
     private readonly getLocale: () => ClassLocale,
-  ) {}
+  ) {
+    makeAutoObservable<this, 'node' | 'getLocale'>(this, {
+      node: false,
+      getLocale: false,
+    });
+  }
 
   public get id(): string {
     return this.node.id;

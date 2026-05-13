@@ -52,7 +52,7 @@ Show a small reference table used by hero foreign keys.
 
 | Source | Fields |
 |---|---|
-| `data.classes` | id, localized name/description, primary stat, HP/MP progression fields. |
+| `data.classes` | `id`, localized `name`/`description`, `primary_stat`, `base_hp`, `hp_per_level`, `mp_per_level`. |
 
 ## Explainer Widget
 

@@ -25,8 +25,10 @@ export const ClassesToolbar = observer(({ vm }: ClassesToolbarProps) => {
       <ButtonGroup aria-label="Content locale" attached flex="0 0 auto" size="sm" variant="outline">
         {localeOptions.map((option) => (
           <Button
+            aria-pressed={vm.locale === option.value}
             colorPalette={vm.locale === option.value ? 'green' : 'gray'}
             key={option.value}
+            minH="44px"
             minW="44px"
             onClick={() => vm.setLocale(option.value)}
             variant={vm.locale === option.value ? 'solid' : 'outline'}

@@ -1,3 +1,5 @@
+import { makeAutoObservable } from 'mobx';
+
 import type { RegionNode } from '../api/RegionsDataSource';
 
 export type RegionLocale = 'en' | 'ru' | 'zh';
@@ -12,7 +14,12 @@ export class RegionItemViewModel {
   constructor(
     private readonly node: RegionNode,
     private readonly getLocale: () => RegionLocale,
-  ) {}
+  ) {
+    makeAutoObservable<this, 'node' | 'getLocale'>(this, {
+      node: false,
+      getLocale: false,
+    });
+  }
 
   public get id(): string {
     return this.node.id;
@@ -56,8 +63,9 @@ export class RegionItemViewModel {
   }
 
   private formatDate(value: string | number): string {
-    return new Intl.DateTimeFormat('en', {
+    return new Intl.DateTimeFormat(this.getLocale(), {
       dateStyle: 'medium',
+      timeZone: 'UTC',
     }).format(new Date(value));
   }
 }

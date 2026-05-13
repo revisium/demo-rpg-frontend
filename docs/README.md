@@ -108,4 +108,4 @@ behaviour in code.
 - One non-trivial React component lives in one file.
 - Generated files under `src/__generated__/` are never edited manually.
 - The review gate is `npm run verify`, which runs `markdown:lint`,
-  `skills:lint`, `ts:check`, `lint:ci`, `fsd:check`, and `build`.
+  `skills:lint`, `ui:lint`, `ts:check`, `lint:ci`, `fsd:check`, and `build`.

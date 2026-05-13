@@ -6,6 +6,7 @@ import type { ExplainerDescriptor } from 'src/widgets/explainer-widget';
 import { RegionsDataSource, type RegionNode } from '../api/RegionsDataSource';
 import { RegionItemViewModel, type RegionLocale } from './RegionItemViewModel';
 
+// Keep this display string in sync with api/Regions.graphql until the widget can import raw GraphQL.
 const REGIONS_QUERY = `query Regions($data: Demo_rpg_dataGetRegionsesInput) {
   regionses(data: $data) {
     edges {
@@ -35,9 +36,8 @@ export class RegionsViewModel implements IViewModel {
   private readonly loadedItems: RegionNode[] = [];
 
   constructor(public readonly dataSource: RegionsDataSource) {
-    makeAutoObservable<this, 'itemCache' | 'loadedItems'>(this, {
+    makeAutoObservable<this, 'itemCache'>(this, {
       itemCache: false,
-      loadedItems: false,
     }, { autoBind: true });
   }
 
@@ -120,8 +120,8 @@ export class RegionsViewModel implements IViewModel {
       responseSample: this.responseSample,
       subgraphsInUse: ['data'],
       deepLinks: {
-        cloudTable: 'https://cloud.revisium.io',
-        cloudSchema: 'https://cloud.revisium.io',
+        cloudTable: 'https://cloud.revisium.io/demo-rpg-data/regions',
+        cloudSchema: 'https://cloud.revisium.io/demo-rpg-data/schema/regions',
       },
       localeFallbacks: this.localeFallbacks,
       footerNote:
@@ -154,10 +154,10 @@ export class RegionsViewModel implements IViewModel {
   }
 
   private async loadInitial(): Promise<void> {
-    this.loadedItems.length = 0;
-    this.itemCache.clear();
     const result = await this.dataSource.request.fetch();
     if (result.ok) {
+      this.loadedItems.length = 0;
+      this.itemCache.clear();
       this.loadedItems.push(...result.value.items);
     }
   }
