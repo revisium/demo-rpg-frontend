@@ -43,7 +43,7 @@ jobs:
       action: ${{ inputs.action }}
       dry_run: ${{ inputs.dry_run }}
       base_branch: master
-      node_version: 22
+      node_version: 24
       install_command: |
         npm ci --ignore-scripts --prefer-offline --no-audit --no-fund
       validate_command: |

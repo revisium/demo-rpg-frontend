@@ -21,10 +21,30 @@ the router is co-located at `/graphql` under the app's own hostname
 | Linters        | ESLint 9 (flat), Prettier 3, Steiger (FSD), `tsc`      |
 | Layout         | Feature-Sliced Design (`app/`, `pages/`, `shared/`, …) |
 
+## Frontend Docs
+
+Frontend implementation is docs-first. Before changing routes, page UX,
+layout, shared UI patterns, or review rules, update the matching document under
+[`docs/`](./docs/README.md).
+
+Start here:
+
+- [`docs/product/page-inventory.md`](./docs/product/page-inventory.md) — route list and status.
+- [`docs/product/project-brief.md`](./docs/product/project-brief.md) — business context and scope.
+- [`docs/product/site-map.md`](./docs/product/site-map.md) — page map and transitions.
+- [`docs/product/feature-map.md`](./docs/product/feature-map.md) — feature-to-route coverage.
+- [`docs/product/pages/`](./docs/product/pages/README.md) — per-page implementation contracts.
+- [`docs/design-system/README.md`](./docs/design-system/README.md) — layout, tokens, and accessibility.
+- [`docs/design-system/art-direction.md`](./docs/design-system/art-direction.md) — world, style, and image prompts.
+- [`docs/architecture/frontend.md`](./docs/architecture/frontend.md) — MVVM, FSD, DI, SSR, codegen.
+- [`docs/playbooks/add-page.md`](./docs/playbooks/add-page.md) — page implementation workflow.
+- [`docs/handoff/README.md`](./docs/handoff/README.md) — developer handoff reading order.
+- [`docs/review/frontend-checklist.md`](./docs/review/frontend-checklist.md) — PR review gate.
+
 ## Commands
 
 ```bash
-nvm use                       # node 22
+nvm use                       # node 24
 npm install
 npm run gql:codegen:download  # writes src/__generated__/schema.graphql
 npm run gql:codegen           # writes src/__generated__/graphql-request.ts
@@ -35,6 +55,10 @@ npm run ts:check
 npm run lint:ci
 npm run fsd:check
 ```
+
+`fsd:check` enables Chokidar polling inside the npm script because Steiger can
+hit `EMFILE` watcher limits under Node 24 in local and containerized runs. The
+check is short-lived, so the polling overhead is bounded to this command.
 
 ## Layout (FSD)
 
@@ -87,7 +111,7 @@ docker run --rm -p 8080:8080 demo-rpg-frontend
 ```
 
 The multi-stage build (`docker/Dockerfile`) compiles the React Router
-SSR bundle in a Node 22 Alpine builder, then ships a minimal runtime
+SSR bundle in a Node 24 Alpine builder, then ships a minimal runtime
 stage that installs only production deps and serves `build/server/index.js`
 with `react-router-serve` on port `8080`.
 

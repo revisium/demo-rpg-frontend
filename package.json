@@ -12,7 +12,7 @@
     "ts:check": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.node.json",
     "lint:ci": "eslint \"src/**/*.{ts,tsx}\" --max-warnings 0",
     "lint:fix": "eslint \"src/**/*.{ts,tsx}\" --max-warnings 0 --fix",
-    "fsd:check": "steiger src",
+    "fsd:check": "CHOKIDAR_USEPOLLING=1 steiger src",
     "gql:codegen": "node scripts/gql-codegen.mjs",
     "gql:codegen:download": "node scripts/gql-codegen.mjs --download"
   },
@@ -39,7 +39,7 @@
     "@graphql-codegen/typescript-graphql-request": "^7.0.0",
     "@graphql-codegen/typescript-operations": "^5.0.9",
     "@react-router/dev": "^7.13.2",
-    "@types/node": "^22.10.5",
+    "@types/node": "^24.0.0",
     "@types/react": "^19.0.7",
     "@types/react-dom": "^19.0.3",
     "@typescript-eslint/eslint-plugin": "^8.20.0",
