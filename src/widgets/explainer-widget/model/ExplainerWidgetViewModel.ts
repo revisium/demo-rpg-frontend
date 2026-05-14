@@ -12,7 +12,7 @@ export type ExplainerTechnicalSectionId =
   | 'federationSdl';
 
 export class ExplainerWidgetViewModel implements IViewModel {
-  public isMobileOpen = false;
+  public isOpen = false;
   private readonly openTechnicalSections = new Set<ExplainerTechnicalSectionId>();
 
   constructor() {
@@ -28,12 +28,16 @@ export class ExplainerWidgetViewModel implements IViewModel {
   }
 
   public unmount(): void {
-    this.isMobileOpen = false;
+    this.isOpen = false;
     this.openTechnicalSections.clear();
   }
 
-  public toggleMobileOpen(): void {
-    this.isMobileOpen = !this.isMobileOpen;
+  public close(): void {
+    this.isOpen = false;
+  }
+
+  public toggleOpen(): void {
+    this.isOpen = !this.isOpen;
   }
 
   public isTechnicalSectionOpen(section: ExplainerTechnicalSectionId): boolean {

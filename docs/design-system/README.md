@@ -19,7 +19,7 @@ a rich dataset, not a game landing page or decorative RPG interface.
 | App shell | Sticky top nav, brand link, route groups, locale switcher, footer chip. |
 | Page header | Title, one-sentence purpose, capability chips, optional primary CTA. |
 | Main content | Catalog grid/table or detail content. |
-| Explainer column | Required on data pages; side-docked on tablet/desktop, accordion on phone, and visually distinct from ordinary site content. |
+| Explainer control | Required on data pages; compact floating trigger with an overlay panel that does not reserve page layout space. |
 | Footer | Architecture chip and source links. |
 
 The top nav uses the primary destinations from the site map: Home, Data,
@@ -34,9 +34,9 @@ and JSON panels may expose their own scroll affordance when needed.
 
 | Breakpoint | Rule |
 |---|---|
-| `<= 480px` | Single column, widget accordion, filter bottom sheet, 16px page gutters. |
-| `481px-1023px` | Two columns, widget visible, 24px gutters. |
-| `>= 1024px` | Content plus sticky widget, max content width `1440px`, 32px gutters. |
+| `<= 480px` | Single column, floating widget trigger, filter bottom sheet, 16px page gutters. |
+| `481px-1023px` | Main content column with floating widget trigger, 24px gutters. |
+| `>= 1024px` | Main content, floating widget trigger, max content width `1440px`, 32px gutters. |
 
 No page-level horizontal scroll. Fixed-format widgets use stable dimensions via
 grid tracks, min/max widths, or aspect ratios.
@@ -89,12 +89,13 @@ surfaces, green actions, blue/copper/purple subgraph chips, and red errors.
 | Buttons | Text for clear commands; icon buttons only with accessible labels/tooltips. |
 | Links | Underline or clear affordance in prose; route cards may use block links. |
 | Cards | Max radius `8px`; no card-inside-card layouts. |
+| Catalog cards | Use restrained hover lift, border-color shift, and media scale to clarify clickability without changing layout dimensions. |
 | Tables | Sticky header only when useful; preserve keyboard readability. |
 | Chips | Short labels for capabilities, subgraphs, statuses, and enums. |
 | Tabs | Used for GraphQL/REST/MCP surfaces and dense view switches. |
 | Code panels | Scroll internally, copy action, language label, accessible focus. |
 | Bottom sheets | Mobile filters only; must be dismissible by button and Escape. |
-| Explainer Widget | Uses a source-reference treatment: tinted surface, strong Revisium header, and explicit cloud/source link block. |
+| Explainer Widget | Uses a compact floating source-reference trigger; expanded panel has tinted surface, strong Revisium header, close control, and explicit cloud/source link block. |
 
 ## Data Visual Treatment
 

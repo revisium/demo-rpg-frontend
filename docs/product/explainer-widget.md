@@ -63,7 +63,8 @@ interface ExplainerDescriptor {
 
 | Block | Requirement |
 |---|---|
-| Header | Visually distinct Revisium reference header with "How this uses Revisium" label plus subgraph chips. |
+| Trigger | Compact floating Revisium control that is visible without occupying page layout space. |
+| Header | Visually distinct Revisium reference header with "How this uses Revisium" label plus subgraph chips inside the expanded panel. |
 | Summary | One plain sentence explaining the page capability. |
 | Surface tabs | GraphQL always; REST/MCP only when equivalents exist. |
 | Request panel | Verbatim request for selected surface. |
@@ -75,9 +76,11 @@ interface ExplainerDescriptor {
 
 ## Responsive Behaviour
 
-- Phone: collapsed accordion on first paint; header and summary above the fold.
-- Tablet: expanded right column.
-- Desktop: expanded sticky right side panel, max width `420px`.
+- Phone/tablet/desktop: collapsed floating trigger on first paint; the expanded
+  panel overlays the page from the lower-right area without reserving a layout
+  column.
+- Expanded panel max width `420px`, max height constrained to the viewport, and
+  internal scrolling for long technical content.
 - The widget surface must be visually distinct from ordinary site cards: use a
   Revisium reference header, source-oriented color treatment, and a visible
   external source-links block.

@@ -85,6 +85,8 @@ Rules:
 
 The widget is required on every catalog, detail, search, branching, blog, and
 news page. See [Explainer Widget](./explainer-widget.md) for the full contract.
+It starts collapsed as a floating Revisium trigger so the page content remains
+primary; the full source-reference panel opens only after user intent.
 
 Minimum descriptor per page:
 

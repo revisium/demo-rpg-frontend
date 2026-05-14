@@ -79,6 +79,8 @@ simple Revisium-generated list pages.
 - Desktop: cards in dense grid/table; widget sticky right.
 - Generated climate landscapes add quick visual scanning, but the climate text badge
   remains the source of meaning.
+- Region cards use a restrained hover/focus lift, accent border, and subtle
+  landscape scale to signal clickability without changing card dimensions.
 
 ## Architecture Notes
 
