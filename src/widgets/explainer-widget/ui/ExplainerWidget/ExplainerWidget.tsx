@@ -1,4 +1,4 @@
-import { Box, Button, Heading, Text } from '@chakra-ui/react';
+import { Badge, Box, Button, Flex, Heading, Stack, Text } from '@chakra-ui/react';
 import { observer } from 'mobx-react-lite';
 
 import { useViewModel } from 'src/shared/lib';
@@ -26,68 +26,109 @@ export const ExplainerWidget = observer(function ExplainerWidget({
       <Box
         as="section"
         aria-labelledby={mobileHeadingId}
-        bg="white"
-        borderColor="gray.200"
+        bg="#f4f8ff"
+        borderColor="blue.300"
         borderRadius="md"
+        borderLeftColor="blue.600"
+        borderLeftWidth="4px"
         borderWidth="1px"
         display={{ base: 'grid', md: 'none' }}
-        gap="4"
         minW="0"
-        p="5"
+        overflow="hidden"
+        shadow="0 12px 32px rgba(30, 64, 175, 0.14)"
       >
-        <Box>
-          <Button
-            aria-controls={mobilePanelId}
-            aria-expanded={vm.isMobileOpen}
-            display="block"
-            h="auto"
-            minH="44px"
-            onClick={() => vm.toggleMobileOpen()}
-            p="0"
-            textAlign="left"
-            variant="plain"
-            w="full"
-          >
-            <Text color="blue.700" fontSize="sm" fontWeight="bold" mb="2">
+        <Button
+          aria-controls={mobilePanelId}
+          aria-expanded={vm.isMobileOpen}
+          bg="blue.950"
+          borderRadius="0"
+          color="white"
+          display="block"
+          h="auto"
+          minH="72px"
+          onClick={() => vm.toggleMobileOpen()}
+          px="5"
+          py="4"
+          textAlign="left"
+          variant="plain"
+          w="full"
+        >
+          <Stack align="flex-start" gap="2">
+            <Flex align="center" gap="2" justify="space-between" w="full">
+              <Badge bg="whiteAlpha.200" color="blue.50" variant="solid">
+                Revisium reference
+              </Badge>
+              <Text color="blue.100" fontSize="xs">
+                cloud.revisium.io
+              </Text>
+            </Flex>
+            <Text color="blue.100" fontSize="sm" fontWeight="bold">
               How this uses Revisium
             </Text>
             <Heading as="h2" fontSize="xl" id={mobileHeadingId}>
               Explainer Widget
             </Heading>
-          </Button>
-        </Box>
+          </Stack>
+        </Button>
         <Box
           aria-labelledby={mobileHeadingId}
           display={vm.isMobileOpen ? 'grid' : 'none'}
           gap="4"
           id={mobilePanelId}
+          p="5"
           role="region"
         >
-          <ExplainerContent descriptor={descriptor} isLoading={isLoading} />
+          <ExplainerContent
+            descriptor={descriptor}
+            isLoading={isLoading}
+            isSectionOpen={(section) => vm.isTechnicalSectionOpen(section)}
+            onToggleSection={(section) => vm.toggleTechnicalSection(section)}
+          />
         </Box>
       </Box>
 
       <Box
         as="section"
         aria-labelledby={headingId}
-        bg="white"
-        borderColor="gray.200"
+        bg="#f4f8ff"
+        borderColor="blue.300"
         borderRadius="md"
+        borderLeftColor="blue.600"
+        borderLeftWidth="4px"
         borderWidth="1px"
         display={{ base: 'none', md: 'grid' }}
-        gap="4"
         minW="0"
-        p="5"
+        overflow="hidden"
         position={{ md: 'static', lg: 'sticky' }}
+        shadow="0 12px 32px rgba(30, 64, 175, 0.14)"
         top="6"
       >
-        <Text color="blue.700" fontSize="sm" fontWeight="bold" mb="2">
-          How this uses Revisium
-        </Text>
-        <Heading as="h2" fontSize="xl" id={headingId}>
-          Explainer Widget
-        </Heading>
-        <ExplainerContent descriptor={descriptor} isLoading={isLoading} />
+        <Box bg="blue.950" color="white" p="5">
+          <Stack gap="2">
+            <Flex align="center" gap="2" justify="space-between" wrap="wrap">
+              <Badge bg="whiteAlpha.200" color="blue.50" variant="solid">
+                Revisium reference
+              </Badge>
+              <Text color="blue.100" fontSize="xs">
+                cloud.revisium.io
+              </Text>
+            </Flex>
+            <Text color="blue.100" fontSize="sm" fontWeight="bold">
+              How this uses Revisium
+            </Text>
+            <Heading as="h2" fontSize="xl" id={headingId}>
+              Explainer Widget
+            </Heading>
+          </Stack>
+        </Box>
+        <Box display="grid" gap="4" p="5">
+          <ExplainerContent
+            descriptor={descriptor}
+            isLoading={isLoading}
+            isSectionOpen={(section) => vm.isTechnicalSectionOpen(section)}
+            onToggleSection={(section) => vm.toggleTechnicalSection(section)}
+          />
+        </Box>
       </Box>
     </>
   );

@@ -63,7 +63,7 @@ interface ExplainerDescriptor {
 
 | Block | Requirement |
 |---|---|
-| Header | "How this uses Revisium" label plus subgraph chips. |
+| Header | Visually distinct Revisium reference header with "How this uses Revisium" label plus subgraph chips. |
 | Summary | One plain sentence explaining the page capability. |
 | Surface tabs | GraphQL always; REST/MCP only when equivalents exist. |
 | Request panel | Verbatim request for selected surface. |
@@ -78,6 +78,12 @@ interface ExplainerDescriptor {
 - Phone: collapsed accordion on first paint; header and summary above the fold.
 - Tablet: expanded right column.
 - Desktop: expanded sticky right side panel, max width `420px`.
+- The widget surface must be visually distinct from ordinary site cards: use a
+  Revisium reference header, source-oriented color treatment, and a visible
+  external source-links block.
+- Technical panels for GraphQL, REST, MCP, variables, response sample, and SDL
+  excerpts stay collapsed by default on every breakpoint. The summary, subgraph
+  chips, and source links remain visible without expanding technical details.
 
 ## Accessibility
 

@@ -3,6 +3,7 @@ import { observer } from 'mobx-react-lite';
 import { Link as RouterLink } from 'react-router';
 
 import type { RegionItemViewModel } from '../../model/RegionItemViewModel';
+import { RegionClimateVisual } from '../RegionClimateVisual/RegionClimateVisual';
 
 interface RegionCardProps {
   readonly item: RegionItemViewModel;
@@ -20,9 +21,11 @@ export const RegionCard = observer(({ item }: RegionCardProps) => {
       display="grid"
       gap="5"
       minH="260px"
-      p="5"
+      overflow="hidden"
     >
-      <Box>
+      <RegionClimateVisual climate={item.climate} regionId={item.id} />
+
+      <Box px="5">
         <Flex align="center" color="gray.600" fontSize="sm" gap="3" justify="space-between">
           <Badge colorPalette="green" variant="subtle">
             {item.climate}
@@ -43,6 +46,7 @@ export const RegionCard = observer(({ item }: RegionCardProps) => {
         borderTopWidth="1px"
         columns={{ base: 1, sm: 2 }}
         gap="3"
+        mx="5"
         pt="4"
       >
         <Box>
@@ -63,9 +67,11 @@ export const RegionCard = observer(({ item }: RegionCardProps) => {
         </Box>
       </SimpleGrid>
 
-      <Button asChild colorPalette="green" size="sm" variant="outline">
-        <RouterLink to={item.detailHref}>Open region</RouterLink>
-      </Button>
+      <Box px="5" pb="5">
+        <Button asChild colorPalette="green" size="sm" variant="outline">
+          <RouterLink to={item.detailHref}>Open region</RouterLink>
+        </Button>
+      </Box>
     </Box>
   );
 });

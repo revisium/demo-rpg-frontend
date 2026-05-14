@@ -28,13 +28,21 @@ export function AppLayout({ children }: AppLayoutProps) {
         p="2"
         position="absolute"
         top="-100px"
-        zIndex="skipNav"
+        zIndex="banner"
         _focus={{ top: '4' }}
       >
         Skip to content
       </Link>
 
-      <Box as="header" bg="white" borderBottomColor="gray.200" borderBottomWidth="1px">
+      <Box
+        as="header"
+        bg="white"
+        borderBottomColor="gray.200"
+        borderBottomWidth="1px"
+        position="sticky"
+        top="0"
+        zIndex="sticky"
+      >
         <Container maxW="1440px" px={{ base: '4', md: '6', lg: '8' }} py="4">
           <Flex align="center" gap="4" justify="space-between" wrap="wrap">
             <Link

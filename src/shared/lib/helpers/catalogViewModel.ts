@@ -5,7 +5,9 @@ export interface CatalogResult<TNode> {
   readonly totalCount: number;
 }
 
-export function shouldRequestInitialData(request: ObservableRequest<unknown, []>): boolean {
+export function shouldRequestInitialData<Args extends unknown[]>(
+  request: ObservableRequest<unknown, Args>,
+): boolean {
   return !request.isLoaded && !request.isLoading;
 }
 
@@ -26,21 +28,27 @@ export function replaceCatalogItems<TNode>(
   loadedItems.push(...items);
 }
 
-export function totalCatalogCount<TNode>(
-  request: ObservableRequest<CatalogResult<TNode>, []>,
+export function totalCatalogCount<TNode, Args extends unknown[]>(
+  request: ObservableRequest<CatalogResult<TNode>, Args>,
   loadedItems: readonly TNode[],
 ): number {
   return request.data?.totalCount ?? loadedItems.length;
 }
 
-export function isInitialLoading(request: ObservableRequest<unknown, []>): boolean {
+export function isInitialLoading<Args extends unknown[]>(
+  request: ObservableRequest<unknown, Args>,
+): boolean {
   return request.isLoading && !request.isLoaded;
 }
 
-export function isRefreshing(request: ObservableRequest<unknown, []>): boolean {
+export function isRefreshing<Args extends unknown[]>(
+  request: ObservableRequest<unknown, Args>,
+): boolean {
   return request.isLoading && request.isLoaded;
 }
 
-export function hasRequestError(request: ObservableRequest<unknown, []>): boolean {
+export function hasRequestError<Args extends unknown[]>(
+  request: ObservableRequest<unknown, Args>,
+): boolean {
   return Boolean(request.error);
 }
