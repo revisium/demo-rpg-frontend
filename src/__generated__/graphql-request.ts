@@ -3546,6 +3546,13 @@ export type ClassesQueryVariables = Exact<{
 
 export type ClassesQuery = { classeses: { totalCount: number, edges: Array<{ cursor: string, node: { id: string, versionId: string, createdAt: number | string, publishedAt: number | string, data: { base_hp: number, hp_per_level: number, mp_per_level: number, primary_stat: string, name: { en: string, ru: string, zh: string }, description: { en: string, ru: string, zh: string } } } }>, pageInfo: { endCursor?: string | null, hasNextPage: boolean } } };
 
+export type RegionDetailQueryVariables = Exact<{
+  id: Scalars['String']['input'];
+}>;
+
+
+export type RegionDetailQuery = { regions: { id: string, versionId: string, createdAt: number | string, publishedAt: number | string, data: { climate: string, name: { en: string, ru: string, zh: string }, description: { en: string, ru: string, zh: string } } } };
+
 export type RegionsQueryVariables = Exact<{
   data?: InputMaybe<Demo_Rpg_DataGetRegionsesInput>;
 }>;
@@ -3587,6 +3594,29 @@ export const ClassesDocument = gql`
       hasNextPage
     }
     totalCount
+  }
+}
+    `;
+export const RegionDetailDocument = gql`
+    query RegionDetail($id: String!) {
+  regions(id: $id) {
+    id
+    versionId
+    createdAt
+    publishedAt
+    data {
+      climate
+      name {
+        en
+        ru
+        zh
+      }
+      description {
+        en
+        ru
+        zh
+      }
+    }
   }
 }
     `;
@@ -3633,6 +3663,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
   return {
     Classes(variables?: ClassesQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<ClassesQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<ClassesQuery>({ document: ClassesDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'Classes', 'query', variables);
+    },
+    RegionDetail(variables: RegionDetailQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<RegionDetailQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<RegionDetailQuery>({ document: RegionDetailDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'RegionDetail', 'query', variables);
     },
     Regions(variables?: RegionsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<RegionsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<RegionsQuery>({ document: RegionsDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'Regions', 'query', variables);

@@ -16,15 +16,19 @@ a rich dataset, not a game landing page or decorative RPG interface.
 
 | Area | Requirement |
 |---|---|
-| App shell | Top nav, brand link, route groups, locale switcher, footer chip. |
+| App shell | Sticky top nav, brand link, route groups, locale switcher, footer chip. |
 | Page header | Title, one-sentence purpose, capability chips, optional primary CTA. |
 | Main content | Catalog grid/table or detail content. |
-| Explainer column | Required on data pages; side-docked on tablet/desktop, accordion on phone. |
+| Explainer column | Required on data pages; side-docked on tablet/desktop, accordion on phone, and visually distinct from ordinary site content. |
 | Footer | Architecture chip and source links. |
 
 The top nav uses the primary destinations from the site map: Home, Data,
 Search, Branching, About, and News. Secondary dictionary routes are reachable
 from page content or stubs, not from the top nav.
+The top nav remains pinned to the top edge while pages scroll so route changes
+and primary navigation stay available on long catalog/detail pages.
+The page keeps native scrolling and browser scrollbar affordance. Internal code
+and JSON panels may expose their own scroll affordance when needed.
 
 ## Breakpoints
 
@@ -90,6 +94,7 @@ surfaces, green actions, blue/copper/purple subgraph chips, and red errors.
 | Tabs | Used for GraphQL/REST/MCP surfaces and dense view switches. |
 | Code panels | Scroll internally, copy action, language label, accessible focus. |
 | Bottom sheets | Mobile filters only; must be dismissible by button and Escape. |
+| Explainer Widget | Uses a source-reference treatment: tinted surface, strong Revisium header, and explicit cloud/source link block. |
 
 ## Data Visual Treatment
 

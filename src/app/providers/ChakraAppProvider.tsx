@@ -1,9 +1,15 @@
-import { ChakraProvider, defaultSystem } from '@chakra-ui/react';
+import {
+  ChakraProvider,
+  createSystem,
+  defaultConfig,
+} from '@chakra-ui/react';
 
 interface ChakraAppProviderProps {
   readonly children: React.ReactNode;
 }
 
+const appSystem = createSystem(defaultConfig);
+
 export function ChakraAppProvider({ children }: ChakraAppProviderProps) {
-  return <ChakraProvider value={defaultSystem}>{children}</ChakraProvider>;
+  return <ChakraProvider value={appSystem}>{children}</ChakraProvider>;
 }

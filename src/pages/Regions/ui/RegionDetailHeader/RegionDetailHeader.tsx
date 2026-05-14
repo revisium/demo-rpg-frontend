@@ -1,0 +1,64 @@
+import { Badge, Box, Button, Flex, Heading, Link, Text } from '@chakra-ui/react';
+import { observer } from 'mobx-react-lite';
+import { Link as RouterLink } from 'react-router';
+
+import { LocaleSwitch } from 'src/shared/ui';
+import type { RegionDetailViewModel } from '../../model/RegionDetailViewModel';
+import { RegionClimateVisual } from '../RegionClimateVisual/RegionClimateVisual';
+
+interface RegionDetailHeaderProps {
+  readonly vm: RegionDetailViewModel;
+}
+
+export const RegionDetailHeader = observer(({ vm }: RegionDetailHeaderProps) => {
+  return (
+    <Box mb="8">
+      <Button
+        aria-label="Back to regions catalog"
+        asChild
+        colorPalette="green"
+        minH="44px"
+        size="md"
+        variant="outline"
+      >
+        <RouterLink to="/regions">← Back to regions catalog</RouterLink>
+      </Button>
+
+      <Box mt="4">
+        <RegionClimateVisual climate={vm.climate} regionId={vm.id} variant="hero" />
+      </Box>
+
+      <Flex align={{ base: 'flex-start', md: 'center' }} gap="5" justify="space-between" mt="5" wrap="wrap">
+        <Box minW="0">
+          <Flex gap="2" mb="4" wrap="wrap">
+            <Badge colorPalette="blue" size="lg" variant="subtle">
+              data.regions
+            </Badge>
+            <Badge colorPalette="green" size="lg" variant="subtle">
+              {vm.climate}
+            </Badge>
+            <Badge colorPalette="gray" size="lg" variant="subtle">
+              backend pending
+            </Badge>
+          </Flex>
+          <Heading as="h1" fontSize={{ base: '3xl', md: '4xl' }} lineHeight="1.1">
+            {vm.title}
+          </Heading>
+          <Text color="gray.600" fontSize="lg" lineHeight="1.6" mt="4" maxW="760px">
+            {vm.description}
+          </Text>
+          <Text color="gray.600" fontSize="sm" mt="3">
+            Locale: <Text as="strong">{vm.localeLabel}</Text>
+          </Text>
+        </Box>
+
+        <Flex align="flex-end" direction="column" gap="3">
+          <LocaleSwitch onChange={(locale) => vm.setLocale(locale)} value={vm.locale} />
+          <Link color="green.800" href={vm.cloudRowHref} rel="noreferrer" target="_blank">
+            Open cloud row
+          </Link>
+        </Flex>
+      </Flex>
+    </Box>
+  );
+});

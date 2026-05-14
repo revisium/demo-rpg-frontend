@@ -1,3 +1,5 @@
-import { createPlaceholderRoute } from 'src/app/route-stubs/createPlaceholderRoute';
+import { RegionDetailPage } from 'src/pages/Regions';
 
-export default createPlaceholderRoute('regionDetail');
+export default function RegionDetailRoute() {
+  return <RegionDetailPage />;
+}

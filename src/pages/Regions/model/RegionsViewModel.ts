@@ -12,8 +12,14 @@ import {
   totalCatalogCount,
 } from 'src/shared/lib';
 import type { ExplainerDescriptor } from 'src/widgets/explainer-widget';
-import { RegionsDataSource, type RegionNode } from '../api/RegionsDataSource';
+import {
+  RegionsDataSource,
+  type RegionNode,
+  type RegionsRequestData,
+} from '../api/RegionsDataSource';
 import { RegionItemViewModel, type RegionLocale } from './RegionItemViewModel';
+
+const REGIONS_PAGE_SIZE = 24;
 
 // Keep this display string in sync with api/Regions.graphql until the widget can import raw GraphQL.
 const REGIONS_QUERY = `query Regions($data: Demo_rpg_dataGetRegionsesInput) {
@@ -38,7 +44,6 @@ const REGIONS_QUERY = `query Regions($data: Demo_rpg_dataGetRegionsesInput) {
 }`;
 
 export class RegionsViewModel implements IViewModel {
-  public readonly canLoadMore = false;
   public locale: RegionLocale = 'en';
   public activeClimate: string | null = null;
   private readonly itemCache = new Map<string, RegionItemViewModel>();
@@ -78,6 +83,10 @@ export class RegionsViewModel implements IViewModel {
 
   public get hasNextPage(): boolean {
     return this.dataSource.request.data?.pageInfo.hasNextPage ?? false;
+  }
+
+  public get canLoadMore(): boolean {
+    return this.hasNextPage && !this.showLoading && !this.showRefreshing;
   }
 
   public get showLoading(): boolean {
@@ -128,8 +137,7 @@ export class RegionsViewModel implements IViewModel {
       responseSample: this.responseSample,
       subgraphsInUse: ['data'],
       deepLinks: {
-        cloudTable: 'https://cloud.revisium.io/demo-rpg-data/regions',
-        cloudSchema: 'https://cloud.revisium.io/demo-rpg-data/schema/regions',
+        cloudTable: 'https://cloud.revisium.io/app/revisium/demo-rpg-data/master/draft/regions',
       },
       localeFallbacks: this.localeFallbacks,
       footerNote:
@@ -141,12 +149,16 @@ export class RegionsViewModel implements IViewModel {
     this.locale = locale;
   }
 
-  public setClimate(climate: string | null): void {
+  public async setClimate(climate: string | null): Promise<void> {
+    if (this.activeClimate === climate) return;
     this.activeClimate = climate;
+    await this.loadInitial();
   }
 
-  public resetFilters(): void {
+  public async resetFilters(): Promise<void> {
+    if (this.activeClimate === null) return;
     this.activeClimate = null;
+    await this.loadInitial();
   }
 
   public async retry(): Promise<void> {
@@ -155,14 +167,14 @@ export class RegionsViewModel implements IViewModel {
 
   public async loadMore(): Promise<void> {
     if (!this.canLoadMore) return;
-    const result = await this.dataSource.request.fetch();
+    const result = await this.dataSource.request.fetch(this.nextPageRequestData);
     if (result.ok) {
       this.loadedItems.push(...result.value.items);
     }
   }
 
   private async loadInitial(): Promise<void> {
-    const result = await this.dataSource.request.fetch();
+    const result = await this.dataSource.request.fetch(this.currentRequestData);
     if (result.ok) {
       replaceCatalogItems(this.loadedItems, this.itemCache, result.value.items);
     }
@@ -184,11 +196,32 @@ export class RegionsViewModel implements IViewModel {
 
   private get currentVariables(): Record<string, unknown> {
     return {
-      data: null,
+      data: this.currentRequestData,
       locale: this.locale,
       climateFilter: this.activeClimate,
-      filterMode: 'client-side until regionses(data) is available',
       pageInfo: this.dataSource.request.data?.pageInfo ?? null,
+    };
+  }
+
+  private get currentRequestData(): RegionsRequestData {
+    const data: RegionsRequestData = {
+      first: REGIONS_PAGE_SIZE,
+    };
+    if (this.activeClimate) {
+      data.where = {
+        data: {
+          equals: this.activeClimate,
+          path: ['climate'],
+        },
+      };
+    }
+    return data;
+  }
+
+  private get nextPageRequestData(): RegionsRequestData {
+    return {
+      ...this.currentRequestData,
+      after: this.dataSource.request.data?.pageInfo.endCursor ?? undefined,
     };
   }
 

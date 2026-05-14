@@ -23,7 +23,7 @@ export const RegionsToolbar = observer(({ vm }: RegionsToolbarProps) => {
               colorPalette={vm.activeClimate === null ? 'green' : 'gray'}
               minH="44px"
               minW="44px"
-              onClick={() => vm.setClimate(null)}
+              onClick={() => void vm.setClimate(null)}
               size="sm"
               type="button"
               variant={vm.activeClimate === null ? 'solid' : 'outline'}
@@ -37,7 +37,7 @@ export const RegionsToolbar = observer(({ vm }: RegionsToolbarProps) => {
                 key={climate}
                 minH="44px"
                 minW="44px"
-                onClick={() => vm.setClimate(climate)}
+                onClick={() => void vm.setClimate(climate)}
                 size="sm"
                 type="button"
                 variant={vm.activeClimate === climate ? 'solid' : 'outline'}

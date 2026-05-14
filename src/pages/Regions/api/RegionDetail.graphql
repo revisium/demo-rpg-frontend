@@ -1,0 +1,21 @@
+query RegionDetail($id: String!) {
+  regions(id: $id) {
+    id
+    versionId
+    createdAt
+    publishedAt
+    data {
+      climate
+      name {
+        en
+        ru
+        zh
+      }
+      description {
+        en
+        ru
+        zh
+      }
+    }
+  }
+}

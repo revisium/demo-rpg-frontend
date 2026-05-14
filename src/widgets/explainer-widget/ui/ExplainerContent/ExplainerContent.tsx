@@ -1,14 +1,28 @@
 import { Badge, Box, Link, Skeleton, Stack, Text } from '@chakra-ui/react';
+import { observer } from 'mobx-react-lite';
+import { useId } from 'react';
 
+import type {
+  ExplainerTechnicalSectionId,
+} from '../../model/ExplainerWidgetViewModel';
 import type { ExplainerDescriptor, ExplainerSubgraph } from '../../model/types';
 import { CodePanel } from '../CodePanel/CodePanel';
 
 interface ExplainerContentProps {
   readonly descriptor: ExplainerDescriptor;
+  readonly isSectionOpen: (section: ExplainerTechnicalSectionId) => boolean;
   readonly isLoading?: boolean;
+  readonly onToggleSection: (section: ExplainerTechnicalSectionId) => void;
 }
 
-export function ExplainerContent({ descriptor, isLoading = false }: ExplainerContentProps) {
+export const ExplainerContent = observer(function ExplainerContent({
+  descriptor,
+  isLoading = false,
+  isSectionOpen,
+  onToggleSection,
+}: ExplainerContentProps) {
+  const panelIdBase = useId();
+
   return (
     <>
       <Stack align="flex-start" direction="row" gap="2" wrap="wrap">
@@ -23,20 +37,49 @@ export function ExplainerContent({ descriptor, isLoading = false }: ExplainerCon
         {descriptor.summary}
       </Text>
 
-      <CodePanel label="GraphQL" meta={descriptor.surfaces.graphql.operationName}>
+      <CodePanel
+        collapsible
+        isOpen={isSectionOpen('graphql')}
+        label="GraphQL"
+        meta={descriptor.surfaces.graphql.operationName}
+        onToggle={() => onToggleSection('graphql')}
+        panelId={`${panelIdBase}-graphql-panel`}
+      >
         {descriptor.surfaces.graphql.request}
       </CodePanel>
       {descriptor.surfaces.rest ? (
-        <CodePanel label="REST" meta={`${descriptor.surfaces.rest.method} ${descriptor.surfaces.rest.path}`}>
+        <CodePanel
+          collapsible
+          isOpen={isSectionOpen('rest')}
+          label="REST"
+          meta={`${descriptor.surfaces.rest.method} ${descriptor.surfaces.rest.path}`}
+          onToggle={() => onToggleSection('rest')}
+          panelId={`${panelIdBase}-rest-panel`}
+        >
           {descriptor.surfaces.rest.request ?? descriptor.surfaces.rest.path}
         </CodePanel>
       ) : null}
       {descriptor.surfaces.mcp ? (
-        <CodePanel label="MCP" meta={descriptor.surfaces.mcp.toolName}>
+        <CodePanel
+          collapsible
+          isOpen={isSectionOpen('mcp')}
+          label="MCP"
+          meta={descriptor.surfaces.mcp.toolName}
+          onToggle={() => onToggleSection('mcp')}
+          panelId={`${panelIdBase}-mcp-panel`}
+        >
           {descriptor.surfaces.mcp.request}
         </CodePanel>
       ) : null}
-      <CodePanel label="Variables">{JSON.stringify(descriptor.variables, null, 2)}</CodePanel>
+      <CodePanel
+        collapsible
+        isOpen={isSectionOpen('variables')}
+        label="Variables"
+        onToggle={() => onToggleSection('variables')}
+        panelId={`${panelIdBase}-variables-panel`}
+      >
+        {JSON.stringify(descriptor.variables, null, 2)}
+      </CodePanel>
       {isLoading ? (
         <Box
           aria-label="Loading explainer response"
@@ -53,7 +96,13 @@ export function ExplainerContent({ descriptor, isLoading = false }: ExplainerCon
           <Skeleton h="4" w="70%" />
         </Box>
       ) : (
-        <CodePanel label="Response sample">
+        <CodePanel
+          collapsible
+          isOpen={isSectionOpen('responseSample')}
+          label="Response sample"
+          onToggle={() => onToggleSection('responseSample')}
+          panelId={`${panelIdBase}-response-panel`}
+        >
           {JSON.stringify(descriptor.responseSample, null, 2)}
         </CodePanel>
       )}
@@ -96,45 +145,60 @@ export function ExplainerContent({ descriptor, isLoading = false }: ExplainerCon
           <Text color="purple.900" fontSize="sm" mt="1">
             {descriptor.federation.summary}
           </Text>
-          <CodePanel label="SDL excerpt">{descriptor.federation.sdlExcerpt}</CodePanel>
+          <CodePanel
+            collapsible
+            isOpen={isSectionOpen('federationSdl')}
+            label="SDL excerpt"
+            onToggle={() => onToggleSection('federationSdl')}
+            panelId={`${panelIdBase}-federation-panel`}
+          >
+            {descriptor.federation.sdlExcerpt}
+          </CodePanel>
         </Box>
       ) : null}
 
-      <Stack align="flex-start" gap="2">
-        <Link color="green.800" href={descriptor.deepLinks.cloudTable} rel="noreferrer" target="_blank">
-          Cloud table
-        </Link>
-        <Link color="green.800" href={descriptor.deepLinks.cloudSchema} rel="noreferrer" target="_blank">
-          Cloud schema
-        </Link>
-        {descriptor.deepLinks.cloudRow ? (
-          <Link color="green.800" href={descriptor.deepLinks.cloudRow} rel="noreferrer" target="_blank">
-            Cloud row
+      <Box bg="white" borderColor="blue.200" borderRadius="md" borderWidth="1px" p="3">
+        <Text color="blue.950" fontSize="sm" fontWeight="bold">
+          Revisium Cloud
+        </Text>
+        <Stack align="flex-start" gap="2" mt="2">
+          <Link color="blue.800" href={descriptor.deepLinks.cloudTable} rel="noreferrer" target="_blank">
+            Cloud table
           </Link>
-        ) : null}
-        {descriptor.deepLinks.openApi ? (
-          <Link color="green.800" href={descriptor.deepLinks.openApi} rel="noreferrer" target="_blank">
-            OpenAPI
-          </Link>
-        ) : null}
-        {descriptor.deepLinks.mcpTool ? (
-          <Link color="green.800" href={descriptor.deepLinks.mcpTool} rel="noreferrer" target="_blank">
-            MCP tool
-          </Link>
-        ) : null}
-        {descriptor.deepLinks.federationSdlSource ? (
-          <Link color="green.800" href={descriptor.deepLinks.federationSdlSource} rel="noreferrer" target="_blank">
-            Federation SDL
-          </Link>
-        ) : null}
-      </Stack>
+          {descriptor.deepLinks.cloudSchema ? (
+            <Link color="blue.800" href={descriptor.deepLinks.cloudSchema} rel="noreferrer" target="_blank">
+              Cloud schema
+            </Link>
+          ) : null}
+          {descriptor.deepLinks.cloudRow ? (
+            <Link color="blue.800" href={descriptor.deepLinks.cloudRow} rel="noreferrer" target="_blank">
+              Cloud row
+            </Link>
+          ) : null}
+          {descriptor.deepLinks.openApi ? (
+            <Link color="blue.800" href={descriptor.deepLinks.openApi} rel="noreferrer" target="_blank">
+              OpenAPI
+            </Link>
+          ) : null}
+          {descriptor.deepLinks.mcpTool ? (
+            <Link color="blue.800" href={descriptor.deepLinks.mcpTool} rel="noreferrer" target="_blank">
+              MCP tool
+            </Link>
+          ) : null}
+          {descriptor.deepLinks.federationSdlSource ? (
+            <Link color="blue.800" href={descriptor.deepLinks.federationSdlSource} rel="noreferrer" target="_blank">
+              Federation SDL
+            </Link>
+          ) : null}
+        </Stack>
+      </Box>
 
       <Text borderTopColor="gray.200" borderTopWidth="1px" color="gray.600" fontSize="sm" pt="3">
         {descriptor.footerNote}
       </Text>
     </>
   );
-}
+});
 
 function subgraphColorPalette(subgraph: ExplainerSubgraph): string {
   if (subgraph === 'cms') return 'orange';

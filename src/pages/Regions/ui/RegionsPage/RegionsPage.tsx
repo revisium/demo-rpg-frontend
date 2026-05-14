@@ -19,7 +19,7 @@ export const RegionsPage = observer(() => {
         <StatePanel
           actionLabel={vm.hasActiveFilter ? 'Reset filter' : undefined}
           description="The query completed, but no loaded regions match the current filter."
-          onAction={vm.hasActiveFilter ? () => vm.resetFilters() : undefined}
+          onAction={vm.hasActiveFilter ? () => void vm.resetFilters() : undefined}
           title="No regions found"
         />,
       )}

@@ -33,7 +33,7 @@ export interface ExplainerDescriptor {
   }[];
   readonly deepLinks: {
     readonly cloudTable: string;
-    readonly cloudSchema: string;
+    readonly cloudSchema?: string;
     readonly cloudRow?: string;
     readonly openApi?: string;
     readonly mcpTool?: string;

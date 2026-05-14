@@ -1,0 +1,64 @@
+import { Box, Grid, Stack } from '@chakra-ui/react';
+import { observer } from 'mobx-react-lite';
+import { useParams } from 'react-router';
+
+import { renderWhen, useViewModel } from 'src/shared/lib';
+import { StatePanel } from 'src/shared/ui';
+import { ExplainerWidget } from 'src/widgets/explainer-widget';
+import { RegionDetailViewModel } from '../../model/RegionDetailViewModel';
+import { RegionBackendPanel } from '../RegionBackendPanel/RegionBackendPanel';
+import { RegionDetailHeader } from '../RegionDetailHeader/RegionDetailHeader';
+import { RegionDetailPanel } from '../RegionDetailPanel/RegionDetailPanel';
+import { RegionDetailSkeleton } from '../RegionDetailSkeleton/RegionDetailSkeleton';
+
+export const RegionDetailPage = observer(() => {
+  const params = useParams();
+  const vm = useViewModel(RegionDetailViewModel, params.id ?? '');
+
+  return (
+    <Box as="main" color="gray.900" overflowX="clip" px={{ base: '4', md: '6', lg: '8' }} py="8">
+      <Box maxW="1440px" mx="auto" w="full">
+        <RegionDetailHeader vm={vm} />
+
+        <Grid
+          alignItems="start"
+          gap="8"
+          templateColumns={{
+            base: 'minmax(0, 1fr)',
+            md: 'minmax(0, 1fr) minmax(280px, 360px)',
+            lg: 'minmax(0, 1fr) minmax(320px, 420px)',
+          }}
+        >
+          <Box minW="0" order={{ base: 1, md: 0 }}>
+            {renderWhen(vm.showLoading, <RegionDetailSkeleton />)}
+            {renderWhen(
+              vm.showError,
+              <StatePanel
+                actionLabel="Retry"
+                description="The GraphQL router did not return this region. Check the URL or return to the catalog."
+                onAction={() => void vm.retry()}
+                title="Region unavailable"
+                tone="error"
+              />,
+            )}
+            {renderWhen(
+              vm.showDetail,
+              <Stack gap="4">
+                <RegionDetailPanel vm={vm} />
+                <RegionBackendPanel />
+              </Stack>,
+            )}
+          </Box>
+
+          <Box minW="0" order={{ base: 0, md: 1 }}>
+            <ExplainerWidget
+              descriptor={vm.explainer}
+              headingId="region-detail-explainer-title"
+              isLoading={vm.showLoading}
+            />
+          </Box>
+        </Grid>
+      </Box>
+    </Box>
+  );
+});
