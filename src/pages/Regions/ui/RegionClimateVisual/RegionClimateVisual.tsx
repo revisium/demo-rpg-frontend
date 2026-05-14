@@ -6,6 +6,7 @@ interface RegionClimateVisualProps {
   readonly climate: string;
   readonly regionId: string;
   readonly variant?: RegionClimateVisualVariant;
+  readonly zoomOnGroupHover?: boolean;
 }
 
 interface RegionLandscapeScene {
@@ -87,6 +88,7 @@ export function RegionClimateVisual({
   climate,
   regionId,
   variant = 'strip',
+  zoomOnGroupHover = false,
 }: RegionClimateVisualProps) {
   const normalizedClimate = climate.toLowerCase();
   const scene = scenes[normalizedClimate] ?? fallbackScene;
@@ -110,6 +112,12 @@ export function RegionClimateVisual({
       <svg
         height="100%"
         preserveAspectRatio="xMidYMid slice"
+        style={{
+          transform: 'scale(1)',
+          transformOrigin: 'center',
+          transition: 'transform 180ms ease',
+        }}
+        {...(zoomOnGroupHover ? { className: 'region-card-visual' } : {})}
         viewBox="0 0 640 180"
         width="100%"
       >

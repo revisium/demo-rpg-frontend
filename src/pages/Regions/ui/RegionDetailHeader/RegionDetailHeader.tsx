@@ -1,4 +1,4 @@
-import { Badge, Box, Button, Flex, Heading, Link, Text } from '@chakra-ui/react';
+import { Badge, Box, Button, Flex, Grid, Heading, Link, Text } from '@chakra-ui/react';
 import { observer } from 'mobx-react-lite';
 import { Link as RouterLink } from 'react-router';
 
@@ -28,7 +28,12 @@ export const RegionDetailHeader = observer(({ vm }: RegionDetailHeaderProps) => 
         <RegionClimateVisual climate={vm.climate} regionId={vm.id} variant="hero" />
       </Box>
 
-      <Flex align={{ base: 'flex-start', md: 'center' }} gap="5" justify="space-between" mt="5" wrap="wrap">
+      <Grid
+        alignItems="start"
+        gap="5"
+        mt="5"
+        templateColumns={{ base: 'minmax(0, 1fr)', lg: 'minmax(0, 1fr) 224px' }}
+      >
         <Box minW="0">
           <Flex gap="2" mb="4" wrap="wrap">
             <Badge colorPalette="blue" size="lg" variant="subtle">
@@ -52,13 +57,13 @@ export const RegionDetailHeader = observer(({ vm }: RegionDetailHeaderProps) => 
           </Text>
         </Box>
 
-        <Flex align="flex-end" direction="column" gap="3">
+        <Flex align={{ base: 'flex-start', lg: 'flex-end' }} direction="column" gap="3" minW="0">
           <LocaleSwitch onChange={(locale) => vm.setLocale(locale)} value={vm.locale} />
           <Link color="green.800" href={vm.cloudRowHref} rel="noreferrer" target="_blank">
             Open cloud row
           </Link>
         </Flex>
-      </Flex>
+      </Grid>
     </Box>
   );
 });

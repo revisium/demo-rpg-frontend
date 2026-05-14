@@ -78,6 +78,8 @@ Federation once backend enrichment fields are present in the composed schema.
 - Tablet/Desktop: detail content left and widget right; backend stats visible above fold.
 - Generated climate landscape hero adds orientation, but the climate text badge remains
   the source of meaning.
+- Revisium-owned field rows use subtle hover/focus surface feedback for scan
+  affordance, while field attribution remains explicit in the widget.
 
 ## Architecture Notes
 
