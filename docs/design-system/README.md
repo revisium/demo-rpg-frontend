@@ -22,6 +22,10 @@ a rich dataset, not a game landing page or decorative RPG interface.
 | Explainer column | Required on data pages; side-docked on tablet/desktop, accordion on phone. |
 | Footer | Architecture chip and source links. |
 
+The top nav uses the primary destinations from the site map: Home, Data,
+Search, Branching, About, and News. Secondary dictionary routes are reachable
+from page content or stubs, not from the top nav.
+
 ## Breakpoints
 
 | Breakpoint | Rule |
@@ -33,10 +37,17 @@ a rich dataset, not a game landing page or decorative RPG interface.
 No page-level horizontal scroll. Fixed-format widgets use stable dimensions via
 grid tracks, min/max widths, or aspect ratios.
 
+## Chakra UI
+
+Implementation uses Chakra UI components and responsive style props for layout,
+spacing, semantic states, and controls. Do not add route-level CSS files for
+page layout; page slices should compose Chakra primitives and only introduce a
+local CSS file when a browser feature cannot be expressed through Chakra props.
+
 ## Tokens
 
-Use CSS custom properties. Exact values may evolve, but the semantic names stay
-stable once implemented.
+Use Chakra theme tokens or raw values that map to the semantic palette below.
+Exact values may evolve, but the semantic intent stays stable once implemented.
 
 | Token | Default | Usage |
 |---|---|---|

@@ -53,6 +53,7 @@ npm run verify
 ```bash
 npm run markdown:lint
 npm run skills:lint
+npm run ui:lint
 npm run ts:check
 npm run lint:ci
 npm run fsd:check

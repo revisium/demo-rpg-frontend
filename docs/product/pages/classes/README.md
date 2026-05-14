@@ -3,7 +3,7 @@
 | Field | Value |
 |---|---|
 | Route | `/classes` |
-| Status | Draft |
+| Status | In delivery |
 | Pattern | Small reference catalog |
 | Primary capability | Enum-like reference table |
 
@@ -52,7 +52,7 @@ Show a small reference table used by hero foreign keys.
 
 | Source | Fields |
 |---|---|
-| `data.classes` | id, localized name/description, optional role fields. |
+| `data.classes` | `id`, localized `name`/`description`, `primary_stat`, `base_hp`, `hp_per_level`, `mp_per_level`. |
 
 ## Explainer Widget
 
@@ -73,9 +73,10 @@ Show a small reference table used by hero foreign keys.
 
 ## Acceptance Criteria
 
-- [ ] Class rows are visible and linkable from hero pages.
-- [ ] Widget explains FK target role.
+- [x] Class rows are visible and link to hero filters.
+- [x] Widget explains FK target role.
 
 ## Open Questions
 
 - Decide whether class detail route is needed; not planned for v1.
+- Add `starting_ability_ids` once the FK-expanded query is confirmed to return within the router timeout.

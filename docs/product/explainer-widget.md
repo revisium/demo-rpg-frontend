@@ -90,7 +90,8 @@ interface ExplainerDescriptor {
 
 ## Implementation Constraints
 
-- Place the component under `src/widgets/explainer-widget/`.
+- Place the shared component under `src/widgets/explainer-widget/` once at
+  least two implemented pages consume the same widget contract.
 - Place shared descriptor types in the widget public API or `src/shared/config`
   only if multiple widgets/pages need them.
 - Do not import page slices into the widget.

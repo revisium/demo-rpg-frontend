@@ -16,6 +16,7 @@ source for `npm run gql:codegen`.
 | Framework      | React Router v7 (SSR mode)                             |
 | UI runtime     | React 19                                               |
 | State          | MobX 6 + mobx-react-lite (MVVM)                        |
+| UI components  | Chakra UI 3                                            |
 | GraphQL client | `graphql-request` 7                                    |
 | Codegen        | `@graphql-codegen/cli` + `typescript-graphql-request`  |
 | Bundler        | Vite 7 (`vite-plugin-checker`, `vite-plugin-svgr`)     |
@@ -54,7 +55,7 @@ then start the dev server:
 ```bash
 nvm use                       # node 24
 npm install
-npm run verify                # markdown:lint, skills:lint, ts:check, lint:ci, fsd:check, build
+npm run verify                # markdown:lint, skills:lint, ui:lint, ts:check, lint:ci, fsd:check, build
 npm run dev                   # react-router dev
 ```
 
@@ -77,6 +78,7 @@ npm run build && npm start    # production SSR
 npm run verify                # full local PR gate
 npm run markdown:lint
 npm run skills:lint
+npm run ui:lint
 npm run ts:check
 npm run lint:ci
 npm run fsd:check
@@ -110,7 +112,7 @@ src/
   pages/<Page>/       # page-level MVVM bundle
     api/*.graphql     # GraphQL documents — codegen source of truth
     model/*ViewModel  # MobX store, DI-registered as transient
-    ui/*Page.tsx      # observer view, consumes ViewModel via useViewModel
+    ui/*Page/*Page.tsx # observer view, consumes ViewModel via useViewModel
   shared/
     config/           # IViewModel, public types
     lib/              # DIContainer, ObservableRequest, useViewModel, helpers

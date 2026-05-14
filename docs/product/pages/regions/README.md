@@ -3,7 +3,7 @@
 | Field | Value |
 |---|---|
 | Route | `/regions` |
-| Status | Ready |
+| Status | In delivery |
 | Pattern | Reference catalog |
 | Primary capability | Nested JSON objects, localized strings, enum, totalCount, pagination |
 
@@ -24,9 +24,9 @@ simple Revisium-generated list pages.
 |---|---|
 | Header | Title, short explanation, chips for `data.regions`, enum, localized strings. |
 | Result summary | Shows visible count and `totalCount`. |
-| Climate filter | Optional filter by `climate` enum once backend query supports it. |
+| Climate filter | Client-side filter over the loaded connection until backend query input is fixed. |
 | Region list | Cards with name, description, climate, and detail link. |
-| Pagination | Load more when `pageInfo.hasNextPage` is available. |
+| Pagination | Shows connection `pageInfo`; load-more stays disabled while backend input is blocked. |
 | Explainer Widget | Required; shows `Regions` operation, variables, response sample, cloud links. |
 
 ## Primary Actions
@@ -34,8 +34,8 @@ simple Revisium-generated list pages.
 | Action | Result |
 |---|---|
 | Change locale | Re-query with selected localized sub-fields or update selection according to query design. |
-| Filter climate | Updates filter payload preview, then list result. |
-| Load more | Fetches next cursor and updates widget variables. |
+| Filter climate | Updates filter payload preview and filters visible loaded rows client-side. |
+| Load more | Fetches next cursor and updates widget variables once backend input works. |
 | Open region | Navigate to `/regions/[id]`. |
 | View in cloud | Opens `demo-rpg-data` regions table. |
 
@@ -53,9 +53,9 @@ simple Revisium-generated list pages.
 | From | Trigger | To |
 |---|---|---|
 | Loaded | Locale change | Refreshing with previous cards preserved |
-| Loaded | Filter change | JSON preview updates |
-| Preview updated | Apply/debounce | Refreshing list |
-| Loaded | Load more | Appended results |
+| Loaded | Filter change | JSON preview updates and visible loaded rows are filtered |
+| Preview updated | Apply/debounce | Refreshing list once backend input works |
+| Loaded | Load more | Appended results once backend input works |
 
 ## Data Contract
 
@@ -67,7 +67,7 @@ simple Revisium-generated list pages.
 
 - Summary: "Regions show how a nested localized JSON Schema becomes a typed GraphQL catalog with enum fields and total count."
 - Surfaces: GraphQL required; REST/MCP once backend exposes equivalents.
-- Variables: locale, climate filter, cursor, page size.
+- Variables: locale, climate filter, cursor, page size; marks client-side filter mode while backend input is blocked.
 - Response sample: current visible region edges plus `totalCount`.
 - Deep links: regions table and schema in `demo-rpg-data`.
 - Subgraphs: `data`.
@@ -86,13 +86,15 @@ simple Revisium-generated list pages.
 
 ## Acceptance Criteria
 
-- [ ] Shows region name, description, and climate from GraphQL.
-- [ ] Shows total count when available.
-- [ ] Handles loading, loaded, empty, and error states.
-- [ ] Explainer Widget shows query, variables, response sample, and cloud links.
-- [ ] Layout passes phone/tablet/desktop audit.
+- [x] Shows region name, description, and climate from GraphQL.
+- [x] Shows total count when available.
+- [x] Handles loading, loaded, empty, and error states.
+- [x] Explainer Widget shows query, variables, response sample, and cloud links.
+- [x] Layout passes phone/tablet/desktop audit.
+- [ ] Server-side pagination and climate filtering work after `regionses(data: ...)` is fixed upstream.
 
 ## Open Questions
 
 - Update the current `Regions.graphql` operation to request `pageInfo` and pass the `Demo_rpg_dataGetRegionsesInput` variable object.
-- Climate filtering uses the generated `data` JSON filter rather than a dedicated top-level `climate` filter; confirm the exact JSON path payload during implementation.
+- Current implementation requests `pageInfo` and keeps the optional `data` variable in the operation, but does not pass `data` at runtime because the dev GraphQL endpoint returned a `data` subgraph 500 for `regionses(data: { first: 1 })` on May 13, 2026.
+- Climate filtering is client-side over loaded rows until the connection input issue is resolved; server-side filtering should use the generated `data` JSON filter rather than a dedicated top-level `climate` filter.

@@ -1,0 +1,34 @@
+query Classes($data: Demo_rpg_dataGetClassesesInput) {
+  classeses(data: $data) {
+    edges {
+      cursor
+      node {
+        id
+        versionId
+        createdAt
+        publishedAt
+        data {
+          base_hp
+          hp_per_level
+          mp_per_level
+          primary_stat
+          name {
+            en
+            ru
+            zh
+          }
+          description {
+            en
+            ru
+            zh
+          }
+        }
+      }
+    }
+    pageInfo {
+      endCursor
+      hasNextPage
+    }
+    totalCount
+  }
+}

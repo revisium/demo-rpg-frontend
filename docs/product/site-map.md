@@ -27,7 +27,7 @@ Top-level navigation should stay compact:
 | Search | `/search` | Global search entry once implemented. |
 | Branching | `/balance-patch` | Revision story. |
 | About | `/about` | Architecture and source story. |
-| Blog/News | `/news` or `/blog` | Editorial surface; exact nav label can be decided in design pass. |
+| News | `/news` | Primary editorial surface; `/blog` remains reachable from content and stubs. |
 
 Do not put every route in the top nav. Detail pages are reached from catalogs,
 search, or related links.

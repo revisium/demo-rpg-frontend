@@ -43,13 +43,17 @@ src/pages/<Page>/
   api/<Page>DataSource.ts
   model/<Page>ViewModel.ts
   model/<Entity>ItemViewModel.ts
-  ui/<Page>Page.tsx
+  ui/<Page>Page/<Page>Page.tsx
   index.ts
 ```
 
 Route modules under `src/app/routes/*.tsx` are thin shells that render the page.
 Route modules should not contain business logic, request logic, or formatting
 logic.
+
+Stub route modules use the shared stub registry/factory under
+`src/app/route-stubs/` so placeholder metadata stays in one place and route
+files do not repeat the same JSX wrapper.
 
 ## MVVM Contract
 
@@ -117,9 +121,9 @@ Catalogs and repeated row/card surfaces should follow this shape:
 api/<Page>DataSource.ts          API calls and response extraction
 model/<Page>ViewModel.ts         page/list state, filters, actions, item cache
 model/<Entity>ItemViewModel.ts   row display getters, links, badges, item actions
-ui/<Page>Page.tsx                page composition
-ui/<Entity>List.tsx              list rendering
-ui/<Entity>Item.tsx              one row/card
+ui/<Page>Page/<Page>Page.tsx         page composition
+ui/<Entity>List/<Entity>List.tsx     list rendering
+ui/<Entity>Item/<Entity>Item.tsx     one row/card
 ```
 
 Use an Item ViewModel when an item has any of:
@@ -187,9 +191,18 @@ replace them.
   responses.
 - Event handlers call model actions with already-available UI values.
 - One non-trivial React component per file.
+- Every non-test component file under `src/**/ui/` lives in a same-named folder,
+  for example `ui/RegionCard/RegionCard.tsx`; `ui/RegionCard.tsx` and
+  component-folder `index.ts` barrels are not allowed.
 - Split `Header`, `Filters`, `List`, `Item`, `Empty`, `Error`, and modal/sheet
   components once they carry meaningful markup or logic.
 - Component files should not register DI services or instantiate DataSources.
+- Reusable low-level UI components may live in `src/shared/ui/<Component>/<Component>.tsx`
+  only after at least two real page/widget consumers use the same behavior.
+  Export them from `src/shared/ui/index.ts`; do not add `index.ts` inside the
+  component folder itself.
+- Shared layout components accept page/widget content as slots. `shared` must
+  not import `pages` or `widgets`.
 
 ## Data Fetching
 

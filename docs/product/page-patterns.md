@@ -12,6 +12,28 @@ requirements, but should not silently weaken these patterns.
 - Global locale switcher is visible in the shell once localization is implemented.
 - Shell must be SSR-rendered and usable before hydration.
 
+## Stub Route Pattern
+
+Routes listed in [Page Inventory](./page-inventory.md) may be wired before their
+full page implementation so navigation and deep links do not 404 during
+delivery.
+
+This is the only explicit exception to the Explainer Widget requirement for
+catalog, detail, search, branching, blog, and news pages. A route may use the
+stub pattern only while its inventory status is `Draft` or `Blocked`; once the
+route status moves to `In delivery`, the matching page spec owns the real page
+blocks and widget requirement again.
+
+Rules:
+
+- Stub routes render inside the normal App Shell.
+- Stub routes show the page title, route, inventory status, primary capability,
+  and a short implementation note.
+- Stub routes link back to `/regions` when the target page is not implemented.
+- Stub routes do not fetch data, render dead detail links, or claim acceptance
+  criteria are complete.
+- Adding a stub route does not change the inventory status to `Done`.
+
 ## Catalog Page Pattern
 
 Used by `/regions`, `/heroes`, `/items`, `/monsters`, `/quests`, `/parties`,

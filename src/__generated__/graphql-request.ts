@@ -3539,32 +3539,85 @@ export type UserModel = {
   username: Scalars['String']['output'];
 };
 
-export type RegionsQueryVariables = Exact<{ [key: string]: never; }>;
+export type ClassesQueryVariables = Exact<{
+  data?: InputMaybe<Demo_Rpg_DataGetClassesesInput>;
+}>;
 
 
-export type RegionsQuery = { regionses: { totalCount: number, edges: Array<{ node: { id: string, versionId: string, createdId: string, createdAt: number | string, publishedAt: number | string, data: { climate: string, name: { en: string }, description: { en: string } } } }> } };
+export type ClassesQuery = { classeses: { totalCount: number, edges: Array<{ cursor: string, node: { id: string, versionId: string, createdAt: number | string, publishedAt: number | string, data: { base_hp: number, hp_per_level: number, mp_per_level: number, primary_stat: string, name: { en: string, ru: string, zh: string }, description: { en: string, ru: string, zh: string } } } }>, pageInfo: { endCursor?: string | null, hasNextPage: boolean } } };
+
+export type RegionsQueryVariables = Exact<{
+  data?: InputMaybe<Demo_Rpg_DataGetRegionsesInput>;
+}>;
 
 
-export const RegionsDocument = gql`
-    query Regions {
-  regionses {
+export type RegionsQuery = { regionses: { totalCount: number, edges: Array<{ cursor: string, node: { id: string, versionId: string, createdAt: number | string, publishedAt: number | string, data: { climate: string, name: { en: string, ru: string, zh: string }, description: { en: string, ru: string, zh: string } } } }>, pageInfo: { endCursor?: string | null, hasNextPage: boolean } } };
+
+
+export const ClassesDocument = gql`
+    query Classes($data: Demo_rpg_dataGetClassesesInput) {
+  classeses(data: $data) {
     edges {
+      cursor
       node {
         id
         versionId
-        createdId
+        createdAt
+        publishedAt
+        data {
+          base_hp
+          hp_per_level
+          mp_per_level
+          primary_stat
+          name {
+            en
+            ru
+            zh
+          }
+          description {
+            en
+            ru
+            zh
+          }
+        }
+      }
+    }
+    pageInfo {
+      endCursor
+      hasNextPage
+    }
+    totalCount
+  }
+}
+    `;
+export const RegionsDocument = gql`
+    query Regions($data: Demo_rpg_dataGetRegionsesInput) {
+  regionses(data: $data) {
+    edges {
+      cursor
+      node {
+        id
+        versionId
         createdAt
         publishedAt
         data {
           climate
           name {
             en
+            ru
+            zh
           }
           description {
             en
+            ru
+            zh
           }
         }
       }
+    }
+    pageInfo {
+      endCursor
+      hasNextPage
     }
     totalCount
   }
@@ -3578,6 +3631,9 @@ const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationTy
 
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
+    Classes(variables?: ClassesQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<ClassesQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<ClassesQuery>({ document: ClassesDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'Classes', 'query', variables);
+    },
     Regions(variables?: RegionsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<RegionsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<RegionsQuery>({ document: RegionsDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'Regions', 'query', variables);
     }

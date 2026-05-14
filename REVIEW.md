@@ -74,6 +74,10 @@ Block a PR when any of these are true:
 - A file exports multiple non-trivial React components. Use one component per
   file, with small private render helpers only when they have no hooks, no
   state, and no reuse value.
+- A non-test component file under `src/**/ui/` is not placed in a same-named
+  folder, or a component folder contains a barrel file such as `index.ts`.
+  Example: `ui/RegionCard/RegionCard.tsx` is valid; `ui/RegionCard.tsx` and
+  `ui/RegionCard/index.ts` are invalid.
 - Generated files under `src/__generated__/` are hand-edited.
 - Steiger, TypeScript, lint, skills:lint, or build failures are ignored.
 - Failed or pending required GitHub Actions, Sonar, or quality-gate checks are
