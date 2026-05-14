@@ -1,7 +1,7 @@
 import { Badge, Box, Button, Container, Heading, SimpleGrid, Stack, Text } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router';
 
-interface PlaceholderPageProps {
+export interface PlaceholderPageProps {
   readonly title: string;
   readonly route: string;
   readonly status: 'Blocked' | 'Draft';

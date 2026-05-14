@@ -1,13 +1,3 @@
-import { PlaceholderPage } from 'src/app/route-stubs/PlaceholderPage/PlaceholderPage';
+import { createPlaceholderRoute } from 'src/app/route-stubs/createPlaceholderRoute';
 
-export default function LocationsRoute() {
-  return (
-    <PlaceholderPage
-      capability="Region FK and map preview"
-      route="/locations"
-      source="data.locations, data.regions"
-      status="Draft"
-      title="Locations"
-    />
-  );
-}
+export default createPlaceholderRoute('locations');

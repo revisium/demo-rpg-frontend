@@ -1,13 +1,3 @@
-import { PlaceholderPage } from 'src/app/route-stubs/PlaceholderPage/PlaceholderPage';
+import { createPlaceholderRoute } from 'src/app/route-stubs/createPlaceholderRoute';
 
-export default function BlogRoute() {
-  return (
-    <PlaceholderPage
-      capability="CMS catalog and markdown content"
-      route="/blog"
-      source="cms.blog_posts, cms.blog_authors"
-      status="Draft"
-      title="Blog"
-    />
-  );
-}
+export default createPlaceholderRoute('blog');

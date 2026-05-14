@@ -51,6 +51,10 @@ Route modules under `src/app/routes/*.tsx` are thin shells that render the page.
 Route modules should not contain business logic, request logic, or formatting
 logic.
 
+Stub route modules use the shared stub registry/factory under
+`src/app/route-stubs/` so placeholder metadata stays in one place and route
+files do not repeat the same JSX wrapper.
+
 ## MVVM Contract
 
 ViewModels own:

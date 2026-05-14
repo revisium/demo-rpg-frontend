@@ -1,13 +1,3 @@
-import { PlaceholderPage } from 'src/app/route-stubs/PlaceholderPage/PlaceholderPage';
+import { createPlaceholderRoute } from 'src/app/route-stubs/createPlaceholderRoute';
 
-export default function HeroesRoute() {
-  return (
-    <PlaceholderPage
-      capability="FK filters, formula string, portrait file field"
-      route="/heroes"
-      source="data.heroes, data.classes, data.regions, data.factions"
-      status="Draft"
-      title="Heroes"
-    />
-  );
-}
+export default createPlaceholderRoute('heroes');

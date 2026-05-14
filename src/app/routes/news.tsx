@@ -1,13 +1,3 @@
-import { PlaceholderPage } from 'src/app/route-stubs/PlaceholderPage/PlaceholderPage';
+import { createPlaceholderRoute } from 'src/app/route-stubs/createPlaceholderRoute';
 
-export default function NewsRoute() {
-  return (
-    <PlaceholderPage
-      capability="Pinned priority order, time-window filter, enum category"
-      route="/news"
-      source="data.news or cms.news TBD"
-      status="Blocked"
-      title="News"
-    />
-  );
-}
+export default createPlaceholderRoute('news');

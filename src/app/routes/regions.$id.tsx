@@ -1,13 +1,3 @@
-import { PlaceholderPage } from 'src/app/route-stubs/PlaceholderPage/PlaceholderPage';
+import { createPlaceholderRoute } from 'src/app/route-stubs/createPlaceholderRoute';
 
-export default function RegionDetailRoute() {
-  return (
-    <PlaceholderPage
-      capability="Federation reference detail"
-      route="/regions/:id"
-      source="data.regions plus backend RegionsNode fields"
-      status="Blocked"
-      title="Region Detail"
-    />
-  );
-}
+export default createPlaceholderRoute('regionDetail');

@@ -1,13 +1,3 @@
-import { PlaceholderPage } from 'src/app/route-stubs/PlaceholderPage/PlaceholderPage';
+import { createPlaceholderRoute } from 'src/app/route-stubs/createPlaceholderRoute';
 
-export default function PartiesRoute() {
-  return (
-    <PlaceholderPage
-      capability="Array FK column and formula counters"
-      route="/parties"
-      source="data.parties, data.heroes"
-      status="Draft"
-      title="Parties"
-    />
-  );
-}
+export default createPlaceholderRoute('parties');

@@ -1,13 +1,3 @@
-import { PlaceholderPage } from 'src/app/route-stubs/PlaceholderPage/PlaceholderPage';
+import { createPlaceholderRoute } from 'src/app/route-stubs/createPlaceholderRoute';
 
-export default function FactionsRoute() {
-  return (
-    <PlaceholderPage
-      capability="Crest file, alignment enum"
-      route="/factions"
-      source="data.factions"
-      status="Draft"
-      title="Factions"
-    />
-  );
-}
+export default createPlaceholderRoute('factions');

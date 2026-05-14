@@ -1,13 +1,3 @@
-import { PlaceholderPage } from 'src/app/route-stubs/PlaceholderPage/PlaceholderPage';
+import { createPlaceholderRoute } from 'src/app/route-stubs/createPlaceholderRoute';
 
-export default function NewsSlugRoute() {
-  return (
-    <PlaceholderPage
-      capability="News detail and optional federation"
-      route="/news/:slug"
-      source="data.news or cms.news TBD plus optional backend enrichment"
-      status="Blocked"
-      title="News Detail"
-    />
-  );
-}
+export default createPlaceholderRoute('newsDetail');

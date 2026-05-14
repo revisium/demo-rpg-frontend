@@ -1,13 +1,3 @@
-import { PlaceholderPage } from 'src/app/route-stubs/PlaceholderPage/PlaceholderPage';
+import { createPlaceholderRoute } from 'src/app/route-stubs/createPlaceholderRoute';
 
-export default function AbilitiesRoute() {
-  return (
-    <PlaceholderPage
-      capability="SVG icon catalog"
-      route="/abilities"
-      source="data.abilities"
-      status="Draft"
-      title="Abilities"
-    />
-  );
-}
+export default createPlaceholderRoute('abilities');

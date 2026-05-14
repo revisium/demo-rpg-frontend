@@ -1,13 +1,3 @@
-import { PlaceholderPage } from 'src/app/route-stubs/PlaceholderPage/PlaceholderPage';
+import { createPlaceholderRoute } from 'src/app/route-stubs/createPlaceholderRoute';
 
-export default function FactionDetailRoute() {
-  return (
-    <PlaceholderPage
-      capability="Reverse-FK aggregation and crest rendering"
-      route="/factions/:id"
-      source="data.factions, related data.heroes, data.monsters"
-      status="Draft"
-      title="Faction Detail"
-    />
-  );
-}
+export default createPlaceholderRoute('factionDetail');

@@ -1,13 +1,3 @@
-import { PlaceholderPage } from 'src/app/route-stubs/PlaceholderPage/PlaceholderPage';
+import { createPlaceholderRoute } from 'src/app/route-stubs/createPlaceholderRoute';
 
-export default function LocationDetailRoute() {
-  return (
-    <PlaceholderPage
-      capability="Large map file and dimensions metadata"
-      route="/locations/:id"
-      source="data.locations, data.regions"
-      status="Draft"
-      title="Location Detail"
-    />
-  );
-}
+export default createPlaceholderRoute('locationDetail');
