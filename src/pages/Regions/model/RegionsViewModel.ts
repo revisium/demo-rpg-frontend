@@ -1,7 +1,16 @@
 import { makeAutoObservable } from 'mobx';
 
-import { container } from 'src/shared/lib';
 import type { IViewModel } from 'src/shared/config';
+import {
+  container,
+  hasRequestError,
+  isInitialLoading,
+  isRefreshing,
+  replaceCatalogItems,
+  resetCatalogState,
+  shouldRequestInitialData,
+  totalCatalogCount,
+} from 'src/shared/lib';
 import type { ExplainerDescriptor } from 'src/widgets/explainer-widget';
 import { RegionsDataSource, type RegionNode } from '../api/RegionsDataSource';
 import { RegionItemViewModel, type RegionLocale } from './RegionItemViewModel';
@@ -46,14 +55,13 @@ export class RegionsViewModel implements IViewModel {
   }
 
   public async mount(): Promise<void> {
-    if (this.dataSource.request.isLoaded || this.dataSource.request.isLoading) return;
+    if (!shouldRequestInitialData(this.dataSource.request)) return;
     await this.loadInitial();
   }
 
   public unmount(): void {
     this.dataSource.reset();
-    this.loadedItems.length = 0;
-    this.itemCache.clear();
+    resetCatalogState(this.loadedItems, this.itemCache);
   }
 
   public get items(): readonly RegionItemViewModel[] {
@@ -61,7 +69,7 @@ export class RegionsViewModel implements IViewModel {
   }
 
   public get totalCount(): number {
-    return this.dataSource.request.data?.totalCount ?? this.loadedItems.length;
+    return totalCatalogCount(this.dataSource.request, this.loadedItems);
   }
 
   public get visibleCount(): number {
@@ -73,15 +81,15 @@ export class RegionsViewModel implements IViewModel {
   }
 
   public get showLoading(): boolean {
-    return this.dataSource.request.isLoading && !this.dataSource.request.isLoaded;
+    return isInitialLoading(this.dataSource.request);
   }
 
   public get showRefreshing(): boolean {
-    return this.dataSource.request.isLoading && this.dataSource.request.isLoaded;
+    return isRefreshing(this.dataSource.request);
   }
 
   public get showError(): boolean {
-    return Boolean(this.dataSource.request.error);
+    return hasRequestError(this.dataSource.request);
   }
 
   public get showEmpty(): boolean {
@@ -156,9 +164,7 @@ export class RegionsViewModel implements IViewModel {
   private async loadInitial(): Promise<void> {
     const result = await this.dataSource.request.fetch();
     if (result.ok) {
-      this.loadedItems.length = 0;
-      this.itemCache.clear();
-      this.loadedItems.push(...result.value.items);
+      replaceCatalogItems(this.loadedItems, this.itemCache, result.value.items);
     }
   }
 

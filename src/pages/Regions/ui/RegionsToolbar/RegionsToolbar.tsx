@@ -1,14 +1,8 @@
-import { Box, Button, ButtonGroup, Flex, Text } from '@chakra-ui/react';
+import { Box, Button, Flex, Text } from '@chakra-ui/react';
 import { observer } from 'mobx-react-lite';
 
-import type { RegionLocale } from '../../model/RegionItemViewModel';
+import { LocaleSwitch, ResultSummary } from 'src/shared/ui';
 import type { RegionsViewModel } from '../../model/RegionsViewModel';
-
-const localeOptions: readonly { value: RegionLocale; label: string }[] = [
-  { value: 'en', label: 'EN' },
-  { value: 'ru', label: 'RU' },
-  { value: 'zh', label: 'ZH' },
-];
 
 interface RegionsToolbarProps {
   readonly vm: RegionsViewModel;
@@ -18,10 +12,7 @@ export const RegionsToolbar = observer(({ vm }: RegionsToolbarProps) => {
   return (
     <Flex align="flex-start" gap="4" justify="space-between" mb="5" wrap={{ base: 'wrap', sm: 'nowrap' }}>
       <Box>
-        <Text color="gray.600">
-          Showing <Text as="strong">{vm.visibleCount}</Text> of{' '}
-          <Text as="strong">{vm.totalCount}</Text> regions
-        </Text>
+        <ResultSummary entityLabel="regions" totalCount={vm.totalCount} visibleCount={vm.visibleCount} />
         <Text color="gray.600" fontSize="sm" mt="1">
           Filter: <Text as="strong">{vm.activeFilterLabel}</Text>
         </Text>
@@ -58,27 +49,7 @@ export const RegionsToolbar = observer(({ vm }: RegionsToolbarProps) => {
         ) : null}
       </Box>
 
-      <ButtonGroup
-        aria-label="Content locale"
-        attached
-        flex="0 0 auto"
-        size="sm"
-        variant="outline"
-      >
-        {localeOptions.map((option) => (
-          <Button
-            aria-pressed={vm.locale === option.value}
-            colorPalette={vm.locale === option.value ? 'green' : 'gray'}
-            key={option.value}
-            minH="44px"
-            minW="44px"
-            onClick={() => vm.setLocale(option.value)}
-            variant={vm.locale === option.value ? 'solid' : 'outline'}
-          >
-            {option.label}
-          </Button>
-        ))}
-      </ButtonGroup>
+      <LocaleSwitch onChange={(locale) => vm.setLocale(locale)} value={vm.locale} />
     </Flex>
   );
 });
