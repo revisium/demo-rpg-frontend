@@ -1,6 +1,8 @@
 import { Box, Button, Heading, Text } from '@chakra-ui/react';
-import { useState } from 'react';
+import { observer } from 'mobx-react-lite';
 
+import { useViewModel } from 'src/shared/lib';
+import { ExplainerWidgetViewModel } from '../../model/ExplainerWidgetViewModel';
 import type { ExplainerDescriptor } from '../../model/types';
 import { ExplainerContent } from '../ExplainerContent/ExplainerContent';
 
@@ -10,10 +12,14 @@ interface ExplainerWidgetProps {
   readonly isLoading?: boolean;
 }
 
-export function ExplainerWidget({ descriptor, headingId, isLoading = false }: ExplainerWidgetProps) {
+export const ExplainerWidget = observer(function ExplainerWidget({
+  descriptor,
+  headingId,
+  isLoading = false,
+}: ExplainerWidgetProps) {
+  const vm = useViewModel(ExplainerWidgetViewModel);
   const mobileHeadingId = `${headingId}-mobile`;
   const mobilePanelId = `${headingId}-mobile-panel`;
-  const [isMobileOpen, setMobileOpen] = useState(false);
 
   return (
     <>
@@ -32,11 +38,11 @@ export function ExplainerWidget({ descriptor, headingId, isLoading = false }: Ex
         <Box>
           <Button
             aria-controls={mobilePanelId}
-            aria-expanded={isMobileOpen}
+            aria-expanded={vm.isMobileOpen}
             display="block"
             h="auto"
             minH="44px"
-            onClick={() => setMobileOpen((current) => !current)}
+            onClick={() => vm.toggleMobileOpen()}
             p="0"
             textAlign="left"
             variant="plain"
@@ -52,7 +58,7 @@ export function ExplainerWidget({ descriptor, headingId, isLoading = false }: Ex
         </Box>
         <Box
           aria-labelledby={mobileHeadingId}
-          display={isMobileOpen ? 'grid' : 'none'}
+          display={vm.isMobileOpen ? 'grid' : 'none'}
           gap="4"
           id={mobilePanelId}
           role="region"
@@ -85,4 +91,4 @@ export function ExplainerWidget({ descriptor, headingId, isLoading = false }: Ex
       </Box>
     </>
   );
-}
+});
