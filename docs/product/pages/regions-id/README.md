@@ -65,7 +65,8 @@ Federation once backend enrichment fields are present in the composed schema.
 
 - Summary: "This page shows a Revisium-owned region detail and where backend-owned federation fields will attach."
 - Surfaces: GraphQL required; REST/MCP if equivalents exist.
-- Variables: region id and locale.
+- Variables: GraphQL region id; locale remains visible through rendered field
+  state and fallback notes.
 - Field attribution: `name`, `description`, `climate` -> `data`; stats/comments -> `backend` once available.
 - Federation: unavailable note until backend `extend type RegionsNode` is present.
 - Deep links: matching cloud region row.

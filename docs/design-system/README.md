@@ -27,8 +27,8 @@ Search, Branching, About, and News. Secondary dictionary routes are reachable
 from page content or stubs, not from the top nav.
 The top nav remains pinned to the top edge while pages scroll so route changes
 and primary navigation stay available on long catalog/detail pages.
-The page keeps native scrolling but hides the browser scrollbar chrome; internal
-code and JSON panels may still expose their own scroll affordance when needed.
+The page keeps native scrolling and browser scrollbar affordance. Internal code
+and JSON panels may expose their own scroll affordance when needed.
 
 ## Breakpoints
 

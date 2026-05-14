@@ -1,4 +1,4 @@
-import { Badge, Box, Text } from '@chakra-ui/react';
+import { Box, Text } from '@chakra-ui/react';
 
 interface RegionDetailFieldProps {
   readonly label: string;
@@ -14,9 +14,6 @@ export function RegionDetailField({ label, value }: RegionDetailFieldProps) {
       <Text as="dd" fontWeight="bold" mt="1">
         {value}
       </Text>
-      <Badge colorPalette="blue" mt="2" size="sm" variant="subtle">
-        data
-      </Badge>
     </Box>
   );
 }

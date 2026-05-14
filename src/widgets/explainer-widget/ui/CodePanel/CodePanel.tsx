@@ -1,23 +1,33 @@
 import { Box, Button, Text } from '@chakra-ui/react';
 
-interface CodePanelProps {
+interface CodePanelBaseProps {
   readonly children: string;
-  readonly isOpen?: boolean;
   readonly label: string;
   readonly meta?: string;
-  readonly onToggle?: () => void;
-  readonly panelId?: string;
 }
 
-export function CodePanel({
-  children,
-  isOpen = true,
-  label,
-  meta,
-  onToggle,
-  panelId,
-}: CodePanelProps) {
-  const isCollapsible = Boolean(onToggle);
+interface CollapsibleCodePanelProps extends CodePanelBaseProps {
+  readonly collapsible: true;
+  readonly isOpen: boolean;
+  readonly onToggle: () => void;
+  readonly panelId: string;
+}
+
+interface StaticCodePanelProps extends CodePanelBaseProps {
+  readonly collapsible?: false;
+}
+
+type CodePanelProps = CollapsibleCodePanelProps | StaticCodePanelProps;
+
+interface CodePanelHeaderProps {
+  readonly label: string;
+  readonly meta?: string;
+}
+
+export function CodePanel(props: CodePanelProps) {
+  const { children, label, meta } = props;
+  const isOpen = props.collapsible ? props.isOpen : true;
+  const panelId = props.collapsible ? props.panelId : undefined;
   const content = (
     <Box
       as="pre"
@@ -37,7 +47,7 @@ export function CodePanel({
 
   return (
     <Box bg="gray.100" borderColor="gray.200" borderRadius="md" borderWidth="1px" minW="0" overflow="hidden">
-      {isCollapsible ? (
+      {props.collapsible ? (
         <Button
           aria-controls={panelId}
           aria-expanded={isOpen}
@@ -51,21 +61,14 @@ export function CodePanel({
           h="auto"
           justifyContent="space-between"
           minH="44px"
-          onClick={onToggle}
+          onClick={props.onToggle}
           px="3"
           py="2"
           type="button"
           variant="plain"
           w="full"
         >
-          <Box alignItems="center" display="flex" gap="3" minW="0">
-            <Text>{label}</Text>
-            {meta ? (
-              <Text as="strong" overflow="hidden" textOverflow="ellipsis" whiteSpace="nowrap">
-                {meta}
-              </Text>
-            ) : null}
-          </Box>
+          <CodePanelHeader label={label} meta={meta} />
           <Text as="span" color="gray.600" flexShrink="0">
             {isOpen ? 'Hide' : 'Show'}
           </Text>
@@ -83,11 +86,23 @@ export function CodePanel({
           px="3"
           py="2"
         >
-          <Text>{label}</Text>
-          {meta ? <Text as="strong">{meta}</Text> : null}
+          <CodePanelHeader label={label} meta={meta} />
         </Box>
       )}
       {isOpen ? content : null}
+    </Box>
+  );
+}
+
+function CodePanelHeader({ label, meta }: CodePanelHeaderProps) {
+  return (
+    <Box alignItems="center" display="flex" gap="3" minW="0">
+      <Text>{label}</Text>
+      {meta ? (
+        <Text as="strong" overflow="hidden" textOverflow="ellipsis" whiteSpace="nowrap">
+          {meta}
+        </Text>
+      ) : null}
     </Box>
   );
 }

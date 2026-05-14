@@ -226,5 +226,5 @@ function buildHazePath(horizon: number): string {
 }
 
 function hashRegion(value: string): number {
-  return value.split('').reduce((hash, char) => (hash * 31 + char.charCodeAt(0)) % 997, 17);
+  return Array.from(value).reduce((hash, char) => (hash * 31 + (char.codePointAt(0) ?? 0)) % 997, 17);
 }

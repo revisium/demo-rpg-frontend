@@ -1,5 +1,6 @@
 import { Badge, Box, Link, Skeleton, Stack, Text } from '@chakra-ui/react';
 import { observer } from 'mobx-react-lite';
+import { useId } from 'react';
 
 import type {
   ExplainerTechnicalSectionId,
@@ -20,6 +21,8 @@ export const ExplainerContent = observer(function ExplainerContent({
   isSectionOpen,
   onToggleSection,
 }: ExplainerContentProps) {
+  const panelIdBase = useId();
+
   return (
     <>
       <Stack align="flex-start" direction="row" gap="2" wrap="wrap">
@@ -35,41 +38,45 @@ export const ExplainerContent = observer(function ExplainerContent({
       </Text>
 
       <CodePanel
+        collapsible
         isOpen={isSectionOpen('graphql')}
         label="GraphQL"
         meta={descriptor.surfaces.graphql.operationName}
         onToggle={() => onToggleSection('graphql')}
-        panelId={`${descriptor.surfaces.graphql.operationName}-graphql-panel`}
+        panelId={`${panelIdBase}-graphql-panel`}
       >
         {descriptor.surfaces.graphql.request}
       </CodePanel>
       {descriptor.surfaces.rest ? (
         <CodePanel
+          collapsible
           isOpen={isSectionOpen('rest')}
           label="REST"
           meta={`${descriptor.surfaces.rest.method} ${descriptor.surfaces.rest.path}`}
           onToggle={() => onToggleSection('rest')}
-          panelId={`${descriptor.surfaces.graphql.operationName}-rest-panel`}
+          panelId={`${panelIdBase}-rest-panel`}
         >
           {descriptor.surfaces.rest.request ?? descriptor.surfaces.rest.path}
         </CodePanel>
       ) : null}
       {descriptor.surfaces.mcp ? (
         <CodePanel
+          collapsible
           isOpen={isSectionOpen('mcp')}
           label="MCP"
           meta={descriptor.surfaces.mcp.toolName}
           onToggle={() => onToggleSection('mcp')}
-          panelId={`${descriptor.surfaces.graphql.operationName}-mcp-panel`}
+          panelId={`${panelIdBase}-mcp-panel`}
         >
           {descriptor.surfaces.mcp.request}
         </CodePanel>
       ) : null}
       <CodePanel
+        collapsible
         isOpen={isSectionOpen('variables')}
         label="Variables"
         onToggle={() => onToggleSection('variables')}
-        panelId={`${descriptor.surfaces.graphql.operationName}-variables-panel`}
+        panelId={`${panelIdBase}-variables-panel`}
       >
         {JSON.stringify(descriptor.variables, null, 2)}
       </CodePanel>
@@ -90,10 +97,11 @@ export const ExplainerContent = observer(function ExplainerContent({
         </Box>
       ) : (
         <CodePanel
+          collapsible
           isOpen={isSectionOpen('responseSample')}
           label="Response sample"
           onToggle={() => onToggleSection('responseSample')}
-          panelId={`${descriptor.surfaces.graphql.operationName}-response-panel`}
+          panelId={`${panelIdBase}-response-panel`}
         >
           {JSON.stringify(descriptor.responseSample, null, 2)}
         </CodePanel>
@@ -138,10 +146,11 @@ export const ExplainerContent = observer(function ExplainerContent({
             {descriptor.federation.summary}
           </Text>
           <CodePanel
+            collapsible
             isOpen={isSectionOpen('federationSdl')}
             label="SDL excerpt"
             onToggle={() => onToggleSection('federationSdl')}
-            panelId={`${descriptor.surfaces.graphql.operationName}-federation-panel`}
+            panelId={`${panelIdBase}-federation-panel`}
           >
             {descriptor.federation.sdlExcerpt}
           </CodePanel>

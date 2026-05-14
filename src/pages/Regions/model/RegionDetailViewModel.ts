@@ -11,6 +11,7 @@ import type { ExplainerDescriptor } from 'src/widgets/explainer-widget';
 import { RegionDetailDataSource, type RegionDetailNode } from '../api/RegionDetailDataSource';
 import type { RegionLocale } from './RegionItemViewModel';
 
+// Keep this explainer copy aligned with src/pages/Regions/api/RegionDetail.graphql.
 const REGION_DETAIL_QUERY = `query RegionDetail($id: String!) {
   regions(id: $id) {
     id
@@ -115,7 +116,6 @@ export class RegionDetailViewModel implements IViewModel {
       },
       variables: {
         id: this.id,
-        locale: this.locale,
       },
       responseSample: this.responseSample,
       subgraphsInUse: ['data'],
@@ -163,7 +163,7 @@ export class RegionDetailViewModel implements IViewModel {
     return {
       id: this.item.id,
       climate: this.item.data.climate,
-      name: this.item.data.name[this.locale],
+      name: this.item.data.name,
       publishedAt: this.item.publishedAt,
       backendFields: 'unavailable until backend RegionsNode fields are composed',
     };
