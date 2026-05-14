@@ -201,6 +201,8 @@ replace them.
   only after at least two real page/widget consumers use the same behavior.
   Export them from `src/shared/ui/index.ts`; do not add `index.ts` inside the
   component folder itself.
+- Shared layout components accept page/widget content as slots. `shared` must
+  not import `pages` or `widgets`.
 
 ## Data Fetching
 

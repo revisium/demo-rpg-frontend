@@ -1,9 +1,15 @@
 import { Box, SimpleGrid, Skeleton, Stack } from '@chakra-ui/react';
 
-export function ClassesSkeleton() {
+interface CatalogSkeletonProps {
+  readonly ariaLabel: string;
+  readonly columns: Record<string, number>;
+  readonly itemCount: number;
+}
+
+export function CatalogSkeleton({ ariaLabel, columns, itemCount }: CatalogSkeletonProps) {
   return (
-    <SimpleGrid aria-label="Loading classes" columns={{ base: 1, lg: 2 }} gap="4">
-      {Array.from({ length: 4 }, (_, index) => (
+    <SimpleGrid aria-label={ariaLabel} columns={columns} gap="4">
+      {Array.from({ length: itemCount }, (_, index) => (
         <Stack
           bg="white"
           borderColor="gray.200"
