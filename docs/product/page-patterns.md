@@ -11,6 +11,9 @@ requirements, but should not silently weaken these patterns.
 - Footer chip links to `/about` and shows subgraph composition in compact text.
 - Global locale switcher is visible in the shell once localization is implemented.
 - Shell must be SSR-rendered and usable before hydration.
+- The shell follows the Dark Tactical Atlas direction from the design system:
+  dark midnight surface, cyan active state, minimal one-tone or two-tone icons,
+  and no gold/yellow system accents.
 
 ## Stub Route Pattern
 
@@ -53,6 +56,9 @@ Functional blocks:
 Rules:
 
 - Catalog cards link to detail pages when a detail route exists.
+- Image-led catalogs, including `/regions`, use dark atlas cards with a stable
+  image area, a separate data area, climate/source chips, and a cyan hover or
+  focus border.
 - Filtering UI must update a JSON payload preview before the request fires.
 - Sorting controls must map to explicit `orderBy` JSON.
 - Pagination must expose the active cursor in the Explainer Widget variables.
@@ -76,6 +82,8 @@ Functional blocks:
 Rules:
 
 - Every rendered field must come from the query or a documented derived display helper.
+- Detail headers may use a strong art panel or atlas hero only when the
+  underlying entity owns meaningful art, map, file, or generated visual context.
 - FK fields link to the referenced row in the app when a route exists and to
   `cloud.revisium.io` from the Explainer Widget.
 - Formula fields are labelled as computed output, not as hand-authored values.
@@ -136,22 +144,22 @@ Rules:
 
 Every data page defines these states:
 
-| State | Requirement |
-|---|---|
-| Initial SSR | Render meaningful shell, heading, and widget summary if possible. |
-| Loading | Keep layout stable; do not blank the whole page during refresh. |
-| Loaded | Render data, actions, and Explainer Widget response sample. |
-| Empty | Explain no rows matched and provide a reset or back action. |
-| Error | Name the failed service when possible; no raw stack trace by default. |
-| Not found | Detail pages show a route-specific missing-row message. |
+| State       | Requirement                                                           |
+| ----------- | --------------------------------------------------------------------- |
+| Initial SSR | Render meaningful shell, heading, and widget summary if possible.     |
+| Loading     | Keep layout stable; do not blank the whole page during refresh.       |
+| Loaded      | Render data, actions, and Explainer Widget response sample.           |
+| Empty       | Explain no rows matched and provide a reset or back action.           |
+| Error       | Name the failed service when possible; no raw stack trace by default. |
+| Not found   | Detail pages show a route-specific missing-row message.               |
 
 ## Responsive Pattern
 
-| Breakpoint | Layout |
-|---|---|
-| Phone `<= 480px` | Single column, widget accordion header above the fold, filters as bottom sheet, cards full-width. |
-| Tablet `481px-1023px` | Two-column layout where content and widget are both visible. |
-| Desktop `>= 1024px` | Content grid/table with sticky right-side widget up to `420px` wide. |
+| Breakpoint            | Layout                                                                                            |
+| --------------------- | ------------------------------------------------------------------------------------------------- |
+| Phone `<= 480px`      | Single column, widget accordion header above the fold, filters as bottom sheet, cards full-width. |
+| Tablet `481px-1023px` | Two-column layout where content and widget are both visible.                                      |
+| Desktop `>= 1024px`   | Content grid/table with sticky right-side widget up to `420px` wide.                              |
 
 No horizontal page scroll is allowed. Code panels and JSON panels may scroll
 inside their own containers.
