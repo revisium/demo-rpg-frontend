@@ -1,3 +1,5 @@
-import { createPlaceholderRoute } from 'src/app/route-stubs/createPlaceholderRoute';
+import { HomePage } from 'src/pages/Home';
 
-export default createPlaceholderRoute('home');
+export default function HomeRoute() {
+  return <HomePage />;
+}
