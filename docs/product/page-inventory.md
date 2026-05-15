@@ -20,7 +20,7 @@ routes the frontend team is expected to build unless this document changes first
 
 | Route | Spec | Data sources | Primary capability | Status |
 |---|---|---|---|---|
-| `/` | [home](./pages/home/README.md) | `cms.landing_hero`, `cms.landing_features`, `cms.landing_testimonials`, optional `data.news` | CMS-driven landing, 80/20 message, capability navigation | Draft |
+| `/` | [home](./pages/home/README.md) | committed fallback copy now; planned `cms.landing_hero`, `cms.landing_features`, `cms.landing_testimonials`, optional `data.news` | CMS-driven landing, 80/20 message, capability navigation | In delivery |
 | `/about` | [about](./pages/about/README.md) | messaging docs + static architecture content | Long-form architecture and "what Revisium did vs what we wrote" | Draft |
 | `/regions` | [regions](./pages/regions/README.md) | `data.regions` | Reference catalog, localized strings, enum, totalCount, pagination | In delivery |
 | `/regions/[id]` | [regions-id](./pages/regions-id/README.md) | `data.regions` + planned backend `RegionsNode` fields | Federation reference detail shell | In delivery |

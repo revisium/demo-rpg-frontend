@@ -3,7 +3,7 @@
 | Field | Value |
 |---|---|
 | Route | `/` |
-| Status | Draft |
+| Status | In delivery |
 | Pattern | Narrative + CMS landing |
 | Primary capability | CMS-driven landing, 80/20 messaging, capability navigation |
 
@@ -25,7 +25,7 @@ the fastest proof page for each major capability.
 | Hero | Brand name, 80/20 subtitle, primary CTA to `/regions`, secondary CTA to `/about`. |
 | Capability map | Cards for schema-first content, federation, branching, three APIs, no glue code. |
 | Demo paths | Short route groups: browse data, inspect formulas/files, compare revisions, read architecture. |
-| Latest news | Shows pinned/latest news once `news` data source exists. |
+| Latest news | Deferred until `news` data source exists. |
 | Source links | Links to frontend, backend, docs, and cloud projects. |
 | Optional Explainer Widget | Required beside live CMS/data sections once they fetch from Revisium. |
 
@@ -57,6 +57,9 @@ the fastest proof page for each major capability.
 
 ## Data Contract
 
+Current implementation uses committed fallback copy only. Live CMS sources remain
+the target contract and must replace fallback copy once the tables are available.
+
 | Source | Fields |
 |---|---|
 | `cms.landing_hero` | `title`, `subtitle`, `cta`, `secondary_cta`, optional `bg_image`. |
@@ -80,17 +83,21 @@ the fastest proof page for each major capability.
 
 ## Architecture Notes
 
-- Page slice: `src/pages/Home/` when home leaves the route module.
-- The current `_index.tsx` shell is temporary and should be replaced by MVVM once CMS data is fetched.
+- Page slice: `src/pages/Home/`.
+- `HomeViewModel` owns committed fallback navigation and messaging while CMS data
+  is pending.
+- The CMS DataSource should be added before the page is marked `Done`.
 - Do not hardcode CMS-managed feature copy after CMS tables are ready.
 
 ## Acceptance Criteria
 
-- [ ] Visitor can reach a proof page for every headline capability from the home page.
+- [x] Visitor can reach a proof page for every headline capability from the home page.
 - [ ] Landing copy matches the messaging source.
-- [ ] CMS failure does not prevent route navigation.
+- [x] CMS absence does not prevent route navigation.
 - [ ] Page works on phone, tablet, and desktop.
 
 ## Open Questions
 
 - Confirm whether latest news is `data.news` or a CMS table.
+- Confirm CMS table availability and messaging source content before replacing
+  fallback copy.
