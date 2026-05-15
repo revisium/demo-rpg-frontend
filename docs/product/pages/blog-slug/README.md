@@ -70,6 +70,7 @@ author reference.
 ## Responsive Rules
 
 - Phone: article single-column with a floating widget trigger.
+- Tablet: readable article column with a floating widget trigger.
 - Desktop: readable article width with a floating widget trigger.
 
 ## Architecture Notes
