@@ -49,7 +49,7 @@ Functional blocks:
 - result summary with visible count and active filters;
 - result grid or table;
 - pagination / load-more control when supported by the API;
-- Explainer Widget side panel or mobile accordion;
+- Explainer Widget floating trigger with overlay panel;
 - empty state with reset action;
 - service-aware error state.
 
@@ -155,11 +155,11 @@ Every data page defines these states:
 
 ## Responsive Pattern
 
-| Breakpoint            | Layout                                                                                            |
-| --------------------- | ------------------------------------------------------------------------------------------------- |
-| Phone `<= 480px`      | Single column, widget accordion header above the fold, filters as bottom sheet, cards full-width. |
-| Tablet `481px-1023px` | Two-column layout where content and widget are both visible.                                      |
-| Desktop `>= 1024px`   | Content grid/table with sticky right-side widget up to `420px` wide.                              |
+| Breakpoint            | Layout                                                                           |
+| --------------------- | -------------------------------------------------------------------------------- |
+| Phone `<= 480px`      | Single column, floating widget trigger, filter bottom sheet, 16px page gutters.  |
+| Tablet `481px-1023px` | Main content column with floating widget trigger, 24px gutters.                  |
+| Desktop `>= 1024px`   | Main content, floating widget trigger, max content width `1440px`, 32px gutters. |
 
 No horizontal page scroll is allowed. Code panels and JSON panels may scroll
 inside their own containers.

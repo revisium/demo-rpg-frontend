@@ -25,8 +25,10 @@ Core rules:
 - Use teal and emerald as secondary accents for data-positive states.
 - Do not use gold/yellow as a system color. It may appear only as a tiny
   content-specific rarity or illustration detail.
-- Avoid beige, parchment, ornate frames, filigree, decorative fantasy borders,
-  purple-blue gradient blobs, and one-note color themes.
+- Avoid beige/parchment treatments, ornate frames, filigree, decorative fantasy
+  borders, purple-blue gradient blobs, and one-note color themes in app chrome.
+  Content art and generated maps may use parchment-inspired source material
+  when the asset requires it, but UI surfaces must stay dark tactical atlas.
 - Icons are minimal one-tone or two-tone glyphs. Prefer simple line or filled
   silhouettes over detailed illustrations for UI chrome.
 
@@ -56,7 +58,7 @@ The top nav remains pinned to the top edge while pages scroll so route changes
 and primary navigation stay available on long catalog/detail pages.
 The page keeps native scrolling and browser scrollbar affordance. Internal code
 and JSON panels may expose their own scroll affordance when needed.
-The app shell uses a dark translucent surface over the page atlas background.
+The app shell uses a dark midnight surface over the page atlas background.
 Active navigation uses a cyan underline or outlined pill, with no layout shift
 between active and inactive states.
 
@@ -170,7 +172,7 @@ world feel present while the product UI remains the first read.
 ## Data Visual Treatment
 
 - Catalogs use cards when imagery or summaries matter; tables when comparison matters.
-- Region catalogs use atlas cards: landscape image first, data block second,
+- Region catalogs use atlas cards: stable image area, a separate data area,
   climate glyph and source chip visible without opening the detail page.
 - Detail pages group fields by meaning: identity, schema fields, computed fields, related rows, files.
 - File previews reserve stable aspect ratios before images load.

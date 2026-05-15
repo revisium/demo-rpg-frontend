@@ -69,8 +69,8 @@ author reference.
 
 ## Responsive Rules
 
-- Phone: article single-column; widget accordion after intro.
-- Desktop: readable article width plus widget side panel.
+- Phone: article single-column with a floating widget trigger.
+- Desktop: readable article width with a floating widget trigger.
 
 ## Architecture Notes
 
