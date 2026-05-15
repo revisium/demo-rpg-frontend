@@ -69,9 +69,9 @@ federated entity after region detail.
 
 ## Responsive Rules
 
-- Phone: metadata above body; widget accordion after header.
-- Tablet: readable article column with the widget visible beside it.
-- Desktop: article readable width with widget side panel.
+- Phone: metadata above body with a floating widget trigger.
+- Tablet: readable article column with a floating widget trigger.
+- Desktop: article readable width with a floating widget trigger.
 
 ## Architecture Notes
 

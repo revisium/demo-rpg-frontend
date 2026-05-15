@@ -74,9 +74,9 @@ simple Revisium-generated list pages.
 
 ## Responsive Rules
 
-- Phone: widget accordion directly below header; cards single-column.
-- Tablet: list left, widget right.
-- Desktop: cards in dense grid/table; widget sticky right.
+- Phone: single column, floating widget trigger, filter bottom sheet, 16px page gutters.
+- Tablet: main content column with floating widget trigger and 24px gutters.
+- Desktop: cards in dense grid/table, floating widget trigger, max content width `1440px`, 32px gutters.
 - Generated climate landscapes add quick visual scanning, but the climate text badge
   remains the source of meaning.
 - Region cards use a restrained hover/focus lift, accent border, and subtle
