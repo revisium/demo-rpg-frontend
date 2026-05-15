@@ -1,25 +1,13 @@
 import { Badge, Box, Button, Heading, Text } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router';
 
-import type { HomeCapability } from '../../model/HomeViewModel';
+import type { HomeCapabilityItemViewModel } from '../../model/HomeCapabilityItemViewModel';
 
 interface HomeCapabilityCardProps {
-  readonly capability: HomeCapability;
+  readonly item: HomeCapabilityItemViewModel;
 }
 
-const statusLabel: Record<HomeCapability['status'], string> = {
-  blocked: 'blocked',
-  live: 'live',
-  next: 'next',
-};
-
-const statusPalette: Record<HomeCapability['status'], 'gray' | 'green' | 'purple'> = {
-  blocked: 'gray',
-  live: 'green',
-  next: 'purple',
-};
-
-export function HomeCapabilityCard({ capability }: HomeCapabilityCardProps) {
+export function HomeCapabilityCard({ item }: HomeCapabilityCardProps) {
   return (
     <Box
       as="article"
@@ -46,17 +34,17 @@ export function HomeCapabilityCard({ capability }: HomeCapabilityCardProps) {
       }}
     >
       <Box>
-        <Badge colorPalette={statusPalette[capability.status]} variant="subtle">
-          {statusLabel[capability.status]}
+        <Badge colorPalette={item.statusPalette} variant="subtle">
+          {item.statusLabel}
         </Badge>
         <Text color="blue.700" fontSize="sm" fontWeight="bold" mt="4">
-          {capability.label}
+          {item.label}
         </Text>
         <Heading as="h3" fontSize="xl" lineHeight="1.2" mt="2">
-          {capability.title}
+          {item.title}
         </Heading>
         <Text color="gray.600" lineHeight="1.55" mt="3">
-          {capability.description}
+          {item.description}
         </Text>
       </Box>
 
@@ -64,12 +52,13 @@ export function HomeCapabilityCard({ capability }: HomeCapabilityCardProps) {
         asChild
         alignSelf="end"
         colorPalette="green"
-        size="sm"
+        minH="11"
+        size="md"
         variant="outline"
         w="fit-content"
         _groupHover={{ bg: 'green.600', color: 'white', transform: 'translateX(2px)' }}
       >
-        <RouterLink to={capability.href}>Open proof</RouterLink>
+        <RouterLink to={item.href}>Open proof</RouterLink>
       </Button>
     </Box>
   );

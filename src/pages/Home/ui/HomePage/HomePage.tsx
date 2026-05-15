@@ -15,11 +15,11 @@ export const HomePage = observer(() => {
   return (
     <Box as="main" color="gray.900" overflowX="clip" px={{ base: '4', md: '6', lg: '8' }} py="8">
       <Stack gap={{ base: '10', lg: '12' }} maxW="1440px" mx="auto" w="full">
-        <HomeHero />
-        <HomeProofStrip />
-        <HomeCapabilityGrid capabilities={vm.capabilities} />
-        <HomeDemoPaths paths={vm.demoPaths} />
-        <HomeSourceLinks links={vm.sourceLinks} />
+        <HomeHero vm={vm} />
+        <HomeProofStrip vm={vm} />
+        <HomeCapabilityGrid vm={vm} />
+        <HomeDemoPaths vm={vm} />
+        <HomeSourceLinks vm={vm} />
       </Stack>
     </Box>
   );
