@@ -17,7 +17,15 @@ export function HomeSourceLinkCard({ item }: HomeSourceLinkCardProps) {
       p="5"
     >
       <Heading as="h3" fontSize="lg">
-        <Link color="green.800" href={item.href} rel={item.rel} target={item.target}>
+        <Link
+          alignItems="center"
+          color="green.800"
+          display="inline-flex"
+          href={item.href}
+          minH="11"
+          rel={item.rel}
+          target={item.target}
+        >
           {item.title}
         </Link>
       </Heading>

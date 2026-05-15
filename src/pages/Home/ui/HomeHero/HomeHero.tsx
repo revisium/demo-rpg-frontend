@@ -1,4 +1,5 @@
 import { Badge, Box, Button, Flex, Heading, Link, Stack, Text } from '@chakra-ui/react';
+import { observer } from 'mobx-react-lite';
 import { Link as RouterLink } from 'react-router';
 
 import type { HomeViewModel } from '../../model/HomeViewModel';
@@ -7,7 +8,7 @@ interface HomeHeroProps {
   readonly vm: HomeViewModel;
 }
 
-export function HomeHero({ vm }: HomeHeroProps) {
+export const HomeHero = observer(({ vm }: HomeHeroProps) => {
   const { hero } = vm;
 
   return (
@@ -48,4 +49,4 @@ export function HomeHero({ vm }: HomeHeroProps) {
       </Stack>
     </Box>
   );
-}
+});

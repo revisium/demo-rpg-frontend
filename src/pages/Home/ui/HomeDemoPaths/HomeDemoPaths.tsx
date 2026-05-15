@@ -1,4 +1,5 @@
 import { Box, Button, Flex, Heading, SimpleGrid, Text } from '@chakra-ui/react';
+import { observer } from 'mobx-react-lite';
 import { Link as RouterLink } from 'react-router';
 
 import type { HomeViewModel } from '../../model/HomeViewModel';
@@ -8,7 +9,7 @@ interface HomeDemoPathsProps {
   readonly vm: HomeViewModel;
 }
 
-export function HomeDemoPaths({ vm }: HomeDemoPathsProps) {
+export const HomeDemoPaths = observer(({ vm }: HomeDemoPathsProps) => {
   const { demoPathsCta, demoPathsSection } = vm;
 
   return (
@@ -34,4 +35,4 @@ export function HomeDemoPaths({ vm }: HomeDemoPathsProps) {
       </SimpleGrid>
     </Box>
   );
-}
+});

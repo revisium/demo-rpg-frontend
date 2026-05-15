@@ -1,4 +1,5 @@
 import { Box, Heading, SimpleGrid } from '@chakra-ui/react';
+import { observer } from 'mobx-react-lite';
 
 import type { HomeViewModel } from '../../model/HomeViewModel';
 import { HomeSourceLinkCard } from '../HomeSourceLinkCard/HomeSourceLinkCard';
@@ -7,7 +8,7 @@ interface HomeSourceLinksProps {
   readonly vm: HomeViewModel;
 }
 
-export function HomeSourceLinks({ vm }: HomeSourceLinksProps) {
+export const HomeSourceLinks = observer(({ vm }: HomeSourceLinksProps) => {
   return (
     <Box as="section" aria-labelledby="home-source-links-title">
       <Heading as="h2" fontSize="2xl" id="home-source-links-title">
@@ -20,4 +21,4 @@ export function HomeSourceLinks({ vm }: HomeSourceLinksProps) {
       </SimpleGrid>
     </Box>
   );
-}
+});

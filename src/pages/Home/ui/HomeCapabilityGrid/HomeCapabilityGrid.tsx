@@ -1,4 +1,5 @@
 import { Box, Heading, SimpleGrid, Text } from '@chakra-ui/react';
+import { observer } from 'mobx-react-lite';
 
 import type { HomeViewModel } from '../../model/HomeViewModel';
 import { HomeCapabilityCard } from '../HomeCapabilityCard/HomeCapabilityCard';
@@ -7,7 +8,7 @@ interface HomeCapabilityGridProps {
   readonly vm: HomeViewModel;
 }
 
-export function HomeCapabilityGrid({ vm }: HomeCapabilityGridProps) {
+export const HomeCapabilityGrid = observer(({ vm }: HomeCapabilityGridProps) => {
   const { capabilitySection } = vm;
 
   return (
@@ -25,4 +26,4 @@ export function HomeCapabilityGrid({ vm }: HomeCapabilityGridProps) {
       </SimpleGrid>
     </Box>
   );
-}
+});

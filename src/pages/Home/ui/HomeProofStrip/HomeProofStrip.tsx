@@ -1,4 +1,5 @@
 import { Box, SimpleGrid } from '@chakra-ui/react';
+import { observer } from 'mobx-react-lite';
 
 import type { HomeViewModel } from '../../model/HomeViewModel';
 import { HomeProofStripItem } from '../HomeProofStripItem/HomeProofStripItem';
@@ -7,7 +8,7 @@ interface HomeProofStripProps {
   readonly vm: HomeViewModel;
 }
 
-export function HomeProofStrip({ vm }: HomeProofStripProps) {
+export const HomeProofStrip = observer(({ vm }: HomeProofStripProps) => {
   return (
     <Box
       aria-label="Revisium delivery path"
@@ -24,4 +25,4 @@ export function HomeProofStrip({ vm }: HomeProofStripProps) {
       </SimpleGrid>
     </Box>
   );
-}
+});
