@@ -59,9 +59,9 @@ simple Revisium-generated list pages.
 
 ## Data Contract
 
-| Source         | Fields                                                                                                                                                                                              |
-| -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `data.regions` | `id`, `data.name.{locale}`, `data.description.{locale}`, `data.cover_image.{fileId,url,hash,fileName,mimeType,width,height}`, `data.climate`, `createdAt`, `publishedAt`, `totalCount`, `pageInfo`. |
+| Source         | Fields                                                                                                                                                                                             |
+| -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `data.regions` | `id`, `data.name.{locale}`, `data.description.{locale}`, `data.cover_image.{fileId,url,hash,fileName,mimeType,width,height}`, `data.climate`, `createdAt`, `publishedAt`, `totalCount`, `pageInfo` |
 
 ## Explainer Widget
 

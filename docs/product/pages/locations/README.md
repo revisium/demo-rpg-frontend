@@ -53,10 +53,10 @@ file fields.
 
 ## Data Contract
 
-| Source           | Fields                                                                                                            |
-| ---------------- | ----------------------------------------------------------------------------------------------------------------- |
-| `data.locations` | id, localized name/description, `region_id`, `map`, `gallery[].{fileId,url,hash,fileName,mimeType,width,height}`. |
-| `data.regions`   | region labels.                                                                                                    |
+| Source           | Fields                                                                                                                                                            |
+| ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `data.locations` | id, localized name/description, `region_id`, `map.{fileId,url,hash,fileName,mimeType,width,height}`, `gallery[].{fileId,url,hash,fileName,mimeType,width,height}` |
+| `data.regions`   | region labels.                                                                                                                                                    |
 
 ## Explainer Widget
 
@@ -78,6 +78,7 @@ file fields.
 
 - [ ] Region labels are query-driven.
 - [ ] Map thumbnails do not cause layout shift.
+- [ ] Each location card shows gallery preview/count sourced from `gallery[]`.
 - [ ] Gallery metadata is visible in the widget response sample.
 
 ## Open Questions

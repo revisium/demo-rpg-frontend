@@ -55,10 +55,10 @@ and a region FK.
 
 ## Data Contract
 
-| Source           | Fields                                                                                                                                           |
-| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `data.locations` | id, name, description, region_id, map file object including width/height/url/hash, `gallery[].{fileId,url,hash,fileName,mimeType,width,height}`. |
-| `data.regions`   | region label and link.                                                                                                                           |
+| Source           | Fields                                                                                                                                                 |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `data.locations` | id, name, description, region_id, `map.{fileId,url,hash,fileName,mimeType,width,height}`, `gallery[].{fileId,url,hash,fileName,mimeType,width,height}` |
+| `data.regions`   | region label and link.                                                                                                                                 |
 
 ## Explainer Widget
 

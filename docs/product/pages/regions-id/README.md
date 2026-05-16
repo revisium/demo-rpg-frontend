@@ -56,10 +56,10 @@ Federation once backend enrichment fields are present in the composed schema.
 
 ## Data Contract
 
-| Source                | Fields                                                                                                                      |
-| --------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| `data.regions`        | `id`, `data.name`, `data.description`, `data.cover_image.{fileId,url,hash,fileName,mimeType,width,height}`, `data.climate`. |
-| `backend.RegionsNode` | Blocked until `likes`, `viewCount`, `comments` or approved equivalents appear in the composed schema.                       |
+| Source                | Fields                                                                                                                     |
+| --------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `data.regions`        | `id`, `data.name`, `data.description`, `data.cover_image.{fileId,url,hash,fileName,mimeType,width,height}`, `data.climate` |
+| `backend.RegionsNode` | Blocked until `likes`, `viewCount`, `comments` or approved equivalents appear in the composed schema.                      |
 
 ## Explainer Widget
 
