@@ -1,10 +1,10 @@
 # Classes Catalog
 
-| Field | Value |
-|---|---|
-| Route | `/classes` |
-| Status | In delivery |
-| Pattern | Small reference catalog |
+| Field              | Value                                             |
+| ------------------ | ------------------------------------------------- |
+| Route              | `/classes`                                        |
+| Status             | In delivery                                       |
+| Pattern            | Small reference catalog                           |
 | Primary capability | Enum-like reference table with required icon file |
 
 ## Purpose
@@ -19,40 +19,40 @@ icon file on every row.
 
 ## Functional Blocks
 
-| Block | Requirement |
-|---|---|
-| Header | Explain class table as FK target. |
-| Class list | Icon, name, description, role/archetype fields if present. |
-| Related heroes | Optional count or link to heroes filtered by class. |
-| Explainer Widget | Required. |
+| Block            | Requirement                                                |
+| ---------------- | ---------------------------------------------------------- |
+| Header           | Explain class table as FK target.                          |
+| Class list       | Icon, name, description, role/archetype fields if present. |
+| Related heroes   | Optional count or link to heroes filtered by class.        |
+| Explainer Widget | Required.                                                  |
 
 ## Primary Actions
 
-| Action | Result |
-|---|---|
-| Filter heroes by class | Navigate to `/heroes` with class filter if supported. |
+| Action                        | Result                                                  |
+| ----------------------------- | ------------------------------------------------------- |
+| Filter heroes by class        | Navigate to `/heroes` with class filter if supported.   |
 | Open Revisium cloud deep-link | Open the selected `data.classes` row in Revisium Cloud. |
 
 ## States
 
-| State | Requirement |
-|---|---|
-| Loading | Skeleton list. |
-| Loaded | Reference rows render. |
-| Empty | Explain missing seed data. |
-| Error | Retry. |
+| State   | Requirement                |
+| ------- | -------------------------- |
+| Loading | Skeleton list.             |
+| Loaded  | Reference rows render.     |
+| Empty   | Explain missing seed data. |
+| Error   | Retry.                     |
 
 ## Transitions
 
-| From | Trigger | To |
-|---|---|---|
-| Catalog loaded | Filter heroes by class | `/heroes` with class filter |
+| From           | Trigger                        | To                          |
+| -------------- | ------------------------------ | --------------------------- |
+| Catalog loaded | Filter heroes by class         | `/heroes` with class filter |
 | Catalog loaded | Revisium cloud deep-link click | External Revisium Cloud row |
 
 ## Data Contract
 
-| Source | Fields |
-|---|---|
+| Source         | Fields                                                                                                                                                    |
+| -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `data.classes` | `id`, localized `name`/`description`, `icon.{fileId,url,hash,fileName,mimeType,width,height}`, `primary_stat`, `base_hp`, `hp_per_level`, `mp_per_level`. |
 
 ## Explainer Widget

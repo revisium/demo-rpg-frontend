@@ -1,10 +1,10 @@
 # Location Detail
 
-| Field | Value |
-|---|---|
-| Route | `/locations/[id]` |
-| Status | Draft |
-| Pattern | Detail |
+| Field              | Value                                                  |
+| ------------------ | ------------------------------------------------------ |
+| Route              | `/locations/[id]`                                      |
+| Status             | Draft                                                  |
+| Pattern            | Detail                                                 |
 | Primary capability | Large map file, dimensions metadata, and gallery array |
 
 ## Purpose
@@ -19,46 +19,46 @@ and a region FK.
 
 ## Functional Blocks
 
-| Block | Requirement |
-|---|---|
-| Header | Location name and region. |
-| Map | Large map image with dimensions metadata. |
-| Gallery | Required `gallery[]` images with stable thumbnails and file metadata. |
-| Description | Localized description. |
-| Related content | Optional quests/NPCs in this location. |
-| Explainer Widget | Required. |
+| Block            | Requirement                                                           |
+| ---------------- | --------------------------------------------------------------------- |
+| Header           | Location name and region.                                             |
+| Map              | Large map image with dimensions metadata.                             |
+| Gallery          | Required `gallery[]` images with stable thumbnails and file metadata. |
+| Description      | Localized description.                                                |
+| Related content  | Optional quests/NPCs in this location.                                |
+| Explainer Widget | Required.                                                             |
 
 ## Primary Actions
 
-| Action | Result |
-|---|---|
-| Back to locations | Navigate to `/locations`. |
-| Open region | Navigate to `/regions/[id]`. |
-| Open cloud row | Open location row. |
+| Action            | Result                       |
+| ----------------- | ---------------------------- |
+| Back to locations | Navigate to `/locations`.    |
+| Open region       | Navigate to `/regions/[id]`. |
+| Open cloud row    | Open location row.           |
 
 ## States
 
-| State | Requirement |
-|---|---|
-| Loading | Stable map area. |
-| Loaded | Map and metadata render. |
-| Not found | Back link. |
-| Error | Retry. |
+| State     | Requirement              |
+| --------- | ------------------------ |
+| Loading   | Stable map area.         |
+| Loaded    | Map and metadata render. |
+| Not found | Back link.               |
+| Error     | Retry.                   |
 
 ## Transitions
 
-| From | Trigger | To |
-|---|---|---|
-| Locations catalog | Open location | Detail loading |
-| Detail loaded | Open region | `/regions/[id]` |
-| Detail loaded | Back action | `/locations` |
+| From              | Trigger       | To              |
+| ----------------- | ------------- | --------------- |
+| Locations catalog | Open location | Detail loading  |
+| Detail loaded     | Open region   | `/regions/[id]` |
+| Detail loaded     | Back action   | `/locations`    |
 
 ## Data Contract
 
-| Source | Fields |
-|---|---|
-| `data.locations` | id, name, description, region_id, map file object including width/height/url/hash, `gallery[]` file objects. |
-| `data.regions` | region label and link. |
+| Source           | Fields                                                                                                                                           |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `data.locations` | id, name, description, region_id, map file object including width/height/url/hash, `gallery[].{fileId,url,hash,fileName,mimeType,width,height}`. |
+| `data.regions`   | region label and link.                                                                                                                           |
 
 ## Explainer Widget
 

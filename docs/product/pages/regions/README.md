@@ -1,10 +1,10 @@
 # Regions Catalog
 
-| Field | Value |
-|---|---|
-| Route | `/regions` |
-| Status | In delivery |
-| Pattern | Reference catalog |
+| Field              | Value                                                                                     |
+| ------------------ | ----------------------------------------------------------------------------------------- |
+| Route              | `/regions`                                                                                |
+| Status             | In delivery                                                                               |
+| Pattern            | Reference catalog                                                                         |
 | Primary capability | Nested JSON objects, localized strings, enum, required file field, totalCount, pagination |
 
 ## Purpose
@@ -20,47 +20,47 @@ simple Revisium-generated list pages.
 
 ## Functional Blocks
 
-| Block | Requirement |
-|---|---|
-| Header | Title, short explanation, chips for `data.regions`, enum, localized strings, file field. |
-| Result summary | Shows visible count and `totalCount`. |
-| Climate filter | Server-side JSON filter using `data.path = ["climate"]`. |
-| Region list | Cards with name, description, climate, `cover_image` thumbnail, and detail link. |
-| Pagination | Shows connection `pageInfo`; load-more fetches the next cursor. |
-| Explainer Widget | Required; shows `Regions` operation, variables, response sample, cloud links. |
+| Block            | Requirement                                                                              |
+| ---------------- | ---------------------------------------------------------------------------------------- |
+| Header           | Title, short explanation, chips for `data.regions`, enum, localized strings, file field. |
+| Result summary   | Shows visible count and `totalCount`.                                                    |
+| Climate filter   | Server-side JSON filter using `data.path = ["climate"]`.                                 |
+| Region list      | Cards with name, description, climate, `cover_image` thumbnail, and detail link.         |
+| Pagination       | Shows connection `pageInfo`; load-more fetches the next cursor.                          |
+| Explainer Widget | Required; shows `Regions` operation, variables, response sample, cloud links.            |
 
 ## Primary Actions
 
-| Action | Result |
-|---|---|
-| Change locale | Re-query with selected localized sub-fields or update selection according to query design. |
-| Filter climate | Updates filter payload preview and re-queries the connection with a JSON filter. |
-| Load more | Fetches next cursor and updates widget variables. |
-| Open region | Navigate to `/regions/[id]`. |
-| View in cloud | Opens `demo-rpg-data` regions table. |
+| Action         | Result                                                                                     |
+| -------------- | ------------------------------------------------------------------------------------------ |
+| Change locale  | Re-query with selected localized sub-fields or update selection according to query design. |
+| Filter climate | Updates filter payload preview and re-queries the connection with a JSON filter.           |
+| Load more      | Fetches next cursor and updates widget variables.                                          |
+| Open region    | Navigate to `/regions/[id]`.                                                               |
+| View in cloud  | Opens `demo-rpg-data` regions table.                                                       |
 
 ## States
 
-| State | Requirement |
-|---|---|
-| Loading | Show stable list skeleton and widget skeleton. |
-| Loaded | Show cards, count, and widget response. |
-| Empty | Show "No regions match this filter" plus reset. |
-| Error | Name GraphQL/router failure where possible and keep retry action. |
+| State   | Requirement                                                       |
+| ------- | ----------------------------------------------------------------- |
+| Loading | Show stable list skeleton and widget skeleton.                    |
+| Loaded  | Show cards, count, and widget response.                           |
+| Empty   | Show "No regions match this filter" plus reset.                   |
+| Error   | Name GraphQL/router failure where possible and keep retry action. |
 
 ## Transitions
 
-| From | Trigger | To |
-|---|---|---|
-| Loaded | Locale change | Refreshing with previous cards preserved |
-| Loaded | Filter change | JSON preview updates and the list refreshes with server-side filter variables |
-| Preview updated | Apply/debounce | Refreshing list |
-| Loaded | Load more | Appended results |
+| From            | Trigger        | To                                                                            |
+| --------------- | -------------- | ----------------------------------------------------------------------------- |
+| Loaded          | Locale change  | Refreshing with previous cards preserved                                      |
+| Loaded          | Filter change  | JSON preview updates and the list refreshes with server-side filter variables |
+| Preview updated | Apply/debounce | Refreshing list                                                               |
+| Loaded          | Load more      | Appended results                                                              |
 
 ## Data Contract
 
-| Source | Fields |
-|---|---|
+| Source         | Fields                                                                                                                                                                                              |
+| -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `data.regions` | `id`, `data.name.{locale}`, `data.description.{locale}`, `data.cover_image.{fileId,url,hash,fileName,mimeType,width,height}`, `data.climate`, `createdAt`, `publishedAt`, `totalCount`, `pageInfo`. |
 
 ## Explainer Widget

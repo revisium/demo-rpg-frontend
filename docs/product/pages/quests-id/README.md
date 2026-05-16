@@ -1,10 +1,10 @@
 # Quest Detail
 
-| Field | Value |
-|---|---|
-| Route | `/quests/[id]` |
-| Status | Draft |
-| Pattern | Detail |
+| Field              | Value                                                |
+| ------------------ | ---------------------------------------------------- |
+| Route              | `/quests/[id]`                                       |
+| Status             | Draft                                                |
+| Pattern            | Detail                                               |
 | Primary capability | Two-level embedded arrays, step images, and formulas |
 
 ## Purpose
@@ -20,47 +20,47 @@ across both levels.
 
 ## Functional Blocks
 
-| Block | Requirement |
-|---|---|
-| Header | Quest title, level, repeatable flag. |
-| Context | NPC giver and location. |
-| Steps timeline | Ordered `steps[]` with required `steps[].image`. |
-| Rewards | Nested `steps[].rewards[]` with item/XP details. |
-| Formula panel | `total_xp`, `total_loot_xp`, `step_count`. |
-| Explainer Widget | Required with nested-array explanation. |
+| Block            | Requirement                                      |
+| ---------------- | ------------------------------------------------ |
+| Header           | Quest title, level, repeatable flag.             |
+| Context          | NPC giver and location.                          |
+| Steps timeline   | Ordered `steps[]` with required `steps[].image`. |
+| Rewards          | Nested `steps[].rewards[]` with item/XP details. |
+| Formula panel    | `total_xp`, `total_loot_xp`, `step_count`.       |
+| Explainer Widget | Required with nested-array explanation.          |
 
 ## Primary Actions
 
-| Action | Result |
-|---|---|
-| Back to quests | Navigate to `/quests`. |
+| Action                 | Result                       |
+| ---------------------- | ---------------------------- |
+| Back to quests         | Navigate to `/quests`.       |
 | Open NPC/location/item | Navigate or cloud deep-link. |
-| View schema | Open quest schema. |
+| View schema            | Open quest schema.           |
 
 ## States
 
-| State | Requirement |
-|---|---|
-| Loading | Timeline skeleton. |
-| Loaded | Steps and rewards render in order. |
-| Empty | Quest row exists but has no authored steps or rewards; keep the header and explain the missing content. |
-| Not found | Back link. |
-| Error | Retry. |
+| State     | Requirement                                                                                             |
+| --------- | ------------------------------------------------------------------------------------------------------- |
+| Loading   | Timeline skeleton.                                                                                      |
+| Loaded    | Steps and rewards render in order.                                                                      |
+| Empty     | Quest row exists but has no authored steps or rewards; keep the header and explain the missing content. |
+| Not found | Back link.                                                                                              |
+| Error     | Retry.                                                                                                  |
 
 ## Transitions
 
-| From | Trigger | To |
-|---|---|---|
-| Quests catalog | Open quest | Detail loading |
-| Detail loaded | Open related row | Related route or cloud row |
-| Detail loaded | Back action | `/quests` |
+| From           | Trigger          | To                         |
+| -------------- | ---------------- | -------------------------- |
+| Quests catalog | Open quest       | Detail loading             |
+| Detail loaded  | Open related row | Related route or cloud row |
+| Detail loaded  | Back action      | `/quests`                  |
 
 ## Data Contract
 
-| Source | Fields |
-|---|---|
-| `data.quests` | localized title/summary, `npc_id`, `location_id`, `steps[]`, `steps[].image.{fileId,url,hash,fileName,mimeType,width,height}`, `steps[].rewards[]`, formula fields. |
-| `data.npcs`, `data.locations`, `data.items` | resolved labels and links. |
+| Source                                      | Fields                                                                                                                                                              |
+| ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `data.quests`                               | localized title/summary, `npc_id`, `location_id`, `steps[]`, `steps[].image.{fileId,url,hash,fileName,mimeType,width,height}`, `steps[].rewards[]`, formula fields. |
+| `data.npcs`, `data.locations`, `data.items` | resolved labels and links.                                                                                                                                          |
 
 ## Explainer Widget
 

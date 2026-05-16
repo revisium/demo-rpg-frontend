@@ -1,10 +1,10 @@
 # Locations Catalog
 
-| Field | Value |
-|---|---|
-| Route | `/locations` |
-| Status | Draft |
-| Pattern | Catalog |
+| Field              | Value                                          |
+| ------------------ | ---------------------------------------------- |
+| Route              | `/locations`                                   |
+| Status             | Draft                                          |
+| Pattern            | Catalog                                        |
 | Primary capability | Region FK, map preview, and gallery file array |
 
 ## Purpose
@@ -19,44 +19,44 @@ file fields.
 
 ## Functional Blocks
 
-| Block | Requirement |
-|---|---|
-| Header | Locations purpose and capability chips. |
-| Filters | Region and name. |
-| Location list | Name, region, map thumbnail, gallery count/preview, short description. |
-| Explainer Widget | Required. |
+| Block            | Requirement                                                            |
+| ---------------- | ---------------------------------------------------------------------- |
+| Header           | Locations purpose and capability chips.                                |
+| Filters          | Region and name.                                                       |
+| Location list    | Name, region, map thumbnail, gallery count/preview, short description. |
+| Explainer Widget | Required.                                                              |
 
 ## Primary Actions
 
-| Action | Result |
-|---|---|
-| Filter region | Updates FK equality payload. |
-| Open location | Navigate to `/locations/[id]`. |
-| Open region | Navigate to `/regions/[id]` when available. |
+| Action        | Result                                      |
+| ------------- | ------------------------------------------- |
+| Filter region | Updates FK equality payload.                |
+| Open location | Navigate to `/locations/[id]`.              |
+| Open region   | Navigate to `/regions/[id]` when available. |
 
 ## States
 
-| State | Requirement |
-|---|---|
+| State   | Requirement                 |
+| ------- | --------------------------- |
 | Loading | Map thumbnail placeholders. |
-| Loaded | Cards render locations. |
-| Empty | Reset filters. |
-| Error | Retry. |
+| Loaded  | Cards render locations.     |
+| Empty   | Reset filters.              |
+| Error   | Retry.                      |
 
 ## Transitions
 
-| From | Trigger | To |
-|---|---|---|
+| From           | Trigger       | To                 |
+| -------------- | ------------- | ------------------ |
 | Loaded catalog | Filter region | Refreshing catalog |
-| Loaded catalog | Open location | `/locations/[id]` |
-| Empty | Reset filters | Default catalog |
+| Loaded catalog | Open location | `/locations/[id]`  |
+| Empty          | Reset filters | Default catalog    |
 
 ## Data Contract
 
-| Source | Fields |
-|---|---|
+| Source           | Fields                                                                                                            |
+| ---------------- | ----------------------------------------------------------------------------------------------------------------- |
 | `data.locations` | id, localized name/description, `region_id`, `map`, `gallery[].{fileId,url,hash,fileName,mimeType,width,height}`. |
-| `data.regions` | region labels. |
+| `data.regions`   | region labels.                                                                                                    |
 
 ## Explainer Widget
 
