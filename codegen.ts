@@ -62,6 +62,7 @@ const config: CodegenConfig = {
           './src/__generated__/graphql-request.ts': {
             plugins: ['typescript', 'typescript-operations', 'typescript-graphql-request'],
             config: {
+              onlyOperationTypes: true,
               rawRequest: false,
               skipTypename: true,
               scalars,
