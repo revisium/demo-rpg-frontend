@@ -10,8 +10,8 @@ export function HomeSourceLinkCard({ item }: HomeSourceLinkCardProps) {
   return (
     <Box
       as="article"
-      bg="white"
-      borderColor="gray.200"
+      bg="rgba(18, 24, 32, 0.82)"
+      borderColor="rgba(103, 232, 249, 0.14)"
       borderRadius="md"
       borderWidth="1px"
       p="5"
@@ -19,7 +19,7 @@ export function HomeSourceLinkCard({ item }: HomeSourceLinkCardProps) {
       <Heading as="h3" fontSize="lg">
         <Link
           alignItems="center"
-          color="green.800"
+          color="#67e8f9"
           display="inline-flex"
           href={item.href}
           minH="11"
@@ -29,7 +29,7 @@ export function HomeSourceLinkCard({ item }: HomeSourceLinkCardProps) {
           {item.title}
         </Link>
       </Heading>
-      <Text color="gray.600" lineHeight="1.55" mt="2">
+      <Text color="#9aa7b1" lineHeight="1.55" mt="2">
         {item.description}
       </Text>
     </Box>

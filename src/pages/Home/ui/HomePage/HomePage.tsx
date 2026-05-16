@@ -13,7 +13,7 @@ export const HomePage = observer(() => {
   const vm = useViewModel(HomeViewModel);
 
   return (
-    <Box as="main" color="gray.900" overflowX="clip" px={{ base: '4', md: '6', lg: '8' }} py="8">
+    <Box as="main" color="inherit" overflowX="clip" px={{ base: '4', md: '6', lg: '8' }} py="8">
       <Stack gap={{ base: '10', lg: '12' }} maxW="1440px" mx="auto" w="full">
         <HomeHero vm={vm} />
         <HomeProofStrip vm={vm} />

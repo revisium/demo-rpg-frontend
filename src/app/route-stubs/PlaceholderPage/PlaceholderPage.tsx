@@ -29,7 +29,7 @@ export function PlaceholderPage({
             <Heading as="h1" fontSize={{ base: '3xl', md: '5xl' }} lineHeight="1.05">
               {title}
             </Heading>
-            <Text color="gray.600" fontSize="lg" lineHeight="1.6" maxW="720px" mt="3">
+            <Text color="#9aa7b1" fontSize="lg" lineHeight="1.6" maxW="720px" mt="3">
               {status === 'Blocked'
                 ? 'This route is wired into the app shell, but its implementation is waiting on a documented dependency.'
                 : 'This route is wired into the app shell and ready for implementation from its page spec.'}
@@ -42,16 +42,27 @@ export function PlaceholderPage({
             <InfoPanel label="Capability" value={capability} />
           </SimpleGrid>
 
-          <Box bg="white" borderColor="gray.200" borderRadius="md" borderWidth="1px" p="5">
+          <Box
+            bg="rgba(18, 24, 32, 0.9)"
+            borderColor="rgba(103, 232, 249, 0.16)"
+            borderRadius="md"
+            borderWidth="1px"
+            p="5"
+          >
             <Heading as="h2" fontSize="xl">
               Implementation placeholder
             </Heading>
-            <Text color="gray.600" lineHeight="1.6" mt="2">
-              The full page should follow its spec under docs/product/pages, the shared
-              page patterns, and the MVVM/DataSource boundaries before this status moves
-              toward Done.
+            <Text color="#9aa7b1" lineHeight="1.6" mt="2">
+              The full page should follow its spec under docs/product/pages, the shared page
+              patterns, and the MVVM/DataSource boundaries before this status moves toward Done.
             </Text>
-            <Button asChild colorPalette="green" mt="5">
+            <Button
+              asChild
+              bg="#22d3ee"
+              color="var(--color-text-on-accent)"
+              mt="5"
+              _hover={{ bg: '#67e8f9' }}
+            >
               <RouterLink to="/regions">Open implemented catalog</RouterLink>
             </Button>
           </Box>
@@ -68,8 +79,15 @@ interface InfoPanelProps {
 
 function InfoPanel({ label, value }: InfoPanelProps) {
   return (
-    <Box bg="white" borderColor="gray.200" borderRadius="md" borderWidth="1px" minW="0" p="4">
-      <Text color="gray.600" fontSize="sm">
+    <Box
+      bg="rgba(18, 24, 32, 0.82)"
+      borderColor="rgba(103, 232, 249, 0.14)"
+      borderRadius="md"
+      borderWidth="1px"
+      minW="0"
+      p="4"
+    >
+      <Text color="#9aa7b1" fontSize="sm">
         {label}
       </Text>
       <Text fontWeight="bold" mt="1" overflowWrap="anywhere">

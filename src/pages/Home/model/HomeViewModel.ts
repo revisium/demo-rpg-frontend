@@ -2,7 +2,10 @@ import { makeAutoObservable } from 'mobx';
 
 import type { IViewModel } from 'src/shared/config';
 import { container } from 'src/shared/lib';
-import { HomeCapabilityItemViewModel, type HomeCapabilityStatus } from './HomeCapabilityItemViewModel';
+import {
+  HomeCapabilityItemViewModel,
+  type HomeCapabilityStatus,
+} from './HomeCapabilityItemViewModel';
 import { HomeDemoPathItemViewModel } from './HomeDemoPathItemViewModel';
 import { HomeProofItemViewModel } from './HomeProofItemViewModel';
 import { HomeSourceLinkItemViewModel } from './HomeSourceLinkItemViewModel';
@@ -32,7 +35,13 @@ interface HomeSectionContent {
   readonly description?: string;
 }
 
-type CapabilityRow = readonly [title: string, description: string, label: string, href: string, status: HomeCapabilityStatus];
+type CapabilityRow = readonly [
+  title: string,
+  description: string,
+  label: string,
+  href: string,
+  status: HomeCapabilityStatus,
+];
 type DemoPathRow = readonly [title: string, description: string, href: string];
 type ProofRow = readonly [label: string, value: string, bg: string, border: string, color: string];
 type SourceLinkRow = readonly [title: string, description: string, href: string];
@@ -74,7 +83,13 @@ const demoPathsCta: HomeCta = {
 };
 
 const capabilityRows: readonly CapabilityRow[] = [
-  ['Schema-first content', 'Browse typed RPG data from Revisium rows through the GraphQL router.', 'data.regions', '/regions', 'live'],
+  [
+    'Schema-first content',
+    'Browse typed RPG data from Revisium rows through the GraphQL router.',
+    'data.regions',
+    '/regions',
+    'live',
+  ],
   [
     'Reference catalogs',
     'Inspect compact enum-like tables before larger catalogs are implemented.',
@@ -114,23 +129,53 @@ const capabilityRows: readonly CapabilityRow[] = [
 
 const demoPathRows: readonly DemoPathRow[] = [
   ['Browse live data', 'Start with localized regions and typed classes.', '/regions'],
-  ['Inspect entity details', 'Open a region row and see field ownership in context.', '/regions/ironcrest-mountains'],
-  ['Compare revisions', 'Reserved for balance and branch proof once the API is ready.', '/balance-patch'],
+  [
+    'Inspect entity details',
+    'Open a region row and see field ownership in context.',
+    '/regions/ironcrest-mountains',
+  ],
+  [
+    'Compare revisions',
+    'Reserved for balance and branch proof once the API is ready.',
+    '/balance-patch',
+  ],
   ['Read architecture', 'See what Revisium owns and what the frontend owns.', '/about'],
 ];
 
 const proofRows: readonly ProofRow[] = [
-  ['Rows', 'demo-rpg-data', 'blue.50', 'blue.200', 'blue.800'],
-  ['Schema', 'GraphQL types', 'green.50', 'green.200', 'green.800'],
-  ['Pages', 'MVVM slices', 'purple.50', 'purple.200', 'purple.800'],
-  ['Sources', 'Explainer widget', 'orange.50', 'orange.200', 'orange.800'],
+  ['Rows', 'demo-rpg-data', 'rgba(56, 189, 248, 0.16)', 'rgba(56, 189, 248, 0.4)', '#7dd3fc'],
+  ['Schema', 'GraphQL types', 'rgba(52, 211, 153, 0.14)', 'rgba(52, 211, 153, 0.36)', '#86efac'],
+  ['Pages', 'MVVM slices', 'rgba(167, 139, 250, 0.16)', 'rgba(167, 139, 250, 0.38)', '#c4b5fd'],
+  [
+    'Sources',
+    'Explainer widget',
+    'rgba(45, 212, 191, 0.14)',
+    'rgba(45, 212, 191, 0.34)',
+    '#5eead4',
+  ],
 ];
 
 const sourceLinkRows: readonly SourceLinkRow[] = [
-  ['Cloud data project', 'Open the Revisium data rows used by the live catalogs.', 'https://cloud.revisium.io/app/revisium/demo-rpg-data/master/draft/regions'],
-  ['Frontend repository', 'React Router, Chakra UI, MobX ViewModels, and generated GraphQL types.', 'https://github.com/revisium/demo-rpg-frontend'],
-  ['Backend repository', 'Federation and backend-owned enrichment fields planned for detail pages.', 'https://github.com/revisium/demo-rpg-backend'],
-  ['Docs repository', 'Product messaging, page inventory, and implementation notes.', 'https://github.com/revisium/demo-rpg-docs'],
+  [
+    'Cloud data project',
+    'Open the Revisium data rows used by the live catalogs.',
+    'https://cloud.revisium.io/app/revisium/demo-rpg-data/master/draft/regions',
+  ],
+  [
+    'Frontend repository',
+    'React Router, Chakra UI, MobX ViewModels, and generated GraphQL types.',
+    'https://github.com/revisium/demo-rpg-frontend',
+  ],
+  [
+    'Backend repository',
+    'Federation and backend-owned enrichment fields planned for detail pages.',
+    'https://github.com/revisium/demo-rpg-backend',
+  ],
+  [
+    'Docs repository',
+    'Product messaging, page inventory, and implementation notes.',
+    'https://github.com/revisium/demo-rpg-docs',
+  ],
 ];
 
 export class HomeViewModel implements IViewModel {
@@ -139,10 +184,12 @@ export class HomeViewModel implements IViewModel {
       new HomeCapabilityItemViewModel({ title, description, label, href, status }),
   );
   private readonly demoPathItems = demoPathRows.map(
-    ([title, description, href], index) => new HomeDemoPathItemViewModel({ title, description, href, index }),
+    ([title, description, href], index) =>
+      new HomeDemoPathItemViewModel({ title, description, href, index }),
   );
   private readonly proofItems = proofRows.map(
-    ([label, value, bg, border, color], index) => new HomeProofItemViewModel({ label, value, bg, border, color, index }),
+    ([label, value, bg, border, color], index) =>
+      new HomeProofItemViewModel({ label, value, bg, border, color, index }),
   );
   private readonly sourceLinkItems = sourceLinkRows.map(
     ([title, description, href]) => new HomeSourceLinkItemViewModel({ title, description, href }),

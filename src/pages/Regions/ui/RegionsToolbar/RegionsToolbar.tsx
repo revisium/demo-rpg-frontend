@@ -10,39 +10,40 @@ interface RegionsToolbarProps {
 
 export const RegionsToolbar = observer(({ vm }: RegionsToolbarProps) => {
   return (
-    <Flex align="flex-start" gap="4" justify="space-between" mb="5" wrap={{ base: 'wrap', sm: 'nowrap' }}>
+    <Flex
+      align="flex-start"
+      gap="4"
+      justify="space-between"
+      mb="5"
+      wrap={{ base: 'wrap', sm: 'nowrap' }}
+    >
       <Box>
-        <ResultSummary entityLabel="regions" totalCount={vm.totalCount} visibleCount={vm.visibleCount} />
-        <Text color="gray.600" fontSize="sm" mt="1">
+        <ResultSummary
+          entityLabel="regions"
+          totalCount={vm.totalCount}
+          visibleCount={vm.visibleCount}
+        />
+        <Text color="#9aa7b1" fontSize="sm" mt="1">
           Filter: <Text as="strong">{vm.activeFilterLabel}</Text>
         </Text>
-        {vm.climates.length > 0 ? (
+        {vm.climateButtons.length > 1 ? (
           <Flex aria-label="Visible climates" gap="2" mt="2" wrap="wrap">
-            <Button
-              aria-pressed={vm.activeClimate === null}
-              colorPalette={vm.activeClimate === null ? 'green' : 'gray'}
-              minH="44px"
-              minW="44px"
-              onClick={() => void vm.setClimate(null)}
-              size="sm"
-              type="button"
-              variant={vm.activeClimate === null ? 'solid' : 'outline'}
-            >
-              All
-            </Button>
-            {vm.climates.map((climate) => (
+            {vm.climateButtons.map((button) => (
               <Button
-                aria-pressed={vm.activeClimate === climate}
-                colorPalette={vm.activeClimate === climate ? 'green' : 'gray'}
-                key={climate}
+                aria-pressed={button.ariaPressed}
+                bg={button.bg}
+                borderColor={button.borderColor}
+                color={button.color}
+                key={button.key}
                 minH="44px"
                 minW="44px"
-                onClick={() => void vm.setClimate(climate)}
+                onClick={() => void button.onSelect()}
                 size="sm"
                 type="button"
-                variant={vm.activeClimate === climate ? 'solid' : 'outline'}
+                variant={button.variant}
+                _hover={button.hoverStyle}
               >
-                {climate}
+                {button.label}
               </Button>
             ))}
           </Flex>

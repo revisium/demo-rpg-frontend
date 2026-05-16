@@ -21,6 +21,20 @@ import { RegionItemViewModel, type RegionLocale } from './RegionItemViewModel';
 
 const REGIONS_PAGE_SIZE = 24;
 
+interface ClimateButtonDescriptor {
+  readonly ariaPressed: boolean;
+  readonly bg: string;
+  readonly borderColor: string;
+  readonly color: string;
+  readonly hoverStyle: {
+    readonly bg: string;
+  };
+  readonly key: string;
+  readonly label: string;
+  readonly onSelect: () => Promise<void>;
+  readonly variant: 'solid' | 'outline';
+}
+
 // Keep this display string in sync with api/Regions.graphql until the widget can import raw GraphQL.
 const REGIONS_QUERY = `query Regions($data: Demo_rpg_dataGetRegionsesInput) {
   regionses(data: $data) {
@@ -50,9 +64,13 @@ export class RegionsViewModel implements IViewModel {
   private readonly loadedItems: RegionNode[] = [];
 
   constructor(public readonly dataSource: RegionsDataSource) {
-    makeAutoObservable<this, 'itemCache'>(this, {
-      itemCache: false,
-    }, { autoBind: true });
+    makeAutoObservable<this, 'itemCache'>(
+      this,
+      {
+        itemCache: false,
+      },
+      { autoBind: true },
+    );
   }
 
   public setup(): void {
@@ -113,6 +131,15 @@ export class RegionsViewModel implements IViewModel {
     return [...new Set(this.loadedItems.map((item) => item.data.climate))].sort((left, right) =>
       left.localeCompare(right),
     );
+  }
+
+  public get climateButtons(): readonly ClimateButtonDescriptor[] {
+    return [
+      this.createClimateButtonDescriptor(null, 'All', 'all'),
+      ...this.climates.map((climate) =>
+        this.createClimateButtonDescriptor(climate, climate, climate),
+      ),
+    ];
   }
 
   public get activeFilterLabel(): string {
@@ -263,10 +290,30 @@ export class RegionsViewModel implements IViewModel {
       return fallbacks;
     });
   }
+
+  private createClimateButtonDescriptor(
+    climate: string | null,
+    label: string,
+    key: string,
+  ): ClimateButtonDescriptor {
+    const isSelected = this.activeClimate === climate;
+
+    return {
+      ariaPressed: isSelected,
+      bg: isSelected ? '#22d3ee' : 'transparent',
+      borderColor: isSelected ? '#67e8f9' : 'rgba(103, 232, 249, 0.24)',
+      color: isSelected ? 'var(--color-text-on-accent)' : 'var(--color-text-supporting)',
+      hoverStyle: {
+        bg: isSelected ? '#67e8f9' : 'rgba(34, 211, 238, 0.12)',
+      },
+      key,
+      label,
+      onSelect: () => this.setClimate(climate),
+      variant: isSelected ? 'solid' : 'outline',
+    };
+  }
 }
 
-container.register(
-  RegionsViewModel,
-  () => new RegionsViewModel(container.get(RegionsDataSource)),
-  { scope: 'transient' },
-);
+container.register(RegionsViewModel, () => new RegionsViewModel(container.get(RegionsDataSource)), {
+  scope: 'transient',
+});

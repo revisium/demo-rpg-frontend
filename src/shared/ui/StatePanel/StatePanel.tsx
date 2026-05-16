@@ -20,8 +20,8 @@ export function StatePanel({
   return (
     <Box
       aria-live={isError ? 'polite' : undefined}
-      bg="white"
-      borderColor={isError ? 'red.300' : 'gray.200'}
+      bg="rgba(18, 24, 32, 0.9)"
+      borderColor={isError ? '#fb7185' : 'rgba(103, 232, 249, 0.16)'}
       borderRadius="md"
       borderWidth="1px"
       p="6"
@@ -29,11 +29,18 @@ export function StatePanel({
       <Heading as="h2" fontSize="xl">
         {title}
       </Heading>
-      <Text color="gray.600" mt="2">
+      <Text color="#9aa7b1" mt="2">
         {description}
       </Text>
       {actionLabel && onAction ? (
-        <Button colorPalette="green" minH="44px" mt="4" onClick={onAction}>
+        <Button
+          bg="#22d3ee"
+          color="var(--color-text-on-accent)"
+          minH="44px"
+          mt="4"
+          onClick={onAction}
+          _hover={{ bg: '#67e8f9' }}
+        >
           {actionLabel}
         </Button>
       ) : null}

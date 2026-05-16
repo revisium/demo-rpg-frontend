@@ -11,22 +11,30 @@ export function HomeDemoPathCard({ item }: HomeDemoPathCardProps) {
   return (
     <Box
       as="li"
-      bg="white"
-      borderColor="gray.200"
+      bg="rgba(18, 24, 32, 0.82)"
+      borderColor="rgba(103, 232, 249, 0.14)"
       borderRadius="md"
       borderWidth="1px"
       p="5"
     >
-      <Text color="green.700" fontSize="sm" fontWeight="bold">
+      <Text color="#2dd4bf" fontSize="sm" fontWeight="bold">
         {item.stepLabel}
       </Text>
       <Heading as="h3" fontSize="lg" lineHeight="1.25" mt="2">
         {item.title}
       </Heading>
-      <Text color="gray.600" lineHeight="1.55" mt="2">
+      <Text color="#9aa7b1" lineHeight="1.55" mt="2">
         {item.description}
       </Text>
-      <Button asChild colorPalette="green" minH="11" mt="4" size="md" variant="ghost">
+      <Button
+        asChild
+        color="#67e8f9"
+        minH="11"
+        mt="4"
+        size="md"
+        variant="ghost"
+        _hover={{ bg: 'rgba(34, 211, 238, 0.12)' }}
+      >
         <RouterLink to={item.href}>Open</RouterLink>
       </Button>
     </Box>

@@ -23,7 +23,7 @@ export function CatalogPageLayout({
   toolbar,
 }: CatalogPageLayoutProps) {
   return (
-    <Box as="main" color="gray.900" overflowX="clip" px={{ base: '4', md: '6', lg: '8' }} py="8">
+    <Box as="main" color="inherit" overflowX="clip" px={{ base: '4', md: '6', lg: '8' }} py="8">
       <Box maxW="1440px" mx="auto" w="full">
         {header}
 

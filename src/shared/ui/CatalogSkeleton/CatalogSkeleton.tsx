@@ -11,8 +11,8 @@ export function CatalogSkeleton({ ariaLabel, columns, itemCount }: CatalogSkelet
     <SimpleGrid aria-label={ariaLabel} columns={columns} gap="4">
       {Array.from({ length: itemCount }, (_, index) => (
         <Stack
-          bg="white"
-          borderColor="gray.200"
+          bg="rgba(18, 24, 32, 0.82)"
+          borderColor="rgba(103, 232, 249, 0.14)"
           borderRadius="md"
           borderWidth="1px"
           gap="5"

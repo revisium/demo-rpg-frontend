@@ -12,7 +12,12 @@ export const HomeHero = observer(({ vm }: HomeHeroProps) => {
   const { hero } = vm;
 
   return (
-    <Box as="section" aria-labelledby="home-title" pb={{ base: '8', lg: '10' }} pt={{ base: '2', lg: '4' }}>
+    <Box
+      as="section"
+      aria-labelledby="home-title"
+      pb={{ base: '8', lg: '10' }}
+      pt={{ base: '2', lg: '4' }}
+    >
       <Stack align="flex-start" gap="6" maxW="960px">
         <Flex aria-label="Current proof surfaces" gap="2" wrap="wrap">
           {hero.badges.map((badge) => (
@@ -26,23 +31,42 @@ export const HomeHero = observer(({ vm }: HomeHeroProps) => {
           <Heading as="h1" fontSize={{ base: '4xl', md: '5xl' }} id="home-title" lineHeight="1.02">
             {hero.title}
           </Heading>
-          <Text color="gray.700" fontSize={{ base: 'lg', md: 'xl' }} lineHeight="1.6" maxW="820px" mt="5">
+          <Text
+            color="var(--color-text-supporting)"
+            fontSize={{ base: 'lg', md: 'xl' }}
+            lineHeight="1.6"
+            maxW="820px"
+            mt="5"
+          >
             {hero.subtitle}
           </Text>
         </Box>
 
         <Flex gap="3" wrap="wrap">
-          <Button asChild colorPalette="green" size="lg">
+          <Button
+            asChild
+            bg="#22d3ee"
+            color="var(--color-text-on-accent)"
+            size="lg"
+            _hover={{ bg: '#67e8f9' }}
+          >
             <RouterLink to={hero.primaryCta.href}>{hero.primaryCta.label}</RouterLink>
           </Button>
-          <Button asChild size="lg" variant="outline">
+          <Button
+            asChild
+            borderColor="rgba(103, 232, 249, 0.38)"
+            color="#f4f7f8"
+            size="lg"
+            variant="outline"
+            _hover={{ bg: 'rgba(34, 211, 238, 0.12)', borderColor: '#67e8f9' }}
+          >
             <RouterLink to={hero.secondaryCta.href}>{hero.secondaryCta.label}</RouterLink>
           </Button>
         </Flex>
 
-        <Text color="gray.600" fontSize="sm" lineHeight="1.6" maxW="720px">
+        <Text color="#9aa7b1" fontSize="sm" lineHeight="1.6" maxW="720px">
           {hero.fallbackNote}{' '}
-          <Link asChild color="green.800" fontWeight="medium">
+          <Link asChild color="#67e8f9" fontWeight="medium">
             <RouterLink to={hero.fallbackLink.href}>{hero.fallbackLink.label}</RouterLink>
           </Link>
         </Text>

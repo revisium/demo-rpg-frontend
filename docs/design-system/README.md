@@ -62,6 +62,16 @@ The app shell uses a dark midnight surface over the page atlas background.
 Active navigation uses a cyan underline or outlined pill, with no layout shift
 between active and inactive states.
 
+Current implementation order:
+
+1. App Shell owns the dark atlas page background, sticky dark midnight top nav,
+   compact brand mark, cyan active navigation, skip link, and footer chip.
+2. Shared page wrappers inherit shell foreground/background instead of forcing a
+   light page color.
+3. Individual pages may then migrate cards, panels, filters, and data widgets
+   from light surfaces to dark tactical atlas surfaces in focused follow-up
+   changes.
+
 ## Breakpoints
 
 | Breakpoint     | Rule                                                                             |
@@ -85,35 +95,37 @@ local CSS file when a browser feature cannot be expressed through Chakra props.
 Use Chakra theme tokens or raw values that map to the semantic palette below.
 Exact values may evolve, but the semantic intent stays stable once implemented.
 
-| Token                    | Default     | Usage                                             |
-| ------------------------ | ----------- | ------------------------------------------------- |
-| `--color-bg`             | `#0b1118`   | Page background.                                  |
-| `--color-bg-deep`        | `#070b10`   | Deep shell areas and page edges.                  |
-| `--color-bg-atlas`       | `#101923`   | Star-map/atlas overlay base.                      |
-| `--color-surface`        | `#121820`   | Cards, panels, popovers.                          |
-| `--color-surface-raised` | `#17212b`   | Hovered cards, active controls, elevated panels.  |
-| `--color-surface-muted`  | `#0f151d`   | Secondary panels, table rows, inactive tabs.      |
-| `--color-text`           | `#f4f7f8`   | Primary text.                                     |
-| `--color-text-muted`     | `#9aa7b1`   | Secondary text.                                   |
-| `--color-text-subtle`    | `#6f7f8b`   | Metadata, helper text, inactive nav.              |
-| `--color-border`         | `#2a3038`   | Borders and dividers.                             |
-| `--color-border-strong`  | `#3a4652`   | Active panels and table headers.                  |
-| `--color-accent`         | `#22d3ee`   | Primary actions, active state, selected filters.  |
-| `--color-accent-strong`  | `#67e8f9`   | Hover/pressed accent and focus rings.             |
-| `--color-accent-muted`   | `#0e7490`   | Filled accent surfaces and quiet badges.          |
-| `--color-positive`       | `#34d399`   | Success, available, loaded, data-positive states. |
-| `--color-data`           | `#38bdf8`   | `data` subgraph chip.                             |
-| `--color-cms`            | `#2dd4bf`   | `cms` subgraph chip.                              |
-| `--color-backend`        | `#a78bfa`   | `backend` subgraph chip.                          |
-| `--color-danger`         | `#fb7185`   | Error states.                                     |
-| `--color-arid`           | `#f97316`   | Arid climate content accent only.                 |
-| `--color-alpine`         | `#93c5fd`   | Alpine climate content accent.                    |
-| `--color-forest`         | `#4ade80`   | Forest climate content accent.                    |
-| `--color-coastal`        | `#22d3ee`   | Coastal climate content accent.                   |
-| `--color-marsh`          | `#14b8a6`   | Marsh climate content accent.                     |
-| `--radius-sm`            | `4px`       | Inputs, chips.                                    |
-| `--radius-md`            | `8px`       | Cards, panels.                                    |
-| `--space-1..8`           | `4px` steps | Spacing scale.                                    |
+| Token                     | Default     | Usage                                             |
+| ------------------------- | ----------- | ------------------------------------------------- |
+| `--color-bg`              | `#0b1118`   | Page background.                                  |
+| `--color-bg-deep`         | `#070b10`   | Deep shell areas and page edges.                  |
+| `--color-bg-atlas`        | `#101923`   | Star-map/atlas overlay base.                      |
+| `--color-surface`         | `#121820`   | Cards, panels, popovers.                          |
+| `--color-surface-raised`  | `#17212b`   | Hovered cards, active controls, elevated panels.  |
+| `--color-surface-muted`   | `#0f151d`   | Secondary panels, table rows, inactive tabs.      |
+| `--color-text`            | `#f4f7f8`   | Primary text.                                     |
+| `--color-text-supporting` | `#c9d2da`   | Larger supporting copy on dark surfaces.          |
+| `--color-text-muted`      | `#9aa7b1`   | Secondary text.                                   |
+| `--color-text-subtle`     | `#6f7f8b`   | Metadata, helper text, inactive nav.              |
+| `--color-text-on-accent`  | `#071018`   | Text and glyphs on cyan/accent filled controls.   |
+| `--color-border`          | `#2a3038`   | Borders and dividers.                             |
+| `--color-border-strong`   | `#3a4652`   | Active panels and table headers.                  |
+| `--color-accent`          | `#22d3ee`   | Primary actions, active state, selected filters.  |
+| `--color-accent-strong`   | `#67e8f9`   | Hover/pressed accent and focus rings.             |
+| `--color-accent-muted`    | `#0e7490`   | Filled accent surfaces and quiet badges.          |
+| `--color-positive`        | `#34d399`   | Success, available, loaded, data-positive states. |
+| `--color-data`            | `#38bdf8`   | `data` subgraph chip.                             |
+| `--color-cms`             | `#2dd4bf`   | `cms` subgraph chip.                              |
+| `--color-backend`         | `#a78bfa`   | `backend` subgraph chip.                          |
+| `--color-danger`          | `#fb7185`   | Error states.                                     |
+| `--color-arid`            | `#f97316`   | Arid climate content accent only.                 |
+| `--color-alpine`          | `#93c5fd`   | Alpine climate content accent.                    |
+| `--color-forest`          | `#4ade80`   | Forest climate content accent.                    |
+| `--color-coastal`         | `#22d3ee`   | Coastal climate content accent.                   |
+| `--color-marsh`           | `#14b8a6`   | Marsh climate content accent.                     |
+| `--radius-sm`             | `4px`       | Inputs, chips.                                    |
+| `--radius-md`             | `8px`       | Cards, panels.                                    |
+| `--space-1..8`            | `4px` steps | Spacing scale.                                    |
 
 Do not let the UI collapse into one dominant hue. The palette combines neutral
 surfaces, cyan actions, blue/teal/purple subgraph chips, climate accents, and
