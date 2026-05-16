@@ -44,6 +44,10 @@ export function AppLayout({ children }: AppLayoutProps) {
         position: 'fixed',
         zIndex: 0,
       }}
+      css={{
+        '--color-text-on-accent': '#071018',
+        '--color-text-supporting': '#c9d2da',
+      }}
     >
       <Link
         _focusVisible={{ outlineColor: '#67e8f9', outlineOffset: '3px', outlineWidth: '2px' }}
@@ -92,7 +96,7 @@ export function AppLayout({ children }: AppLayoutProps) {
                     borderRadius="sm"
                     borderWidth="1px"
                     boxSize="9"
-                    color="#071018"
+                    color="var(--color-text-on-accent)"
                     display="inline-flex"
                     fontSize="sm"
                     fontWeight="black"

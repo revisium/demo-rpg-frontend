@@ -58,7 +58,11 @@ export function HomeCapabilityCard({ item }: HomeCapabilityCardProps) {
         size="md"
         variant="outline"
         w="fit-content"
-        _groupHover={{ bg: '#22d3ee', color: '#071018', transform: 'translateX(2px)' }}
+        _groupHover={{
+          bg: '#22d3ee',
+          color: 'var(--color-text-on-accent)',
+          transform: 'translateX(2px)',
+        }}
       >
         <RouterLink to={item.href}>Open proof</RouterLink>
       </Button>

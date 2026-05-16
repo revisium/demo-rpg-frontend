@@ -26,41 +26,24 @@ export const RegionsToolbar = observer(({ vm }: RegionsToolbarProps) => {
         <Text color="#9aa7b1" fontSize="sm" mt="1">
           Filter: <Text as="strong">{vm.activeFilterLabel}</Text>
         </Text>
-        {vm.climates.length > 0 ? (
+        {vm.climateButtons.length > 1 ? (
           <Flex aria-label="Visible climates" gap="2" mt="2" wrap="wrap">
-            <Button
-              aria-pressed={vm.activeClimate === null}
-              bg={vm.activeClimate === null ? '#22d3ee' : 'transparent'}
-              borderColor={vm.activeClimate === null ? '#67e8f9' : 'rgba(103, 232, 249, 0.24)'}
-              color={vm.activeClimate === null ? '#071018' : '#c9d2da'}
-              minH="44px"
-              minW="44px"
-              onClick={() => void vm.setClimate(null)}
-              size="sm"
-              type="button"
-              variant={vm.activeClimate === null ? 'solid' : 'outline'}
-              _hover={{ bg: vm.activeClimate === null ? '#67e8f9' : 'rgba(34, 211, 238, 0.12)' }}
-            >
-              All
-            </Button>
-            {vm.climates.map((climate) => (
+            {vm.climateButtons.map((button) => (
               <Button
-                aria-pressed={vm.activeClimate === climate}
-                bg={vm.activeClimate === climate ? '#22d3ee' : 'transparent'}
-                borderColor={vm.activeClimate === climate ? '#67e8f9' : 'rgba(103, 232, 249, 0.24)'}
-                color={vm.activeClimate === climate ? '#071018' : '#c9d2da'}
-                key={climate}
+                aria-pressed={button.ariaPressed}
+                bg={button.bg}
+                borderColor={button.borderColor}
+                color={button.color}
+                key={button.key}
                 minH="44px"
                 minW="44px"
-                onClick={() => void vm.setClimate(climate)}
+                onClick={() => void button.onSelect()}
                 size="sm"
                 type="button"
-                variant={vm.activeClimate === climate ? 'solid' : 'outline'}
-                _hover={{
-                  bg: vm.activeClimate === climate ? '#67e8f9' : 'rgba(34, 211, 238, 0.12)',
-                }}
+                variant={button.variant}
+                _hover={button.hoverStyle}
               >
-                {climate}
+                {button.label}
               </Button>
             ))}
           </Flex>

@@ -56,7 +56,13 @@ export function PlaceholderPage({
               The full page should follow its spec under docs/product/pages, the shared page
               patterns, and the MVVM/DataSource boundaries before this status moves toward Done.
             </Text>
-            <Button asChild bg="#22d3ee" color="#071018" mt="5" _hover={{ bg: '#67e8f9' }}>
+            <Button
+              asChild
+              bg="#22d3ee"
+              color="var(--color-text-on-accent)"
+              mt="5"
+              _hover={{ bg: '#67e8f9' }}
+            >
               <RouterLink to="/regions">Open implemented catalog</RouterLink>
             </Button>
           </Box>

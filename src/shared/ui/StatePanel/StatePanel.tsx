@@ -35,7 +35,7 @@ export function StatePanel({
       {actionLabel && onAction ? (
         <Button
           bg="#22d3ee"
-          color="#071018"
+          color="var(--color-text-on-accent)"
           minH="44px"
           mt="4"
           onClick={onAction}

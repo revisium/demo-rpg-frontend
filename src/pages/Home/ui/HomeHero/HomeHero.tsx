@@ -32,7 +32,7 @@ export const HomeHero = observer(({ vm }: HomeHeroProps) => {
             {hero.title}
           </Heading>
           <Text
-            color="#c9d2da"
+            color="var(--color-text-supporting)"
             fontSize={{ base: 'lg', md: 'xl' }}
             lineHeight="1.6"
             maxW="820px"
@@ -43,7 +43,13 @@ export const HomeHero = observer(({ vm }: HomeHeroProps) => {
         </Box>
 
         <Flex gap="3" wrap="wrap">
-          <Button asChild bg="#22d3ee" color="#071018" size="lg" _hover={{ bg: '#67e8f9' }}>
+          <Button
+            asChild
+            bg="#22d3ee"
+            color="var(--color-text-on-accent)"
+            size="lg"
+            _hover={{ bg: '#67e8f9' }}
+          >
             <RouterLink to={hero.primaryCta.href}>{hero.primaryCta.label}</RouterLink>
           </Button>
           <Button

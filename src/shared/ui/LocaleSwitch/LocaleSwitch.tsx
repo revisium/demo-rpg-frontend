@@ -26,7 +26,7 @@ export function LocaleSwitch<TLocale extends string>({
             aria-pressed={isSelected}
             bg={isSelected ? '#22d3ee' : 'transparent'}
             borderColor={isSelected ? '#67e8f9' : 'rgba(103, 232, 249, 0.24)'}
-            color={isSelected ? '#071018' : '#c9d2da'}
+            color={isSelected ? 'var(--color-text-on-accent)' : 'var(--color-text-supporting)'}
             key={option.value}
             minH="44px"
             minW="44px"

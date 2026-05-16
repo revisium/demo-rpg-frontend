@@ -51,7 +51,13 @@ export const RegionDetailHeader = observer(({ vm }: RegionDetailHeaderProps) => 
           <Heading as="h1" fontSize={{ base: '3xl', md: '4xl' }} lineHeight="1.1">
             {vm.title}
           </Heading>
-          <Text color="#c9d2da" fontSize="lg" lineHeight="1.6" mt="4" maxW="760px">
+          <Text
+            color="var(--color-text-supporting)"
+            fontSize="lg"
+            lineHeight="1.6"
+            mt="4"
+            maxW="760px"
+          >
             {vm.description}
           </Text>
           <Text color="#9aa7b1" fontSize="sm" mt="3">

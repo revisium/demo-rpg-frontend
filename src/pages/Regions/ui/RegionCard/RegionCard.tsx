@@ -96,7 +96,11 @@ export const RegionCard = observer(({ item }: RegionCardProps) => {
           size="sm"
           transition="background-color 160ms ease, color 160ms ease, transform 160ms ease"
           variant="outline"
-          _groupHover={{ bg: '#22d3ee', color: '#071018', transform: 'translateX(2px)' }}
+          _groupHover={{
+            bg: '#22d3ee',
+            color: 'var(--color-text-on-accent)',
+            transform: 'translateX(2px)',
+          }}
         >
           <RouterLink to={item.detailHref}>Open region</RouterLink>
         </Button>

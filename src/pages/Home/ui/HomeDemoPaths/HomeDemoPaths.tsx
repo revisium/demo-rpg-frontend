@@ -23,7 +23,13 @@ export const HomeDemoPaths = observer(({ vm }: HomeDemoPathsProps) => {
             {demoPathsSection.description}
           </Text>
         </Box>
-        <Button asChild bg="#22d3ee" color="#071018" variant="solid" _hover={{ bg: '#67e8f9' }}>
+        <Button
+          asChild
+          bg="#22d3ee"
+          color="var(--color-text-on-accent)"
+          variant="solid"
+          _hover={{ bg: '#67e8f9' }}
+        >
           <RouterLink to={demoPathsCta.href}>{demoPathsCta.label}</RouterLink>
         </Button>
       </Flex>
