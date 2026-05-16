@@ -5,11 +5,12 @@
 | Route | `/locations` |
 | Status | Draft |
 | Pattern | Catalog |
-| Primary capability | Region FK and map preview |
+| Primary capability | Region FK, map preview, and gallery file array |
 
 ## Purpose
 
-Show location rows that belong to regions and preview map file fields.
+Show location rows that belong to regions and preview required map and gallery
+file fields.
 
 ## Context And Entry
 
@@ -22,7 +23,7 @@ Show location rows that belong to regions and preview map file fields.
 |---|---|
 | Header | Locations purpose and capability chips. |
 | Filters | Region and name. |
-| Location list | Name, region, map thumbnail, short description. |
+| Location list | Name, region, map thumbnail, gallery count/preview, short description. |
 | Explainer Widget | Required. |
 
 ## Primary Actions
@@ -54,12 +55,12 @@ Show location rows that belong to regions and preview map file fields.
 
 | Source | Fields |
 |---|---|
-| `data.locations` | id, localized name/description, `region_id`, `map`. |
+| `data.locations` | id, localized name/description, `region_id`, `map`, `gallery[].{fileId,url,hash,fileName,mimeType,width,height}`. |
 | `data.regions` | region labels. |
 
 ## Explainer Widget
 
-- Summary: "Locations show a region foreign key and large map file metadata."
+- Summary: "Locations show a region foreign key, large map file metadata, and a required file array."
 - Variables: region filter, locale, cursor.
 - Deep links: locations table/schema.
 - Subgraphs: `data`.
@@ -77,7 +78,8 @@ Show location rows that belong to regions and preview map file fields.
 
 - [ ] Region labels are query-driven.
 - [ ] Map thumbnails do not cause layout shift.
+- [ ] Gallery metadata is visible in the widget response sample.
 
 ## Open Questions
 
-- Confirm if map file exists on catalog rows or detail only.
+- Confirm how many gallery images should be shown on catalog cards before opening detail.

@@ -5,12 +5,13 @@
 | Route | `/quests/[id]` |
 | Status | Draft |
 | Pattern | Detail |
-| Primary capability | Two-level embedded arrays and formulas |
+| Primary capability | Two-level embedded arrays, step images, and formulas |
 
 ## Purpose
 
 Demonstrate the deepest JSON Schema shape in the demo: quest steps containing
-nested reward arrays, with formulas reducing across both levels.
+required image file fields and nested reward arrays, with formulas reducing
+across both levels.
 
 ## Context And Entry
 
@@ -23,7 +24,7 @@ nested reward arrays, with formulas reducing across both levels.
 |---|---|
 | Header | Quest title, level, repeatable flag. |
 | Context | NPC giver and location. |
-| Steps timeline | Ordered `steps[]`. |
+| Steps timeline | Ordered `steps[]` with required `steps[].image`. |
 | Rewards | Nested `steps[].rewards[]` with item/XP details. |
 | Formula panel | `total_xp`, `total_loot_xp`, `step_count`. |
 | Explainer Widget | Required with nested-array explanation. |
@@ -58,12 +59,12 @@ nested reward arrays, with formulas reducing across both levels.
 
 | Source | Fields |
 |---|---|
-| `data.quests` | localized title/summary, `npc_id`, `location_id`, `steps[]`, `steps[].rewards[]`, formula fields. |
+| `data.quests` | localized title/summary, `npc_id`, `location_id`, `steps[]`, `steps[].image.{fileId,url,hash,fileName,mimeType,width,height}`, `steps[].rewards[]`, formula fields. |
 | `data.npcs`, `data.locations`, `data.items` | resolved labels and links. |
 
 ## Explainer Widget
 
-- Summary: "Quest detail shows nested embedded arrays and formulas that reduce across one and two levels."
+- Summary: "Quest detail shows required file fields inside object arrays, nested embedded arrays, and formulas that reduce across one and two levels."
 - Variables: quest id and locale.
 - Response sample: quest with steps and a capped reward list.
 - Deep links: quest row/schema.
@@ -83,6 +84,7 @@ nested reward arrays, with formulas reducing across both levels.
 ## Acceptance Criteria
 
 - [ ] Steps and nested rewards are visually distinct.
+- [ ] Every step renders its required image file field.
 - [ ] Formula panel maps each formula to visible source fields.
 - [ ] Widget shows nested array JSON shape.
 

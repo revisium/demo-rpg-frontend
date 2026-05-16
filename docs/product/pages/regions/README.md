@@ -5,7 +5,7 @@
 | Route | `/regions` |
 | Status | In delivery |
 | Pattern | Reference catalog |
-| Primary capability | Nested JSON objects, localized strings, enum, totalCount, pagination |
+| Primary capability | Nested JSON objects, localized strings, enum, required file field, totalCount, pagination |
 
 ## Purpose
 
@@ -22,10 +22,10 @@ simple Revisium-generated list pages.
 
 | Block | Requirement |
 |---|---|
-| Header | Title, short explanation, chips for `data.regions`, enum, localized strings. |
+| Header | Title, short explanation, chips for `data.regions`, enum, localized strings, file field. |
 | Result summary | Shows visible count and `totalCount`. |
 | Climate filter | Server-side JSON filter using `data.path = ["climate"]`. |
-| Region list | Cards with name, description, climate, generated climate landscape, and detail link. |
+| Region list | Cards with name, description, climate, `cover_image` thumbnail, and detail link. |
 | Pagination | Shows connection `pageInfo`; load-more fetches the next cursor. |
 | Explainer Widget | Required; shows `Regions` operation, variables, response sample, cloud links. |
 
@@ -61,11 +61,11 @@ simple Revisium-generated list pages.
 
 | Source | Fields |
 |---|---|
-| `data.regions` | `id`, `data.name.{locale}`, `data.description.{locale}`, `data.climate`, `createdAt`, `publishedAt`, `totalCount`, `pageInfo`. |
+| `data.regions` | `id`, `data.name.{locale}`, `data.description.{locale}`, `data.cover_image.{fileId,url,hash,fileName,mimeType,width,height}`, `data.climate`, `createdAt`, `publishedAt`, `totalCount`, `pageInfo`. |
 
 ## Explainer Widget
 
-- Summary: "Regions show how a nested localized JSON Schema becomes a typed GraphQL catalog with enum fields and total count."
+- Summary: "Regions show how localized fields, a required Admin-uploaded cover image, enum fields, pagination, and total count become a typed GraphQL catalog."
 - Surfaces: GraphQL required; REST/MCP once backend exposes equivalents.
 - Variables: locale, climate filter, cursor, page size, and generated `data` input payload.
 - Response sample: current visible region edges plus `totalCount`.
@@ -77,8 +77,8 @@ simple Revisium-generated list pages.
 - Phone: single column, floating widget trigger, filter bottom sheet, 16px page gutters.
 - Tablet: main content column with floating widget trigger and 24px gutters.
 - Desktop: cards in dense grid/table, floating widget trigger, max content width `1440px`, 32px gutters.
-- Generated climate landscapes add quick visual scanning, but the climate text badge
-  remains the source of meaning.
+- Region cards render the required `cover_image` through imgproxy. The climate
+  text badge remains the source of meaning when art is unavailable or abstract.
 - Region cards use a restrained hover/focus lift, accent border, and subtle
   landscape scale to signal clickability without changing card dimensions.
 

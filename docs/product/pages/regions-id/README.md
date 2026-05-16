@@ -23,7 +23,7 @@ Federation once backend enrichment fields are present in the composed schema.
 | Block | Requirement |
 |---|---|
 | Breadcrumb | Prominent back button to regions catalog. |
-| Region header | Name, climate, description, source chips, and generated climate landscape hero. |
+| Region header | Name, climate, description, source chips, and required `cover_image` hero. |
 | Backend stats | Shows an unavailable state until likes, view count, comments, or approved equivalents exist. |
 | Related data | Optional related locations/heroes once query supports them. |
 | Federation explanation | Visible field attribution chips on rendered fields. |
@@ -58,7 +58,7 @@ Federation once backend enrichment fields are present in the composed schema.
 
 | Source | Fields |
 |---|---|
-| `data.regions` | `id`, `data.name`, `data.description`, `data.climate`. |
+| `data.regions` | `id`, `data.name`, `data.description`, `data.cover_image.{fileId,url,hash,fileName,mimeType,width,height}`, `data.climate`. |
 | `backend.RegionsNode` | Blocked until `likes`, `viewCount`, `comments` or approved equivalents appear in the composed schema. |
 
 ## Explainer Widget
@@ -76,8 +76,8 @@ Federation once backend enrichment fields are present in the composed schema.
 
 - Phone: stats stack below header with a floating widget trigger.
 - Tablet/Desktop: detail content stays primary with a floating widget trigger; backend stats visible above fold.
-- Generated climate landscape hero adds orientation, but the climate text badge remains
-  the source of meaning.
+- The required `cover_image` renders through imgproxy as the hero media. The
+  climate text badge remains the source of meaning when art is unavailable or abstract.
 - Revisium-owned field rows use subtle hover/focus surface feedback for scan
   affordance, while field attribution remains explicit in the widget.
 
@@ -88,7 +88,8 @@ Federation once backend enrichment fields are present in the composed schema.
 
 ## Acceptance Criteria
 
-- [x] Renders Revisium-owned region fields from GraphQL.
+- [x] Renders Revisium-owned region text fields from GraphQL.
+- [ ] Renders required `cover_image` from GraphQL through imgproxy.
 - [x] Field ownership is visible in the page UI and widget for data-owned fields.
 - [x] Backend-unavailable state is visible while federation fields are absent.
 - [ ] Renders at least one backend-owned field in the same GraphQL result.

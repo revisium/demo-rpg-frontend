@@ -5,11 +5,12 @@
 | Route | `/classes` |
 | Status | In delivery |
 | Pattern | Small reference catalog |
-| Primary capability | Enum-like reference table |
+| Primary capability | Enum-like reference table with required icon file |
 
 ## Purpose
 
-Show a small reference table used by hero foreign keys.
+Show a small reference table used by hero foreign keys, with a required class
+icon file on every row.
 
 ## Context And Entry
 
@@ -21,7 +22,7 @@ Show a small reference table used by hero foreign keys.
 | Block | Requirement |
 |---|---|
 | Header | Explain class table as FK target. |
-| Class list | Name, description, role/archetype fields if present. |
+| Class list | Icon, name, description, role/archetype fields if present. |
 | Related heroes | Optional count or link to heroes filtered by class. |
 | Explainer Widget | Required. |
 
@@ -52,18 +53,18 @@ Show a small reference table used by hero foreign keys.
 
 | Source | Fields |
 |---|---|
-| `data.classes` | `id`, localized `name`/`description`, `primary_stat`, `base_hp`, `hp_per_level`, `mp_per_level`. |
+| `data.classes` | `id`, localized `name`/`description`, `icon.{fileId,url,hash,fileName,mimeType,width,height}`, `primary_stat`, `base_hp`, `hp_per_level`, `mp_per_level`. |
 
 ## Explainer Widget
 
-- Summary: "Classes show a small Revisium reference table used as a foreign-key target by heroes."
+- Summary: "Classes show a small Revisium reference table with a required file field used as a foreign-key target by heroes."
 - Variables: locale.
 - Deep links: classes table/schema.
 - Subgraphs: `data`.
 
 ## Responsive Rules
 
-- Phone: one-column simple list.
+- Phone: one-column simple list with fixed icon boxes.
 - Tablet: two-column reference list with the widget visible.
 - Desktop: compact table.
 
@@ -74,6 +75,7 @@ Show a small reference table used by hero foreign keys.
 ## Acceptance Criteria
 
 - [x] Class rows are visible and link to hero filters.
+- [ ] Required class icons render without layout shift.
 - [x] Widget explains FK target role.
 
 ## Open Questions
