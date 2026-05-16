@@ -1,4 +1,4 @@
-import { type ClassesQuery, type Demo_Rpg_DataPageInfo } from 'src/__generated__/graphql-request';
+import type { ClassesQuery } from 'src/__generated__/graphql-request';
 import { container, ObservableRequest } from 'src/shared/lib';
 import { ApiService } from 'src/shared/model';
 
@@ -6,7 +6,7 @@ export type ClassNode = ClassesQuery['classeses']['edges'][number]['node'];
 
 export interface ClassesResult {
   readonly items: readonly ClassNode[];
-  readonly pageInfo: Pick<Demo_Rpg_DataPageInfo, 'endCursor' | 'hasNextPage'>;
+  readonly pageInfo: ClassesQuery['classeses']['pageInfo'];
   readonly totalCount: number;
 }
 

@@ -1,6 +1,5 @@
 import {
   type Demo_Rpg_DataGetRegionsesInput,
-  type Demo_Rpg_DataPageInfo,
   type RegionsQuery,
 } from 'src/__generated__/graphql-request';
 import { container, ObservableRequest } from 'src/shared/lib';
@@ -11,7 +10,7 @@ export type RegionsRequestData = Demo_Rpg_DataGetRegionsesInput;
 
 export interface RegionsResult {
   readonly items: readonly RegionNode[];
-  readonly pageInfo: Pick<Demo_Rpg_DataPageInfo, 'endCursor' | 'hasNextPage'>;
+  readonly pageInfo: RegionsQuery['regionses']['pageInfo'];
   readonly totalCount: number;
 }
 

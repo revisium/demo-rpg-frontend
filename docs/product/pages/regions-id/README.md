@@ -78,6 +78,11 @@ Federation once backend enrichment fields are present in the composed schema.
 - Tablet/Desktop: detail content stays primary with a floating widget trigger; backend stats visible above fold.
 - The required `cover_image` renders through imgproxy as the hero media. The
   climate text badge remains the source of meaning when art is unavailable or abstract.
+- While the public dev GraphQL response exposes `cover_image` but returns empty
+  file objects, `/regions/[id]` may use the same local copies of Revisium Cloud
+  draft files as `/regions`. The fallback is secondary to `data.cover_image.url`
+  and must be removed once the dev dataset consistently returns file URLs and
+  imgproxy can derive them.
 - Revisium-owned field rows use subtle hover/focus surface feedback for scan
   affordance, while field attribution remains explicit in the widget.
 

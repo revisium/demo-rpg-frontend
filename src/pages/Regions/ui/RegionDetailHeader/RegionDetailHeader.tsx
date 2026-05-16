@@ -4,7 +4,7 @@ import { Link as RouterLink } from 'react-router';
 
 import { LocaleSwitch } from 'src/shared/ui';
 import type { RegionDetailViewModel } from '../../model/RegionDetailViewModel';
-import { RegionClimateVisual } from '../RegionClimateVisual/RegionClimateVisual';
+import { RegionCoverVisual } from '../RegionCoverVisual/RegionCoverVisual';
 
 interface RegionDetailHeaderProps {
   readonly vm: RegionDetailViewModel;
@@ -27,7 +27,12 @@ export const RegionDetailHeader = observer(({ vm }: RegionDetailHeaderProps) => 
       </Button>
 
       <Box mt="4">
-        <RegionClimateVisual climate={vm.climate} regionId={vm.id} variant="hero" />
+        <RegionCoverVisual
+          climate={vm.climate}
+          image={vm.coverImage}
+          regionId={vm.id}
+          variant="hero"
+        />
       </Box>
 
       <Grid

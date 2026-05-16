@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite';
 import { Link as RouterLink } from 'react-router';
 
 import type { RegionItemViewModel } from '../../model/RegionItemViewModel';
-import { RegionClimateVisual } from '../RegionClimateVisual/RegionClimateVisual';
+import { RegionCoverVisual } from '../RegionCoverVisual/RegionCoverVisual';
 
 interface RegionCardProps {
   readonly item: RegionItemViewModel;
@@ -44,7 +44,12 @@ export const RegionCard = observer(({ item }: RegionCardProps) => {
         },
       }}
     >
-      <RegionClimateVisual climate={item.climate} regionId={item.id} zoomOnGroupHover />
+      <RegionCoverVisual
+        climate={item.climate}
+        image={item.coverImage}
+        regionId={item.id}
+        zoomOnGroupHover
+      />
 
       <Box px="5">
         <Flex align="center" color="#9aa7b1" fontSize="sm" gap="3" justify="space-between">

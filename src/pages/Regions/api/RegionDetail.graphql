@@ -6,6 +6,15 @@ query RegionDetail($id: String!) {
     publishedAt
     data {
       climate
+      cover_image {
+        fileId
+        fileName
+        hash
+        height
+        mimeType
+        url
+        width
+      }
       name {
         en
         ru
