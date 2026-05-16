@@ -59,6 +59,9 @@ Rules:
 - Image-led catalogs, including `/regions`, use dark atlas cards with a stable
   image area, a separate data area, climate/source chips, and a cyan hover or
   focus border.
+- Catalog images must render slot-sized `imgproxy` derivatives, not original
+  Revisium/admin CDN URLs. Cards should provide `1x` and `2x` candidates for
+  high-density screens.
 - Filtering UI must update a JSON payload preview before the request fires.
 - Sorting controls must map to explicit `orderBy` JSON.
 - Pagination must expose the active cursor in the Explainer Widget variables.
@@ -84,10 +87,34 @@ Rules:
 - Every rendered field must come from the query or a documented derived display helper.
 - Detail headers may use a strong art panel or atlas hero only when the
   underlying entity owns meaningful art, map, file, or generated visual context.
+- Detail heroes, maps, portraits, and file previews must request dimensions
+  for their actual rendered slot through `imgproxy`; the original CDN URL may
+  be shown as metadata or source evidence, but not used as rendered image bytes.
 - FK fields link to the referenced row in the app when a route exists and to
   `cloud.revisium.io` from the Explainer Widget.
 - Formula fields are labelled as computed output, not as hand-authored values.
 - File previews show useful metadata when it helps explain Revisium file fields.
+
+## Media Field Pattern
+
+Used by image fields on catalogs, details, news, blog, and home content.
+
+Rules:
+
+- Revisium/admin file fields expose absolute original URLs. Treat them as
+  source references.
+- Rendered UI images use `imgproxy` derivatives with explicit dimensions from
+  the consuming component's layout slot.
+- Do not use originals for list thumbnails, cover cards, avatars, map previews,
+  or detail media.
+- Preserve the original URL in Explainer Widget response samples so the demo
+  still shows the stored Revisium value.
+- Prefer `rs:fit` when the complete asset matters and `rs:fill` when a fixed
+  cover crop is intended.
+- Provide a high-density `srcset` candidate with `dpr:2` or doubled physical
+  dimensions.
+- Keep placeholders, aspect ratios, and skeletons stable so image loading does
+  not shift catalog or detail layouts.
 
 ## Explainer Widget Pattern
 
