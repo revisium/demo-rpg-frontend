@@ -26,7 +26,9 @@ const REGION_DETAIL_QUERY = `query RegionDetail($id: String!) {
     data {
       climate
       cover_image {
+        fileId
         fileName
+        hash
         height
         mimeType
         url

@@ -1,7 +1,9 @@
 import { prepareImgproxyImageSlot, type PreparedImageSlot } from 'src/shared/lib';
 
 interface RegionCoverImageSource {
+  readonly fileId: string;
   readonly fileName: string;
+  readonly hash: string;
   readonly height: number;
   readonly mimeType: string;
   readonly url: string;
@@ -9,7 +11,7 @@ interface RegionCoverImageSource {
 }
 
 export function prepareRegionCardCoverImage(
-  source: RegionCoverImageSource,
+  source: RegionCoverImageSource | null | undefined,
   regionId: string,
   title: string,
 ): PreparedImageSlot | null {
@@ -20,7 +22,7 @@ export function prepareRegionCardCoverImage(
 }
 
 export function prepareRegionHeroCoverImage(
-  source: RegionCoverImageSource,
+  source: RegionCoverImageSource | null | undefined,
   regionId: string,
   title: string,
 ): PreparedImageSlot | null {
@@ -30,23 +32,30 @@ export function prepareRegionHeroCoverImage(
   );
 }
 
-export function getRegionCoverImageMetadata(source: RegionCoverImageSource): Record<string, unknown> {
+export function getRegionCoverImageMetadata(
+  source: RegionCoverImageSource | null | undefined,
+): Record<string, unknown> | null {
+  if (!source) return null;
+
   return {
+    fileId: source.fileId,
     fileName: source.fileName,
+    hash: source.hash,
     mimeType: source.mimeType,
+    url: source.url,
     width: source.width,
     height: source.height,
   };
 }
 
 function prepareRegionCoverImage(
-  source: RegionCoverImageSource,
+  source: RegionCoverImageSource | null | undefined,
   title: string,
   width: number,
   height: number,
   eager: boolean,
 ): PreparedImageSlot | null {
-  if (!source.mimeType.startsWith('image/')) return null;
+  if (!source?.mimeType.startsWith('image/')) return null;
 
   return prepareImgproxyImageSlot({
     alt: `${title} region cover image`,

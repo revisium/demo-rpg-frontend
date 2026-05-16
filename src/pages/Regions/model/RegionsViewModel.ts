@@ -18,6 +18,7 @@ import {
   type RegionsRequestData,
 } from '../api/RegionsDataSource';
 import { RegionItemViewModel, type RegionLocale } from './RegionItemViewModel';
+import { getRegionCoverImageMetadata } from './regionCoverImages';
 
 const REGIONS_PAGE_SIZE = 24;
 
@@ -48,7 +49,9 @@ const REGIONS_QUERY = `query Regions($data: Demo_rpg_dataGetRegionsesInput) {
         data {
           climate
           cover_image {
+            fileId
             fileName
+            hash
             height
             mimeType
             url
@@ -268,10 +271,7 @@ export class RegionsViewModel implements IViewModel {
       edges: this.visibleNodes.slice(0, 3).map((node) => ({
         id: node.id,
         climate: node.data.climate,
-        coverImage: {
-          fileName: node.data.cover_image.fileName,
-          mimeType: node.data.cover_image.mimeType,
-        },
+        coverImage: getRegionCoverImageMetadata(node.data.cover_image),
         name: node.data.name[this.locale],
       })),
     };

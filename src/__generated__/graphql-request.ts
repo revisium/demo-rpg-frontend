@@ -3663,14 +3663,14 @@ export type RegionDetailQueryVariables = Exact<{
 }>;
 
 
-export type RegionDetailQuery = { regions: { id: string, versionId: string, createdAt: number | string, publishedAt: number | string, data: { climate: string, cover_image: { fileName: string, height: number, mimeType: string, url: string, width: number }, name: { en: string, ru: string, zh: string }, description: { en: string, ru: string, zh: string } } } };
+export type RegionDetailQuery = { regions: { id: string, versionId: string, createdAt: number | string, publishedAt: number | string, data: { climate: string, cover_image: { fileId: string, fileName: string, hash: string, height: number, mimeType: string, url: string, width: number }, name: { en: string, ru: string, zh: string }, description: { en: string, ru: string, zh: string } } } };
 
 export type RegionsQueryVariables = Exact<{
   data?: InputMaybe<Demo_Rpg_DataGetRegionsesInput>;
 }>;
 
 
-export type RegionsQuery = { regionses: { totalCount: number, edges: Array<{ cursor: string, node: { id: string, versionId: string, createdAt: number | string, publishedAt: number | string, data: { climate: string, cover_image: { fileName: string, height: number, mimeType: string, url: string, width: number }, name: { en: string, ru: string, zh: string }, description: { en: string, ru: string, zh: string } } } }>, pageInfo: { endCursor?: string | null, hasNextPage: boolean } } };
+export type RegionsQuery = { regionses: { totalCount: number, edges: Array<{ cursor: string, node: { id: string, versionId: string, createdAt: number | string, publishedAt: number | string, data: { climate: string, cover_image: { fileId: string, fileName: string, hash: string, height: number, mimeType: string, url: string, width: number }, name: { en: string, ru: string, zh: string }, description: { en: string, ru: string, zh: string } } } }>, pageInfo: { endCursor?: string | null, hasNextPage: boolean } } };
 
 
 export const ClassesDocument = gql`
@@ -3719,7 +3719,9 @@ export const RegionDetailDocument = gql`
     data {
       climate
       cover_image {
+        fileId
         fileName
+        hash
         height
         mimeType
         url
@@ -3752,7 +3754,9 @@ export const RegionsDocument = gql`
         data {
           climate
           cover_image {
+            fileId
             fileName
+            hash
             height
             mimeType
             url

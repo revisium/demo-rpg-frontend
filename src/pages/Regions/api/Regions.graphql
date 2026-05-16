@@ -10,7 +10,9 @@ query Regions($data: Demo_rpg_dataGetRegionsesInput) {
         data {
           climate
           cover_image {
+            fileId
             fileName
+            hash
             height
             mimeType
             url

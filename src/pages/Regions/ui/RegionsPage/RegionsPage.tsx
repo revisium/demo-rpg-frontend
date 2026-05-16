@@ -54,7 +54,7 @@ export const RegionsPage = observer(() => {
         vm.showLoading,
         <CatalogSkeleton
           ariaLabel="Loading regions"
-          columns={{ base: 1, md: 2, xl: 3 }}
+          columns={{ base: 1, md: 2, xl: 5 }}
           itemCount={6}
         />,
       )}

@@ -62,11 +62,8 @@ export function RegionCoverVisual({
         objectFit="cover"
         src={image.src}
         srcSet={image.srcSet}
-        style={{
-          transform: 'scale(1)',
-          transformOrigin: 'center',
-          transition: 'transform 180ms ease',
-        }}
+        transformOrigin="center"
+        transition="transform 180ms ease"
         w="full"
         width={image.width}
       />

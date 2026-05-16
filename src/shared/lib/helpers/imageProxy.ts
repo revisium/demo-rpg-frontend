@@ -21,13 +21,15 @@ export interface PreparedImageSlot {
 }
 
 const IMGPROXY_BASE_URL = 'https://imgproxy.revisium.io/unsafe';
+const TRUSTED_IMAGE_HOSTS = new Set(['cloud.revisium.io', 'revisium.io']);
 
 export function prepareImgproxyImageSlot(request: ImageSlotRequest): PreparedImageSlot | null {
   if (!isAbsoluteHttpUrl(request.sourceUrl)) return null;
+  if (!isPositiveInteger(request.width) || !isPositiveInteger(request.height)) return null;
 
   const baseOptions = [
     `rs:${request.resizeMode}:${request.width}:${request.height}`,
-    `g:${request.gravity ?? 'sm'}`,
+    `g:${request.gravity ?? 'ce'}`,
   ];
   const src = buildImgproxyUrl(request.sourceUrl, baseOptions);
   const src2x = buildImgproxyUrl(request.sourceUrl, [...baseOptions, 'dpr:2']);
@@ -50,8 +52,13 @@ function buildImgproxyUrl(sourceUrl: string, options: readonly string[]): string
 function isAbsoluteHttpUrl(value: string): boolean {
   try {
     const parsed = new URL(value);
-    return parsed.protocol === 'http:' || parsed.protocol === 'https:';
+    if (parsed.protocol !== 'http:' && parsed.protocol !== 'https:') return false;
+    return TRUSTED_IMAGE_HOSTS.has(parsed.hostname) || parsed.hostname.endsWith('.revisium.io');
   } catch {
     return false;
   }
+}
+
+function isPositiveInteger(value: number): boolean {
+  return Number.isInteger(value) && value > 0;
 }
