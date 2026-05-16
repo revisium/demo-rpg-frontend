@@ -19,9 +19,11 @@ QA bridge between the product coverage matrix and frontend implementation.
 | Boolean formula | `/heroes/[id]` | `/parties/[id]` | Badge driven by API formula field. |
 | Count formula | `/parties/[id]` | `/quests/[id]`, `/monsters/[id]` | Count shown with expression in widget. |
 | Sum/avg formula | `/quests/[id]` | `/heroes/[id]`, `/monsters/[id]` | Formula panel maps output to source arrays. |
-| File field: SVG icon | `/items` | `/abilities`, `/factions` | Icon/crest rendered and file metadata shown. |
+| File field: SVG/icon glyph | `/items` | `/abilities`, `/factions`, `/classes` | Icon/crest/class glyph rendered and file metadata shown. |
 | File field: PNG portrait | `/heroes/[id]` | `/npcs/[id]` | Portrait and file metadata shown. |
-| File field: map/image | `/locations/[id]` | `/monsters/[id]` | Image dimensions reserve layout. |
+| File field: cover/map/image | `/regions`, `/locations/[id]` | `/monsters/[id]` | Image dimensions reserve layout. |
+| File field: array | `/locations/[id]` | none | Required `gallery[]` items render with file metadata. |
+| File field: object-array member | `/quests/[id]` | none | Required `steps[].image` renders beside each quest step. |
 | `where` filters | `/items` | `/heroes`, `/quests`, `/news` | Live JSON filter payload. |
 | Multi-key `orderBy` | `/items` | `/news` | Visible `orderBy` array and sorted result. |
 | Cursor pagination | `/regions` | all catalogs | `pageInfo`/cursor visible in widget. |

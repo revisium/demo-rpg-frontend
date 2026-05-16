@@ -1,15 +1,16 @@
 # Locations Catalog
 
-| Field | Value |
-|---|---|
-| Route | `/locations` |
-| Status | Draft |
-| Pattern | Catalog |
-| Primary capability | Region FK and map preview |
+| Field              | Value                                          |
+| ------------------ | ---------------------------------------------- |
+| Route              | `/locations`                                   |
+| Status             | Draft                                          |
+| Pattern            | Catalog                                        |
+| Primary capability | Region FK, map preview, and gallery file array |
 
 ## Purpose
 
-Show location rows that belong to regions and preview map file fields.
+Show location rows that belong to regions and preview required map and gallery
+file fields.
 
 ## Context And Entry
 
@@ -18,48 +19,48 @@ Show location rows that belong to regions and preview map file fields.
 
 ## Functional Blocks
 
-| Block | Requirement |
-|---|---|
-| Header | Locations purpose and capability chips. |
-| Filters | Region and name. |
-| Location list | Name, region, map thumbnail, short description. |
-| Explainer Widget | Required. |
+| Block            | Requirement                                                            |
+| ---------------- | ---------------------------------------------------------------------- |
+| Header           | Locations purpose and capability chips.                                |
+| Filters          | Region and name.                                                       |
+| Location list    | Name, region, map thumbnail, gallery count/preview, short description. |
+| Explainer Widget | Required.                                                              |
 
 ## Primary Actions
 
-| Action | Result |
-|---|---|
-| Filter region | Updates FK equality payload. |
-| Open location | Navigate to `/locations/[id]`. |
-| Open region | Navigate to `/regions/[id]` when available. |
+| Action        | Result                                      |
+| ------------- | ------------------------------------------- |
+| Filter region | Updates FK equality payload.                |
+| Open location | Navigate to `/locations/[id]`.              |
+| Open region   | Navigate to `/regions/[id]` when available. |
 
 ## States
 
-| State | Requirement |
-|---|---|
+| State   | Requirement                 |
+| ------- | --------------------------- |
 | Loading | Map thumbnail placeholders. |
-| Loaded | Cards render locations. |
-| Empty | Reset filters. |
-| Error | Retry. |
+| Loaded  | Cards render locations.     |
+| Empty   | Reset filters.              |
+| Error   | Retry.                      |
 
 ## Transitions
 
-| From | Trigger | To |
-|---|---|---|
+| From           | Trigger       | To                 |
+| -------------- | ------------- | ------------------ |
 | Loaded catalog | Filter region | Refreshing catalog |
-| Loaded catalog | Open location | `/locations/[id]` |
-| Empty | Reset filters | Default catalog |
+| Loaded catalog | Open location | `/locations/[id]`  |
+| Empty          | Reset filters | Default catalog    |
 
 ## Data Contract
 
-| Source | Fields |
-|---|---|
-| `data.locations` | id, localized name/description, `region_id`, `map`. |
-| `data.regions` | region labels. |
+| Source           | Fields                                                                                                                                                            |
+| ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `data.locations` | id, localized name/description, `region_id`, `map.{fileId,url,hash,fileName,mimeType,width,height}`, `gallery[].{fileId,url,hash,fileName,mimeType,width,height}` |
+| `data.regions`   | region labels.                                                                                                                                                    |
 
 ## Explainer Widget
 
-- Summary: "Locations show a region foreign key and large map file metadata."
+- Summary: "Locations show a region foreign key, large map file metadata, and a required file array."
 - Variables: region filter, locale, cursor.
 - Deep links: locations table/schema.
 - Subgraphs: `data`.
@@ -77,7 +78,9 @@ Show location rows that belong to regions and preview map file fields.
 
 - [ ] Region labels are query-driven.
 - [ ] Map thumbnails do not cause layout shift.
+- [ ] Each location card shows gallery preview/count sourced from `gallery[]`.
+- [ ] Gallery metadata is visible in the widget response sample.
 
 ## Open Questions
 
-- Confirm if map file exists on catalog rows or detail only.
+- Confirm how many gallery images should be shown on catalog cards before opening detail.

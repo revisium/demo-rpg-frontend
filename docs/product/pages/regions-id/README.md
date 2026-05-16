@@ -1,10 +1,10 @@
 # Region Detail
 
-| Field | Value |
-|---|---|
-| Route | `/regions/[id]` |
-| Status | In delivery |
-| Pattern | Federated detail |
+| Field              | Value                                                                 |
+| ------------------ | --------------------------------------------------------------------- |
+| Route              | `/regions/[id]`                                                       |
+| Status             | In delivery                                                           |
+| Pattern            | Federated detail                                                      |
 | Primary capability | Revisium-owned fields plus backend-owned fields on one GraphQL entity |
 
 ## Purpose
@@ -20,46 +20,46 @@ Federation once backend enrichment fields are present in the composed schema.
 
 ## Functional Blocks
 
-| Block | Requirement |
-|---|---|
-| Breadcrumb | Prominent back button to regions catalog. |
-| Region header | Name, climate, description, source chips, and generated climate landscape hero. |
-| Backend stats | Shows an unavailable state until likes, view count, comments, or approved equivalents exist. |
-| Related data | Optional related locations/heroes once query supports them. |
-| Federation explanation | Visible field attribution chips on rendered fields. |
-| Explainer Widget | Required with federation disclosure and SDL excerpt. |
+| Block                  | Requirement                                                                                  |
+| ---------------------- | -------------------------------------------------------------------------------------------- |
+| Breadcrumb             | Prominent back button to regions catalog.                                                    |
+| Region header          | Name, climate, description, source chips, and required `cover_image` hero.                   |
+| Backend stats          | Shows an unavailable state until likes, view count, comments, or approved equivalents exist. |
+| Related data           | Optional related locations/heroes once query supports them.                                  |
+| Federation explanation | Visible field attribution chips on rendered fields.                                          |
+| Explainer Widget       | Required with federation disclosure and SDL excerpt.                                         |
 
 ## Primary Actions
 
-| Action | Result |
-|---|---|
-| Back to catalog | Navigate to `/regions` from a visible back-arrow button. |
-| Open cloud row | Opens the matching region row in `demo-rpg-data`. |
-| View federation source | Opens backend source/SDL link once available. |
+| Action                 | Result                                                   |
+| ---------------------- | -------------------------------------------------------- |
+| Back to catalog        | Navigate to `/regions` from a visible back-arrow button. |
+| Open cloud row         | Opens the matching region row in `demo-rpg-data`.        |
+| View federation source | Opens backend source/SDL link once available.            |
 
 ## States
 
-| State | Requirement |
-|---|---|
-| Loading | Stable detail skeleton. |
-| Loaded | Shows Revisium-owned data fields and the backend-unavailable block. |
-| Not found | Region id does not exist or GraphQL returns an id error; link back to catalog. |
+| State                 | Requirement                                                                                             |
+| --------------------- | ------------------------------------------------------------------------------------------------------- |
+| Loading               | Stable detail skeleton.                                                                                 |
+| Loaded                | Shows Revisium-owned data fields and the backend-unavailable block.                                     |
+| Not found             | Region id does not exist or GraphQL returns an id error; link back to catalog.                          |
 | Partial backend error | Revisium fields remain visible; backend block shows unavailable state if GraphQL supports partial data. |
-| Error | Visitor-readable error. |
+| Error                 | Visitor-readable error.                                                                                 |
 
 ## Transitions
 
-| From | Trigger | To |
-|---|---|---|
-| Catalog | Card click | Detail loading |
-| Detail loaded | Back click | Catalog |
+| From          | Trigger    | To             |
+| ------------- | ---------- | -------------- |
+| Catalog       | Card click | Detail loading |
+| Detail loaded | Back click | Catalog        |
 
 ## Data Contract
 
-| Source | Fields |
-|---|---|
-| `data.regions` | `id`, `data.name`, `data.description`, `data.climate`. |
-| `backend.RegionsNode` | Blocked until `likes`, `viewCount`, `comments` or approved equivalents appear in the composed schema. |
+| Source                | Fields                                                                                                                     |
+| --------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `data.regions`        | `id`, `data.name`, `data.description`, `data.cover_image.{fileId,url,hash,fileName,mimeType,width,height}`, `data.climate` |
+| `backend.RegionsNode` | Blocked until `likes`, `viewCount`, `comments` or approved equivalents appear in the composed schema.                      |
 
 ## Explainer Widget
 
@@ -67,7 +67,7 @@ Federation once backend enrichment fields are present in the composed schema.
 - Surfaces: GraphQL required; REST/MCP if equivalents exist.
 - Variables: GraphQL region id; locale remains visible through rendered field
   state and fallback notes.
-- Field attribution: `name`, `description`, `climate` -> `data`; stats/comments -> `backend` once available.
+- Field attribution: `name`, `description`, `cover_image`, `climate` -> `data`; stats/comments -> `backend` once available.
 - Federation: unavailable note until backend `extend type RegionsNode` is present.
 - Deep links: matching cloud region row.
 - Subgraphs: `data`; add `backend` once backend fields are present.
@@ -76,8 +76,8 @@ Federation once backend enrichment fields are present in the composed schema.
 
 - Phone: stats stack below header with a floating widget trigger.
 - Tablet/Desktop: detail content stays primary with a floating widget trigger; backend stats visible above fold.
-- Generated climate landscape hero adds orientation, but the climate text badge remains
-  the source of meaning.
+- The required `cover_image` renders through imgproxy as the hero media. The
+  climate text badge remains the source of meaning when art is unavailable or abstract.
 - Revisium-owned field rows use subtle hover/focus surface feedback for scan
   affordance, while field attribution remains explicit in the widget.
 
@@ -88,7 +88,9 @@ Federation once backend enrichment fields are present in the composed schema.
 
 ## Acceptance Criteria
 
-- [x] Renders Revisium-owned region fields from GraphQL.
+- [x] Renders Revisium-owned region text fields from GraphQL.
+- [ ] Renders required `cover_image` from GraphQL through imgproxy.
+- [ ] Required `cover_image` reserves layout and renders without layout shift on phone/tablet/desktop.
 - [x] Field ownership is visible in the page UI and widget for data-owned fields.
 - [x] Backend-unavailable state is visible while federation fields are absent.
 - [ ] Renders at least one backend-owned field in the same GraphQL result.

@@ -1,11 +1,11 @@
 # Regions Catalog
 
-| Field | Value |
-|---|---|
-| Route | `/regions` |
-| Status | In delivery |
-| Pattern | Reference catalog |
-| Primary capability | Nested JSON objects, localized strings, enum, totalCount, pagination |
+| Field              | Value                                                                                     |
+| ------------------ | ----------------------------------------------------------------------------------------- |
+| Route              | `/regions`                                                                                |
+| Status             | In delivery                                                                               |
+| Pattern            | Reference catalog                                                                         |
+| Primary capability | Nested JSON objects, localized strings, enum, required file field, totalCount, pagination |
 
 ## Purpose
 
@@ -20,52 +20,52 @@ simple Revisium-generated list pages.
 
 ## Functional Blocks
 
-| Block | Requirement |
-|---|---|
-| Header | Title, short explanation, chips for `data.regions`, enum, localized strings. |
-| Result summary | Shows visible count and `totalCount`. |
-| Climate filter | Server-side JSON filter using `data.path = ["climate"]`. |
-| Region list | Cards with name, description, climate, generated climate landscape, and detail link. |
-| Pagination | Shows connection `pageInfo`; load-more fetches the next cursor. |
-| Explainer Widget | Required; shows `Regions` operation, variables, response sample, cloud links. |
+| Block            | Requirement                                                                              |
+| ---------------- | ---------------------------------------------------------------------------------------- |
+| Header           | Title, short explanation, chips for `data.regions`, enum, localized strings, file field. |
+| Result summary   | Shows visible count and `totalCount`.                                                    |
+| Climate filter   | Server-side JSON filter using `data.path = ["climate"]`.                                 |
+| Region list      | Cards with name, description, climate, `cover_image` thumbnail, and detail link.         |
+| Pagination       | Shows connection `pageInfo`; load-more fetches the next cursor.                          |
+| Explainer Widget | Required; shows `Regions` operation, variables, response sample, cloud links.            |
 
 ## Primary Actions
 
-| Action | Result |
-|---|---|
-| Change locale | Re-query with selected localized sub-fields or update selection according to query design. |
-| Filter climate | Updates filter payload preview and re-queries the connection with a JSON filter. |
-| Load more | Fetches next cursor and updates widget variables. |
-| Open region | Navigate to `/regions/[id]`. |
-| View in cloud | Opens `demo-rpg-data` regions table. |
+| Action         | Result                                                                                     |
+| -------------- | ------------------------------------------------------------------------------------------ |
+| Change locale  | Re-query with selected localized sub-fields or update selection according to query design. |
+| Filter climate | Updates filter payload preview and re-queries the connection with a JSON filter.           |
+| Load more      | Fetches next cursor and updates widget variables.                                          |
+| Open region    | Navigate to `/regions/[id]`.                                                               |
+| View in cloud  | Opens `demo-rpg-data` regions table.                                                       |
 
 ## States
 
-| State | Requirement |
-|---|---|
-| Loading | Show stable list skeleton and widget skeleton. |
-| Loaded | Show cards, count, and widget response. |
-| Empty | Show "No regions match this filter" plus reset. |
-| Error | Name GraphQL/router failure where possible and keep retry action. |
+| State   | Requirement                                                       |
+| ------- | ----------------------------------------------------------------- |
+| Loading | Show stable list skeleton and widget skeleton.                    |
+| Loaded  | Show cards, count, and widget response.                           |
+| Empty   | Show "No regions match this filter" plus reset.                   |
+| Error   | Name GraphQL/router failure where possible and keep retry action. |
 
 ## Transitions
 
-| From | Trigger | To |
-|---|---|---|
-| Loaded | Locale change | Refreshing with previous cards preserved |
-| Loaded | Filter change | JSON preview updates and the list refreshes with server-side filter variables |
-| Preview updated | Apply/debounce | Refreshing list |
-| Loaded | Load more | Appended results |
+| From            | Trigger        | To                                                                            |
+| --------------- | -------------- | ----------------------------------------------------------------------------- |
+| Loaded          | Locale change  | Refreshing with previous cards preserved                                      |
+| Loaded          | Filter change  | JSON preview updates and the list refreshes with server-side filter variables |
+| Preview updated | Apply/debounce | Refreshing list                                                               |
+| Loaded          | Load more      | Appended results                                                              |
 
 ## Data Contract
 
-| Source | Fields |
-|---|---|
-| `data.regions` | `id`, `data.name.{locale}`, `data.description.{locale}`, `data.climate`, `createdAt`, `publishedAt`, `totalCount`, `pageInfo`. |
+| Source         | Fields                                                                                                                                                                                             |
+| -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `data.regions` | `id`, `data.name.{locale}`, `data.description.{locale}`, `data.cover_image.{fileId,url,hash,fileName,mimeType,width,height}`, `data.climate`, `createdAt`, `publishedAt`, `totalCount`, `pageInfo` |
 
 ## Explainer Widget
 
-- Summary: "Regions show how a nested localized JSON Schema becomes a typed GraphQL catalog with enum fields and total count."
+- Summary: "Regions show how localized fields, a required Admin-uploaded cover image, enum fields, pagination, and total count become a typed GraphQL catalog."
 - Surfaces: GraphQL required; REST/MCP once backend exposes equivalents.
 - Variables: locale, climate filter, cursor, page size, and generated `data` input payload.
 - Response sample: current visible region edges plus `totalCount`.
@@ -77,8 +77,10 @@ simple Revisium-generated list pages.
 - Phone: single column, floating widget trigger, filter bottom sheet, 16px page gutters.
 - Tablet: main content column with floating widget trigger and 24px gutters.
 - Desktop: cards in dense grid/table, floating widget trigger, max content width `1440px`, 32px gutters.
-- Generated climate landscapes add quick visual scanning, but the climate text badge
-  remains the source of meaning.
+- Region cards render the required `cover_image` through imgproxy. The climate
+  text badge remains the source of meaning when art is unavailable or abstract.
+  The card reserves space for `cover_image` so imgproxy-served art renders
+  without layout shift across phone, tablet, and desktop widths.
 - Region cards use a restrained hover/focus lift, accent border, and subtle
   landscape scale to signal clickability without changing card dimensions.
 
