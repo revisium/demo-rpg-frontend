@@ -79,6 +79,8 @@ simple Revisium-generated list pages.
 - Desktop: cards in dense grid/table, floating widget trigger, max content width `1440px`, 32px gutters.
 - Region cards render the required `cover_image` through imgproxy. The climate
   text badge remains the source of meaning when art is unavailable or abstract.
+  The card reserves space for `cover_image` so imgproxy-served art renders
+  without layout shift across phone, tablet, and desktop widths.
 - Region cards use a restrained hover/focus lift, accent border, and subtle
   landscape scale to signal clickability without changing card dimensions.
 
