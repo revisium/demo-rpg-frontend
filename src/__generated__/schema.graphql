@@ -982,6 +982,7 @@ type Demo_rpg_dataClasses {
   base_hp: Float!
   description: Demo_rpg_dataClassesDescription!
   hp_per_level: Float!
+  icon: Demo_rpg_dataClassesIcon!
   mp_per_level: Float!
   name: Demo_rpg_dataClassesName!
   primary_stat: String!
@@ -1009,6 +1010,7 @@ type Demo_rpg_dataClassesFlat {
   base_hp: Float!
   description: Demo_rpg_dataClassesFlatDescription!
   hp_per_level: Float!
+  icon: Demo_rpg_dataClassesFlatIcon!
   mp_per_level: Float!
   name: Demo_rpg_dataClassesFlatName!
   primary_stat: String!
@@ -1032,10 +1034,36 @@ type Demo_rpg_dataClassesFlatEdge {
   node: Demo_rpg_dataClassesFlat!
 }
 
+type Demo_rpg_dataClassesFlatIcon {
+  extension: String!
+  fileId: String!
+  fileName: String!
+  hash: String!
+  height: Float!
+  mimeType: String!
+  size: Float!
+  status: String!
+  url: String!
+  width: Float!
+}
+
 type Demo_rpg_dataClassesFlatName {
   en: String!
   ru: String!
   zh: String!
+}
+
+type Demo_rpg_dataClassesIcon {
+  extension: String!
+  fileId: String!
+  fileName: String!
+  hash: String!
+  height: Float!
+  mimeType: String!
+  size: Float!
+  status: String!
+  url: String!
+  width: Float!
 }
 
 type Demo_rpg_dataClassesName {
@@ -2100,6 +2128,7 @@ input Demo_rpg_dataJsonFilter {
 type Demo_rpg_dataLocations {
   coordinates: Demo_rpg_dataLocationsCoordinates!
   description: Demo_rpg_dataLocationsDescription!
+  gallery: [Demo_rpg_dataLocationsGalleryItems!]!
   kind: String!
   map: Demo_rpg_dataLocationsMap!
   name: Demo_rpg_dataLocationsName!
@@ -2131,6 +2160,7 @@ type Demo_rpg_dataLocationsEdge {
 type Demo_rpg_dataLocationsFlat {
   coordinates: Demo_rpg_dataLocationsFlatCoordinates!
   description: Demo_rpg_dataLocationsFlatDescription!
+  gallery: [Demo_rpg_dataLocationsFlatGalleryItems!]!
   kind: String!
   map: Demo_rpg_dataLocationsFlatMap!
   name: Demo_rpg_dataLocationsFlatName!
@@ -2159,6 +2189,19 @@ type Demo_rpg_dataLocationsFlatEdge {
   node: Demo_rpg_dataLocationsFlat!
 }
 
+type Demo_rpg_dataLocationsFlatGalleryItems {
+  extension: String!
+  fileId: String!
+  fileName: String!
+  hash: String!
+  height: Float!
+  mimeType: String!
+  size: Float!
+  status: String!
+  url: String!
+  width: Float!
+}
+
 type Demo_rpg_dataLocationsFlatMap {
   extension: String!
   fileId: String!
@@ -2176,6 +2219,19 @@ type Demo_rpg_dataLocationsFlatName {
   en: String!
   ru: String!
   zh: String!
+}
+
+type Demo_rpg_dataLocationsGalleryItems {
+  extension: String!
+  fileId: String!
+  fileName: String!
+  hash: String!
+  height: Float!
+  mimeType: String!
+  size: Float!
+  status: String!
+  url: String!
+  width: Float!
 }
 
 type Demo_rpg_dataLocationsMap {
@@ -2691,6 +2747,7 @@ type Demo_rpg_dataQuestsFlatName {
 
 type Demo_rpg_dataQuestsFlatStepsItems {
   description: Demo_rpg_dataQuestsFlatStepsItemsDescription!
+  image: Demo_rpg_dataQuestsFlatStepsItemsImage!
   location_id: Demo_rpg_dataLocationsFlat!
   npc_id: Demo_rpg_dataNpcsFlat!
   rewards: [Demo_rpg_dataQuestsFlatStepsItemsRewardsItems!]!
@@ -2702,6 +2759,19 @@ type Demo_rpg_dataQuestsFlatStepsItemsDescription {
   en: String!
   ru: String!
   zh: String!
+}
+
+type Demo_rpg_dataQuestsFlatStepsItemsImage {
+  extension: String!
+  fileId: String!
+  fileName: String!
+  hash: String!
+  height: Float!
+  mimeType: String!
+  size: Float!
+  status: String!
+  url: String!
+  width: Float!
 }
 
 type Demo_rpg_dataQuestsFlatStepsItemsRewardsItems {
@@ -2742,6 +2812,7 @@ type Demo_rpg_dataQuestsNode {
 
 type Demo_rpg_dataQuestsStepsItems {
   description: Demo_rpg_dataQuestsStepsItemsDescription!
+  image: Demo_rpg_dataQuestsStepsItemsImage!
   location_id: Demo_rpg_dataLocationsNode!
   npc_id: Demo_rpg_dataNpcsNode!
   rewards: [Demo_rpg_dataQuestsStepsItemsRewardsItems!]!
@@ -2753,6 +2824,19 @@ type Demo_rpg_dataQuestsStepsItemsDescription {
   en: String!
   ru: String!
   zh: String!
+}
+
+type Demo_rpg_dataQuestsStepsItemsImage {
+  extension: String!
+  fileId: String!
+  fileName: String!
+  hash: String!
+  height: Float!
+  mimeType: String!
+  size: Float!
+  status: String!
+  url: String!
+  width: Float!
 }
 
 type Demo_rpg_dataQuestsStepsItemsRewardsItems {
@@ -2777,6 +2861,7 @@ input Demo_rpg_dataQuestsesWhereInput {
 
 type Demo_rpg_dataRegions {
   climate: String!
+  cover_image: Demo_rpg_dataRegionsCover_image!
   description: Demo_rpg_dataRegionsDescription!
   name: Demo_rpg_dataRegionsName!
 }
@@ -2785,6 +2870,19 @@ type Demo_rpg_dataRegionsConnection {
   edges: [Demo_rpg_dataRegionsEdge!]!
   pageInfo: Demo_rpg_dataPageInfo!
   totalCount: Int!
+}
+
+type Demo_rpg_dataRegionsCover_image {
+  extension: String!
+  fileId: String!
+  fileName: String!
+  hash: String!
+  height: Float!
+  mimeType: String!
+  size: Float!
+  status: String!
+  url: String!
+  width: Float!
 }
 
 type Demo_rpg_dataRegionsDescription {
@@ -2800,6 +2898,7 @@ type Demo_rpg_dataRegionsEdge {
 
 type Demo_rpg_dataRegionsFlat {
   climate: String!
+  cover_image: Demo_rpg_dataRegionsFlatCover_image!
   description: Demo_rpg_dataRegionsFlatDescription!
   name: Demo_rpg_dataRegionsFlatName!
 }
@@ -2808,6 +2907,19 @@ type Demo_rpg_dataRegionsFlatConnection {
   edges: [Demo_rpg_dataRegionsFlatEdge!]!
   pageInfo: Demo_rpg_dataPageInfo!
   totalCount: Int!
+}
+
+type Demo_rpg_dataRegionsFlatCover_image {
+  extension: String!
+  fileId: String!
+  fileName: String!
+  hash: String!
+  height: Float!
+  mimeType: String!
+  size: Float!
+  status: String!
+  url: String!
+  width: Float!
 }
 
 type Demo_rpg_dataRegionsFlatDescription {

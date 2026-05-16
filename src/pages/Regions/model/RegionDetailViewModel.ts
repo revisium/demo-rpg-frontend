@@ -6,10 +6,15 @@ import {
   hasRequestError,
   isInitialLoading,
   isRefreshing,
+  type PreparedImageSlot,
 } from 'src/shared/lib';
 import type { ExplainerDescriptor } from 'src/widgets/explainer-widget';
 import { RegionDetailDataSource, type RegionDetailNode } from '../api/RegionDetailDataSource';
 import type { RegionLocale } from './RegionItemViewModel';
+import {
+  getRegionCoverImageMetadata,
+  prepareRegionHeroCoverImage,
+} from './regionCoverImages';
 
 // Keep this explainer copy aligned with src/pages/Regions/api/RegionDetail.graphql.
 const REGION_DETAIL_QUERY = `query RegionDetail($id: String!) {
@@ -20,6 +25,13 @@ const REGION_DETAIL_QUERY = `query RegionDetail($id: String!) {
     publishedAt
     data {
       climate
+      cover_image {
+        fileName
+        height
+        mimeType
+        url
+        width
+      }
       name { en ru zh }
       description { en ru zh }
     }
@@ -69,6 +81,11 @@ export class RegionDetailViewModel implements IViewModel {
 
   public get climate(): string {
     return this.item?.data.climate ?? 'unknown';
+  }
+
+  public get coverImage(): PreparedImageSlot | null {
+    if (!this.item) return null;
+    return prepareRegionHeroCoverImage(this.item.data.cover_image, this.item.id, this.title);
   }
 
   public get localeLabel(): string {
@@ -126,6 +143,7 @@ export class RegionDetailViewModel implements IViewModel {
         { path: 'regions.data.name', owningSubgraph: 'data' },
         { path: 'regions.data.description', owningSubgraph: 'data' },
         { path: 'regions.data.climate', owningSubgraph: 'data' },
+        { path: 'regions.data.cover_image', owningSubgraph: 'data' },
       ],
       localeFallbacks: this.localeFallbacks,
       footerNote:
@@ -163,6 +181,7 @@ export class RegionDetailViewModel implements IViewModel {
     return {
       id: this.item.id,
       climate: this.item.data.climate,
+      coverImage: getRegionCoverImageMetadata(this.item.data.cover_image),
       name: this.item.data.name,
       publishedAt: this.item.publishedAt,
       backendFields: 'unavailable until backend RegionsNode fields are composed',

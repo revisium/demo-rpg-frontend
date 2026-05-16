@@ -9,6 +9,13 @@ query Regions($data: Demo_rpg_dataGetRegionsesInput) {
         publishedAt
         data {
           climate
+          cover_image {
+            fileName
+            height
+            mimeType
+            url
+            width
+          }
           name {
             en
             ru

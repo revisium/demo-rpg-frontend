@@ -47,6 +47,13 @@ const REGIONS_QUERY = `query Regions($data: Demo_rpg_dataGetRegionsesInput) {
         publishedAt
         data {
           climate
+          cover_image {
+            fileName
+            height
+            mimeType
+            url
+            width
+          }
           name { en ru zh }
           description { en ru zh }
         }
@@ -261,6 +268,10 @@ export class RegionsViewModel implements IViewModel {
       edges: this.visibleNodes.slice(0, 3).map((node) => ({
         id: node.id,
         climate: node.data.climate,
+        coverImage: {
+          fileName: node.data.cover_image.fileName,
+          mimeType: node.data.cover_image.mimeType,
+        },
         name: node.data.name[this.locale],
       })),
     };

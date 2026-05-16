@@ -1,6 +1,8 @@
 import { makeAutoObservable } from 'mobx';
 
+import type { PreparedImageSlot } from 'src/shared/lib';
 import type { RegionNode } from '../api/RegionsDataSource';
+import { prepareRegionCardCoverImage } from './regionCoverImages';
 
 export type RegionLocale = 'en' | 'ru' | 'zh';
 
@@ -39,6 +41,10 @@ export class RegionItemViewModel {
 
   public get climate(): string {
     return this.node.data.climate;
+  }
+
+  public get coverImage(): PreparedImageSlot | null {
+    return prepareRegionCardCoverImage(this.node.data.cover_image, this.id, this.title);
   }
 
   public get publishedLabel(): string {

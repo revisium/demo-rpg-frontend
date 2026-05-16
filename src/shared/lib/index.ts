@@ -10,6 +10,13 @@ export {
   totalCatalogCount,
   type CatalogResult,
 } from './helpers/catalogViewModel';
+export {
+  prepareImgproxyImageSlot,
+  type ImageGravity,
+  type ImageResizeMode,
+  type ImageSlotRequest,
+  type PreparedImageSlot,
+} from './helpers/imageProxy';
 export { isClient } from './helpers/isClient';
 export { renderWhen } from './helpers/renderWhen';
 export { useViewModel } from './hooks/useViewModel';

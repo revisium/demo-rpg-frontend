@@ -991,6 +991,7 @@ export type Demo_Rpg_DataClasses = {
   base_hp: Scalars['Float']['output'];
   description: Demo_Rpg_DataClassesDescription;
   hp_per_level: Scalars['Float']['output'];
+  icon: Demo_Rpg_DataClassesIcon;
   mp_per_level: Scalars['Float']['output'];
   name: Demo_Rpg_DataClassesName;
   primary_stat: Scalars['String']['output'];
@@ -1018,6 +1019,7 @@ export type Demo_Rpg_DataClassesFlat = {
   base_hp: Scalars['Float']['output'];
   description: Demo_Rpg_DataClassesFlatDescription;
   hp_per_level: Scalars['Float']['output'];
+  icon: Demo_Rpg_DataClassesFlatIcon;
   mp_per_level: Scalars['Float']['output'];
   name: Demo_Rpg_DataClassesFlatName;
   primary_stat: Scalars['String']['output'];
@@ -1041,10 +1043,36 @@ export type Demo_Rpg_DataClassesFlatEdge = {
   node: Demo_Rpg_DataClassesFlat;
 };
 
+export type Demo_Rpg_DataClassesFlatIcon = {
+  extension: Scalars['String']['output'];
+  fileId: Scalars['String']['output'];
+  fileName: Scalars['String']['output'];
+  hash: Scalars['String']['output'];
+  height: Scalars['Float']['output'];
+  mimeType: Scalars['String']['output'];
+  size: Scalars['Float']['output'];
+  status: Scalars['String']['output'];
+  url: Scalars['String']['output'];
+  width: Scalars['Float']['output'];
+};
+
 export type Demo_Rpg_DataClassesFlatName = {
   en: Scalars['String']['output'];
   ru: Scalars['String']['output'];
   zh: Scalars['String']['output'];
+};
+
+export type Demo_Rpg_DataClassesIcon = {
+  extension: Scalars['String']['output'];
+  fileId: Scalars['String']['output'];
+  fileName: Scalars['String']['output'];
+  hash: Scalars['String']['output'];
+  height: Scalars['Float']['output'];
+  mimeType: Scalars['String']['output'];
+  size: Scalars['Float']['output'];
+  status: Scalars['String']['output'];
+  url: Scalars['String']['output'];
+  width: Scalars['Float']['output'];
 };
 
 export type Demo_Rpg_DataClassesName = {
@@ -2109,6 +2137,7 @@ export type Demo_Rpg_DataJsonFilter = {
 export type Demo_Rpg_DataLocations = {
   coordinates: Demo_Rpg_DataLocationsCoordinates;
   description: Demo_Rpg_DataLocationsDescription;
+  gallery: Array<Demo_Rpg_DataLocationsGalleryItems>;
   kind: Scalars['String']['output'];
   map: Demo_Rpg_DataLocationsMap;
   name: Demo_Rpg_DataLocationsName;
@@ -2140,6 +2169,7 @@ export type Demo_Rpg_DataLocationsEdge = {
 export type Demo_Rpg_DataLocationsFlat = {
   coordinates: Demo_Rpg_DataLocationsFlatCoordinates;
   description: Demo_Rpg_DataLocationsFlatDescription;
+  gallery: Array<Demo_Rpg_DataLocationsFlatGalleryItems>;
   kind: Scalars['String']['output'];
   map: Demo_Rpg_DataLocationsFlatMap;
   name: Demo_Rpg_DataLocationsFlatName;
@@ -2168,6 +2198,19 @@ export type Demo_Rpg_DataLocationsFlatEdge = {
   node: Demo_Rpg_DataLocationsFlat;
 };
 
+export type Demo_Rpg_DataLocationsFlatGalleryItems = {
+  extension: Scalars['String']['output'];
+  fileId: Scalars['String']['output'];
+  fileName: Scalars['String']['output'];
+  hash: Scalars['String']['output'];
+  height: Scalars['Float']['output'];
+  mimeType: Scalars['String']['output'];
+  size: Scalars['Float']['output'];
+  status: Scalars['String']['output'];
+  url: Scalars['String']['output'];
+  width: Scalars['Float']['output'];
+};
+
 export type Demo_Rpg_DataLocationsFlatMap = {
   extension: Scalars['String']['output'];
   fileId: Scalars['String']['output'];
@@ -2185,6 +2228,19 @@ export type Demo_Rpg_DataLocationsFlatName = {
   en: Scalars['String']['output'];
   ru: Scalars['String']['output'];
   zh: Scalars['String']['output'];
+};
+
+export type Demo_Rpg_DataLocationsGalleryItems = {
+  extension: Scalars['String']['output'];
+  fileId: Scalars['String']['output'];
+  fileName: Scalars['String']['output'];
+  hash: Scalars['String']['output'];
+  height: Scalars['Float']['output'];
+  mimeType: Scalars['String']['output'];
+  size: Scalars['Float']['output'];
+  status: Scalars['String']['output'];
+  url: Scalars['String']['output'];
+  width: Scalars['Float']['output'];
 };
 
 export type Demo_Rpg_DataLocationsMap = {
@@ -2700,6 +2756,7 @@ export type Demo_Rpg_DataQuestsFlatName = {
 
 export type Demo_Rpg_DataQuestsFlatStepsItems = {
   description: Demo_Rpg_DataQuestsFlatStepsItemsDescription;
+  image: Demo_Rpg_DataQuestsFlatStepsItemsImage;
   location_id: Demo_Rpg_DataLocationsFlat;
   npc_id: Demo_Rpg_DataNpcsFlat;
   rewards: Array<Demo_Rpg_DataQuestsFlatStepsItemsRewardsItems>;
@@ -2711,6 +2768,19 @@ export type Demo_Rpg_DataQuestsFlatStepsItemsDescription = {
   en: Scalars['String']['output'];
   ru: Scalars['String']['output'];
   zh: Scalars['String']['output'];
+};
+
+export type Demo_Rpg_DataQuestsFlatStepsItemsImage = {
+  extension: Scalars['String']['output'];
+  fileId: Scalars['String']['output'];
+  fileName: Scalars['String']['output'];
+  hash: Scalars['String']['output'];
+  height: Scalars['Float']['output'];
+  mimeType: Scalars['String']['output'];
+  size: Scalars['Float']['output'];
+  status: Scalars['String']['output'];
+  url: Scalars['String']['output'];
+  width: Scalars['Float']['output'];
 };
 
 export type Demo_Rpg_DataQuestsFlatStepsItemsRewardsItems = {
@@ -2751,6 +2821,7 @@ export type Demo_Rpg_DataQuestsNode = {
 
 export type Demo_Rpg_DataQuestsStepsItems = {
   description: Demo_Rpg_DataQuestsStepsItemsDescription;
+  image: Demo_Rpg_DataQuestsStepsItemsImage;
   location_id: Demo_Rpg_DataLocationsNode;
   npc_id: Demo_Rpg_DataNpcsNode;
   rewards: Array<Demo_Rpg_DataQuestsStepsItemsRewardsItems>;
@@ -2762,6 +2833,19 @@ export type Demo_Rpg_DataQuestsStepsItemsDescription = {
   en: Scalars['String']['output'];
   ru: Scalars['String']['output'];
   zh: Scalars['String']['output'];
+};
+
+export type Demo_Rpg_DataQuestsStepsItemsImage = {
+  extension: Scalars['String']['output'];
+  fileId: Scalars['String']['output'];
+  fileName: Scalars['String']['output'];
+  hash: Scalars['String']['output'];
+  height: Scalars['Float']['output'];
+  mimeType: Scalars['String']['output'];
+  size: Scalars['Float']['output'];
+  status: Scalars['String']['output'];
+  url: Scalars['String']['output'];
+  width: Scalars['Float']['output'];
 };
 
 export type Demo_Rpg_DataQuestsStepsItemsRewardsItems = {
@@ -2786,6 +2870,7 @@ export type Demo_Rpg_DataQuestsesWhereInput = {
 
 export type Demo_Rpg_DataRegions = {
   climate: Scalars['String']['output'];
+  cover_image: Demo_Rpg_DataRegionsCover_Image;
   description: Demo_Rpg_DataRegionsDescription;
   name: Demo_Rpg_DataRegionsName;
 };
@@ -2794,6 +2879,19 @@ export type Demo_Rpg_DataRegionsConnection = {
   edges: Array<Demo_Rpg_DataRegionsEdge>;
   pageInfo: Demo_Rpg_DataPageInfo;
   totalCount: Scalars['Int']['output'];
+};
+
+export type Demo_Rpg_DataRegionsCover_Image = {
+  extension: Scalars['String']['output'];
+  fileId: Scalars['String']['output'];
+  fileName: Scalars['String']['output'];
+  hash: Scalars['String']['output'];
+  height: Scalars['Float']['output'];
+  mimeType: Scalars['String']['output'];
+  size: Scalars['Float']['output'];
+  status: Scalars['String']['output'];
+  url: Scalars['String']['output'];
+  width: Scalars['Float']['output'];
 };
 
 export type Demo_Rpg_DataRegionsDescription = {
@@ -2809,6 +2907,7 @@ export type Demo_Rpg_DataRegionsEdge = {
 
 export type Demo_Rpg_DataRegionsFlat = {
   climate: Scalars['String']['output'];
+  cover_image: Demo_Rpg_DataRegionsFlatCover_Image;
   description: Demo_Rpg_DataRegionsFlatDescription;
   name: Demo_Rpg_DataRegionsFlatName;
 };
@@ -2817,6 +2916,19 @@ export type Demo_Rpg_DataRegionsFlatConnection = {
   edges: Array<Demo_Rpg_DataRegionsFlatEdge>;
   pageInfo: Demo_Rpg_DataPageInfo;
   totalCount: Scalars['Int']['output'];
+};
+
+export type Demo_Rpg_DataRegionsFlatCover_Image = {
+  extension: Scalars['String']['output'];
+  fileId: Scalars['String']['output'];
+  fileName: Scalars['String']['output'];
+  hash: Scalars['String']['output'];
+  height: Scalars['Float']['output'];
+  mimeType: Scalars['String']['output'];
+  size: Scalars['Float']['output'];
+  status: Scalars['String']['output'];
+  url: Scalars['String']['output'];
+  width: Scalars['Float']['output'];
 };
 
 export type Demo_Rpg_DataRegionsFlatDescription = {
@@ -3551,14 +3663,14 @@ export type RegionDetailQueryVariables = Exact<{
 }>;
 
 
-export type RegionDetailQuery = { regions: { id: string, versionId: string, createdAt: number | string, publishedAt: number | string, data: { climate: string, name: { en: string, ru: string, zh: string }, description: { en: string, ru: string, zh: string } } } };
+export type RegionDetailQuery = { regions: { id: string, versionId: string, createdAt: number | string, publishedAt: number | string, data: { climate: string, cover_image: { fileName: string, height: number, mimeType: string, url: string, width: number }, name: { en: string, ru: string, zh: string }, description: { en: string, ru: string, zh: string } } } };
 
 export type RegionsQueryVariables = Exact<{
   data?: InputMaybe<Demo_Rpg_DataGetRegionsesInput>;
 }>;
 
 
-export type RegionsQuery = { regionses: { totalCount: number, edges: Array<{ cursor: string, node: { id: string, versionId: string, createdAt: number | string, publishedAt: number | string, data: { climate: string, name: { en: string, ru: string, zh: string }, description: { en: string, ru: string, zh: string } } } }>, pageInfo: { endCursor?: string | null, hasNextPage: boolean } } };
+export type RegionsQuery = { regionses: { totalCount: number, edges: Array<{ cursor: string, node: { id: string, versionId: string, createdAt: number | string, publishedAt: number | string, data: { climate: string, cover_image: { fileName: string, height: number, mimeType: string, url: string, width: number }, name: { en: string, ru: string, zh: string }, description: { en: string, ru: string, zh: string } } } }>, pageInfo: { endCursor?: string | null, hasNextPage: boolean } } };
 
 
 export const ClassesDocument = gql`
@@ -3606,6 +3718,13 @@ export const RegionDetailDocument = gql`
     publishedAt
     data {
       climate
+      cover_image {
+        fileName
+        height
+        mimeType
+        url
+        width
+      }
       name {
         en
         ru
@@ -3632,6 +3751,13 @@ export const RegionsDocument = gql`
         publishedAt
         data {
           climate
+          cover_image {
+            fileName
+            height
+            mimeType
+            url
+            width
+          }
           name {
             en
             ru
