@@ -18,11 +18,40 @@ export function AppLayout({ children }: AppLayoutProps) {
   const location = useLocation();
 
   return (
-    <Box bg="gray.50" color="gray.900" minH="100dvh" overflowX="clip">
+    <Box
+      bg="#0b1118"
+      color="#f4f7f8"
+      minH="100dvh"
+      overflowX="clip"
+      position="relative"
+      _before={{
+        bgImage:
+          'radial-gradient(circle at 12% 18%, rgba(103, 232, 249, 0.24) 0 1px, transparent 1.5px), radial-gradient(circle at 78% 12%, rgba(154, 167, 177, 0.26) 0 1px, transparent 1.5px), radial-gradient(circle at 88% 72%, rgba(52, 211, 153, 0.16) 0 1px, transparent 1.5px), linear-gradient(115deg, transparent 0 42%, rgba(34, 211, 238, 0.08) 42.2%, transparent 43%), linear-gradient(16deg, transparent 0 62%, rgba(45, 212, 191, 0.06) 62.2%, transparent 63%)',
+        bgSize: '180px 180px, 260px 260px, 220px 220px, 520px 520px, 620px 620px',
+        content: '""',
+        inset: '0',
+        opacity: 0.72,
+        pointerEvents: 'none',
+        position: 'fixed',
+        zIndex: 0,
+      }}
+      _after={{
+        bgImage:
+          'radial-gradient(circle at 50% 0%, rgba(16, 25, 35, 0.78), rgba(7, 11, 16, 0.36) 42%, rgba(7, 11, 16, 0.84) 100%)',
+        content: '""',
+        inset: '0',
+        pointerEvents: 'none',
+        position: 'fixed',
+        zIndex: 0,
+      }}
+    >
       <Link
-        _focusVisible={{ outlineColor: 'green.700', outlineOffset: '3px', outlineWidth: '2px' }}
-        bg="white"
-        color="green.800"
+        _focusVisible={{ outlineColor: '#67e8f9', outlineOffset: '3px', outlineWidth: '2px' }}
+        bg="#17212b"
+        borderColor="#22d3ee"
+        borderRadius="md"
+        borderWidth="1px"
+        color="#f4f7f8"
         href="#app-content"
         left="4"
         p="2"
@@ -36,24 +65,44 @@ export function AppLayout({ children }: AppLayoutProps) {
 
       <Box
         as="header"
-        bg="white"
-        borderBottomColor="gray.200"
+        bg="rgba(7, 11, 16, 0.9)"
+        backdropFilter="blur(14px)"
+        borderBottomColor="rgba(103, 232, 249, 0.16)"
         borderBottomWidth="1px"
         position="sticky"
         top="0"
         zIndex="sticky"
       >
-        <Container maxW="1440px" px={{ base: '4', md: '6', lg: '8' }} py="4">
+        <Container maxW="1440px" px={{ base: '4', md: '6', lg: '8' }} py="3">
           <Flex align="center" gap="4" justify="space-between" wrap="wrap">
             <Link
               asChild
-              color="gray.950"
+              color="#f4f7f8"
               fontSize="lg"
               fontWeight="bold"
               letterSpacing="0"
               _hover={{ textDecoration: 'none' }}
             >
-              <RouterLink to="/">Branching Tales</RouterLink>
+              <RouterLink to="/">
+                <Flex align="center" gap="3">
+                  <Box
+                    alignItems="center"
+                    bg="#22d3ee"
+                    borderColor="rgba(244, 247, 248, 0.24)"
+                    borderRadius="sm"
+                    borderWidth="1px"
+                    boxSize="9"
+                    color="#071018"
+                    display="inline-flex"
+                    fontSize="sm"
+                    fontWeight="black"
+                    justifyContent="center"
+                  >
+                    BT
+                  </Box>
+                  <Text as="span">Branching Tales</Text>
+                </Flex>
+              </RouterLink>
             </Link>
 
             <HStack as="nav" gap="2" aria-label="Primary navigation" wrap="wrap">
@@ -66,10 +115,17 @@ export function AppLayout({ children }: AppLayoutProps) {
                 return (
                   <Button
                     asChild
-                    colorPalette={isActive ? 'green' : 'gray'}
+                    bg={isActive ? 'rgba(34, 211, 238, 0.16)' : 'transparent'}
+                    borderColor={isActive ? 'rgba(103, 232, 249, 0.65)' : 'transparent'}
+                    borderWidth="1px"
+                    color={isActive ? '#f4f7f8' : '#9aa7b1'}
                     key={item.to}
                     size="sm"
-                    variant={isActive ? 'solid' : 'ghost'}
+                    variant="ghost"
+                    _hover={{
+                      bg: isActive ? 'rgba(34, 211, 238, 0.2)' : 'rgba(23, 33, 43, 0.78)',
+                      color: '#f4f7f8',
+                    }}
                   >
                     <RouterLink to={item.to}>{item.label}</RouterLink>
                   </Button>
@@ -80,17 +136,26 @@ export function AppLayout({ children }: AppLayoutProps) {
         </Container>
       </Box>
 
-      <Box id="app-content">{children}</Box>
+      <Box id="app-content" position="relative" zIndex="1">
+        {children}
+      </Box>
 
-      <Box as="footer" bg="white" borderTopColor="gray.200" borderTopWidth="1px">
+      <Box
+        as="footer"
+        bg="rgba(7, 11, 16, 0.86)"
+        borderTopColor="rgba(103, 232, 249, 0.14)"
+        borderTopWidth="1px"
+        position="relative"
+        zIndex="1"
+      >
         <Container maxW="1440px" px={{ base: '4', md: '6', lg: '8' }} py="4">
           <Flex align="center" gap="3" justify="space-between" wrap="wrap">
-            <Badge colorPalette="purple" variant="subtle">
+            <Badge bg="rgba(167, 139, 250, 0.16)" color="#c4b5fd" variant="solid">
               React Router SSR + Revisium GraphQL
             </Badge>
-            <Text color="gray.600" fontSize="sm">
+            <Text color="#9aa7b1" fontSize="sm">
               data + cms + backend subgraphs.{' '}
-              <Link asChild color="green.800" fontWeight="medium">
+              <Link asChild color="#67e8f9" fontWeight="medium">
                 <RouterLink to="/about">Architecture</RouterLink>
               </Link>
             </Text>

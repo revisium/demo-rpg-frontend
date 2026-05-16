@@ -10,9 +10,9 @@ export function HomeProofStripItem({ item }: HomeProofStripItemProps) {
   return (
     <Flex
       align="center"
-      borderLeftColor="gray.200"
+      borderLeftColor="rgba(103, 232, 249, 0.14)"
       borderLeftWidth={{ base: '0', md: item.showDesktopDivider ? '1px' : '0' }}
-      borderTopColor="gray.200"
+      borderTopColor="rgba(103, 232, 249, 0.14)"
       borderTopWidth={{ base: item.showMobileDivider ? '1px' : '0', md: '0' }}
       gap="3"
       minH="96px"
@@ -35,7 +35,7 @@ export function HomeProofStripItem({ item }: HomeProofStripItemProps) {
         {item.sequenceLabel}
       </Box>
       <Box minW="0">
-        <Text color="gray.600" fontSize="sm">
+        <Text color="#9aa7b1" fontSize="sm">
           {item.label}
         </Text>
         <Text fontWeight="bold">{item.value}</Text>

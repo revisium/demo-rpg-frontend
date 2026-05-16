@@ -19,16 +19,23 @@ export const HomeDemoPaths = observer(({ vm }: HomeDemoPathsProps) => {
           <Heading as="h2" fontSize="2xl" id="home-demo-paths-title">
             {demoPathsSection.title}
           </Heading>
-          <Text color="gray.600" lineHeight="1.6" maxW="720px" mt="2">
+          <Text color="#9aa7b1" lineHeight="1.6" maxW="720px" mt="2">
             {demoPathsSection.description}
           </Text>
         </Box>
-        <Button asChild colorPalette="green" variant="solid">
+        <Button asChild bg="#22d3ee" color="#071018" variant="solid" _hover={{ bg: '#67e8f9' }}>
           <RouterLink to={demoPathsCta.href}>{demoPathsCta.label}</RouterLink>
         </Button>
       </Flex>
 
-      <SimpleGrid as="ol" columns={{ base: 1, md: 2, xl: 4 }} gap="4" listStyleType="none" mt="6" p="0">
+      <SimpleGrid
+        as="ol"
+        columns={{ base: 1, md: 2, xl: 4 }}
+        gap="4"
+        listStyleType="none"
+        mt="6"
+        p="0"
+      >
         {vm.demoPaths.map((item) => (
           <HomeDemoPathCard item={item} key={item.key} />
         ))}

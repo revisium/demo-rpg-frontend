@@ -16,7 +16,7 @@ export const HomeCapabilityGrid = observer(({ vm }: HomeCapabilityGridProps) => 
       <Heading as="h2" fontSize="2xl" id="home-capabilities-title">
         {capabilitySection.title}
       </Heading>
-      <Text color="gray.600" lineHeight="1.6" maxW="760px" mt="2">
+      <Text color="#9aa7b1" lineHeight="1.6" maxW="760px" mt="2">
         {capabilitySection.description}
       </Text>
       <SimpleGrid as="div" columns={{ base: 1, md: 2, xl: 3 }} gap="5" mt="6">

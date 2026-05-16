@@ -12,8 +12,8 @@ export const ClassCard = observer(({ item }: ClassCardProps) => {
   return (
     <Box
       as="li"
-      bg="white"
-      borderColor="gray.200"
+      bg="rgba(18, 24, 32, 0.9)"
+      borderColor="rgba(103, 232, 249, 0.16)"
       borderRadius="md"
       borderWidth="1px"
       display="grid"
@@ -21,7 +21,7 @@ export const ClassCard = observer(({ item }: ClassCardProps) => {
       p="5"
     >
       <Box>
-        <Flex align="center" color="gray.600" fontSize="sm" gap="3" justify="space-between">
+        <Flex align="center" color="#9aa7b1" fontSize="sm" gap="3" justify="space-between">
           <Badge colorPalette="purple" variant="subtle">
             {item.primaryStat}
           </Badge>
@@ -30,18 +30,31 @@ export const ClassCard = observer(({ item }: ClassCardProps) => {
         <Heading as="h2" fontSize="xl" lineHeight="1.2" mt="4">
           {item.title}
         </Heading>
-        <Text color="gray.600" lineHeight="1.55" mt="2">
+        <Text color="#9aa7b1" lineHeight="1.55" mt="2">
           {item.description}
         </Text>
       </Box>
 
-      <SimpleGrid borderTopColor="gray.200" borderTopWidth="1px" columns={{ base: 1, sm: 3 }} gap="3" pt="4">
+      <SimpleGrid
+        borderTopColor="rgba(103, 232, 249, 0.14)"
+        borderTopWidth="1px"
+        columns={{ base: 1, sm: 3 }}
+        gap="3"
+        pt="4"
+      >
         <Stat label="Base HP" value={item.baseHpLabel} />
         <Stat label="HP growth" value={item.hpPerLevelLabel} />
         <Stat label="MP growth" value={item.mpPerLevelLabel} />
       </SimpleGrid>
 
-      <Button asChild colorPalette="green" minH="44px" variant="outline">
+      <Button
+        asChild
+        borderColor="rgba(103, 232, 249, 0.34)"
+        color="#67e8f9"
+        minH="44px"
+        variant="outline"
+        _hover={{ bg: 'rgba(34, 211, 238, 0.12)' }}
+      >
         <RouterLink to={item.heroesHref}>Filter heroes</RouterLink>
       </Button>
     </Box>
@@ -56,7 +69,7 @@ interface StatProps {
 function Stat({ label, value }: StatProps) {
   return (
     <Box>
-      <Text color="gray.600" fontSize="xs">
+      <Text color="#9aa7b1" fontSize="xs">
         {label}
       </Text>
       <Text fontWeight="bold" mt="1">

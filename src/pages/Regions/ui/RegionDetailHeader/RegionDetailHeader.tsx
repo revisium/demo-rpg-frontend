@@ -16,10 +16,12 @@ export const RegionDetailHeader = observer(({ vm }: RegionDetailHeaderProps) => 
       <Button
         aria-label="Back to regions catalog"
         asChild
-        colorPalette="green"
+        borderColor="rgba(103, 232, 249, 0.34)"
+        color="#67e8f9"
         minH="44px"
         size="md"
         variant="outline"
+        _hover={{ bg: 'rgba(34, 211, 238, 0.12)', borderColor: '#67e8f9' }}
       >
         <RouterLink to="/regions">← Back to regions catalog</RouterLink>
       </Button>
@@ -49,17 +51,17 @@ export const RegionDetailHeader = observer(({ vm }: RegionDetailHeaderProps) => 
           <Heading as="h1" fontSize={{ base: '3xl', md: '4xl' }} lineHeight="1.1">
             {vm.title}
           </Heading>
-          <Text color="gray.600" fontSize="lg" lineHeight="1.6" mt="4" maxW="760px">
+          <Text color="#c9d2da" fontSize="lg" lineHeight="1.6" mt="4" maxW="760px">
             {vm.description}
           </Text>
-          <Text color="gray.600" fontSize="sm" mt="3">
+          <Text color="#9aa7b1" fontSize="sm" mt="3">
             Locale: <Text as="strong">{vm.localeLabel}</Text>
           </Text>
         </Box>
 
         <Flex align={{ base: 'flex-start', lg: 'flex-end' }} direction="column" gap="3" minW="0">
           <LocaleSwitch onChange={(locale) => vm.setLocale(locale)} value={vm.locale} />
-          <Link color="green.800" href={vm.cloudRowHref} rel="noreferrer" target="_blank">
+          <Link color="#67e8f9" href={vm.cloudRowHref} rel="noreferrer" target="_blank">
             Open cloud row
           </Link>
         </Flex>

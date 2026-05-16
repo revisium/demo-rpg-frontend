@@ -11,8 +11,8 @@ export function HomeCapabilityCard({ item }: HomeCapabilityCardProps) {
   return (
     <Box
       as="article"
-      bg="white"
-      borderColor="gray.200"
+      bg="rgba(18, 24, 32, 0.9)"
+      borderColor="rgba(103, 232, 249, 0.16)"
       borderRadius="md"
       borderWidth="1px"
       display="grid"
@@ -20,16 +20,17 @@ export function HomeCapabilityCard({ item }: HomeCapabilityCardProps) {
       minH="230px"
       p="5"
       role="group"
-      shadow="0 1px 2px rgba(15, 23, 42, 0.04)"
+      shadow="0 18px 42px rgba(0, 0, 0, 0.24)"
       transition="transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease"
       _focusWithin={{
-        borderColor: 'green.500',
-        boxShadow: '0 0 0 3px rgba(36, 107, 84, 0.18), 0 14px 30px rgba(15, 23, 42, 0.12)',
+        borderColor: '#67e8f9',
+        boxShadow: '0 0 0 3px rgba(34, 211, 238, 0.16), 0 22px 44px rgba(0, 0, 0, 0.32)',
         transform: 'translateY(-2px)',
       }}
       _hover={{
-        borderColor: 'green.400',
-        boxShadow: '0 14px 30px rgba(15, 23, 42, 0.12)',
+        bg: '#17212b',
+        borderColor: 'rgba(103, 232, 249, 0.58)',
+        boxShadow: '0 22px 44px rgba(0, 0, 0, 0.32)',
         transform: 'translateY(-2px)',
       }}
     >
@@ -37,13 +38,13 @@ export function HomeCapabilityCard({ item }: HomeCapabilityCardProps) {
         <Badge colorPalette={item.statusPalette} variant="subtle">
           {item.statusLabel}
         </Badge>
-        <Text color="blue.700" fontSize="sm" fontWeight="bold" mt="4">
+        <Text color="#67e8f9" fontSize="sm" fontWeight="bold" mt="4">
           {item.label}
         </Text>
         <Heading as="h3" fontSize="xl" lineHeight="1.2" mt="2">
           {item.title}
         </Heading>
-        <Text color="gray.600" lineHeight="1.55" mt="3">
+        <Text color="#9aa7b1" lineHeight="1.55" mt="3">
           {item.description}
         </Text>
       </Box>
@@ -51,12 +52,13 @@ export function HomeCapabilityCard({ item }: HomeCapabilityCardProps) {
       <Button
         asChild
         alignSelf="end"
-        colorPalette="green"
+        borderColor="rgba(103, 232, 249, 0.34)"
+        color="#67e8f9"
         minH="11"
         size="md"
         variant="outline"
         w="fit-content"
-        _groupHover={{ bg: 'green.600', color: 'white', transform: 'translateX(2px)' }}
+        _groupHover={{ bg: '#22d3ee', color: '#071018', transform: 'translateX(2px)' }}
       >
         <RouterLink to={item.href}>Open proof</RouterLink>
       </Button>

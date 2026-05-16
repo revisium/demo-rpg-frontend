@@ -10,7 +10,13 @@ interface RegionDetailPanelProps {
 
 export const RegionDetailPanel = observer(({ vm }: RegionDetailPanelProps) => {
   return (
-    <Box bg="white" borderColor="gray.200" borderRadius="md" borderWidth="1px" p="6">
+    <Box
+      bg="rgba(18, 24, 32, 0.9)"
+      borderColor="rgba(103, 232, 249, 0.16)"
+      borderRadius="md"
+      borderWidth="1px"
+      p="6"
+    >
       <Heading as="h2" fontSize="xl">
         Revisium fields
       </Heading>

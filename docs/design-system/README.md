@@ -62,6 +62,16 @@ The app shell uses a dark midnight surface over the page atlas background.
 Active navigation uses a cyan underline or outlined pill, with no layout shift
 between active and inactive states.
 
+Current implementation order:
+
+1. App Shell owns the dark atlas page background, sticky dark midnight top nav,
+   compact brand mark, cyan active navigation, skip link, and footer chip.
+2. Shared page wrappers inherit shell foreground/background instead of forcing a
+   light page color.
+3. Individual pages may then migrate cards, panels, filters, and data widgets
+   from light surfaces to dark tactical atlas surfaces in focused follow-up
+   changes.
+
 ## Breakpoints
 
 | Breakpoint     | Rule                                                                             |
