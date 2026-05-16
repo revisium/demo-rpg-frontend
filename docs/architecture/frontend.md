@@ -179,6 +179,14 @@ Use services for cross-page concerns:
 - storage-backed preferences;
 - long-lived UI state shared across routes.
 
+Image URL derivation is a cross-page concern. When image rendering is
+implemented, add a shared image helper/service that converts absolute
+Revisium/admin original URLs into slot-sized `imgproxy` URLs according to the
+design-system media rules. Page ViewModels or Item ViewModels choose the
+semantic slot and dimensions; React components render the prepared URL and
+`srcset` but do not build `imgproxy` paths manually. The original file URL may
+remain in metadata, source links, and Explainer Widget samples.
+
 Persisted state must go through a service or dedicated state ViewModel. Do not
 read/write `localStorage`, `sessionStorage`, cookies, or browser globals inside
 React components. Inject browser-backed dependencies so SSR and tests can

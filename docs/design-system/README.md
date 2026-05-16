@@ -158,6 +158,86 @@ world feel present while the product UI remains the first read.
 | Bottom sheets    | Mobile filters only; must be dismissible by button and Escape.                                                                                                    |
 | Explainer Widget | Uses a compact floating source-reference trigger; expanded panel has tinted surface, strong Revisium header, close control, and explicit cloud/source link block. |
 
+## Image Delivery And Imgproxy
+
+Revisium admin stores original image files and exposes absolute original URLs,
+for example `https://cdn.revisium.io/<file-hash>`. The frontend treats those
+URLs as source metadata only. Do not render original CDN URLs directly in
+visible `<img>`, `<picture>`, CSS background, or preload tags.
+
+Every visible image must use a derived `imgproxy` URL with dimensions chosen
+for the exact UI slot. The current unsigned base URL is:
+
+```text
+https://imgproxy.revisium.io/unsafe/
+```
+
+Keep this base in one shared helper or service so a future signed path can
+replace `/unsafe/` without touching page components.
+
+The URL shape is:
+
+```text
+https://imgproxy.revisium.io/unsafe/<processing-options>/plain/<encoded-source-url>@webp
+```
+
+Example for a 300x300 catalog thumbnail:
+
+```text
+https://imgproxy.revisium.io/unsafe/rs:fit:300:300/plain/https://cdn.revisium.io/8e682e1bf2a57397adf4a58b2ff523d6691e15c3@webp
+```
+
+Plain source URLs that contain special characters such as `%`, `?`, or `@`
+must be percent-encoded before they are placed after `/plain/`. CDN hash URLs
+without query strings can use the readable form shown above.
+
+Implementation rules:
+
+- Build image URLs through one shared helper or service once image rendering is
+  implemented; do not hand-concatenate `imgproxy` URLs inside React components.
+- The source URL returned by Revisium/admin remains available for metadata,
+  Explainer Widget samples, and cloud/source links, but not for rendered image
+  bytes.
+- Always request slot-sized images. Catalog thumbnails, avatars, cover cards,
+  media previews, and detail heroes each define their own target dimensions.
+- Use `srcset` for high-density screens. Prefer the same logical slot with
+  `dpr:2` for the 2x candidate; if that option is unavailable, request doubled
+  physical dimensions explicitly.
+- Set stable layout dimensions with `width`/`height`, `aspect-ratio`, or fixed
+  grid tracks before the image loads.
+- Use `loading="lazy"` for below-the-fold catalog images and keep eager loading
+  for the primary LCP image only.
+- Keep the output format `webp` by default with the `@webp` suffix unless a
+  specific browser or asset requirement changes the rule.
+
+Allowed processing options for app UI:
+
+| Option                         | Use                                                                                                                       |
+| ------------------------------ | ------------------------------------------------------------------------------------------------------------------------- |
+| `rs:fit:<w>:<h>`               | Default for thumbnails where the full asset must remain visible, such as maps, item icons, portraits, and file previews.  |
+| `rs:fill:<w>:<h>`              | Cropped cover treatment for news/blog cards, hero images, and decorative-safe art slots. Pair with explicit `gravity`.    |
+| `rs:fill-down:<w>:<h>`         | Cropped treatment that avoids visually inflating small source images. Use for user-provided or uncertain CMS images.      |
+| `dpr:2`                        | Retina/high-density `srcset` candidate for the same logical slot.                                                         |
+| `g:ce`, `g:sm`, `g:fp:<x>:<y>` | Crop gravity. Use center by default, smart gravity for general art, and focus points only when content provides them.     |
+| `q:<value>`                    | Optional quality override for large covers or heroes after visual review. Do not tune quality per component by guesswork. |
+| `@webp`                        | Default output format suffix.                                                                                             |
+
+Avoid these in product UI unless a page spec explicitly allows them:
+
+- direct original CDN URLs as rendered image sources;
+- `force` resizing, because it distorts assets;
+- unbounded dimensions, `0x0` original-size requests, or links that depend on
+  the uploaded file's natural size;
+- per-component use of security-related options such as source file-size or
+  result-dimension overrides;
+- inline filters, blur, pixelate, watermark, or format-specific encoder tuning
+  as decorative UI effects.
+
+See the upstream
+[imgproxy processing documentation](https://docs.imgproxy.net/usage/processing)
+for syntax details, but keep application code limited to the approved subset
+above.
+
 ### Icons And Logo
 
 - App and UI icons are minimal one-tone or two-tone glyphs.
@@ -175,7 +255,8 @@ world feel present while the product UI remains the first read.
 - Region catalogs use atlas cards: stable image area, a separate data area,
   climate glyph and source chip visible without opening the detail page.
 - Detail pages group fields by meaning: identity, schema fields, computed fields, related rows, files.
-- File previews reserve stable aspect ratios before images load.
+- File previews reserve stable aspect ratios before images load and render
+  slot-sized `imgproxy` derivatives instead of original CDN files.
 - Formula fields are visually labelled as computed.
 - Federated fields show visible subgraph attribution on reference pages.
 
