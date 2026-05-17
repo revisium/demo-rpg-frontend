@@ -2,11 +2,11 @@ import { makeAutoObservable } from 'mobx';
 
 import {
   type ActiveNavigationItem,
+  type IViewModel,
   type NavigationItem,
   primaryNavItems,
   withActivePrimaryNavigationItems,
 } from 'src/shared/config';
-import type { IViewModel } from 'src/shared/config';
 import { container } from 'src/shared/lib';
 import { LocaleService, type LocaleOption, type SupportedLocale } from 'src/shared/model';
 
