@@ -20,7 +20,7 @@ export const primaryNavItems: readonly NavigationItem[] = [
 
 const primaryActiveRoutes = {
   '/': ['/'],
-  '/blog': ['/blog'],
+  '/blog': ['/blog', '/news', '/balance-patch'],
   '/heroes': ['/heroes', '/classes', '/abilities', '/npcs', '/parties'],
   '/items': ['/items', '/item-types', '/stats', '/effects'],
   '/monsters': ['/monsters'],

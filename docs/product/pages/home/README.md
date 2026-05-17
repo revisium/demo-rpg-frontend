@@ -29,7 +29,7 @@ section is backed by live data.
 | Global search             | Search-first entry to `/search`; may be a route card until search data is available.                  |
 | Featured databases        | Cards for Heroes, Items, Monsters, World, Quests, and Guides.                                         |
 | Latest guides/updates     | Use `cms.blog_posts` as guides/articles; do not claim news is implemented until a news source exists. |
-| Featured entities         | Highlight implemented or planned entity sections with clear route/status labels.                      |
+| Featured entities         | Render selected entity routes from `cms.landing_features` using the rendering contract below.         |
 | Codex paths               | May link to implemented or stub section routes such as `/classes` to demonstrate subnav flow.         |
 | World preview             | Route to `/regions`, `/locations`, and `/factions` through the World family.                          |
 | Optional Explainer Widget | Required only beside live CMS/data sections; it is the only visible Revisium proof layer.             |
@@ -67,13 +67,21 @@ the target contract and must replace fallback copy once the tables are available
 There is no confirmed news table yet, so latest updates use `cms.blog_posts`
 only when guides/articles are implemented.
 
-| Source                      | Fields                                                            |
-| --------------------------- | ----------------------------------------------------------------- |
-| `cms.landing_hero`          | `title`, `subtitle`, `cta`, `secondary_cta`, optional `bg_image`. |
-| `cms.landing_features`      | ordered featured database cards and world preview copy.           |
-| `cms.landing_testimonials`  | optional composite quotes.                                        |
-| `cms.blog_posts`            | latest guide/article cards when the blog page is implemented.     |
-| `data.news` or CMS news TBD | blocked until source confirmation.                                |
+| Source                      | Fields                                                                                                                          |
+| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `cms.landing_hero`          | `title`, `subtitle`, `cta`, `secondary_cta`, optional `bg_image`.                                                               |
+| `cms.landing_features`      | `id`, `title`, `slug`, `entity_type`, `status`, `description`, `icon_url`, `route`, `cta_label`, `priority`, `visible_on_home`. |
+| `cms.landing_testimonials`  | optional composite quotes.                                                                                                      |
+| `cms.blog_posts`            | latest guide/article cards when the blog page is implemented.                                                                   |
+| `data.news` or CMS news TBD | blocked until source confirmation.                                                                                              |
+
+`cms.landing_features.status` is one of `implemented`, `planned`, or `stub`.
+Home renders only rows where `visible_on_home = true`, ordered by ascending
+`priority` and then `title`. Cards show the status badge, `title`,
+`description`, and `cta_label`; descriptions clamp to two lines in card grids.
+Cards link to `route` when it is an internal route listed in the page inventory.
+Use the default section icon when `icon_url` is empty, and do not render raw
+original image URLs directly if a future icon uses a file source.
 
 ## Explainer Widget
 
