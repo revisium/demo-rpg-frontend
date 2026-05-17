@@ -11,7 +11,7 @@ interface HomeProofStripProps {
 export const HomeProofStrip = observer(({ vm }: HomeProofStripProps) => {
   return (
     <Box
-      aria-label="Revisium delivery path"
+      aria-label="Codex highlights"
       bg="rgba(18, 24, 32, 0.86)"
       borderColor="rgba(103, 232, 249, 0.16)"
       borderRadius="md"

@@ -11,6 +11,7 @@ import {
   shouldRequestInitialData,
   totalCatalogCount,
 } from 'src/shared/lib';
+import { LocaleService } from 'src/shared/model';
 import type { ExplainerDescriptor } from 'src/widgets/explainer-widget';
 import { ClassesDataSource, type ClassNode } from '../api/ClassesDataSource';
 import { ClassItemViewModel, type ClassLocale } from './ClassItemViewModel';
@@ -41,14 +42,21 @@ const CLASSES_QUERY = `query Classes($data: Demo_rpg_dataGetClassesesInput) {
 }`;
 
 export class ClassesViewModel implements IViewModel {
-  public locale: ClassLocale = 'en';
   private readonly itemCache = new Map<string, ClassItemViewModel>();
   private readonly loadedItems: ClassNode[] = [];
 
-  constructor(public readonly dataSource: ClassesDataSource) {
-    makeAutoObservable<this, 'itemCache'>(this, {
-      itemCache: false,
-    }, { autoBind: true });
+  constructor(
+    public readonly dataSource: ClassesDataSource,
+    private readonly localeService: LocaleService,
+  ) {
+    makeAutoObservable<this, 'itemCache' | 'localeService'>(
+      this,
+      {
+        itemCache: false,
+        localeService: false,
+      },
+      { autoBind: true },
+    );
   }
 
   public setup(): void {
@@ -124,8 +132,12 @@ export class ClassesViewModel implements IViewModel {
     };
   }
 
+  public get locale(): ClassLocale {
+    return this.localeService.locale;
+  }
+
   public setLocale(locale: ClassLocale): void {
-    this.locale = locale;
+    this.localeService.setLocale(locale);
   }
 
   public async retry(): Promise<void> {
@@ -189,6 +201,6 @@ export class ClassesViewModel implements IViewModel {
 
 container.register(
   ClassesViewModel,
-  () => new ClassesViewModel(container.get(ClassesDataSource)),
+  () => new ClassesViewModel(container.get(ClassesDataSource), container.get(LocaleService)),
   { scope: 'transient' },
 );

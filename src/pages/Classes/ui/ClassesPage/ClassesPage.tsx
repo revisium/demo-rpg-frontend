@@ -1,7 +1,8 @@
 import { observer } from 'mobx-react-lite';
 
+import { sectionNavItems } from 'src/shared/config';
 import { renderWhen, useViewModel } from 'src/shared/lib';
-import { CatalogPageLayout, CatalogSkeleton, StatePanel } from 'src/shared/ui';
+import { CatalogPageLayout, CatalogSkeleton, SectionSubnav, StatePanel } from 'src/shared/ui';
 import { ExplainerWidget } from 'src/widgets/explainer-widget';
 import { ClassesViewModel } from '../../model/ClassesViewModel';
 import { ClassList } from '../ClassList/ClassList';
@@ -38,6 +39,7 @@ export const ClassesPage = observer(() => {
         />
       }
       header={<ClassesHeader />}
+      sectionSubnav={<SectionSubnav ariaLabel="Heroes section" items={sectionNavItems.heroes} />}
       list={renderWhen(vm.showList, <ClassList vm={vm} />)}
       loading={renderWhen(
         vm.showLoading,

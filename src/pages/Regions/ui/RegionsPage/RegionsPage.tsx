@@ -1,8 +1,9 @@
 import { Box, Button } from '@chakra-ui/react';
 import { observer } from 'mobx-react-lite';
 
+import { sectionNavItems } from 'src/shared/config';
 import { renderWhen, useViewModel } from 'src/shared/lib';
-import { CatalogPageLayout, CatalogSkeleton, StatePanel } from 'src/shared/ui';
+import { CatalogPageLayout, CatalogSkeleton, SectionSubnav, StatePanel } from 'src/shared/ui';
 import { ExplainerWidget } from 'src/widgets/explainer-widget';
 import { RegionsViewModel } from '../../model/RegionsViewModel';
 import { RegionList } from '../RegionList/RegionList';
@@ -49,6 +50,7 @@ export const RegionsPage = observer(() => {
         </Box>,
       )}
       header={<RegionsHeader />}
+      sectionSubnav={<SectionSubnav ariaLabel="World section" items={sectionNavItems.world} />}
       list={renderWhen(vm.showList, <RegionList vm={vm} />)}
       loading={renderWhen(
         vm.showLoading,

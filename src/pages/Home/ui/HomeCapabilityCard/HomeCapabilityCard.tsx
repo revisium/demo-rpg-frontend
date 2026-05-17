@@ -64,7 +64,7 @@ export function HomeCapabilityCard({ item }: HomeCapabilityCardProps) {
           transform: 'translateX(2px)',
         }}
       >
-        <RouterLink to={item.href}>Open proof</RouterLink>
+        <RouterLink to={item.href}>Open section</RouterLink>
       </Button>
     </Box>
   );

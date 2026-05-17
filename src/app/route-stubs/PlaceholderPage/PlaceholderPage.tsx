@@ -1,17 +1,22 @@
 import { Badge, Box, Button, Container, Heading, SimpleGrid, Stack, Text } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router';
 
+import { sectionNavItems, type SectionNavKey } from 'src/shared/config';
+import { SectionSubnav } from 'src/shared/ui';
+
 export interface PlaceholderPageProps {
   readonly title: string;
   readonly route: string;
   readonly status: 'Blocked' | 'Draft';
   readonly capability: string;
   readonly source: string;
+  readonly sectionNavKey?: SectionNavKey;
 }
 
 export function PlaceholderPage({
   capability,
   route,
+  sectionNavKey,
   source,
   status,
   title,
@@ -35,6 +40,10 @@ export function PlaceholderPage({
                 : 'This route is wired into the app shell and ready for implementation from its page spec.'}
             </Text>
           </Box>
+
+          {sectionNavKey ? (
+            <SectionSubnav ariaLabel={`${title} section`} items={sectionNavItems[sectionNavKey]} />
+          ) : null}
 
           <SimpleGrid columns={{ base: 1, md: 3 }} gap="4">
             <InfoPanel label="Route" value={route} />

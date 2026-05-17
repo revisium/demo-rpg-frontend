@@ -6,7 +6,10 @@ requirements, but should not silently weaken these patterns.
 ## App Shell
 
 - Persistent top navigation with brand link to `/`.
-- Primary navigation exposes capability families, not every route.
+- Primary navigation exposes direct game-database links only: Home, Heroes,
+  Items, Monsters, World, Quests, Guides, and Search.
+- Top navigation v1 does not use dropdowns. Secondary routes live in section
+  subnav on catalog/detail pages.
 - Footer chip appears on every page except full-screen error pages.
 - Footer chip links to `/about` and shows subgraph composition in compact text.
 - Global locale switcher is visible in the shell once localization is implemented.
@@ -14,6 +17,33 @@ requirements, but should not silently weaken these patterns.
 - The shell follows the Dark Tactical Atlas direction from the design system:
   dark midnight surface, cyan active state, minimal one-tone or two-tone icons,
   and no gold/yellow system accents.
+
+## Game Database Section Pattern
+
+Used by catalog and detail pages that belong to a game database family:
+Heroes, Items, World, and Quests.
+
+Functional blocks:
+
+- page header with the game-facing section name and purpose;
+- horizontal section subnav for sibling catalogs;
+- catalog/detail content;
+- related entity sections written as player-facing relationships;
+- Explainer Widget as the only technical source/proof layer.
+
+Rules:
+
+- Section subnav uses links, chips, or tabs. Do not use dropdowns in v1.
+- Related entities render as named game-facing sections, not raw foreign-key
+  fields.
+- Detail pages should group relationships by meaning, for example:
+  "Dropped by monsters", "Used by heroes", "Quest rewards", "Related type",
+  and "Related stat".
+- Raw FK, array FK, formula, source table, schema, row, GraphQL variables,
+  REST, and MCP explanations belong in the Explainer Widget.
+- If a relationship cannot be resolved yet, do not render a dead route link.
+  Prefer a blocked/empty game-facing section in the page spec and source proof
+  in the widget.
 
 ## Stub Route Pattern
 
