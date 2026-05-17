@@ -1,6 +1,6 @@
 import { makeAutoObservable } from 'mobx';
 
-import { container, isClient } from 'src/shared/lib';
+import { container } from 'src/shared/lib';
 
 export type SupportedLocale = 'en' | 'ru' | 'zh';
 
@@ -18,35 +18,11 @@ const localeOptions: readonly LocaleOption[] = [
   { value: 'zh', label: 'ZH', nativeLabel: 'Chinese' },
 ] as const;
 
-class LocaleState {
+export class LocaleService {
   public locale: SupportedLocale = 'en';
 
   constructor() {
     makeAutoObservable(this, {}, { autoBind: true });
-  }
-
-  public setLocale(locale: SupportedLocale): void {
-    this.locale = locale;
-  }
-}
-
-let clientLocaleState: LocaleState | null = null;
-
-function createLocaleState(): LocaleState {
-  return new LocaleState();
-}
-
-function getLocaleState(): LocaleState {
-  if (!isClient()) return createLocaleState();
-  clientLocaleState ??= createLocaleState();
-  return clientLocaleState;
-}
-
-export class LocaleService {
-  constructor(private readonly state = getLocaleState()) {}
-
-  public get locale(): SupportedLocale {
-    return this.state.locale;
   }
 
   public get options(): readonly LocaleOption[] {
@@ -58,8 +34,8 @@ export class LocaleService {
   }
 
   public setLocale(locale: SupportedLocale): void {
-    this.state.setLocale(locale);
+    this.locale = locale;
   }
 }
 
-container.register(LocaleService, () => new LocaleService(), { scope: 'transient' });
+container.register(LocaleService, () => new LocaleService(), { scope: 'clientSingleton' });

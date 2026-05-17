@@ -60,7 +60,8 @@ comparison, roles, and stat growth.
 
 - Summary: "Classes show a small Revisium reference table with a required file field used as a foreign-key target by heroes."
 - Variables: locale.
-- Deep links: classes table/schema.
+- Deep links: classes table/schema and selected class row when a row action is
+  present.
 - Subgraphs: `data`.
 
 ## Responsive Rules

@@ -30,12 +30,12 @@ together without making the main product UI feel like a developer console.
 
 ## Primary Actions
 
-| Action                    | Result                                      |
-| ------------------------- | ------------------------------------------- |
-| View schema-first example | Navigate to `/regions`.                     |
-| View federation example   | Navigate to `/regions/[id]` once available. |
-| View branching example    | Navigate to `/balance-patch`.               |
-| Open source               | Open GitHub repo in a new tab.              |
+| Action                    | Result                                                        |
+| ------------------------- | ------------------------------------------------------------- |
+| View schema-first example | Navigate to `/regions`.                                       |
+| View federation example   | Navigate from `/regions` to a concrete `/regions/[id]` route. |
+| View branching example    | Navigate to `/balance-patch`.                                 |
+| Open source               | Open GitHub repo in a new tab.                                |
 
 ## States
 
