@@ -1,12 +1,17 @@
 import { makeAutoObservable } from 'mobx';
 
-import { primaryNavItems } from 'src/shared/config';
+import {
+  type ActiveNavigationItem,
+  type NavigationItem,
+  primaryNavItems,
+  withActivePrimaryNavigationItems,
+} from 'src/shared/config';
 import type { IViewModel } from 'src/shared/config';
 import { container } from 'src/shared/lib';
 import { LocaleService, type LocaleOption, type SupportedLocale } from 'src/shared/model';
 
 export class AppLayoutViewModel implements IViewModel {
-  public readonly navItems = primaryNavItems;
+  public readonly navItems: readonly NavigationItem[] = primaryNavItems;
 
   constructor(private readonly localeService: LocaleService) {
     makeAutoObservable<this, 'localeService'>(
@@ -27,7 +32,11 @@ export class AppLayoutViewModel implements IViewModel {
   }
 
   public unmount(): void {
-    // Shared locale state intentionally survives route changes.
+    // The app shell owns its mounted language button state; no cleanup is needed.
+  }
+
+  public getPrimaryNavItems(pathname: string): readonly ActiveNavigationItem[] {
+    return withActivePrimaryNavigationItems(pathname);
   }
 
   public get localeOptions(): readonly LocaleOption[] {

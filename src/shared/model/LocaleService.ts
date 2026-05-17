@@ -38,4 +38,4 @@ export class LocaleService {
   }
 }
 
-container.register(LocaleService, () => new LocaleService(), { scope: 'singleton' });
+container.register(LocaleService, () => new LocaleService(), { scope: 'transient' });

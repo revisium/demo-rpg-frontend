@@ -18,7 +18,7 @@ section is backed by live data.
 
 - Entry point from docs, direct demo URL, and product walkthroughs.
 - Links to `/heroes`, `/items`, `/monsters`, `/regions`, `/quests`, `/blog`,
-  and `/search`.
+  `/search`, and selected section-subnav examples such as `/classes`.
 - Uses the messaging source from `https://github.com/revisium/demo-rpg-docs/blob/master/products/branching-tales/messaging.md`.
 
 ## Functional Blocks
@@ -30,6 +30,7 @@ section is backed by live data.
 | Featured databases        | Cards for Heroes, Items, Monsters, World, Quests, and Guides.                                         |
 | Latest guides/updates     | Use `cms.blog_posts` as guides/articles; do not claim news is implemented until a news source exists. |
 | Featured entities         | Highlight implemented or planned entity sections with clear route/status labels.                      |
+| Codex paths               | May link to implemented or stub section routes such as `/classes` to demonstrate subnav flow.         |
 | World preview             | Route to `/regions`, `/locations`, and `/factions` through the World family.                          |
 | Optional Explainer Widget | Required only beside live CMS/data sections; it is the only visible Revisium proof layer.             |
 

@@ -1,7 +1,7 @@
 import { Badge, Box, Button, Container, Heading, SimpleGrid, Stack, Text } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router';
 
-import { sectionNavItems, type SectionNavKey } from 'src/shared/config';
+import { getSectionNavigationItems, type SectionNavKey } from 'src/shared/config';
 import { SectionSubnav } from 'src/shared/ui';
 
 export interface PlaceholderPageProps {
@@ -22,6 +22,7 @@ export function PlaceholderPage({
   title,
 }: PlaceholderPageProps) {
   const colorPalette = status === 'Blocked' ? 'red' : 'orange';
+  const sectionNav = sectionNavKey ? getSectionNavigationItems(sectionNavKey, route) : null;
 
   return (
     <Box as="main" minH="calc(100dvh - 145px)" px={{ base: '4', md: '6', lg: '8' }} py="8">
@@ -41,9 +42,7 @@ export function PlaceholderPage({
             </Text>
           </Box>
 
-          {sectionNavKey ? (
-            <SectionSubnav ariaLabel={`${title} section`} items={sectionNavItems[sectionNavKey]} />
-          ) : null}
+          {sectionNav ? <SectionSubnav ariaLabel={`${title} section`} items={sectionNav} /> : null}
 
           <SimpleGrid columns={{ base: 1, md: 3 }} gap="4">
             <InfoPanel label="Route" value={route} />

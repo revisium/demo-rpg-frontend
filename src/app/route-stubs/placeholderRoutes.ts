@@ -37,6 +37,22 @@ export const placeholderRoutes = {
     status: 'Draft',
     title: 'Blog Post',
   },
+  dialogs: {
+    capability: 'Quest dialog branches and speaker references',
+    route: '/dialogs',
+    sectionNavKey: 'quests',
+    source: 'data.dialogs, data.quests, data.npcs',
+    status: 'Draft',
+    title: 'Dialogs',
+  },
+  effects: {
+    capability: 'Reusable stat or combat effect reference rows',
+    route: '/effects',
+    sectionNavKey: 'items',
+    source: 'data.effects',
+    status: 'Draft',
+    title: 'Effects',
+  },
   factionDetail: {
     capability: 'Reverse-FK aggregation and crest rendering',
     route: '/factions/:id',
@@ -91,6 +107,14 @@ export const placeholderRoutes = {
     source: 'data.items, data.item_types, data.stats',
     status: 'Draft',
     title: 'Items',
+  },
+  itemTypes: {
+    capability: 'Item taxonomy reference table',
+    route: '/item-types',
+    sectionNavKey: 'items',
+    source: 'data.item_types',
+    status: 'Draft',
+    title: 'Item Types',
   },
   locationDetail: {
     capability: 'Large map file and dimensions metadata',
@@ -198,6 +222,14 @@ export const placeholderRoutes = {
     source: 'search across demo-rpg-data and demo-rpg-cms',
     status: 'Blocked',
     title: 'Search',
+  },
+  stats: {
+    capability: 'Stat taxonomy reference table',
+    route: '/stats',
+    sectionNavKey: 'items',
+    source: 'data.stats',
+    status: 'Draft',
+    title: 'Stats',
   },
 } satisfies Record<string, PlaceholderPageProps>;
 

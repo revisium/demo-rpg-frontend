@@ -47,16 +47,18 @@ Core rules:
 
 | Area              | Requirement                                                                                                     |
 | ----------------- | --------------------------------------------------------------------------------------------------------------- |
-| App shell         | Sticky top nav, brand link, direct route links, language button, footer chip.                                   |
+| App shell         | Sticky top nav, brand link, direct route links, compact language button/menu, footer chip.                      |
 | Page header       | Title, one-sentence purpose, capability chips, optional primary CTA.                                            |
 | Main content      | Catalog grid/table or detail content.                                                                           |
 | Explainer control | Required on data pages; compact floating trigger with an overlay panel that does not reserve page layout space. |
 | Footer            | Architecture chip and source links.                                                                             |
 
 The top nav uses the primary destinations from the site map: Home, Heroes,
-Items, Monsters, World, Quests, Guides, and Search. It does not use dropdowns
-in v1. Secondary dictionary routes are reachable from section subnav, page
-content, or stubs, not from header menus.
+Items, Monsters, World, Quests, Guides, Search, and a language button. It does
+not use route-navigation dropdowns in v1. Secondary dictionary routes are
+reachable from section subnav, page content, or stubs, not from header menus.
+The language button may open a compact language menu, but it is not a route
+dropdown or a technical settings panel.
 The top nav remains pinned to the top edge while pages scroll so route changes
 and primary navigation stay available on long catalog/detail pages.
 The page keeps native scrolling and browser scrollbar affordance. Internal code

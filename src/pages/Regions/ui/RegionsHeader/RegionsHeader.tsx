@@ -14,7 +14,7 @@ export function RegionsHeader() {
       </Text>
       <Flex aria-label="Capabilities" gap="2" mt="5" wrap="wrap">
         <Badge colorPalette="blue" size="lg" variant="subtle">
-          regions
+          data.regions
         </Badge>
         <Badge size="lg" variant="outline">
           climates

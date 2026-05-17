@@ -44,7 +44,7 @@ export const RegionDetailHeader = observer(({ vm }: RegionDetailHeaderProps) => 
         <Box minW="0">
           <Flex gap="2" mb="4" wrap="wrap">
             <Badge colorPalette="blue" size="lg" variant="subtle">
-              World atlas
+              data.regions
             </Badge>
             <Badge colorPalette="green" size="lg" variant="subtle">
               {vm.climate}

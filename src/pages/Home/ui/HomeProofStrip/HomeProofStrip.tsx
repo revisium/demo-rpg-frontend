@@ -11,6 +11,7 @@ interface HomeProofStripProps {
 export const HomeProofStrip = observer(({ vm }: HomeProofStripProps) => {
   return (
     <Box
+      as="section"
       aria-label="Codex highlights"
       bg="rgba(18, 24, 32, 0.86)"
       borderColor="rgba(103, 232, 249, 0.16)"

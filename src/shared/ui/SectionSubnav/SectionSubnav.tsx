@@ -1,16 +1,14 @@
 import { Box, Button, HStack } from '@chakra-ui/react';
-import { Link as RouterLink, useLocation } from 'react-router';
+import { Link as RouterLink } from 'react-router';
 
-import type { NavigationItem } from 'src/shared/config';
+import type { ActiveNavigationItem } from 'src/shared/config';
 
 interface SectionSubnavProps {
   readonly ariaLabel: string;
-  readonly items: readonly NavigationItem[];
+  readonly items: readonly ActiveNavigationItem[];
 }
 
 export function SectionSubnav({ ariaLabel, items }: SectionSubnavProps) {
-  const location = useLocation();
-
   if (items.length <= 1) return null;
 
   return (
@@ -24,27 +22,26 @@ export function SectionSubnav({ ariaLabel, items }: SectionSubnavProps) {
     >
       <HStack gap="2" minW="max-content">
         {items.map((item) => {
-          const isActive =
-            location.pathname === item.to || location.pathname.startsWith(`${item.to}/`);
-
           return (
             <Button
               asChild
-              bg={isActive ? '#22d3ee' : 'rgba(18, 24, 32, 0.76)'}
-              borderColor={isActive ? '#67e8f9' : 'rgba(103, 232, 249, 0.24)'}
+              bg={item.isActive ? '#22d3ee' : 'rgba(18, 24, 32, 0.76)'}
+              borderColor={item.isActive ? '#67e8f9' : 'rgba(103, 232, 249, 0.24)'}
               borderWidth="1px"
-              color={isActive ? 'var(--color-text-on-accent)' : 'var(--color-text-supporting)'}
+              color={item.isActive ? 'var(--color-text-on-accent)' : 'var(--color-text-supporting)'}
               flex="0 0 auto"
               key={item.to}
               minH="44px"
               size="sm"
-              variant={isActive ? 'solid' : 'outline'}
+              variant={item.isActive ? 'solid' : 'outline'}
               _hover={{
-                bg: isActive ? '#67e8f9' : 'rgba(34, 211, 238, 0.12)',
-                color: isActive ? 'var(--color-text-on-accent)' : '#f4f7f8',
+                bg: item.isActive ? '#67e8f9' : 'rgba(34, 211, 238, 0.12)',
+                color: item.isActive ? 'var(--color-text-on-accent)' : '#f4f7f8',
               }}
             >
-              <RouterLink to={item.to}>{item.label}</RouterLink>
+              <RouterLink aria-current={item.isActive ? 'page' : undefined} to={item.to}>
+                {item.label}
+              </RouterLink>
             </Button>
           );
         })}

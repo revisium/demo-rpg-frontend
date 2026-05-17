@@ -1,6 +1,10 @@
 import { makeAutoObservable } from 'mobx';
 
-import type { IViewModel } from 'src/shared/config';
+import {
+  getSectionNavigationItems,
+  type ActiveNavigationItem,
+  type IViewModel,
+} from 'src/shared/config';
 import {
   container,
   hasRequestError,
@@ -134,6 +138,10 @@ export class ClassesViewModel implements IViewModel {
 
   public get locale(): ClassLocale {
     return this.localeService.locale;
+  }
+
+  public get sectionNavItems(): readonly ActiveNavigationItem[] {
+    return getSectionNavigationItems('heroes', '/classes');
   }
 
   public setLocale(locale: ClassLocale): void {
